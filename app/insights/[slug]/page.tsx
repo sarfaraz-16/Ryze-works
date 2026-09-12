@@ -175,7 +175,7 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
         {/* Footer info */}
         <div className="mt-16 pt-8 border-t border-white/[0.08] flex items-center justify-between font-mono text-xs text-zinc-400">
           <div>Published by Ryze Works Editorial Practice</div>
-          <div className="text-zinc-500">Bangalore, India</div>
+          <div className="text-zinc-500">Chennai, India</div>
         </div>
       </article>
 

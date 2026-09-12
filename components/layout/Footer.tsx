@@ -127,7 +127,7 @@ export const Footer: React.FC = () => {
               >
                 teamryzeworks@gmail.com
               </a>
-              <p className="text-zinc-500">Bangalore, India</p>
+              <p className="text-zinc-500">Chennai, India</p>
             </div>
           </div>
         </div>

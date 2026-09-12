@@ -90,7 +90,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <span className="font-mono text-[10px] uppercase font-medium text-zinc-400 block">Studio Headquarters</span>
-                  <span className="text-sm font-semibold text-white">Bangalore, India</span>
+                  <span className="text-sm font-semibold text-white">Chennai, India</span>
                 </div>
               </div>
             </div>

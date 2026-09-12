@@ -60,7 +60,7 @@ export default function RootLayout({
     },
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Bangalore",
+      "addressLocality": "Chennai",
       "addressCountry": "India"
     }
   };

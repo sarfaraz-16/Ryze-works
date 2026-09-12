@@ -326,5 +326,5 @@ export const FOOTER_COLUMNS = [
 
 export const SITE_CONTACT = {
   email: "teamryzeworks@gmail.com",
-  location: "Bangalore, India",
+  location: "Chennai, India",
 };

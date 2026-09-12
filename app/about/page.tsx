@@ -30,7 +30,7 @@ export default function AboutPage() {
         </h1>
 
         <p className="text-base sm:text-xl text-zinc-300 font-normal leading-relaxed max-w-3xl mb-16">
-          Ryze Works was founded in Bangalore with a radical conviction: the next generation of category-defining brands will not be built by bloated 80-person agency decks. They will be engineered by compact, elite pods armed with intelligent computational workflows.
+          Ryze Works was founded in Chennai with a radical conviction: the next generation of category-defining brands will not be built by bloated 80-person agency decks. They will be engineered by compact, elite pods armed with intelligent computational workflows.
         </p>
 
         {/* 3 Pillars */}
@@ -71,13 +71,13 @@ export default function AboutPage() {
           <div>
             <div className="flex items-center gap-2 font-mono text-xs font-medium text-[#B896FF] uppercase tracking-wider mb-2">
               <Globe2 className="w-4 h-4" />
-              <span>Bangalore Studio &amp; Global Operations</span>
+              <span>Chennai Studio &amp; Global Operations</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-2 tracking-[-0.01em] [word-spacing:0.08em]">
               Building from India for the world.
             </h2>
             <p className="text-xs sm:text-sm text-zinc-300 font-normal max-w-md leading-relaxed">
-              We collaborate with venture-backed tech startups, fintech unicorns, and ambitious founders globally from our headquarters in Bangalore.
+              We collaborate with venture-backed tech startups, fintech unicorns, and ambitious founders globally from our headquarters in Chennai.
             </p>
           </div>
 

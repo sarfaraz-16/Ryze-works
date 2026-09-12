@@ -27,7 +27,7 @@ export default function PrivacyPage() {
           Privacy Policy
         </h1>
         <p className="font-mono text-xs text-zinc-400 mb-10 pb-4 border-b border-white/[0.08]">
-          Last Updated: September 2024 • Bangalore, India
+          Last Updated: September 2024 • Chennai, India
         </p>
 
         <div className="rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] p-8 sm:p-12 shadow-2xl shadow-black/50 space-y-8 text-sm sm:text-base text-zinc-300 leading-relaxed">
