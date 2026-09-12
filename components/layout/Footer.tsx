@@ -23,6 +23,39 @@ export const Footer: React.FC = () => {
               An AI-native creative and technology partner helping brands build, grow and scale.
             </p>
 
+            {/* Company Links */}
+            <div className="mb-6">
+              <h4 className="text-[11px] font-bold tracking-[0.2em] text-white uppercase mb-4">
+                COMPANY
+              </h4>
+              <ul className="space-y-2.5">
+                <li>
+                  <Link
+                    href="/about"
+                    className="text-xs text-white/50 hover:text-white transition-colors"
+                  >
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/careers"
+                    className="text-xs text-white/50 hover:text-white transition-colors"
+                  >
+                    Careers
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact"
+                    className="text-xs text-white/50 hover:text-white transition-colors"
+                  >
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
             {/* Social Links */}
             <div className="flex items-center gap-3">
               <a
