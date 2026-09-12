@@ -65,7 +65,7 @@ export default function AIPage() {
         ...prev,
         {
           role: "assistant",
-          text: "Connection to AI Gateway interrupted. Please try again or reach out at hello@ryzeworks.tech."
+          text: "Connection to AI Gateway interrupted. Please try again or reach out at teamryzeworks@gmail.com."
         }
       ]);
     } finally {

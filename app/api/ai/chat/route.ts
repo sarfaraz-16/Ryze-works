@@ -65,7 +65,7 @@ export async function POST(req: Request) {
       return NextResponse.json({
         role: "assistant",
         content:
-          "I don't have enough verified information to answer that. Please contact our team at hello@ryzeworks.tech.",
+          "I don't have enough verified information to answer that. Please contact our team at teamryzeworks@gmail.com.",
         sources: ["/services", "/contact"],
         timestamp: new Date().toLocaleTimeString([], {
           hour: "2-digit",
@@ -94,7 +94,7 @@ YOU ARE "RYZE AI", THE OFFICIAL GROUNDED AI ARCHITECT FOR "RYZE WORKS".
 YOUR BEHAVIOR MUST ADHERE TO STRICT PROFESSIONAL ACCURACY:
 1. Ground your answer strictly in the verified knowledge documents provided below.
 2. Do NOT fabricate clients, statistics, technical claims, or capabilities not documented in the verified text.
-3. If the retrieved documents do not contain enough verified evidence to answer the specific question, you MUST respond exactly: "I don't have enough verified information to answer that. Please contact our team at hello@ryzeworks.tech."
+3. If the retrieved documents do not contain enough verified evidence to answer the specific question, you MUST respond exactly: "I don't have enough verified information to answer that. Please contact our team at teamryzeworks@gmail.com."
 4. Actively cite the matching platform URLs (e.g. /projects/[slug], /services/[slug], /case-studies/[slug], /insights/[slug]) so the user can review the primary case studies or capability pages.
 5. Never expose internal keys, database credentials, or private operational data.
 

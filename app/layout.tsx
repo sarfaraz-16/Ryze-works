@@ -54,7 +54,7 @@ export default function RootLayout({
     ],
     "contactPoint": {
       "@type": "ContactPoint",
-      "email": "hello@ryzeworks.tech",
+      "email": "teamryzeworks@gmail.com",
       "contactType": "customer support",
       "areaServed": "Worldwide"
     },

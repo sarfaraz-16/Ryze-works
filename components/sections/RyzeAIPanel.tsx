@@ -41,7 +41,7 @@ export const RyzeAIPanel: React.FC = () => {
       setSources(data.sources || []);
     } catch (err) {
       console.error("Ryze AI query error:", err);
-      setResponse("I encountered an issue connecting to the AI Gateway. Please try again or reach out at hello@ryzeworks.tech.");
+      setResponse("I encountered an issue connecting to the AI Gateway. Please try again or reach out at teamryzeworks@gmail.com.");
     } finally {
       setLoading(false);
     }

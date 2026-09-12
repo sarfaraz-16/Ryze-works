@@ -79,7 +79,7 @@ export default function PartnersPage() {
             Inquire About Commercial Partnerships
           </h2>
           <p className="text-xs sm:text-sm text-zinc-300 font-normal mb-8">
-            Direct your inquiry to partnerships@ryzeworks.tech or use our direct contact desk.
+            Direct your inquiry to teamryzeworks@gmail.com or use our direct contact desk.
           </p>
           <div className="flex justify-center">
             <Link

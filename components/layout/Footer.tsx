@@ -122,10 +122,10 @@ export const Footer: React.FC = () => {
             </h4>
             <div className="space-y-2 text-xs">
               <a
-                href="mailto:hello@ryzeworks.tech"
+                href="mailto:teamryzeworks@gmail.com"
                 className="block text-zinc-400 hover:text-[#B896FF] transition-colors"
               >
-                hello@ryzeworks.tech
+                teamryzeworks@gmail.com
               </a>
               <p className="text-zinc-500">Bangalore, India</p>
             </div>

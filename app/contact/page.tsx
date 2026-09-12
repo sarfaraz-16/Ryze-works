@@ -78,8 +78,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <span className="font-mono text-[10px] uppercase font-medium text-zinc-400 block">Email Us Directly</span>
-                  <a href="mailto:hello@ryzeworks.tech" className="text-sm font-semibold text-white hover:text-[#B896FF] transition-colors">
-                    hello@ryzeworks.tech
+                  <a href="mailto:teamryzeworks@gmail.com" className="text-sm font-semibold text-white hover:text-[#B896FF] transition-colors">
+                    teamryzeworks@gmail.com
                   </a>
                 </div>
               </div>
