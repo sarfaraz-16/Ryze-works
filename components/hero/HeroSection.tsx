@@ -17,8 +17,9 @@ export const HeroSection: React.FC = () => {
     if (aiSection) {
       aiSection.scrollIntoView({ behavior: "smooth" });
       window.dispatchEvent(
-        new CustomEvent("ryze-ai-prompt", { detail: heroPrompt })
+        new CustomEvent("ryze-ai-prompt", { detail: heroPrompt.trim() })
       );
+      setHeroPrompt("");
     }
   };
 

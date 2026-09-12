@@ -13,7 +13,6 @@ export const RyzeAIPanel: React.FC = () => {
   useEffect(() => {
     const handleCustomPrompt = (e: CustomEvent<string>) => {
       if (e.detail) {
-        setQuery(e.detail);
         submitQuery(e.detail);
       }
     };
@@ -22,7 +21,11 @@ export const RyzeAIPanel: React.FC = () => {
   }, []);
 
   const submitQuery = async (userQuery: string) => {
-    if (!userQuery.trim()) return;
+    const trimmed = userQuery.trim();
+    if (!trimmed || loading) return;
+
+    // Immediately clear input so text does not remain stuck
+    setQuery("");
     setLoading(true);
     setResponse(null);
     setSources([]);
@@ -31,7 +34,7 @@ export const RyzeAIPanel: React.FC = () => {
       const res = await fetch("/api/ai/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userQuery })
+        body: JSON.stringify({ message: trimmed })
       });
       const data = await res.json();
       setResponse(data.content);
@@ -46,11 +49,12 @@ export const RyzeAIPanel: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!query.trim() || loading) return;
     submitQuery(query);
   };
 
   const handleChipClick = (promptText: string) => {
-    setQuery(promptText);
+    if (loading) return;
     submitQuery(promptText);
   };
 
@@ -154,17 +158,22 @@ export const RyzeAIPanel: React.FC = () => {
                 <input
                   type="text"
                   value={query}
+                  disabled={loading}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Ask me anything..."
-                  className="w-full rounded-full bg-white/[0.04] border border-white/15 hover:border-[#B896FF]/50 focus:border-[#7042FF] focus:ring-1 focus:ring-[#7042FF] px-5 py-3.5 text-xs sm:text-sm text-white placeholder:text-zinc-500 focus:outline-none pr-14 transition-all shadow-inner"
+                  placeholder={loading ? "Generating grounded response..." : "Ask me anything..."}
+                  className="w-full rounded-full bg-white/[0.04] border border-white/15 hover:border-[#B896FF]/50 focus:border-[#7042FF] focus:ring-1 focus:ring-[#7042FF] px-5 py-3.5 text-xs sm:text-sm text-white placeholder:text-zinc-500 focus:outline-none pr-14 transition-all shadow-inner disabled:opacity-60 disabled:cursor-not-allowed"
                 />
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || !query.trim()}
                   aria-label="Send Query"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-gradient-to-r from-[#7042FF] to-[#4318D1] hover:from-[#8257ff] hover:to-[#5022e0] text-white flex items-center justify-center transition-all shadow-[0_0_15px_rgba(112,66,255,0.4)] disabled:opacity-50 transform hover:scale-105 active:scale-95"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-gradient-to-r from-[#7042FF] to-[#4318D1] hover:from-[#8257ff] hover:to-[#5022e0] text-white flex items-center justify-center transition-all shadow-[0_0_15px_rgba(112,66,255,0.4)] disabled:opacity-40 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95 cursor-pointer"
                 >
-                  <ArrowRight className="w-4 h-4" />
+                  {loading ? (
+                    <Loader2 className="w-4 h-4 animate-spin text-white" />
+                  ) : (
+                    <ArrowRight className="w-4 h-4" />
+                  )}
                 </button>
               </form>
 
