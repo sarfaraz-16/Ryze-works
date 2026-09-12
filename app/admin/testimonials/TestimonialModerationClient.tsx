@@ -143,22 +143,22 @@ export function TestimonialModerationClient({
       )}
 
       {/* Desk Control Tabs */}
-      <div className="flex items-center gap-3 border-b border-white/[0.08] pb-4">
+      <div className="flex items-center gap-3 border-b border-white/[0.06] pb-4">
         <button
           onClick={() => setActiveTab("pending")}
           className={`px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer ${
             activeTab === "pending"
-              ? "bg-[#7042FF] text-white shadow-lg shadow-[#7042FF]/30"
-              : "bg-white/[0.04] text-zinc-400 hover:text-white hover:bg-white/[0.08]"
+              ? "bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-[0_0_20px_rgba(124,58,237,0.35)] border border-violet-400/30 font-bold"
+              : "bg-[#0E0A24]/60 text-neutral-400 hover:text-white hover:bg-white/[0.05] border border-white/10"
           }`}
         >
-          <Clock className="w-4 h-4" />
+          <Clock className="w-4 h-4 text-amber-400" />
           <span>Pending Verification</span>
           <span
-            className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+            className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold ${
               activeTab === "pending"
-                ? "bg-white text-[#7042FF]"
-                : "bg-amber-500/20 text-amber-300"
+                ? "bg-white text-violet-700"
+                : "bg-amber-500/15 border border-amber-500/30 text-amber-300"
             }`}
           >
             {pendingList.length}
@@ -169,17 +169,17 @@ export function TestimonialModerationClient({
           onClick={() => setActiveTab("processed")}
           className={`px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer ${
             activeTab === "processed"
-              ? "bg-[#7042FF] text-white shadow-lg shadow-[#7042FF]/30"
-              : "bg-white/[0.04] text-zinc-400 hover:text-white hover:bg-white/[0.08]"
+              ? "bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-[0_0_20px_rgba(124,58,237,0.35)] border border-violet-400/30 font-bold"
+              : "bg-[#0E0A24]/60 text-neutral-400 hover:text-white hover:bg-white/[0.05] border border-white/10"
           }`}
         >
-          <CheckCircle2 className="w-4 h-4" />
+          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
           <span>Processed Records Ledger</span>
           <span
-            className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+            className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold ${
               activeTab === "processed"
-                ? "bg-white text-[#7042FF]"
-                : "bg-white/[0.1] text-zinc-300"
+                ? "bg-white text-violet-700"
+                : "bg-white/[0.05] border border-white/10 text-neutral-300"
             }`}
           >
             {processedList.length}
@@ -190,18 +190,18 @@ export function TestimonialModerationClient({
       {/* TAB 1: PENDING VERIFICATION QUEUE */}
       {activeTab === "pending" && (
         <div className="space-y-4">
-          <div className="flex items-center justify-between text-xs text-zinc-400 font-mono">
+          <div className="flex items-center justify-between text-xs text-neutral-400 font-mono">
             <span>SHOWING {pendingList.length} QUEUED CLIENT SUBMISSION(S)</span>
-            <span>RLS STATUS: QUARANTINED FROM PUBLIC</span>
+            <span className="text-amber-400/80">RLS STATUS: QUARANTINED FROM PUBLIC</span>
           </div>
 
           {pendingList.length === 0 ? (
-            <div className="rounded-3xl bg-[#0d0e17]/80 border border-white/[0.08] p-12 text-center text-zinc-400">
-              <CheckCircle2 className="w-10 h-10 text-emerald-400 mx-auto mb-3" />
-              <div className="text-base font-semibold text-white">
+            <div className="py-16 text-center rounded-3xl bg-[#0E0A24]/60 backdrop-blur-md border border-white/10 p-8 shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
+              <CheckCircle2 className="w-10 h-10 text-emerald-400 mx-auto mb-3 shadow-[0_0_15px_rgba(52,211,153,0.3)]" />
+              <div className="text-base font-semibold text-white font-display">
                 Queue Completely Verified
               </div>
-              <p className="text-xs text-zinc-400 mt-1 max-w-sm mx-auto">
+              <p className="text-xs text-neutral-400 mt-1 max-w-sm mx-auto">
                 All client submissions have been editorialized. New inquiries via the public
                 form will automatically appear here.
               </p>
@@ -213,7 +213,7 @@ export function TestimonialModerationClient({
                 return (
                   <div
                     key={item.id}
-                    className="rounded-3xl bg-[#0d0e17]/90 backdrop-blur-md border border-amber-500/20 hover:border-amber-500/40 p-6 sm:p-7 flex flex-col justify-between shadow-2xl shadow-black/50 transition-all"
+                    className="rounded-3xl bg-[#0E0A24]/60 backdrop-blur-md border border-amber-500/20 hover:border-amber-500/40 p-6 sm:p-7 flex flex-col justify-between shadow-[0_4px_24px_rgba(0,0,0,0.4)] transition-all"
                   >
                     <div>
                       {/* Card Header */}
@@ -299,22 +299,22 @@ export function TestimonialModerationClient({
 
       {/* TAB 2: PROCESSED RECORDS LEDGER */}
       {activeTab === "processed" && (
-        <div className="rounded-3xl bg-[#0d0e17]/90 border border-white/[0.08] overflow-hidden shadow-2xl shadow-black/60">
-          <div className="p-6 border-b border-white/[0.08] flex items-center justify-between">
+        <div className="rounded-3xl bg-[#0E0A24]/60 backdrop-blur-md border border-white/10 overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
+          <div className="p-6 border-b border-white/[0.06] flex items-center justify-between">
             <div>
-              <h2 className="text-sm font-bold text-white">Editorial Audit Ledger</h2>
-              <p className="text-xs text-zinc-400">
+              <h2 className="text-sm font-bold text-white font-display">Editorial Audit Ledger</h2>
+              <p className="text-xs text-neutral-400">
                 Historic record of all approved and rejected client quotes.
               </p>
             </div>
-            <span className="text-xs font-mono text-zinc-500">
+            <span className="text-xs font-mono text-violet-300/60">
               {processedList.length} TOTAL RECORDS
             </span>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-[#080417] text-zinc-400 font-mono uppercase text-[10px] border-b border-white/[0.06]">
+              <thead className="bg-white/[0.02] text-neutral-400 font-mono uppercase text-[10px] border-b border-white/[0.06]">
                 <tr>
                   <th className="py-3.5 px-6">Client / Author</th>
                   <th className="py-3.5 px-6">Quote Snippet</th>

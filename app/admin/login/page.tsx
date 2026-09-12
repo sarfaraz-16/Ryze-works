@@ -76,7 +76,7 @@ function LoginForm() {
       </div>
 
       {/* Login Card */}
-      <div className="rounded-3xl bg-[#0d0e17]/90 backdrop-blur-xl border border-white/[0.08] p-8 sm:p-10 shadow-2xl shadow-black/80">
+      <div className="rounded-3xl bg-[#0E0A24]/60 backdrop-blur-xl border border-white/10 p-8 sm:p-10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
         {errorMsg && (
           <div className="mb-6 p-4 rounded-xl bg-red-950/40 border border-red-500/30 text-red-200 text-xs flex items-start gap-3">
             <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
@@ -90,14 +90,14 @@ function LoginForm() {
               Work Email
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Mail className="w-4 h-4 text-neutral-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="editor@ryzeworks.com"
-                className="w-full pl-10 pr-4 py-3 bg-[#080417]/80 border border-white/[0.1] rounded-xl text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#7042FF] focus:ring-1 focus:ring-[#7042FF] transition-colors"
+                className="w-full pl-10 pr-4 py-3 bg-[#080417] border border-white/[0.1] rounded-xl text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500/50 transition-colors"
               />
             </div>
           </div>
@@ -109,14 +109,14 @@ function LoginForm() {
               </label>
             </div>
             <div className="relative">
-              <Lock className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Lock className="w-4 h-4 text-neutral-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••••••"
-                className="w-full pl-10 pr-4 py-3 bg-[#080417]/80 border border-white/[0.1] rounded-xl text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#7042FF] focus:ring-1 focus:ring-[#7042FF] transition-colors"
+                className="w-full pl-10 pr-4 py-3 bg-[#080417] border border-white/[0.1] rounded-xl text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500/50 transition-colors"
               />
             </div>
           </div>
@@ -124,7 +124,7 @@ function LoginForm() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-2 py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#7042FF] to-[#7C3AED] hover:from-[#7E52FF] hover:to-[#8B5CF6] text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-[#7042FF]/20 hover:shadow-[#7042FF]/40 active:scale-[0.99] transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            className="w-full mt-2 py-3.5 px-6 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(124,58,237,0.35)] active:scale-[0.99] transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
             {loading ? (
               <>
@@ -143,7 +143,7 @@ function LoginForm() {
         <div className="mt-8 pt-6 border-t border-white/[0.06] text-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-neutral-400 hover:text-white transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Public Experience
@@ -156,9 +156,9 @@ function LoginForm() {
 
 export default function AdminLoginPage() {
   return (
-    <main className="min-h-screen bg-[#080417] text-zinc-100 flex flex-col justify-center items-center px-6 py-12 relative overflow-hidden selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
+    <main className="min-h-screen bg-[#030014] text-zinc-100 flex flex-col justify-center items-center px-6 py-12 relative overflow-hidden selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
       {/* Ambient background glow */}
-      <div className="absolute top-0 right-0 left-0 h-[600px] bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(112,66,255,0.22),rgba(8,4,23,0))] pointer-events-none" />
+      <div className="absolute top-0 right-0 left-0 h-[600px] bg-[radial-gradient(ellipse_75%_50%_at_50%_0%,rgba(112,66,255,0.2),transparent_70%)] pointer-events-none" />
 
       <Suspense
         fallback={

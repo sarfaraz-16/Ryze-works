@@ -206,7 +206,7 @@ export function ArticleEditorForm({ initialArticle }: Props) {
             type="button"
             onClick={handlePublish}
             disabled={isPending}
-            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#7042FF] to-[#7C3AED] hover:brightness-110 text-white text-xs font-bold flex items-center gap-2 shadow-lg shadow-[#7042FF]/30 transition-all cursor-pointer disabled:opacity-50"
+            className="px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-bold flex items-center gap-2 shadow-[0_0_20px_rgba(124,58,237,0.35)] transition-all cursor-pointer disabled:opacity-50"
           >
             {isPending ? (
               <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -241,7 +241,7 @@ export function ArticleEditorForm({ initialArticle }: Props) {
         {/* Left Column: Core Content (2/3) */}
         <div className="lg:col-span-2 space-y-6">
           {/* Title & Slug */}
-          <div className="rounded-3xl bg-[#0d0e17]/90 border border-white/[0.08] p-6 sm:p-7 space-y-5">
+          <div className="rounded-3xl bg-[#0E0A24]/60 backdrop-blur-md border border-white/10 p-6 sm:p-7 space-y-5 shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
             <div>
               <label className="block text-xs font-mono uppercase tracking-wider text-zinc-300 mb-2">
                 Article Title *
@@ -294,7 +294,7 @@ export function ArticleEditorForm({ initialArticle }: Props) {
           </div>
 
           {/* Excerpt / Summary */}
-          <div className="rounded-3xl bg-[#0d0e17]/90 border border-white/[0.08] p-6 sm:p-7 space-y-2">
+          <div className="rounded-3xl bg-[#0E0A24]/60 backdrop-blur-md border border-white/10 p-6 sm:p-7 space-y-2 shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
             <div className="flex items-center justify-between">
               <label className="text-xs font-mono uppercase tracking-wider text-zinc-300">
                 Executive Summary / Excerpt *
@@ -313,7 +313,7 @@ export function ArticleEditorForm({ initialArticle }: Props) {
           </div>
 
           {/* Markdown Content Area with Word Count & Live Reading Time */}
-          <div className="rounded-3xl bg-[#0d0e17]/90 border border-white/[0.08] p-6 sm:p-7 space-y-3">
+          <div className="rounded-3xl bg-[#0E0A24]/60 backdrop-blur-md border border-white/10 p-6 sm:p-7 space-y-3 shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
             <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
               <div className="flex items-center gap-2">
                 <FileText className="w-4 h-4 text-[#B896FF]" />
@@ -340,7 +340,7 @@ export function ArticleEditorForm({ initialArticle }: Props) {
           </div>
 
           {/* PRE-PUBLISH SEO VALIDATION GATE SECTION */}
-          <div className="rounded-3xl bg-[#0d0e17]/90 border border-violet-500/20 p-6 sm:p-7 space-y-5">
+          <div className="rounded-3xl bg-[#0E0A24]/60 backdrop-blur-md border border-violet-500/30 p-6 sm:p-7 space-y-5 shadow-[0_4px_24px_rgba(124,58,237,0.12)]">
             <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
               <div className="flex items-center gap-2">
                 <Search className="w-4 h-4 text-[#B896FF]" />
@@ -416,7 +416,7 @@ export function ArticleEditorForm({ initialArticle }: Props) {
         {/* Right Column: Metadata & Settings (1/3) */}
         <div className="space-y-6">
           {/* Category & Tags */}
-          <div className="rounded-3xl bg-[#0d0e17]/90 border border-white/[0.08] p-6 space-y-5">
+          <div className="rounded-3xl bg-[#0E0A24]/60 backdrop-blur-md border border-white/10 p-6 space-y-5 shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
             <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 pb-2 border-b border-white/[0.06]">
               Classification
             </h3>
@@ -495,7 +495,7 @@ export function ArticleEditorForm({ initialArticle }: Props) {
           </div>
 
           {/* Publishing Checklist Card */}
-          <div className="rounded-3xl bg-[#0d0e17]/90 border border-white/[0.08] p-6 space-y-4">
+          <div className="rounded-3xl bg-[#0E0A24]/60 backdrop-blur-md border border-white/10 p-6 space-y-4 shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
             <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-400 pb-2 border-b border-white/[0.06]">
               Release Checklist
             </h3>

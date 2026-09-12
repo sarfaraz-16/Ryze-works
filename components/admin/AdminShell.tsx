@@ -82,11 +82,15 @@ export function AdminShell({ children }: AdminShellProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#080417] text-zinc-100 flex flex-col md:flex-row selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
+    <div className="min-h-screen bg-[#030014] text-zinc-100 flex flex-col md:flex-row selection:bg-[#7042FF]/30 selection:text-[#B896FF] relative overflow-hidden">
+      {/* Ambient Cosmic Radial Glows */}
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(ellipse_75%_50%_at_50%_0%,rgba(112,66,255,0.14),transparent_70%)] z-0" />
+      <div className="pointer-events-none fixed -bottom-32 -left-32 w-80 h-80 rounded-full bg-[#7042FF]/08 blur-3xl z-0" />
+
       {/* Mobile Top Bar */}
-      <div className="md:hidden flex items-center justify-between p-4 bg-[#0d0e17] border-b border-white/[0.08]">
+      <div className="md:hidden flex items-center justify-between p-4 bg-[#0B071E]/90 backdrop-blur-xl border-b border-white/[0.06] relative z-20">
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
           <span className="font-bold text-sm text-white tracking-wider font-mono">
             RYZE // COMMAND
           </span>
@@ -101,33 +105,33 @@ export function AdminShell({ children }: AdminShellProps) {
 
       {/* Sidebar */}
       <aside
-        className={`w-full md:w-64 bg-[#0d0e17]/95 backdrop-blur-xl border-r border-white/[0.08] flex flex-col justify-between p-5 md:min-h-screen shrink-0 ${
+        className={`w-full md:w-64 bg-[#0B071E]/80 backdrop-blur-xl border-r border-white/5 md:border-violet-500/15 flex flex-col justify-between p-5 md:min-h-screen shrink-0 relative z-10 ${
           mobileMenuOpen ? "block" : "hidden md:flex"
         }`}
       >
         <div>
           {/* Brand Header */}
-          <div className="pb-6 mb-6 border-b border-white/[0.08]">
+          <div className="pb-6 mb-6 border-b border-white/[0.06]">
             <div className="flex items-center gap-2.5 mb-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7042FF] to-[#1E085A] flex items-center justify-center text-white shadow-lg shadow-[#7042FF]/30">
-                <Shield className="w-4 h-4" />
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7042FF] via-[#5D30DF] to-[#1E085A] flex items-center justify-center text-white shadow-lg shadow-[#7042FF]/30 border border-violet-400/20">
+                <Shield className="w-4 h-4 text-violet-200" />
               </div>
               <div>
-                <div className="font-bold text-sm tracking-tight text-white">RYZE WORKS</div>
+                <div className="font-bold text-sm tracking-tight text-white font-display">RYZE WORKS</div>
                 <div className="text-[10px] font-mono text-[#B896FF] tracking-widest uppercase">
                   Command Center
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-2 mt-3 px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/[0.05] text-[11px] text-zinc-400 font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>LIVE CONTROL // PROD</span>
+            <div className="flex items-center gap-2 mt-3 px-2.5 py-1 rounded-md bg-white/[0.02] border border-violet-500/20 text-[11px] text-zinc-400 font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.7)]" />
+              <span className="text-zinc-300">LIVE CONTROL // PROD</span>
             </div>
           </div>
 
           {/* Navigation Links */}
           <nav className="space-y-1.5">
-            <div className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 px-3 mb-2 font-medium">
+            <div className="text-[10px] font-mono uppercase tracking-widest text-violet-300/60 px-3 mb-2 font-semibold">
               Editorial Operations
             </div>
             {navItems.map((item) => {
@@ -137,14 +141,19 @@ export function AdminShell({ children }: AdminShellProps) {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all ${
+                  className={`group relative flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all ${
                     item.active
-                      ? "bg-[#7042FF]/15 text-white border border-[#7042FF]/30 shadow-sm shadow-[#7042FF]/10 font-semibold"
-                      : "text-zinc-400 hover:text-white hover:bg-white/[0.04]"
+                      ? "bg-gradient-to-r from-violet-600/20 to-purple-600/10 text-white border border-violet-500/30 shadow-[0_0_20px_rgba(124,58,237,0.15)] font-semibold"
+                      : "text-neutral-400 hover:text-white hover:bg-white/[0.04]"
                   }`}
                 >
+                  {item.active && (
+                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 rounded-r-full bg-[#8B5CF6] shadow-[0_0_8px_#8B5CF6]" />
+                  )}
                   <Icon
-                    className={`w-4 h-4 ${item.active ? "text-[#B896FF]" : "text-zinc-500"}`}
+                    className={`w-4 h-4 transition-colors ${
+                      item.active ? "text-[#B896FF]" : "text-neutral-500 group-hover:text-neutral-300"
+                    }`}
                   />
                   <span>{item.label}</span>
                 </Link>
@@ -154,23 +163,23 @@ export function AdminShell({ children }: AdminShellProps) {
         </div>
 
         {/* Bottom Staff & Controls */}
-        <div className="pt-6 border-t border-white/[0.08] space-y-3">
+        <div className="pt-6 border-t border-white/[0.06] space-y-3">
           <Link
             href="/"
             target="_blank"
-            className="flex items-center justify-between px-3.5 py-2 rounded-xl text-xs text-zinc-400 hover:text-white hover:bg-white/[0.04] transition-colors"
+            className="flex items-center justify-between px-3.5 py-2 rounded-xl text-xs text-neutral-400 hover:text-white hover:bg-white/[0.04] transition-colors border border-transparent hover:border-white/5"
           >
             <span className="flex items-center gap-2">
-              <ExternalLink className="w-3.5 h-3.5 text-zinc-500" />
+              <ExternalLink className="w-3.5 h-3.5 text-neutral-500" />
               <span>Public Website</span>
             </span>
-            <span className="text-[10px] font-mono text-zinc-500">VIEW →</span>
+            <span className="text-[10px] font-mono text-violet-400">VIEW →</span>
           </Link>
 
           <button
             onClick={handleSignOut}
             disabled={signingOut}
-            className="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs text-red-400 hover:text-red-300 hover:bg-red-500/10 border border-transparent hover:border-red-500/20 transition-all cursor-pointer"
+            className="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs text-red-400/90 hover:text-red-300 hover:bg-red-500/10 border border-transparent hover:border-red-500/20 transition-all cursor-pointer"
           >
             <LogOut className="w-4 h-4" />
             <span>{signingOut ? "Ending Session..." : "Staff Sign Out"}</span>
@@ -179,7 +188,7 @@ export function AdminShell({ children }: AdminShellProps) {
       </aside>
 
       {/* Main Content Pane */}
-      <div className="flex-1 flex flex-col min-w-0 bg-[#080417] overflow-y-auto">
+      <div className="flex-1 flex flex-col min-w-0 bg-transparent overflow-y-auto relative z-10">
         <main className="p-6 sm:p-8 lg:p-10 max-w-7xl mx-auto w-full">{children}</main>
       </div>
     </div>

@@ -159,7 +159,7 @@ export function ApplicationsDeskClient({ initialApplications }: Props) {
       )}
 
       {/* Filter Tabs & Search */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.08]">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.06]">
         <div className="flex flex-wrap items-center gap-2">
           {["ALL", "submitted", "reviewing", "hired", "rejected"].map((st) => (
             <button
@@ -167,8 +167,8 @@ export function ApplicationsDeskClient({ initialApplications }: Props) {
               onClick={() => setFilterStatus(st)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold transition-all cursor-pointer ${
                 filterStatus === st
-                  ? "bg-[#7042FF] text-white shadow-md shadow-[#7042FF]/20"
-                  : "bg-white/[0.04] text-zinc-400 hover:text-white hover:bg-white/[0.08]"
+                  ? "bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-[0_0_15px_rgba(124,58,237,0.3)] border border-violet-400/30"
+                  : "bg-[#0E0A24]/60 text-neutral-400 hover:text-white hover:bg-white/[0.05] border border-white/10"
               }`}
             >
               {st === "ALL"
@@ -181,22 +181,22 @@ export function ApplicationsDeskClient({ initialApplications }: Props) {
         </div>
 
         <div className="relative w-full sm:w-64">
-          <Search className="w-3.5 h-3.5 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-3.5 h-3.5 text-neutral-500 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search candidate name, role..."
-            className="w-full pl-9 pr-3 py-1.5 bg-[#080417] border border-white/[0.1] rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#7042FF] transition-colors"
+            className="w-full pl-9 pr-3 py-1.5 bg-[#0E0A24]/60 border border-white/10 rounded-xl text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500/50 transition-colors"
           />
         </div>
       </div>
 
       {/* Applications Table */}
-      <div className="rounded-3xl bg-[#0d0e17]/90 border border-white/[0.08] overflow-hidden shadow-2xl shadow-black/60">
+      <div className="rounded-3xl bg-[#0E0A24]/60 backdrop-blur-md border border-white/10 overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#080417] text-zinc-400 font-mono uppercase text-[10px] border-b border-white/[0.06]">
+            <thead className="bg-white/[0.02] text-neutral-400 font-mono uppercase text-[10px] border-b border-white/[0.06]">
               <tr>
                 <th className="py-3.5 px-6">Candidate</th>
                 <th className="py-3.5 px-6">Role Applied For</th>

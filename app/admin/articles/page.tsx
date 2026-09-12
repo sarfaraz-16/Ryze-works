@@ -59,7 +59,7 @@ export default async function AdminArticlesPage() {
         {/* Primary Action Button */}
         <Link
           href="/admin/articles/new"
-          className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#7042FF] to-[#7C3AED] hover:brightness-110 text-white text-xs font-bold flex items-center gap-2 shadow-lg shadow-[#7042FF]/30 transition-all cursor-pointer self-start sm:self-center"
+          className="px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-bold flex items-center gap-2 shadow-[0_0_20px_rgba(124,58,237,0.35)] transition-all cursor-pointer self-start sm:self-center"
         >
           <PlusCircle className="w-4 h-4" />
           <span>Write New Article</span>
@@ -68,39 +68,39 @@ export default async function AdminArticlesPage() {
 
       {/* Overview Stat Badges */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-5 rounded-2xl bg-[#0d0e17]/80 border border-white/[0.08]">
-          <div className="text-xs font-mono uppercase text-zinc-400 mb-1">Total Entries</div>
-          <div className="text-2xl font-bold text-white">{articles.length}</div>
+        <div className="p-5 rounded-2xl bg-[#0E0A24]/60 backdrop-blur-md border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+          <div className="text-[10px] font-mono uppercase tracking-wider text-violet-300/70 mb-1 font-semibold">Total Entries</div>
+          <div className="text-2xl font-bold text-white font-display">{articles.length}</div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-[#0d0e17]/80 border border-emerald-500/20">
-          <div className="text-xs font-mono uppercase text-emerald-400 mb-1">Published Live</div>
-          <div className="text-2xl font-bold text-white">{publishedCount}</div>
+        <div className="p-5 rounded-2xl bg-[#0E0A24]/60 backdrop-blur-md border border-emerald-500/20 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+          <div className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 mb-1 font-semibold">Published Live</div>
+          <div className="text-2xl font-bold text-white font-display">{publishedCount}</div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-[#0d0e17]/80 border border-amber-500/20">
-          <div className="text-xs font-mono uppercase text-amber-400 mb-1">Drafts (Quarantined)</div>
-          <div className="text-2xl font-bold text-white">{draftCount}</div>
+        <div className="p-5 rounded-2xl bg-[#0E0A24]/60 backdrop-blur-md border border-amber-500/20 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+          <div className="text-[10px] font-mono uppercase tracking-wider text-amber-400 mb-1 font-semibold">Drafts (Quarantined)</div>
+          <div className="text-2xl font-bold text-white font-display">{draftCount}</div>
         </div>
       </div>
 
       {/* Articles Table */}
-      <div className="rounded-3xl bg-[#0d0e17]/90 border border-white/[0.08] overflow-hidden shadow-2xl shadow-black/60">
-        <div className="p-6 border-b border-white/[0.08] flex items-center justify-between">
+      <div className="rounded-3xl bg-[#0E0A24]/60 backdrop-blur-md border border-white/10 overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.4)]">
+        <div className="p-6 border-b border-white/[0.06] flex items-center justify-between">
           <div>
-            <h2 className="text-sm font-bold text-white">Editorial Manifest</h2>
-            <p className="text-xs text-zinc-400">
+            <h2 className="text-sm font-bold text-white font-display">Editorial Manifest</h2>
+            <p className="text-xs text-neutral-400">
               Live index of all published insights and working drafts.
             </p>
           </div>
-          <span className="text-xs font-mono text-zinc-500">
+          <span className="text-xs font-mono text-violet-300/60">
             {articles.length} RECORD{articles.length !== 1 ? "S" : ""}
           </span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#080417] text-zinc-400 font-mono uppercase text-[10px] border-b border-white/[0.06]">
+            <thead className="bg-white/[0.02] text-neutral-400 font-mono uppercase text-[10px] border-b border-white/[0.06]">
               <tr>
                 <th className="py-3.5 px-6">Article / Headline</th>
                 <th className="py-3.5 px-6">Category</th>
