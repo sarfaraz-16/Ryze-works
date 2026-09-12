@@ -31,18 +31,15 @@ export const Navbar: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#07070b]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-2xl py-3.5"
-          : "bg-[#07070b]/50 backdrop-blur-md border-b border-white/[0.04] py-5"
+          ? "bg-[#080417]/90 backdrop-blur-xl border-b border-white/[0.08] shadow-2xl py-3.5"
+          : "bg-[#080417]/60 backdrop-blur-md border-b border-white/[0.04] py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Brand Logo */}
-        <Link href="/" className="flex flex-col leading-none group">
-          <span className="text-sm font-black tracking-[0.25em] text-white group-hover:text-purple-300 transition-colors">
-            RYZE
-          </span>
-          <span className="text-sm font-black tracking-[0.25em] text-white group-hover:text-purple-300 transition-colors">
-            WORKS
+        <Link href="/" className="flex items-center group select-none">
+          <span className="font-display font-extrabold text-white text-base sm:text-lg tracking-[0.14em] uppercase whitespace-nowrap group-hover:text-[#B896FF] transition-colors">
+            RYZE WORKS
           </span>
         </Link>
 
@@ -52,7 +49,7 @@ export const Navbar: React.FC = () => {
             <Link
               key={link.label}
               href={link.href}
-              className="text-[11px] font-bold tracking-[0.18em] text-white/75 hover:text-white transition-colors duration-150 py-1"
+              className="text-[11px] font-bold tracking-[0.18em] text-zinc-300 hover:text-white transition-colors duration-150 py-1"
             >
               {link.label}
             </Link>
@@ -65,7 +62,7 @@ export const Navbar: React.FC = () => {
             <Button
               variant="primary"
               size="md"
-              className="text-[11px] font-bold tracking-[0.14em] px-6 py-2.5 rounded-md"
+              className="text-[11px] font-bold tracking-[0.14em] px-6 py-2.5 rounded-full shadow-[0_0_20px_rgba(112,66,255,0.4)]"
             >
               START A PROJECT
             </Button>
@@ -75,7 +72,7 @@ export const Navbar: React.FC = () => {
         {/* Mobile menu trigger */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 text-white/80 hover:text-white"
+          className="lg:hidden p-2 text-zinc-300 hover:text-white"
           aria-label="Toggle menu"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -84,14 +81,14 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#07070b] border-b border-white/10 px-6 py-6 animate-in slide-in-from-top-4 duration-200">
+        <div className="lg:hidden bg-[#080417] border-b border-white/10 px-6 py-6 animate-in slide-in-from-top-4 duration-200">
           <nav className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-xs font-bold tracking-widest text-white/80 hover:text-white py-1.5"
+                className="text-xs font-bold tracking-widest text-zinc-200 hover:text-white py-1.5"
               >
                 {link.label}
               </Link>

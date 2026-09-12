@@ -1,56 +1,104 @@
 import { NextResponse } from "next/server";
-import { supabase, isSupabaseConfigured } from "@/lib/supabase";
+import { supabaseAdmin, isSupabaseConfigured } from "@/lib/supabase";
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-3.6-flash";
+
+export interface ValidatedProjectBrief {
+  company: string;
+  industry: string;
+  objective: string;
+  challenge: string;
+  target_audience: string;
+  timeline: string;
+  budget: string;
+  recommended_services: string[];
+}
 
 export async function POST(req: Request) {
   try {
-    const { name, email, company, projectIdea, targetAudience, timeline, servicesNeeded } = await req.json();
+    const body = await req.json();
+    const {
+      name,
+      email,
+      company,
+      industry,
+      objective,
+      challenge,
+      projectIdea,
+      targetAudience,
+      target_audience,
+      timeline,
+      budget,
+      servicesNeeded,
+      recommended_services,
+      source,
+    } = body;
 
-    if (!email || !projectIdea) {
+    if (!email) {
       return NextResponse.json(
-        { error: "Email and project description are required." },
+        { error: "Work email is required to receive the project brief." },
         { status: 400 }
       );
     }
 
-    let structuredBrief = {
-      executiveSummary: `Project brief for ${company || name || "innovative brand"} focused on building ${projectIdea}.`,
-      scopeDeliverables: [
-        "Brand Identity & Positioning Architecture",
-        "Fullstack Next.js & Supabase Web Application",
-        "AI Agent / RAG Workflow Integration",
-        "Performance Growth & Conversion Engine"
-      ],
-      recommendedStack: ["Next.js (App Router)", "TypeScript", "Tailwind CSS", "Supabase (PostgreSQL + RLS + pgvector)", "Gemini AI Gateway"],
-      estimatedSprint: timeline || "4 to 8 weeks",
-      confidenceScore: "96%"
+    const clientCompany = company || name || "Stealth Startup";
+    const clientIndustry = industry || "Technology / AI";
+    const clientObjective = objective || projectIdea || "Build next-generation product platform";
+    const clientChallenge = challenge || "Accelerate speed-to-market while ensuring institutional-grade reliability";
+    const clientAudience = target_audience || targetAudience || "Enterprise and tech-forward consumers";
+    const clientTimeline = timeline || "6 to 10 weeks";
+    const clientBudget = budget || "$15k - $30k";
+    const clientServices = recommended_services || servicesNeeded || [
+      "Brand Architecture & Positioning",
+      "Fullstack Web Application (Next.js & Supabase)",
+      "pgvector RAG AI Workflow",
+      "Conversion & Growth Engine",
+    ];
+
+    let validatedBrief: ValidatedProjectBrief = {
+      company: clientCompany,
+      industry: clientIndustry,
+      objective: clientObjective,
+      challenge: clientChallenge,
+      target_audience: clientAudience,
+      timeline: clientTimeline,
+      budget: clientBudget,
+      recommended_services: Array.isArray(clientServices)
+        ? clientServices
+        : [clientServices],
     };
 
+    // If Gemini API is available, synthesize and structure the brief with AI intelligence
     if (GEMINI_API_KEY) {
       try {
         const prompt = `
-You are the Lead Solutions Architect at Ryze Works (AI-Native Creative & Technology Partner).
-Generate a structured JSON project brief for a potential client with these details:
-- Client Name: ${name || "Anonymous"}
-- Company: ${company || "Startup"}
-- Project Idea: ${projectIdea}
-- Target Audience: ${targetAudience || "Tech-forward consumers & businesses"}
-- Timeline: ${timeline || "Not specified"}
-- Services Needed: ${servicesNeeded || "Design + Technology"}
+You are the Lead Systems & Brand Architect at Ryze Works.
+Synthesize an architectural and commercial project brief based on this client intake:
+- Company: ${clientCompany}
+- Industry: ${clientIndustry}
+- Objective: ${clientObjective}
+- Challenge: ${clientChallenge}
+- Target Audience: ${clientAudience}
+- Timeline: ${clientTimeline}
+- Budget Range: ${clientBudget}
+- Initial Services Requested: ${JSON.stringify(clientServices)}
 
-Output strictly valid JSON with no markdown backticks, matching this exact shape:
+Return ONLY a valid JSON object with NO MARKDOWN formatting or backticks, matching this exact schema:
 {
-  "executiveSummary": "string",
-  "scopeDeliverables": ["string", "string", "string", "string"],
-  "recommendedStack": ["string", "string", "string"],
-  "estimatedSprint": "string",
-  "confidenceScore": "string"
+  "company": "string",
+  "industry": "string",
+  "objective": "string",
+  "challenge": "string",
+  "target_audience": "string",
+  "timeline": "string",
+  "budget": "string",
+  "recommended_services": ["string", "string", "string"]
 }
-`;
+`.trim();
 
         const geminiRes = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${GEMINI_API_KEY}`,
+          `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -58,49 +106,79 @@ Output strictly valid JSON with no markdown backticks, matching this exact shape
               contents: [{ role: "user", parts: [{ text: prompt }] }],
               generationConfig: {
                 temperature: 0.2,
-                responseMimeType: "application/json"
-              }
-            })
+                responseMimeType: "application/json",
+              },
+            }),
           }
         );
 
         if (geminiRes.ok) {
           const geminiData = await geminiRes.json();
-          const rawJson = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text;
+          const rawJson =
+            geminiData?.candidates?.[0]?.content?.parts?.[0]?.text;
           if (rawJson) {
-            structuredBrief = JSON.parse(rawJson);
+            const parsed = JSON.parse(rawJson);
+            validatedBrief = {
+              company: parsed.company || clientCompany,
+              industry: parsed.industry || clientIndustry,
+              objective: parsed.objective || clientObjective,
+              challenge: parsed.challenge || clientChallenge,
+              target_audience: parsed.target_audience || clientAudience,
+              timeline: parsed.timeline || clientTimeline,
+              budget: parsed.budget || clientBudget,
+              recommended_services: Array.isArray(parsed.recommended_services)
+                ? parsed.recommended_services
+                : [parsed.recommended_services || "Fullstack Technology & AI"],
+            };
           }
         }
-      } catch (err) {
-        console.warn("Gemini brief parsing fallback:", err);
+      } catch (aiErr) {
+        console.warn("Gemini project brief structuring fallback:", aiErr);
       }
     }
 
-    // Save lead with AI brief to Supabase if configured
+    // Ingest into public.leads with type = 'project' and ai_brief = JSON payload
+    let leadId: string | null = null;
     if (isSupabaseConfigured()) {
-      await supabase.from("leads").insert([
-        {
-          name: name || "Anonymous Lead",
-          email,
-          company: company || null,
-          service_interest: servicesNeeded || "AI & Web Development",
-          message: projectIdea,
-          ai_brief: structuredBrief,
-          source: "ai_brief_generator",
-          status: "new"
+      try {
+        const { data, error: leadErr } = await supabaseAdmin
+          .from("leads")
+          .insert([
+            {
+              name: name || clientCompany,
+              email,
+              company: validatedBrief.company,
+              type: "project",
+              service_interest: validatedBrief.recommended_services.join(", "),
+              message: `[AI Brief] Objective: ${validatedBrief.objective}\nChallenge: ${validatedBrief.challenge}`,
+              ai_brief: validatedBrief,
+              source: source || "/ai",
+              status: "new",
+            },
+          ])
+          .select()
+          .single();
+
+        if (!leadErr && data) {
+          leadId = data.id;
+        } else if (leadErr) {
+          console.error("Error inserting project lead with ai_brief:", leadErr);
         }
-      ]);
+      } catch (dbErr) {
+        console.error("Database lead ingestion exception:", dbErr);
+      }
     }
 
     return NextResponse.json({
       success: true,
-      brief: structuredBrief,
-      message: "AI project brief generated successfully!"
+      leadId,
+      brief: validatedBrief,
+      message: "Project brief successfully synthesized and recorded into CRM pipeline.",
     });
-  } catch (error) {
-    console.error("AI brief route error:", error);
+  } catch (error: any) {
+    console.error("AI brief generation route error:", error);
     return NextResponse.json(
-      { error: "Error generating project brief." },
+      { error: "Failed to generate project brief." },
       { status: 500 }
     );
   }

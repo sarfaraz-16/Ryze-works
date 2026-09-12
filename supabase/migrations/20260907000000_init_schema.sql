@@ -208,6 +208,9 @@ CREATE POLICY "Public can view published projects" ON projects
 CREATE POLICY "Public can view published case studies" ON case_studies
   FOR SELECT USING (status = 'published');
 
+CREATE POLICY "Public can view project_services" ON project_services
+  FOR SELECT USING (true);
+
 CREATE POLICY "Public can view approved testimonials" ON testimonials
   FOR SELECT USING (status = 'approved');
 

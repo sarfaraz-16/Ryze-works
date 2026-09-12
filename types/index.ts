@@ -45,7 +45,7 @@ export interface Testimonial {
   authorName: string;
   role: string;
   company: string;
-  avatar: string;
+  avatar?: string;
   quote: string;
   rating: number;
   isVerified: boolean;

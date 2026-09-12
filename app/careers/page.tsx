@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { supabaseAdmin, isSupabaseConfigured } from "@/lib/supabase";
 import { CareerRoleCard, CareerRole } from "./CareerRoleCard";
 import { Sparkles, Users, Zap, Shield } from "lucide-react";
@@ -93,19 +94,23 @@ export default async function CareersPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#07070b] text-white">
+    <main className="min-h-[calc(100vh-80px)] bg-[#080417] text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
       <Navbar />
 
-      <section className="pt-36 pb-20 max-w-7xl mx-auto px-6">
+      {/* Hero Ambient Backlight */}
+      <div className="absolute top-0 right-0 left-0 h-[600px] bg-[radial-gradient(ellipse_80%_60%_at_70%_-10%,rgba(112,66,255,0.28),rgba(8,4,23,0))] pointer-events-none" />
+
+      <section className="pt-36 pb-20 max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/40 border border-purple-800/40 text-purple-300 text-[11px] font-bold tracking-[0.2em] uppercase mb-4">
-            OPEN POSITIONS
+        <div className="max-w-3xl mb-12 sm:mb-16">
+          <div className="text-[11px] font-mono text-[#B896FF] uppercase tracking-widest mb-3 font-medium flex items-center gap-2">
+            <Sparkles className="w-3.5 h-3.5 text-[#B896FF]" />
+            CAREERS &amp; OPEN OPPORTUNITIES
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.08] tracking-[-0.01em] [word-spacing:0.1em] text-white mb-6">
             Build the future of AI-driven creative engineering.
           </h1>
-          <p className="text-base sm:text-lg text-white/60 leading-relaxed">
+          <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed max-w-2xl">
             We are looking for exceptional thinkers, builders, and designers to help shape category-defining brands and intelligence systems.
           </p>
         </div>
@@ -119,54 +124,57 @@ export default async function CareersPage() {
 
         {/* Culture & Perks Grid */}
         <div className="pt-16 border-t border-white/[0.08]">
-          <div className="mb-10">
-            <span className="text-xs font-bold tracking-[0.2em] text-purple-400 uppercase">STUDIO CULTURE</span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mt-2">Why build with Ryze Works?</h2>
+          <div className="mb-8">
+            <span className="font-mono text-[11px] font-medium tracking-widest text-[#B896FF] uppercase">STUDIO CULTURE</span>
+            <h2 className="text-2xl sm:text-3xl font-semibold text-white mt-2 tracking-[-0.01em] [word-spacing:0.08em]">Why build with Ryze Works?</h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-purple-950/40 border border-purple-800/40 flex items-center justify-center text-purple-400">
+            <div className="p-6 sm:p-8 rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/30 shadow-2xl shadow-black/50 space-y-3 transition-all duration-300">
+              <div className="w-12 h-12 rounded-2xl bg-[#1E085A]/60 border border-[#7042FF]/30 flex items-center justify-center text-[#B896FF] shadow-lg shadow-[#1E085A]/50">
                 <Sparkles className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-bold text-white">AI-Native Workflow</h3>
-              <p className="text-xs text-white/60 leading-relaxed">
+              <h3 className="text-base font-semibold text-white tracking-[-0.01em] [word-spacing:0.08em]">AI-Native Workflow</h3>
+              <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
                 Work with bleeding-edge AI models, vector reasoning, and accelerated generative pipelines.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-pink-950/40 border border-pink-800/40 flex items-center justify-center text-pink-400">
+            <div className="p-6 sm:p-8 rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/30 shadow-2xl shadow-black/50 space-y-3 transition-all duration-300">
+              <div className="w-12 h-12 rounded-2xl bg-[#1E085A]/60 border border-[#7042FF]/30 flex items-center justify-center text-[#B896FF] shadow-lg shadow-[#1E085A]/50">
                 <Users className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-bold text-white">High Autonomy</h3>
-              <p className="text-xs text-white/60 leading-relaxed">
+              <h3 className="text-base font-semibold text-white tracking-[-0.01em] [word-spacing:0.08em]">High Autonomy</h3>
+              <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
                 Flat hierarchy with direct ownership from inception to release with senior leadership.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-cyan-950/40 border border-cyan-800/40 flex items-center justify-center text-cyan-400">
+            <div className="p-6 sm:p-8 rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/30 shadow-2xl shadow-black/50 space-y-3 transition-all duration-300">
+              <div className="w-12 h-12 rounded-2xl bg-[#1E085A]/60 border border-[#7042FF]/30 flex items-center justify-center text-cyan-400 shadow-lg shadow-[#1E085A]/50">
                 <Zap className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-bold text-white">Competitive Equity</h3>
-              <p className="text-xs text-white/60 leading-relaxed">
+              <h3 className="text-base font-semibold text-white tracking-[-0.01em] [word-spacing:0.08em]">Competitive Equity</h3>
+              <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
                 Comprehensive health insurance, flexible remote/hybrid setups, and performance bonuses.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-950/40 border border-amber-800/40 flex items-center justify-center text-amber-400">
+            <div className="p-6 sm:p-8 rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/30 shadow-2xl shadow-black/50 space-y-3 transition-all duration-300">
+              <div className="w-12 h-12 rounded-2xl bg-[#1E085A]/60 border border-[#7042FF]/30 flex items-center justify-center text-emerald-400 shadow-lg shadow-[#1E085A]/50">
                 <Shield className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-bold text-white">Craft Over Compromise</h3>
-              <p className="text-xs text-white/60 leading-relaxed">
+              <h3 className="text-base font-semibold text-white tracking-[-0.01em] [word-spacing:0.08em]">Craft Over Compromise</h3>
+              <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
                 Obsessive attention to craft, typography, performance budgets, and pixel precision.
               </p>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Pre-footer Anchor Marquee & Closing CTA */}
+      <ClosingCTA />
 
       <Footer />
     </main>

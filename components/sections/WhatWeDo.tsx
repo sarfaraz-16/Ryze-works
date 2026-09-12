@@ -1,119 +1,76 @@
 import React from "react";
-import { Brain, PenTool, Code2, TrendingUp, Zap } from "lucide-react";
+import Link from "next/link";
+import { Brain, PenTool, Code2, TrendingUp, Zap, ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SERVICES_DATA } from "@/data/siteData";
 
 export const WhatWeDo: React.FC = () => {
-  const getIcon = (iconName: string, colorClass: string) => {
+  const getIcon = (iconName: string) => {
     switch (iconName) {
       case "Brain":
-        return <Brain className={`w-6 h-6 ${colorClass}`} />;
+        return <Brain className="w-6 h-6 text-[#B896FF]" />;
       case "PenTool":
-        return <PenTool className={`w-6 h-6 ${colorClass}`} />;
+        return <PenTool className="w-6 h-6 text-[#B896FF]" />;
       case "Code2":
-        return <Code2 className={`w-6 h-6 ${colorClass}`} />;
+        return <Code2 className="w-6 h-6 text-cyan-300" />;
       case "TrendingUp":
-        return <TrendingUp className={`w-6 h-6 ${colorClass}`} />;
+        return <TrendingUp className="w-6 h-6 text-amber-300" />;
       case "Zap":
-        return <Zap className={`w-6 h-6 ${colorClass}`} />;
+        return <Zap className="w-6 h-6 text-[#B896FF]" />;
       default:
-        return <Brain className={`w-6 h-6 ${colorClass}`} />;
-    }
-  };
-
-  const getStyleConfigs = (index: number) => {
-    switch (index) {
-      case 0:
-        return {
-          textColor: "text-purple-400",
-          iconBg: "bg-purple-950/40 border-purple-800/30 shadow-[0_0_20px_rgba(168,85,247,0.15)]",
-          iconColor: "text-purple-400"
-        };
-      case 1:
-        return {
-          textColor: "text-pink-400",
-          iconBg: "bg-pink-950/40 border-pink-800/30 shadow-[0_0_20px_rgba(236,72,153,0.15)]",
-          iconColor: "text-pink-400"
-        };
-      case 2:
-        return {
-          textColor: "text-cyan-400",
-          iconBg: "bg-cyan-950/40 border-cyan-800/30 shadow-[0_0_20px_rgba(56,189,248,0.15)]",
-          iconColor: "text-cyan-400"
-        };
-      case 3:
-        return {
-          textColor: "text-amber-400",
-          iconBg: "bg-amber-950/40 border-amber-800/30 shadow-[0_0_20px_rgba(245,158,11,0.15)]",
-          iconColor: "text-amber-400"
-        };
-      case 4:
-        return {
-          textColor: "text-violet-400",
-          iconBg: "bg-indigo-950/40 border-indigo-800/30 shadow-[0_0_20px_rgba(99,102,241,0.15)]",
-          iconColor: "text-violet-400"
-        };
-      default:
-        return {
-          textColor: "text-purple-400",
-          iconBg: "bg-purple-950/40 border-purple-800/30",
-          iconColor: "text-purple-400"
-        };
+        return <Brain className="w-6 h-6 text-[#B896FF]" />;
     }
   };
 
   return (
-    <section id="services" className="py-24 max-w-7xl mx-auto px-6">
+    <section id="services" className="py-24 max-w-7xl mx-auto px-6 relative">
+      {/* Ambient baseline glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-24 bg-gradient-to-b from-[#1E085A]/30 via-transparent to-transparent pointer-events-none" />
+
       <SectionHeader
         eyebrow="WHAT WE DO"
         title="End-to-end capabilities to build what's next."
         linkText="VIEW ALL SERVICES"
-        linkHref="#services"
+        linkHref="/services"
       />
 
-      {/* 5-Column Grid */}
+      {/* 5-Column Bento Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-        {SERVICES_DATA.map((service, index) => {
-          const config = getStyleConfigs(index);
-          return (
-            <div
-              key={service.id}
-              className="group p-6 rounded-2xl bg-[#0c0d16]/80 border border-white/[0.07] hover:border-purple-500/40 transition-all duration-300 flex flex-col justify-between hover:bg-[#111320]"
-            >
-              <div>
-                {/* Icon box */}
-                <div
-                  className={`w-12 h-12 rounded-xl flex items-center justify-center border mb-6 transition-transform duration-300 group-hover:scale-110 ${config.iconBg}`}
-                >
-                  {getIcon(service.icon, config.iconColor)}
-                </div>
-
-                {/* Tagline */}
-                <span
-                  className={`text-[11px] font-bold tracking-[0.2em] uppercase mb-1.5 block ${config.textColor}`}
-                >
-                  {service.tagline}
-                </span>
-
-                {/* Title */}
-                <h3 className="text-base font-bold text-white mb-3">
-                  {service.name}
-                </h3>
-
-                {/* Description */}
-                <p className="text-xs text-white/50 leading-relaxed group-hover:text-white/70 transition-colors">
-                  {service.description}
-                </p>
+        {SERVICES_DATA.map((service, index) => (
+          <Link
+            key={service.id}
+            href={`/services/${service.slug}`}
+            className="group p-6 rounded-2xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/35 shadow-2xl shadow-black/50 hover:shadow-[#1E085A]/40 transition-all duration-300 flex flex-col justify-between hover:bg-[#131422] hover:-translate-y-1 select-none"
+          >
+            <div>
+              {/* Icon box */}
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center border border-white/10 bg-[#1E085A]/40 mb-6 transition-all duration-300 group-hover:scale-110 group-hover:border-[#7042FF]/50 shadow-[0_0_20px_rgba(112,66,255,0.15)]">
+                {getIcon(service.icon)}
               </div>
 
-              {/* Bottom Subtle line */}
-              <div className="mt-6 pt-4 border-t border-white/[0.05] flex items-center text-[11px] text-white/30 group-hover:text-white/60 transition-colors">
-                <span>Explore {service.name}</span>
-                <span className="ml-auto group-hover:translate-x-1 transition-transform">→</span>
-              </div>
+              {/* Tagline */}
+              <span className="font-mono text-[10px] sm:text-[11px] font-bold tracking-[0.22em] uppercase mb-1.5 block text-[#B896FF]">
+                {service.tagline}
+              </span>
+
+              {/* Title */}
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-2 group-hover:text-[#B896FF] transition-colors tracking-[-0.01em] [word-spacing:0.08em]">
+                {service.name}
+              </h3>
+
+              {/* Description */}
+              <p className="text-xs text-zinc-300 leading-relaxed">
+                {service.description}
+              </p>
             </div>
-          );
-        })}
+
+            {/* Bottom Subtle line */}
+            <div className="mt-6 pt-4 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-medium text-zinc-400 group-hover:text-white transition-colors">
+              <span>Explore {service.name}</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 text-[#B896FF] transition-transform" />
+            </div>
+          </Link>
+        ))}
       </div>
     </section>
   );

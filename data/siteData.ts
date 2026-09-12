@@ -302,23 +302,23 @@ export const FOOTER_COLUMNS = [
   {
     title: "INSIGHTS",
     links: [
-      { label: "Blog", href: "/insights" },
-      { label: "Reports", href: "/insights" },
-      { label: "Resources", href: "/insights" }
+      { label: "Articles", href: "/insights" },
+      { label: "Reports", href: "/reports" },
+      { label: "Resources", href: "/resources" }
     ]
   },
   {
     title: "AI",
     links: [
       { label: "Ryze AI", href: "/ai" },
-      { label: "AI Lab", href: "/ai" }
+      { label: "AI Lab", href: "/ai/lab" }
     ]
   },
   {
     title: "PARTNERS",
     links: [
-      { label: "Advertise", href: "/partners" },
-      { label: "Media Kit", href: "/partners" },
+      { label: "Advertise", href: "/advertise" },
+      { label: "Media Kit", href: "/media-kit" },
       { label: "Partnerships", href: "/partners" }
     ]
   }

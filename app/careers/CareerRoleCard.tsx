@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp, MapPin, Briefcase, Clock, Send, CheckCircle2, AlertCircle, FileText } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 
 export interface CareerRole {
   id: string;
@@ -33,20 +32,20 @@ export function CareerRoleCard({ role }: { role: CareerRole }) {
     const lower = badge.toLowerCase();
     if (lower === "hot") {
       return (
-        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-rose-950/60 text-rose-400 border border-rose-800/40 shadow-sm">
+        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium tracking-wider uppercase bg-rose-950/60 text-rose-400 border border-rose-800/40 shadow-sm">
           HOT
         </span>
       );
     }
     if (lower === "new") {
       return (
-        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-purple-950/60 text-purple-300 border border-purple-800/40 shadow-sm">
+        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium tracking-wider uppercase bg-[#1E085A]/70 text-[#B896FF] border border-[#7042FF]/40 shadow-sm">
           NEW
         </span>
       );
     }
     return (
-      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-white/[0.06] text-white/70 border border-white/10 shadow-sm">
+      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium tracking-wider uppercase bg-white/[0.06] text-zinc-300 border border-white/10 shadow-sm">
         {badge}
       </span>
     );
@@ -98,7 +97,7 @@ export function CareerRoleCard({ role }: { role: CareerRole }) {
   };
 
   return (
-    <div className="rounded-2xl bg-[#0c0d16]/80 border border-white/[0.08] hover:border-purple-500/40 transition-all duration-300 overflow-hidden hover:bg-[#111320]">
+    <div className="rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/30 shadow-2xl shadow-black/50 transition-all duration-300 overflow-hidden">
       {/* Main Row */}
       <div
         onClick={() => setIsExpanded(!isExpanded)}
@@ -106,48 +105,48 @@ export function CareerRoleCard({ role }: { role: CareerRole }) {
       >
         <div className="space-y-2 flex-1">
           <div className="flex items-center gap-3 flex-wrap">
-            <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight hover:text-purple-300 transition-colors">
+            <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-[-0.01em] [word-spacing:0.08em] hover:text-[#B896FF] transition-colors">
               {role.title}
             </h3>
             {renderBadge(role.badge)}
           </div>
-          <p className="text-sm sm:text-base text-white/50 font-medium">
+          <p className="font-mono text-xs sm:text-sm text-zinc-400 font-normal">
             {role.department || "General"} · {role.employment_type || "Full-time"} · {role.location || "Remote"}
           </p>
         </div>
 
         <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
-          <span className="text-xs font-semibold uppercase tracking-wider text-purple-400/80">
+          <span className="font-mono text-xs font-medium uppercase tracking-wider text-[#B896FF]">
             {isExpanded ? "Collapse" : "View & Apply"}
           </span>
-          <div className="w-9 h-9 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center text-white/70 hover:text-white transition-colors">
-            {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+          <div className="w-9 h-9 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-300 hover:text-white transition-colors">
+            {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </div>
         </div>
       </div>
 
       {/* Expand Affordance Details */}
       {isExpanded && (
-        <div className="px-6 pb-8 sm:px-8 pt-2 border-t border-white/[0.06] bg-black/20 animate-in fade-in duration-200">
+        <div className="px-6 pb-8 sm:px-8 pt-2 border-t border-white/[0.06] bg-[#080417]/50 animate-in fade-in duration-200">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4">
             {/* Role Metadata & Description */}
             <div className="lg:col-span-6 space-y-6">
-              <div className="flex flex-wrap gap-4 text-xs text-white/60">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.03] border border-white/10">
-                  <Briefcase className="w-3.5 h-3.5 text-purple-400" />
+              <div className="flex flex-wrap gap-3 font-mono text-xs text-zinc-300">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.03] border border-white/10">
+                  <Briefcase className="w-3.5 h-3.5 text-[#B896FF]" />
                   {role.department || "General"}
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.03] border border-white/10">
-                  <Clock className="w-3.5 h-3.5 text-pink-400" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.03] border border-white/10">
+                  <Clock className="w-3.5 h-3.5 text-[#B896FF]" />
                   {role.employment_type || "Full-time"}
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.03] border border-white/10">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.03] border border-white/10">
                   <MapPin className="w-3.5 h-3.5 text-cyan-400" />
                   {role.location || "Remote"}
                 </span>
               </div>
 
-              <div className="space-y-3 text-sm text-white/70 leading-relaxed">
+              <div className="space-y-3 text-sm text-zinc-300 font-normal leading-relaxed">
                 <p>
                   Join our cross-functional studio partnering with category-defining brands to shape AI-native digital systems, brand identities, and high-velocity engineering solutions.
                 </p>
@@ -157,16 +156,16 @@ export function CareerRoleCard({ role }: { role: CareerRole }) {
               </div>
 
               <div className="pt-2">
-                <span className="text-xs uppercase tracking-widest text-purple-400 font-bold">
-                  Role ID: <code className="text-white/40 font-mono">{role.id}</code>
+                <span className="font-mono text-[10px] uppercase tracking-widest text-[#B896FF] font-medium">
+                  Role ID: <code className="text-zinc-500">{role.id}</code>
                 </span>
               </div>
             </div>
 
             {/* Application Form */}
-            <div className="lg:col-span-6 rounded-xl bg-white/[0.02] border border-white/10 p-6">
-              <h4 className="text-base font-bold text-white mb-4 flex items-center gap-2">
-                <span>Apply for {role.title}</span>
+            <div className="lg:col-span-6 rounded-2xl bg-[#0d0e17] border border-white/10 p-6">
+              <h4 className="text-base font-semibold text-white mb-4">
+                Apply for {role.title}
               </h4>
 
               {submitStatus === "success" ? (
@@ -174,7 +173,7 @@ export function CareerRoleCard({ role }: { role: CareerRole }) {
                   <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold text-emerald-200">Application Submitted</p>
-                    <p className="mt-1 text-emerald-300/80">{statusMessage}</p>
+                    <p className="mt-1 text-emerald-300/80 text-xs">{statusMessage}</p>
                   </div>
                 </div>
               ) : (
@@ -187,7 +186,7 @@ export function CareerRoleCard({ role }: { role: CareerRole }) {
                   )}
 
                   <div>
-                    <label className="block text-xs font-semibold text-white/70 mb-1.5 uppercase tracking-wider">
+                    <label className="block font-mono text-[11px] font-medium text-zinc-300 mb-1.5 uppercase tracking-wider">
                       Full Name *
                     </label>
                     <input
@@ -196,12 +195,12 @@ export function CareerRoleCard({ role }: { role: CareerRole }) {
                       placeholder="Jane Doe"
                       value={formData.applicant_name}
                       onChange={(e) => setFormData({ ...formData, applicant_name: e.target.value })}
-                      className="w-full px-3.5 py-2 rounded-lg bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-purple-500 transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/15 text-white text-xs focus:border-[#B896FF] focus:outline-none transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-white/70 mb-1.5 uppercase tracking-wider">
+                    <label className="block font-mono text-[11px] font-medium text-zinc-300 mb-1.5 uppercase tracking-wider">
                       Email Address *
                     </label>
                     <input
@@ -210,12 +209,12 @@ export function CareerRoleCard({ role }: { role: CareerRole }) {
                       placeholder="jane@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-3.5 py-2 rounded-lg bg-black/40 border border-white/10 text-white text-sm focus:outline-none focus:border-purple-500 transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/15 text-white text-xs focus:border-[#B896FF] focus:outline-none transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-white/70 mb-1.5 uppercase tracking-wider">
+                    <label className="block font-mono text-[11px] font-medium text-zinc-300 mb-1.5 uppercase tracking-wider">
                       Resume (PDF, DOC, DOCX up to 5MB)
                     </label>
                     <div className="relative">
@@ -223,32 +222,30 @@ export function CareerRoleCard({ role }: { role: CareerRole }) {
                         type="file"
                         accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                         onChange={handleFileChange}
-                        className="w-full text-xs text-white/60 file:mr-4 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-purple-950/50 file:text-purple-300 hover:file:bg-purple-900/50 cursor-pointer"
+                        className="w-full text-xs text-zinc-400 file:mr-4 file:py-2 file:px-3.5 file:rounded-full file:border-0 file:text-xs file:font-medium file:bg-[#1E085A]/70 file:text-[#B896FF] hover:file:bg-[#7042FF]/30 cursor-pointer"
                       />
                     </div>
                     {resumeFile && (
-                      <p className="mt-1 text-xs text-emerald-400/80 flex items-center gap-1">
+                      <p className="mt-1.5 text-xs text-emerald-400 flex items-center gap-1 font-mono">
                         <FileText className="w-3.5 h-3.5" /> {resumeFile.name} ({(resumeFile.size / 1024).toFixed(1)} KB)
                       </p>
                     )}
                   </div>
 
-                  <Button
+                  <button
                     type="submit"
-                    variant="primary"
-                    size="md"
-                    className="w-full justify-center mt-2"
                     disabled={isSubmitting}
+                    className="w-full justify-center px-5 py-3 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-[#7042FF] to-[#4318D1] hover:brightness-110 shadow-lg shadow-[#7042FF]/30 border border-[#B896FF]/30 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50 mt-2"
                   >
                     {isSubmitting ? (
                       "Submitting Application..."
                     ) : (
                       <>
                         <span>Submit Application</span>
-                        <Send className="w-4 h-4 ml-1.5" />
+                        <Send className="w-3.5 h-3.5" />
                       </>
                     )}
-                  </Button>
+                  </button>
                 </form>
               )}
             </div>
