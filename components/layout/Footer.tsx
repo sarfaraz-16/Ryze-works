@@ -136,7 +136,7 @@ export const Footer: React.FC = () => {
         <div className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-zinc-500">
           <div>© 2024 Ryze Works. All rights reserved.</div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-6 gap-y-2">
             <Link href="/privacy" className="hover:text-zinc-200 transition-colors">
               Privacy Policy
             </Link>
@@ -148,6 +148,16 @@ export const Footer: React.FC = () => {
             </Link>
             <Link href="/ai-disclosure" className="hover:text-zinc-200 transition-colors">
               AI Disclosure
+            </Link>
+            <span className="text-zinc-700 select-none text-[10px]" aria-hidden="true">
+              •
+            </span>
+            <Link
+              href="/admin"
+              className="text-zinc-600 hover:text-zinc-400 transition-colors text-[11px]"
+              title="Staff Command Center"
+            >
+              Staff
             </Link>
           </div>
         </div>
