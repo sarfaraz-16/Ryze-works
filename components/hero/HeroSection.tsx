@@ -1,26 +1,101 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Sparkles, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { ArrowRight } from "lucide-react";
 import { HeroOrb } from "./HeroOrb";
+
+const PROMPTS = [
+  "Scale our brand with custom AI models...",
+  "Redesign mobile UX for 10M+ users...",
+  "Automate enterprise creative workflows...",
+  "Architect full-stack Next.js platforms...",
+];
+
+const QUICK_CHIPS = [
+  {
+    label: "AI Strategy",
+    prompt: "AI Strategy: What are the best opportunities to embed AI in our enterprise stack?",
+  },
+  {
+    label: "Product Design",
+    prompt: "Product Design: How would Ryze approach a complete UX/UI overhaul for scale?",
+  },
+  {
+    label: "Full-Stack Build",
+    prompt: "Full-Stack Build: What is the recommended Next.js and Supabase architecture?",
+  },
+  {
+    label: "Performance Growth",
+    prompt: "Performance Growth: How can we optimize our conversion funnels and speed?",
+  },
+];
 
 export const HeroSection: React.FC = () => {
   const [heroPrompt, setHeroPrompt] = useState("");
+  const [placeholderText, setPlaceholderText] = useState(PROMPTS[0]);
+  const [isFocused, setIsFocused] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Animated Cycling Placeholder / Typewriter
+  useEffect(() => {
+    if (isFocused || heroPrompt) return;
+
+    let currentPromptIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    let timer: NodeJS.Timeout;
+
+    const tick = () => {
+      const currentFullText = PROMPTS[currentPromptIdx];
+
+      if (isDeleting) {
+        charIdx--;
+        setPlaceholderText(currentFullText.substring(0, charIdx));
+        if (charIdx === 0) {
+          isDeleting = false;
+          currentPromptIdx = (currentPromptIdx + 1) % PROMPTS.length;
+          timer = setTimeout(tick, 350);
+          return;
+        }
+        timer = setTimeout(tick, 25);
+      } else {
+        charIdx++;
+        setPlaceholderText(currentFullText.substring(0, charIdx));
+        if (charIdx === currentFullText.length) {
+          isDeleting = true;
+          timer = setTimeout(tick, 2600);
+          return;
+        }
+        timer = setTimeout(tick, 45);
+      }
+    };
+
+    timer = setTimeout(tick, 1000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isFocused, heroPrompt]);
 
   const handleHeroPromptSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!heroPrompt.trim()) return;
+    const query = heroPrompt.trim() || placeholderText;
+    if (!query) return;
 
     const aiSection = document.getElementById("ryze-ai");
     if (aiSection) {
       aiSection.scrollIntoView({ behavior: "smooth" });
       window.dispatchEvent(
-        new CustomEvent("ryze-ai-prompt", { detail: heroPrompt.trim() })
+        new CustomEvent("ryze-ai-prompt", { detail: query })
       );
       setHeroPrompt("");
     }
+  };
+
+  const handleChipClick = (promptText: string) => {
+    setHeroPrompt(promptText);
+    inputRef.current?.focus();
   };
 
   return (
@@ -68,11 +143,14 @@ export const HeroSection: React.FC = () => {
                       What are you trying to build?
                     </label>
                     <input
+                      ref={inputRef}
                       id="hero-prompt-input"
                       type="text"
                       value={heroPrompt}
+                      onFocus={() => setIsFocused(true)}
+                      onBlur={() => setIsFocused(false)}
                       onChange={(e) => setHeroPrompt(e.target.value)}
-                      placeholder="Tell Ryze what you're working on..."
+                      placeholder={isFocused && !heroPrompt ? "Tell Ryze what you're working on..." : placeholderText}
                       className="w-full bg-transparent border-0 outline-none ring-0 focus:ring-0 focus:outline-none focus:border-0 shadow-none text-sm text-zinc-100 placeholder:text-zinc-500 font-sans caret-violet-400 p-0"
                     />
                   </div>
@@ -85,29 +163,32 @@ export const HeroSection: React.FC = () => {
                   </button>
                 </div>
               </form>
-            </div>
 
-            {/* Dual CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-4">
-              <Link href="#ryze-ai">
-                <Button
-                  variant="primary"
-                  size="md"
-                  icon={<Sparkles className="w-4 h-4 text-white" />}
-                  className="text-xs font-bold tracking-wider px-7 py-3"
+              {/* Interactive Quick-Starter Chips */}
+              <div className="flex flex-wrap items-center gap-2 mt-3">
+                {QUICK_CHIPS.map((chip) => (
+                  <button
+                    key={chip.label}
+                    type="button"
+                    onClick={() => handleChipClick(chip.prompt)}
+                    className="text-[11px] text-zinc-400 bg-white/[0.03] border border-white/10 hover:border-violet-500/50 hover:text-white transition-all cursor-pointer rounded-full px-3 py-1 backdrop-blur-md active:scale-95 flex items-center gap-1.5 shadow-sm"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-violet-400/70" />
+                    <span>{chip.label}</span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Secondary CTA Pairing */}
+              <div className="mt-6 flex items-center gap-2">
+                <Link
+                  href="/work"
+                  className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-zinc-300 hover:text-white transition-colors group"
                 >
-                  START WITH AI
-                </Button>
-              </Link>
-              <Link href="#work">
-                <Button
-                  variant="outline"
-                  size="md"
-                  className="border-white/20 hover:border-[#B896FF]/50 text-xs font-bold tracking-wider px-7 py-3 text-zinc-200 hover:text-white"
-                >
-                  EXPLORE OUR WORK →
-                </Button>
-              </Link>
+                  <span>EXPLORE OUR WORK</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-[#B896FF] group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
             </div>
           </div>
 
