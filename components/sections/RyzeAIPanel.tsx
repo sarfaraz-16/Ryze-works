@@ -1,14 +1,42 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import { Sparkles, ArrowRight, Loader2, Bot } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+
+const AiNeuralCore3D = dynamic(() => import("@/components/ai/AiNeuralCore3D"), {
+  ssr: false,
+  loading: () => null,
+});
 
 export const RyzeAIPanel: React.FC = () => {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState<string | null>(null);
   const [sources, setSources] = useState<string[]>([]);
+  const [isFocused, setIsFocused] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+  const typingTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (typingTimerRef.current) {
+        clearTimeout(typingTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+    setIsTyping(true);
+    if (typingTimerRef.current) {
+      clearTimeout(typingTimerRef.current);
+    }
+    typingTimerRef.current = setTimeout(() => {
+      setIsTyping(false);
+    }, 400);
+  };
 
   useEffect(() => {
     const handleCustomPrompt = (e: CustomEvent<string>) => {
@@ -105,8 +133,17 @@ export const RyzeAIPanel: React.FC = () => {
           </div>
 
           {/* Right Column: Interactive Chat / Query Box */}
-          <div className="lg:col-span-7">
-            <div className="rounded-2xl bg-[#080417]/90 border border-white/10 p-6 sm:p-8 shadow-2xl backdrop-blur-xl">
+          <div className="lg:col-span-7 relative">
+            {/* 3D Neural Particle Core Canvas */}
+            <div className="absolute -inset-10 sm:-inset-16 pointer-events-none z-0 overflow-hidden flex items-center justify-center">
+              <AiNeuralCore3D
+                isFocused={isFocused}
+                isTyping={isTyping}
+                queryLength={query.length}
+              />
+            </div>
+
+            <div className="relative z-10 rounded-2xl bg-[#080417]/90 border border-white/10 p-6 sm:p-8 shadow-2xl backdrop-blur-xl">
               {/* Header inside widget */}
               <div className="flex items-start gap-4 mb-6">
                 <div className="w-10 h-10 rounded-xl bg-[#1E085A]/80 border border-[#7042FF]/40 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(112,66,255,0.3)]">
@@ -159,7 +196,12 @@ export const RyzeAIPanel: React.FC = () => {
                   type="text"
                   value={query}
                   disabled={loading}
-                  onChange={(e) => setQuery(e.target.value)}
+                  onFocus={() => setIsFocused(true)}
+                  onBlur={() => {
+                    setIsFocused(false);
+                    setIsTyping(false);
+                  }}
+                  onChange={handleInputChange}
                   placeholder={loading ? "Generating grounded response..." : "Ask me anything..."}
                   className="w-full rounded-full bg-white/[0.04] border border-white/15 hover:border-[#B896FF]/50 focus:border-[#7042FF] focus:ring-1 focus:ring-[#7042FF] px-5 py-3.5 text-xs sm:text-sm text-white placeholder:text-zinc-500 focus:outline-none pr-14 transition-all shadow-inner disabled:opacity-60 disabled:cursor-not-allowed"
                 />
