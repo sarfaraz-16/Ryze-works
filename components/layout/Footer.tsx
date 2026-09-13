@@ -155,9 +155,9 @@ export const Footer: React.FC = () => {
             <Link
               href="/admin"
               className="text-zinc-600 hover:text-zinc-400 transition-colors text-[11px]"
-              title="Staff Command Center"
+              title="Admin Command Center"
             >
-              Staff
+              Admin
             </Link>
           </div>
         </div>
