@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
 import { ProjectMockup } from "@/components/ui/ProjectMockup";
+import { TiltCard3D } from "@/components/ui/TiltCard3D";
 import { Search, ArrowRight } from "lucide-react";
 import { Project } from "@/types";
 
@@ -60,24 +60,25 @@ export function ProjectsClient({ initialProjects }: ProjectsClientProps) {
         </div>
       </div>
 
-      {/* Edge-to-Edge Media-Dominant Grid */}
+      {/* Edge-to-Edge Media-Dominant Grid with 3D Perspective Tilt & Parallax */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
         {filteredProjects.map((project) => (
-          <Link
+          <TiltCard3D
             key={project.id}
             href={`/projects/${project.slug}`}
-            className="group relative rounded-3xl overflow-hidden aspect-[4/3] md:aspect-[16/10] border border-white/[0.08] hover:border-[#B896FF]/40 transition-all duration-500 shadow-2xl shadow-black/60 bg-[#0d0e17]/85 flex flex-col justify-end select-none"
+            ariaLabel={`View project: ${project.title}`}
+            className="group relative rounded-3xl aspect-[4/3] md:aspect-[16/10] border border-white/[0.08] hover:border-[#B896FF]/40 shadow-2xl shadow-black/60 bg-[#0d0e17]/85 flex flex-col justify-end select-none h-full"
           >
             {/* Media Background Mockup */}
-            <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl [transform:translateZ(10px)_scale(0.98)] transition-transform duration-300">
               <ProjectMockup slug={project.slug} className="w-full h-full" />
             </div>
 
             {/* Intrinsic Bottom-Scrim Gradient */}
-            <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#080417]/95 via-[#080417]/50 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#080417]/95 via-[#080417]/50 to-transparent pointer-events-none rounded-3xl" />
 
             {/* Card Top Taxonomies */}
-            <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-20">
+            <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-20 [transform:translateZ(24px)] transition-transform duration-300">
               <span className="font-mono text-[10px] uppercase tracking-wider text-[#B896FF] bg-[#080417]/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/15 shadow-md">
                 {project.industry}
               </span>
@@ -87,7 +88,7 @@ export function ProjectsClient({ initialProjects }: ProjectsClientProps) {
             </div>
 
             {/* Card Bottom Scrim Details */}
-            <div className="relative z-20 p-6 sm:p-8 flex flex-col justify-end">
+            <div className="relative z-20 p-6 sm:p-8 flex flex-col justify-end [transform:translateZ(28px)] transition-transform duration-300">
               <div className="font-mono text-[11px] font-medium tracking-wider uppercase text-[#B896FF] mb-1">
                 {project.client} // {project.category}
               </div>
@@ -114,7 +115,7 @@ export function ProjectsClient({ initialProjects }: ProjectsClientProps) {
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
-          </Link>
+          </TiltCard3D>
         ))}
       </div>
     </>

@@ -1,7 +1,7 @@
 import React from "react";
-import Link from "next/link";
 import { ArrowRight, Activity, ShoppingBag, Bike, ShieldCheck, CreditCard, Sparkles, Check } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { TiltCard3D } from "@/components/ui/TiltCard3D";
 import { FEATURED_PROJECTS } from "@/data/siteData";
 
 export const FeaturedWork: React.FC = () => {
@@ -170,21 +170,22 @@ export const FeaturedWork: React.FC = () => {
         linkHref="/projects"
       />
 
-      {/* 5-Card Project Bento Grid */}
+      {/* 5-Card Project Bento Grid with 3D Perspective Tilt & Parallax */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
         {FEATURED_PROJECTS.map((project) => (
-          <Link
+          <TiltCard3D
             key={project.id}
             href={`/projects/${project.slug}`}
-            className="group rounded-2xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/35 p-4 shadow-2xl shadow-black/50 hover:shadow-[#1E085A]/40 transition-all duration-300 flex flex-col justify-between hover:bg-[#131422] hover:-translate-y-1 select-none"
+            ariaLabel={`View project: ${project.title}`}
+            className="group rounded-2xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/35 p-4 shadow-2xl shadow-black/50 hover:shadow-[#1E085A]/40 flex flex-col justify-between hover:bg-[#131422] h-full"
           >
-            {/* Visual Thumbnail */}
-            <div className="mb-4 overflow-hidden rounded-xl">
+            {/* Visual Thumbnail: Layered Depth Hierarchy (floats above card frame in 3D space) */}
+            <div className="mb-4 rounded-xl [transform:translateZ(28px)_scale(0.96)] transition-transform duration-300">
               {renderProjectVisual(project.slug)}
             </div>
 
-            {/* Project Details */}
-            <div className="flex-1">
+            {/* Project Details with layered depth */}
+            <div className="flex-1 [transform:translateZ(18px)] transition-transform duration-300">
               <h3 className="text-base font-semibold text-white mb-1 group-hover:text-[#B896FF] transition-colors tracking-[-0.01em] [word-spacing:0.08em]">
                 {project.title}
               </h3>
@@ -193,12 +194,12 @@ export const FeaturedWork: React.FC = () => {
               </p>
             </div>
 
-            {/* Bottom link with arrow */}
-            <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-zinc-300 group-hover:text-[#B896FF] transition-colors">
+            {/* Bottom link with arrow with layered depth */}
+            <div className="pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-semibold text-zinc-300 group-hover:text-[#B896FF] transition-colors [transform:translateZ(20px)] transition-transform duration-300">
               <span>{project.linkText}</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 text-[#B896FF] transition-transform" />
             </div>
-          </Link>
+          </TiltCard3D>
         ))}
       </div>
     </section>
