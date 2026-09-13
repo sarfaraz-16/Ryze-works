@@ -13,7 +13,7 @@ import { Footer } from "@/components/layout/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#080417] text-zinc-100 selection:bg-[#7042FF] selection:text-white relative overflow-x-hidden">
+    <main className="min-h-screen bg-transparent text-zinc-100 selection:bg-[#7042FF] selection:text-white relative overflow-x-hidden">
       {/* Fixed Sticky Header */}
       <Navbar />
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { CosmicBackground } from "@/components/background/CosmicBackground";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans",
@@ -78,7 +79,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-sans antialiased bg-[#080417] text-zinc-100 selection:bg-[#7042FF] selection:text-white" suppressHydrationWarning>
+      <body className="min-h-full flex flex-col font-sans antialiased bg-[#080417] text-zinc-100 selection:bg-[#7042FF] selection:text-white relative" suppressHydrationWarning>
+        <CosmicBackground />
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>
