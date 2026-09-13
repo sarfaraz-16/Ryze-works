@@ -1,7 +1,15 @@
+"use client";
+
 import React from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+
+const CosmicHorizon3D = dynamic(() => import("@/components/ui/CosmicHorizon3D"), {
+  ssr: false,
+  loading: () => null,
+});
 
 export const ClosingCTA: React.FC = () => {
   const marqueeItems = [
@@ -29,6 +37,13 @@ export const ClosingCTA: React.FC = () => {
 
       {/* Main Closing CTA Container */}
       <div className="relative py-20 sm:py-28">
+        {/* 3D Cosmic Event Horizon Warp Grid */}
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+          <CosmicHorizon3D />
+          {/* Soft dark gradient mask so wireframe emerges organically out of the dark void */}
+          <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#030014]/40 to-[#030014] pointer-events-none" />
+        </div>
+
         {/* Background ambient gradient glow with brand spectrum */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(112,66,255,0.25),rgba(8,4,23,0)_70%)] pointer-events-none" />
 
