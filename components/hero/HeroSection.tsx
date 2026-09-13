@@ -132,7 +132,7 @@ export const HeroSection: React.FC = () => {
             <div className="w-full max-w-lg mb-8">
               <form
                 onSubmit={handleHeroPromptSubmit}
-                className="relative rounded-2xl bg-white/[0.04] border border-white/15 focus-within:border-violet-500/70 focus-within:ring-1 focus-within:ring-violet-500/30 focus-within:shadow-[0_0_25px_rgba(139,92,246,0.18)] p-3.5 px-4 shadow-2xl backdrop-blur-md transition-all duration-200 group"
+                className="relative rounded-2xl bg-white/[0.04] border border-white/15 focus-within:border-violet-500/70 focus-within:shadow-[0_0_25px_rgba(139,92,246,0.2)] p-3.5 px-4 shadow-2xl backdrop-blur-md transition-all duration-200 group"
               >
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex-1 min-w-0">
@@ -151,7 +151,8 @@ export const HeroSection: React.FC = () => {
                       onBlur={() => setIsFocused(false)}
                       onChange={(e) => setHeroPrompt(e.target.value)}
                       placeholder={isFocused && !heroPrompt ? "Tell Ryze what you're working on..." : placeholderText}
-                      className="w-full bg-transparent border-0 outline-none ring-0 focus:ring-0 focus:outline-none focus:border-0 shadow-none text-sm text-zinc-100 placeholder:text-zinc-500 font-sans caret-violet-400 p-0"
+                      className="w-full bg-transparent border-none outline-none ring-0 shadow-none focus:outline-none focus:ring-0 focus:border-none focus:ring-offset-0 focus:ring-transparent [box-shadow:none] text-sm text-zinc-100 placeholder:text-zinc-500 caret-violet-400 p-0"
+                      style={{ border: 'none', outline: 'none', boxShadow: 'none' }}
                     />
                   </div>
                   <button
