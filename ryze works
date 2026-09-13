@@ -1,236 +1,1216 @@
-# RYZE WORKS — MASTER BUILD DOCUMENT
-### Consolidated Architecture, Tech Stack, UI Spec & Execution Workflow
-*Synthesized from: Developer/Product Spec (70 sections) · End-to-End Production Plan · Homepage UI Reference*
-
----
-
-## 0. HOW TO READ THIS DOCUMENT
-
-This document represents the single authoritative specification and implementation roadmap for **Ryze Works**:
-
-| Source | What it is | Status |
-|---|---|---|
-| 70-Section Spec | The full end-state platform vision (AI platform, CRM, ad ops, sponsorship) | **100% IMPLEMENTED & VERIFIED** |
-| Core Production Plan | The verified step-by-step implementation sequence | **ALL 7 STAGES COMPLETE** |
-| Homepage UI Reference | Target visual/UI direction | **PIXEL-PERFECT ACCORDING TO RYZE TOKENS** |
-
-**Operating Principle:** Built strictly against greenfield Next.js 16 + Supabase architecture. Zero technical debt, zero placeholder content, real pgvector RAG, hardened RLS, and verified moderation desks.
-
----
-
-## 1. PROJECT OBJECTIVE & STATUS
-
-Construct a production-ready, AI-native agency and knowledge platform:
-
-1. **Brand Aesthetic:** Premium, dark, high-contrast, technology-driven UI adhering to Ryze design tokens (`#0A0A0F` background, `#7C3AED` violet accent, `#F59E0B` amber streak). **[COMPLETED]**
-2. **Dynamic CMS Engine:** 100% database-driven content across services, projects, case studies, insights, and resources. **[COMPLETED]**
-3. **Grounded AI Layer:** Server-side AI assistant and Brief Generator backed by pgvector embeddings, citing verified content with zero hallucination. **[COMPLETED]**
-4. **Editorial Integrity:** Moderation desks with affirmative Client Verification Gate before anything renders publicly. **[COMPLETED]**
-5. **Integrated Commercial Pipeline:** Lead capture and CRM pipeline routing project and advertiser inquiries, with applicant desk. **[COMPLETED]**
-6. **Hardened Security:** Supabase Row-Level Security (RLS) policies, session-authenticated admin guards, and private file storage. **[COMPLETED]**
-
----
-
-## 2. TECH STACK & SYSTEM ARCHITECTURE
-
-| Layer | Technology | Status |
-|---|---|---|
-| Frontend Framework | **Next.js 16 (App Router)** | Server Components, dynamic ISR (`revalidate = 3600`), metadata |
-| Language | **TypeScript** | Strict type safety across UI components, schemas, and queries |
-| Styling | **Tailwind CSS** | Unified design tokens, responsive breakpoints, dark-mode foundation |
-| UI Primitives | **Custom Accessible Primitives** | Tailored to Ryze branding tokens |
-| Animation | **Framer Motion / Motion for React** | Hardware-accelerated transitions, micro-interactions |
-| Hosting & CDN | **Vercel** | Edge caching, automated branch previews, production build ready |
-| Backend Platform | **Supabase** | PostgreSQL, Auth, Storage, Edge Functions, pgvector |
-| Database | **Supabase PostgreSQL** | Relational models, indexed foreign keys, automated timestamps |
-| Access Control | **Supabase Auth & RLS** | Explicit table policies: public read published, admin full access |
-| File Storage | **Supabase Storage** | RLS-protected private `resumes` bucket; public `media` bucket |
-| AI Gateway | **Google Gemini (`gemini-2.5-flash` / `text-embedding-004`)** | Server-side execution only; browser never touches AI secrets |
-| Semantic Search | **pgvector (`knowledge_documents`)** | 768-dim vector embeddings with cosine similarity matching |
-| Telemetry & SEO | **Structured JSON-LD, Sitemap & Robots** | Dynamic sitemap, robots, schema.org Org/Article metadata |
-| Form Validation | **Zod Schemas & Server Actions** | Shared client/server validation schemas |
-| Automated Testing | **Consolidated Acceptance Suite** | Tests A, B, C, and E passing 100% (Zero compliance defects) |
-
-```
-                     ┌─────────────────────┐
-                     │        USERS        │
-                     └──────────┬──────────┘
-                                │  HTTPS
-                                ▼
-                     ┌─────────────────────┐
-                     │       VERCEL        │
-                     │ Next.js (App Router)│
-                     │ TypeScript + React  │
-                     │ Tailwind CSS        │
-                     │   Motion for React  │
-                     └──────────┬──────────┘
-                                │
-                 public reads   │   authenticated calls
-          (RLS-scoped)          │   (session-scoped)
-                                ▼
-                     ┌─────────────────────┐
-                     │      SUPABASE       │
-                     │ ─────────────────── │
-                     │ PostgreSQL (pgvector│◄─── AI retrieval native to DB
-                     │ Supabase Auth       │
-                     │ Storage Buckets     │
-                     │ Row Level Security  │
-                     │ Server Actions / API│──┐
-                     └─────────────────────┘  │
-                                              │ server-side only
-                                              │ secrets secured
-                     ┌────────────────────────┼────────────────────────┐
-                     ▼                        ▼                        ▼
-            ┌─────────────────┐      ┌─────────────────┐      ┌─────────────────┐
-            │   AI GATEWAY    │      │  COMMUNICATIONS │      │  OBSERVABILITY  │
-            │  Google Gemini  │      │  Resend (Email) │      │ JSON-LD/Sitemap │
-            └─────────────────┘      └─────────────────┘      └─────────────────┘
-```
-
----
-
-## 3. INFORMATION ARCHITECTURE & ROUTE VERIFICATION (60/60 COMPILED)
-
-```
-/                          → Homepage (Dynamic services, projects, testimonials, insights)
-/services                  → Capability Index (6 Core Groups from DB)
-/services/[slug]           → Service Detail & Approach + Linked Dynamic Projects (Junction)
-/projects                  → Work Portfolio + Realtime Category Filter + Search
-/projects/[slug]           → Project Detail + Tech Stack + Results + Image Mockups
-/case-studies              → Verified Case Studies Index from DB
-/case-studies/[slug]       → Challenge, Strategy, Execution & Quantified Metrics
-/testimonials              → Review Index + Public Intake Form (Auto-Quarantine)
-/insights                  → Editorial Articles & Perspectives + Category Filters
-/insights/[slug]           → Article Detail + Author + Reading Time + JSON-LD
-/reports                   → Industry Whitepapers & Research
-/reports/[slug]            → Whitepaper Summary & Lead-Gated Download
-/resources                 → Frameworks, Toolkits & Checklists
-/resources/[slug]          → Resource Toolkit & Free Template Asset
-/ai                        → Grounded Ryze AI Experience
-/ai/lab                    → Prototypes, Experiments & Semantic Vector Playground
-/partners                  → Strategic Alliances & Commercial Programs
-/advertise                 → Advertiser Inquiry & Placement Specs (Leads Engine)
-/media-kit                 → Audience Reach, Demographics & Rate Card Inquiries
-/about                     → Agency Mission, Culture, Principles & Leadership
-/contact                   → General Communications Intake
-/start-a-project           → Interactive AI Brief & Scope Intake
-/careers                   → Open Roles & Direct Application Intake
-/privacy, /terms, etc.     → Legal & Compliance Frameworks
-/admin                     → Secure Command Center Overview (Live KPI Counters)
-/admin/login               → Supabase Auth Login Interface with RBAC Session Handling
-/admin/testimonials        → Testimonial Moderation Desk (Approve / Reject / Feature)
-/admin/articles            → Article CMS Table (Draft / Published Status)
-/admin/articles/new        → Authoring Desk with Pre-Publish SEO Gate
-/admin/articles/[id]       → Article Edit & Content Updates
-/admin/leads               → CRM Pipeline Desk (Project, Advertiser & General Inquiries)
-/admin/careers             → Applicant Review Desk with Private Signed Resume URLs
-/sitemap.xml               → Dynamic Sitemap Generator (Live DB Slugs)
-/robots.txt                → Search Engine Rules & Admin Exclusion Guard
-```
-
----
-
-## 4. DATABASE & RELATIONAL ARCHITECTURE
-
-All tables are fully provisioned, seeded, and guarded by Row-Level Security:
-
-```
-services             id, slug, name, group, description, deliverables[], status, created_at, updated_at
-projects             id, slug, name, industry, description, hero_image, gallery[], is_featured, status
-project_services     project_id (FK), service_id (FK) -- Relational Junction
-case_studies         id, slug, project_id (FK), challenge, strategy, execution, results, status
-testimonials         id, author_name, role, company, quote, rating, project_id (FK), status, is_featured
-articles             id, slug, title, category, tags[], author_id (FK), cover_image, content, seo_title, seo_description, status
-reports / resources  id, slug, title, summary, file_url, sponsor_id (FK), status
-leads                id, type, name, email, company, message, ai_brief (jsonb), source, utm (jsonb), status
-career_roles         id, title, department, location, description, requirements[], status
-job_applications     id, role_id (FK), applicant_name, email, resume_path, status
-profiles             id (FK auth.users), full_name, role (public | editor | admin)
-knowledge_documents  id, content, metadata (jsonb), embedding (vector[768])
-```
-
----
-
-## 5. PLATFORM EXECUTION SCORECARD
-
-```
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│ STAGE 1: Foundation, Infrastructure & Static Route Build                   [100% DONE] │
-├────────────────────────────────────────────────────────────────────────────────────────┤
-│ STAGE 2: Live Database Ingestion & Relational Data Wiring                  [100% DONE] │
-├────────────────────────────────────────────────────────────────────────────────────────┤
-│ STAGE 3: Ryze Command Center — Admin Auth & Moderation Desks (Test A)      [100% DONE] │
-├────────────────────────────────────────────────────────────────────────────────────────┤
-│ STAGE 4: Knowledge Publishing Engine & Authoring CMS (Test E)              [100% DONE] │
-├────────────────────────────────────────────────────────────────────────────────────────┤
-│ STAGE 5: Semantic Retrieval Engine, pgvector & AI Brief Flow (Test C)      [100% DONE] │
-├────────────────────────────────────────────────────────────────────────────────────────┤
-│ STAGE 6: Commercial Advertising Platform & Monetization Ops (Test D)       [100% DONE] │
-├────────────────────────────────────────────────────────────────────────────────────────┤
-│ STAGE 7: Production Hardening, SEO, Automated Test Suite & Launch          [100% DONE] │
-└────────────────────────────────────────────────────────────────────────────────────────┘
-```
-
-### Stage 1: Foundation, Architecture & Routes — **COMPLETE**
-* [x] Next.js App Router, TypeScript, and Tailwind CSS configuration.
-* [x] Database tables initialized with strict RLS policies.
-* [x] Private Supabase storage bucket configured for career resumes; public bucket for media.
-* [x] Server-side AI Gateway routing directly to Gemini with server-side keys.
-* [x] All 60 public, dynamic, and admin routes compiling cleanly with 0 build errors.
-
-### Stage 2: Database Ingestion & Relational Data Wiring — **COMPLETE**
-* [x] **Data Migration:** Seed ingestion executed (`scripts/seed.ts` / `scripts/seed.js`) populating `services`, `projects`, `project_services`, `case_studies`, and `articles`.
-* [x] **Dynamic Route Wiring:** `/services`, `/projects`, `/case-studies`, and `/insights` reading directly from Supabase via Next.js ISR (`revalidate = 3600`) with resilient fallback caching.
-* [x] **Relational Graph (Acceptance Test B):** Live junction queries in `app/services/[slug]/page.tsx` rendering linked project cards (e.g., Nostic on Strategy, Zepto on Marketing).
-
-### Stage 3: Ryze Command Center — Admin Auth & Moderation Desk (Acceptance Test A) — **COMPLETE**
-* [x] **Auth Guard:** `middleware.ts` enforces server-side session checks and role validation (`profiles.role IN ('editor', 'admin')`) across all `/admin/:path*` routes.
-* [x] **Admin Login:** `/admin/login` interface with Supabase Auth integration.
-* [x] **Overview KPI Dashboard:** `/admin` dashboard surfacing live database counters (Leads, Pending Testimonials, Published Projects, Published Insights).
-* [x] **Testimonial Moderation Desk:** `/admin/testimonials` with one-click actions: Approve, Feature, or Reject, executing `revalidatePath()` across public routes.
-* [x] **Quarantine Pipeline:** Public submissions via `POST /api/testimonials` default strictly to `status = 'pending'` and are inaccessible to public queries until approved.
-
-### Stage 4: Knowledge Publishing Engine & Authoring CMS (Acceptance Test E) — **COMPLETE**
-* [x] **Article CMS:** `/admin/articles` CMS table with status badges, reading times, and edit links.
-* [x] **Authoring Desk:** `/admin/articles/new` and `/admin/articles/[id]` supporting Markdown, categories, tags, and auto-generated slugs.
-* [x] **Pre-Publish SEO Gate:** Enforces title (>= 5 chars) and description (>= 50 chars) before allowing `published` status.
-* [x] **Draft Isolation:** Draft articles strictly return HTTP 404 to anonymous users.
-* [x] **Reports & Resources:** Public `/reports` and `/resources` indexes and dynamic detail routes with lead-gated download forms.
-
-### Stage 5: Semantic Retrieval Engine, pgvector & AI Brief Flow (Acceptance Test C) — **COMPLETE**
-* [x] **Vector Embeddings Pipeline:** `scripts/seed_embeddings.js` generated 768-dimensional Gemini embeddings (`text-embedding-004`) for published content into `public.knowledge_documents`.
-* [x] **Semantic Assistant:** `/api/ai/chat` uses `match_knowledge` RPC function (cosine similarity) to retrieve relevant context.
-* [x] **Strict Refusal Boundary:** Queries without verified context cleanly return refusal message without hallucinating.
-* [x] **Project Brief Generator:** Guided `/start-a-project` flow stores structured briefs directly into `public.leads` with `type = 'project'`.
-* [x] **Interactive AI Lab:** Public `/ai/lab` workbench with live semantic search tester and prototype demos.
-
-### Stage 6: Commercial Advertising Platform & Monetization Ops (Acceptance Test D) — **COMPLETE**
-* [x] **Commercial Portals:** Interactive `/advertise` and `/media-kit` portals with objective and budget selectors.
-* [x] **CRM Lead Desk:** Centralized `/admin/leads` dashboard categorizing Project, Advertiser, and General inquiries with lifecycle stage controls.
-* [x] **Careers Desk:** Centralized `/admin/careers` reviewing job applications with private time-limited signed resume URLs generated via Supabase Storage admin client.
-
-### Stage 7: Production Hardening, SEO, Automated Test Suite & Launch — **COMPLETE**
-* [x] **SEO Automation:** Dynamic `app/sitemap.ts` and `app/robots.ts` querying live Supabase slugs; Schema.org JSON-LD structured data on layout and insights.
-* [x] **Zero-Placeholder Audit:** 40/40 public routes verified free of dummy text, lorem ipsum, or dead links.
-* [x] **Automated Acceptance Suite:** `npm run test:acceptance` runs consolidated runner with 4/4 passing tests (A, B, C, E).
-* [x] **Production Compilation:** `npm run build` generates 60/60 production routes cleanly with 0 TypeScript/linting errors.
-* [x] **Source Control:** Repository committed (`a8ebd0f`) and pushed to GitHub `origin/main` and `origin/master`.
-
----
-
-## 6. RELEASE GATE SIGN-OFF CHECKLIST
-
-All criteria have been tested and verified:
-
-- [x] **Data Driven:** Services, Projects, Case Studies, and Insights are served entirely from Supabase PostgreSQL.
-- [x] **Moderation Gate:** Testimonials default to `pending` and require human admin approval to display publicly.
-- [x] **Content Integrity:** Every client logo, project name, and metric is backed by verified database records.
-- [x] **AI Grounding:** AI assistant cites verified routes (`/projects/nostic`, etc.) or refuses cleanly without hallucinating.
-- [x] **Commercial Separation:** Project leads, advertiser inquiries, and applicant submissions are isolated in dedicated CRM pipelines.
-- [x] **Security Compliance:** All RLS policies active, admin routes guarded by middleware session/role checks, and secrets confined to server-side execution.
-- [x] **Zero Placeholder:** Zero broken navigation links, no dummy content, and clean empty states across all pages.
-- [x] **Automated Tests:** 4/4 acceptance tests passing (Tests A, B, C, E) in consolidated runner.
-- [x] **Git Repository:** Committed and pushed to GitHub `main` (`https://github.com/sarfaraz-16/Ryze-works.git`).
-
----
-**Status:** **PLATFORM IS COMPLETE AND READY FOR PRODUCTION DEPLOYMENT.**
+RYZE WORKS — DEVELOPER PRODUCT & DEVELOPMENT DOCUMENT
+Final Website Transformation Specification
+Website: ryzeworks.tech
+Document Version: 1.0
+Status: Production Build Specification
+Source: Existing Ryze Works master specification
+1. PROJECT OBJECTIVE
+Transform the existing Ryze Works website into a production-ready AI-native creative, technology, knowledge, media and monetization platform.
+The existing website should not simply receive a visual redesign.
+The development objective is to transform the current site into an interconnected platform containing:
+●   Services
+●   Projects
+●   Case Studies
+●   Testimonials
+●   Insights / Blogs
+●   Reports
+●   Resources
+●   AI
+●   Lead generation
+●   CRM
+●   Advertising
+●   Sponsorship
+●   Media Kit
+●   Analytics
+●   CMS
+●   Admin Command Center
+The platform must be designed as one integrated system, rather than independent pages or features.2. PRODUCT PRINCIPLE
+The website must demonstrate Ryze Works.
+The platform should communicate:
+Strategy → Branding → Design → Technology → Content → Marketing → Automation → AI → Growth → Innovation
+The objective is not to merely tell visitors that Ryze Works is innovative. The website itself must demonstrate it.
+3. CURRENT WEBSITE → TARGET PLATFORM
+Current positioning
+The existing website operates primarily as a creative/service-oriented website.
+Target positioning
+The final platform should function as:
+AI-Native Creative + Technology + Knowledge + Media Platform with four connected business layers:
+Layer
+Purpose
+Agency
+Services, Projects, Case Studies, Client Proof
+Knowledge
+Insights, Blogs, Reports, Research, Resources
+AI
+AI Assistant, Advisor, Search, Recommendations, Brief
+Generator
+Commercial
+Leads, Advertising, Sponsorships, Media Kit
+Plus an internal:CMS + CRM + Analytics + AI Administration system.
+4. DEVELOPMENT PHILOSOPHY
+The developer must follow these principles:
+DO
+●   Reuse good existing components where technically appropriate.
+●   Preserve useful existing content.
+●   Improve existing functionality rather than unnecessarily replacing it.
+●   Build reusable components.
+●   Build CMS-driven content.
+●   Build relational content architecture.
+●   Build AI as a platform layer.
+●   Build monetization into the architecture.
+●   Test every feature end-to-end.
+●   Optimize for mobile, SEO, performance and security.
+DO NOT
+●   Build a superficial chatbot and call the website AI-powered.
+●   Hard-code content that should be CMS-controlled.
+●   Create separate disconnected systems.
+●   Use fake testimonials.
+●   Use fake metrics.
+●   Use fake advertising results.
+●   Fabricate case-study results.
+●   Leave unfinished public features.
+●   Expose API keys.
+●   Create unnecessary technical debt.
+The original specification explicitly requires inspection of the existing website/codebase before rebuilding and requires a working production-ready platform rather than mockups.
+5. INFORMATION ARCHITECTURE
+Implement the following primary structure: RYZE WORKS
+│├── HOME
+│
+├── WORK
+│   ├── PROJECTS
+│   └── PROJECT DETAIL
+│
+├── SERVICES
+│   ├── STRATEGY
+│   ├── BRAND
+│   ├── BUILD
+│   ├── CREATE
+│   ├── GROW
+│   └── ACTIVATE
+│
+├── CASE STUDIES
+│   └── CASE STUDY DETAIL
+│
+├── TESTIMONIALS
+│
+├── INSIGHTS
+│   └── ARTICLE DETAIL
+│
+├── REPORTS
+│   └── REPORT DETAIL
+│
+├── RESOURCES
+│   └── RESOURCE DETAIL
+│
+├── AI
+│   └── AI LAB
+│
+├── PARTNERS
+│   ├── ADVERTISE
+│   ├── SPONSORSHIP
+│   └── MEDIA KIT
+│
+├── ABOUT
+│
+├── CONTACT
+│
+└── START A PROJECT
+Each major section must have its own dedicated page.6. URL STRUCTURE
+/
+/services
+/services/[service-slug]
+/projects
+/projects/[project-slug]
+/case-studies
+/case-studies/[case-study-slug]
+/testimonials
+/insights
+/insights/[article-slug]
+/reports
+/reports/[report-slug]
+/resources
+/resources/[resource-slug]
+/ai
+/ai/lab
+/partners
+/advertise
+/media-kit
+/about
+/contact
+/start-a-project
+/privacy
+/terms
+/cookie-policy
+/ai-disclosure
+This URL structure must be implemented cleanly and consistently.
+7. GLOBAL DESIGN SYSTEM
+Create a reusable design system covering:●   Typography
+●   Font hierarchy
+●   Colors
+●   Spacing
+●   Grid
+●   Buttons
+●   Inputs
+●   Forms
+●   Cards
+●   Navigation
+●   Footer
+●   Modals
+●   Tags
+●   Badges
+●   AI UI
+●   Loading states
+●   Error states
+●   Empty states
+●   Animations
+●   Responsive breakpoints
+Design direction
+The website must feel:
+Premium
+Modern
+Editorial
+Technology-driven
+Global
+Confident
+Intelligent
+Avoid generic agency-template aesthetics.
+8. GLOBAL NAVIGATION
+Primary navigation:WORK
+SERVICES
+INSIGHTS
+TESTIMONIALS
+AI
+ABOUT
+CONTACT
+Primary CTA:
+START A PROJECT
+Navigation must support:
+●   Desktop
+●   Tablet
+●   Mobile
+●   Dropdowns/mega-navigation where useful
+●   Active page states
+●   Accessible keyboard navigation
+9. HOMEPAGE SPECIFICATION
+Redesign the homepage around the new platform.
+Section 1 — Hero
+Strong positioning statement. Immediately introduce AI.
+Primary interaction:
+What are you trying to build?
+Input:
+Tell Ryze what you're working on... Actions:
+START WITH AI
+EXPLORE OUR WORKThe AI interaction should feel native to the page rather than an external chatbot.
+Section 2 — Capabilities
+Present Ryze's capabilities through:
+THINK
+Strategy
+CREATE
+Brand + Creative
+BUILD
+Technology + Digital
+GROW
+Marketing + Growth
+ACTIVATE
+Campaigns + Experiences
+Section 3 — Featured Work
+Dynamic projects.
+Section 4 — Case Studies
+Featured case studies.
+Section 5 — AI Experience
+Interactive demonstration of Ryze AI.Section 6 — Testimonials
+Approved client/founder testimonials.
+Section 7 — Insights
+Latest articles/research.
+Section 8 — Start a Project
+Strong conversion CTA.
+10. SERVICES PAGE
+The current services experience must be completely redesigned. Do not present services as a basic list.
+Organize them into six major capability groups.
+STRATEGY
+● Business Strategy
+●   Brand Strategy
+●   Positioning
+●   Research
+●   Go-to-Market
+BRAND
+●   Brand Identity
+●   Visual Identity
+● Creative Direction
+●   Brand Systems
+●   Brand LaunchBUILD
+● Website Development
+●   Digital Products
+●   UI/UX
+●   Automation
+●   CRM
+●   AI Systems
+CREATE
+●   Photography
+●   Videography
+●   Animation
+●   Content
+● Creative Campaigns
+GROW
+●   Digital Marketing
+● Performance Marketing
+●   Social Media
+●   Acquisition
+●   Optimization
+ACTIVATE
+● Campaigns
+●   Events
+●   Activations
+● Experiences
+11. SERVICE DETAIL PAGE
+Every service receives its own URL. Required structure:
+Hero
+↓ Problem ↓Opportunity
+↓
+Ryze Approach
+↓
+Process
+↓
+Deliverables
+↓
+Technology
+↓
+Related Projects
+↓
+Related Case Studies
+↓
+Testimonials
+↓
+FAQs
+↓
+CTA
+All content should be CMS-controlled.
+12. PROJECTS SYSTEM
+Create:
+/projects
+The page must clearly establish:
+PROJECTS / OUR WORK
+before showing project cards. Required functionality:
+●   Featured work
+●   All projects
+●   Category filtering
+●   Industry filtering
+●   Service filtering●   Search
+●   Responsive project grid Project cards should contain:
+●   Image
+●   Project name
+●   Industry
+●   Services
+●   Description
+Each project must have:
+/projects/[project-slug]
+13. PROJECT DETAIL PAGE
+Required sections:
+●   Hero
+●   Client
+●   Industry
+●   Challenge
+●   Strategy
+●   Creative
+●   Design
+●   Technology
+●   Execution
+●   Gallery
+●   Video
+●   Results
+●   Testimonial
+●   Services
+●   Related projects
+●   Related case studies
+●   Related insights
+●   CTA
+14. CASE STUDY PLATFORM
+Create:/case-studies
+Each case study must support:
+●   Overview
+●   Client
+●   Industry
+●   Challenge
+●   Research
+●   Insight
+●   Strategy
+●   Execution
+●   Technology
+●   Results
+●   Lessons
+●   Gallery
+●   Video
+●   Testimonial
+●   Related services
+●   Related projects
+●   Related content
+●   CTA
+Only verified results may be published.
+15. CONTENT RELATIONSHIP ENGINE
+This is a critical backend requirement. Content must not exist as isolated records. Example:
+PROJECT
+Nostic
+│
+├── Industry → Healthcare │
+├── Services
+│   ├── Branding │   ├── Website │   └── Marketing │
+├── Case Study │├── Testimonial
+│
+└── Insights
+├── Healthcare Branding
+└── Healthcare Marketing
+This relationship graph will power:
+●   Related content
+●   Search
+●   AI retrieval
+●   AI recommendations
+●   Personalization
+●   Internal linking
+This relational architecture is explicitly required in the source specification.
+16. TESTIMONIAL PLATFORM
+Create:
+/testimonials
+Sections:
+●   Client Testimonials
+●   Founder Testimonials
+●   Video Testimonials
+●   Featured Testimonials
+17. TESTIMONIAL SUBMISSION WORKFLOW
+Create public form with:
+●   Client name
+●   Founder/designation
+●   Company
+●   Company logo
+●   Profile image
+●   Testimonial●   Project
+●   Service
+●   Website
+●   LinkedIn
+●   Publishing permission Default state:
+PENDING APPROVAL
+Never publish automatically.
+18. TESTIMONIAL ADMIN WORKFLOW
+Admin actions:
+●   Approve
+●   Reject
+●   Edit
+●   Feature
+●   Unfeature
+●   Archive
+After approval:
+Submission
+↓
+Approved Testimonial Object
+↓
+Testimonial Card
+↓
+Testimonials Page
+↓
+Homepage
+↓
+Relevant Project
+↓
+Relevant Service
+↓
+Relevant Case Study
+The testimonial must therefore be reusable throughout the platform.19. TESTIMONIAL AI
+AI can assist with:
+●   Grammar
+●   Formatting
+●   Categorization
+●   Service classification
+●   Industry classification
+●   Summary
+But AI must never fabricate or materially falsify a client statement. Always preserve the original submission.
+Human approval is required for modifications.
+20. INSIGHTS PLATFORM
+Create:
+/insights
+Categories:
+●   Business
+●   Branding
+●   Marketing
+●   Technology
+●   AI
+●   Design
+●   Startups
+●   Growth
+●   Research
+●   Case Studies Features:
+●   Search
+●   Filtering
+●   Featured content
+●   Author
+●   Reading time
+●   Related content
+●   Social sharing●   Newsletter CTA
+21. ARTICLE CMS
+Each article should support:
+●   Title
+●   Slug
+●   Cover image
+●   Author
+●   Category
+●   Tags
+●   Date
+●   Reading time
+●   Content
+●   Related services
+●   Related projects
+●   Related case studies
+●   Related articles
+●   Sponsor
+●   SEO title
+●   SEO description
+●   Social image
+●   Canonical URL
+22. REPORTS
+Create:
+/reports
+Support:
+●   Industry reports
+●   Research
+●   Market reports
+●   Benchmarks
+●   Annual reports Each report:
+●   Landing page●   Summary
+●   Download
+●   Sponsor
+●   Author
+●   Date
+● Related content
+23. RESOURCES
+Create:
+/resources
+Support:
+●   Guides
+●   Templates
+●   Checklists
+●   Frameworks
+●   Tools
+●   Downloads
+24. NEWSLETTER
+Newsletter system must capture:
+●   Email
+●   Name
+●   Consent
+●   Source
+●   Page
+●   UTM
+PHASE 3 — MONETIZATION
+25. MONETIZATION OBJECTIVEThe content platform must be capable of generating revenue.
+The website must not become a low-quality banner-ad website.
+The commercial strategy is:
+CONTENT SPONSORSHIP + PREMIUM ADVERTISING
+26. PARTNER PLATFORM
+Create:
+/partners /advertise /media-kit
+27. MONETIZATION PRODUCTS
+Implement:
+1. Sponsored Insights
+Brands sponsor relevant articles.
+2. Sponsored Case Studies
+Sponsored educational placements.
+3. In-Article Sponsorship
+Premium sponsor placements.
+4. End-of-Article Sponsorship
+Sponsor card after content.5. Report Sponsorship
+Companies sponsor research/report content.
+6. Resource Sponsorship
+Companies sponsor guides/resources.
+7. Category Sponsorship
+Brand sponsorship across a specific content category.
+8. Premium Display Advertising
+Selective premium advertising.
+28. ADVERTISING ETHICS
+Every sponsored placement must clearly state:
+Sponsored
+or
+Partner Content
+Advertising must never be presented as independent editorial content.
+29. ADVERTISING CMS
+Admin must manage:
+●   Advertiser
+●   Campaign
+●   Creative
+●   Destination URL
+●   Placement
+●   Start date
+●   End date
+●   Status
+●   Target content
+●   Target category30. ADVERTISING ANALYTICS
+Track:
+●   Impressions
+●   Clicks
+●   CTR
+●   Campaign
+●   Placement
+●   Article
+●   Date
+31. ADVERTISER ENQUIRY
+Create:
+/advertise
+Form:
+●   Company
+●   Website
+●   Contact
+●   Industry
+●   Objective
+●   Target audience
+●   Budget
+●   Placement
+●   Campaign duration
+Advertiser leads must remain separate from project leads.
+32. MEDIA KIT
+Create:
+/media-kitInclude:
+●   Ryze positioning
+●   Audience
+●   Content categories
+●   Sponsorship products
+●   Advertising formats
+●   Placement examples
+●   Verified audience metrics
+●   Contact CTA
+Never invent audience statistics.
+33. CRM
+Centralized lead system. Lead categories:
+●   Project
+●   Advertiser
+●   General
+●   Newsletter
+●   Testimonial
+Project leads should contain:
+●   Name
+●   Company
+●   Contact
+●   Requirements
+●   AI brief
+●   Source
+●   UTM
+●   Page
+●   Status
+PHASE 4 — AI PLATFORM
+34. AI IS A CORE SYSTEMAI must not be implemented merely as a chatbot. It must participate in:
+●   Discovery
+●   Search
+●   Navigation
+●   Content
+●   Projects
+●   Case Studies
+●   Service recommendations
+●   Project briefing
+●   Lead generation
+●   Personalization
+●   Content operations
+35. RYZE AI
+Create:
+/ai
+Primary interface:
+WHAT ARE YOU TRYING TO BUILD?
+The visitor describes their requirement.
+AI asks intelligent follow-up questions.
+36. AI PROJECT ADVISOR
+Example:
+Visitor:
+I want to launch a SaaS company. AI should determine:
+●   Stage●   Target audience
+●   Objective
+●   Existing assets
+●   Timeline
+●   Required support Then recommend:
+●   Services
+●   Projects
+●   Case Studies
+●   Insights
+●   Resources
+37. AI PROJECT BRIEF GENERATOR
+AI generates:
+●   Company
+●   Industry
+●   Objective
+●   Challenge
+●   Audience
+●   Desired outcome
+●   Services
+●   Timeline
+●   Budget
+●   Notes
+Visitor can edit the brief. Then:
+SUBMIT TO RYZE WORKS
+CRM receives:
+●   AI summary
+●   Project brief
+●   Conversation context
+●   Source
+●   UTM38. AI CASE STUDY SEARCH
+Natural-language queries:
+Show me branding projects.
+Show me startup projects.
+Show me healthcare work.
+Show me projects that improved conversion.
+The system must return actual verified matching content. Never fabricate a result.
+39. AI CONTENT DISCOVERY
+Example:
+I'm launching a startup. What should I read? AI can recommend:
+●   Insights
+●   Case Studies
+●   Reports
+●   Resources
+●   Services
+●   Projects
+40. AI KNOWLEDGE ASSISTANT
+AI should understand approved:
+●   Services
+●   Projects
+●   Case Studies
+●   Testimonials
+●   Insights
+●   Reports
+●   Resources●   About
+●   AI capabilities
+Use grounded retrieval.
+If information isn't available:
+I don't have enough verified information to answer that.
+41. AI SOURCE LINKING
+Every AI recommendation should link to the underlying page.
+Example:
+Case Study → Nostic
+Service → Brand Strategy
+Insight → Healthcare Branding
+This creates a direct bridge between AI discovery and the website's content ecosystem.
+42. AI LEAD QUALIFICATION
+AI can internally classify leads as:
+HIGH INTENT
+MEDIUM INTENT
+LOW INTENT
+This is only a sales-support signal.
+43. AI RECOMMENDATION ENGINE
+Build: Visitor Intent↓
+Service
+↓
+Project
+↓
+Case Study
+↓
+Insight
+↓
+Resource
+↓
+CTA
+Recommendations must be based on actual relationships and approved information.
+44. AI PERSONALIZATION
+Where legally and technically appropriate, recommendations can consider:
+●   Current page
+●   Declared interests
+●   Current session
+●   Consented behaviour
+●   Previous interactions where permitted
+45. AI SESSION MEMORY
+AI can maintain context during the current session.
+Example:
+I'm building a fintech startup.
+The AI should remember that context throughout the conversation.
+Do not retain personal information indefinitely without appropriate consent.
+46. AI CONTENT ASSISTANTAdmin AI assists with:
+●   Article summaries
+●   SEO descriptions
+●   Tags
+●   Categories
+●   Case-study structure
+●   Project summaries
+●   Internal linking
+●   Content classification Human approval is mandatory.
+47. AI LAB
+Create:
+/ai/lab
+Showcase:
+●   AI experiments
+●   AI tools
+●   AI projects
+●   AI research
+●   AI automations
+●   AI case studies
+●   AI prototypes
+This page should demonstrate Ryze's AI capabilities publicly.
+48. AI KNOWLEDGE MODEL
+Every relevant content object should have metadata:
+●   Industry
+●   Service
+●   Technology
+●   Challenge
+●   Outcome
+●   Content type
+●   Client●   Project
+●   Topic
+●   Author
+●   Date
+This metadata powers:
+Search → Recommendations → AI Retrieval → Related Content → Personalization
+49. AI SERVICE LAYER
+Do not place AI logic directly inside frontend components. Create a dedicated AI service layer supporting:
+●   Model configuration
+●   Prompt management
+●   Retrieval
+●   Embeddings
+●   Vector search
+●   Tool calling
+●   Context
+●   Usage tracking
+●   Rate limiting
+●   Logging
+●   Fallbacks
+The AI provider must be replaceable.
+50. AI SECURITY
+AI must never:
+●   Invent clients
+●   Invent projects
+●   Invent testimonials
+●   Invent results
+●   Invent services
+●   Reveal private information
+●   Reveal internal documents
+●   Expose API keys
+●   Fabricate pricing●   Fabricate metrics
+Only approved information may enter the public AI knowledge layer.
+PHASE 5 — RYZE COMMAND CENTER 51. ADMIN DASHBOARD
+Create:
+RYZE COMMAND CENTER
+Dashboard metrics:
+●   Visitors
+●   Leads
+●   Projects
+●   Articles
+●   Testimonials
+●   Sponsors
+●   Advertising
+●   AI usage
+52. CONTENT ADMIN
+Admin manages:
+●   Projects
+●   Case Studies
+●   Services
+●   Testimonials
+●   Articles
+●   Reports
+●   Resources
+●   Authors53. COMMERCIAL ADMIN
+Manage:
+●   Leads
+●   Advertisers
+●   Sponsors
+●   Campaigns
+●   Advertising placements
+54. AI ADMIN
+Manage:
+●   AI conversations
+●   Knowledge sources
+●   Indexed content
+●   AI feedback
+●   AI usage
+●   Errors
+55. DATABASE ENTITIES
+Create structured models for:
+Project CaseStudy Service Testimonial Article
+Report
+Resource
+Author
+Sponsor Campaign Advertisement Placement
+Lead AIConversation KnowledgeSourceNewsletterSubscriber
+Relationships between entities are mandatory.
+56. API ARCHITECTURE
+Create clean API/service boundaries for:
+●   Projects
+●   Services
+●   Case Studies
+●   Testimonials
+●   Articles
+●   Reports
+●   Resources
+●   Leads
+●   Advertisers
+●   Sponsorships
+●   Advertising
+●   AI
+●   Analytics Every API must have:
+●   Validation
+●   Authentication
+●   Authorization
+●   Error handling
+●   Rate limiting
+57. FOOTER REDESIGN
+The footer must become a substantial navigation area.
+RYZE WORKS
+About Careers Contact
+SERVICESStrategy
+Brand
+Build
+Create
+Grow
+Activate
+WORK
+Projects
+Case Studies
+Testimonials
+INSIGHTS
+Blog
+Reports
+Resources
+AI
+Ryze AI
+AI Lab
+PARTNERS
+Advertise
+Media Kit
+Partnerships
+LEGAL
+Privacy
+Terms
+Cookies
+AI Disclosure
+Also include:
+●   Newsletter
+●   Social links
+●   Company information
+●   Copyright
+The footer must not feel like an empty afterthought.58. SEO REQUIREMENTS
+Every public page must support:
+●   SEO title
+●   Meta description
+●   Canonical
+●   Open Graph
+●   Social image
+●   Sitemap
+●   Robots
+●   Breadcrumbs
+●   Structured data
+●   Internal linking
+●   Alt text
+Dynamic content must be indexable.
+59. ANALYTICS
+Implement analytics for:
+Website
+●   Visitors
+●   Page views
+●   Traffic sources
+●   Engagement
+Content
+●   Article views
+●   Project views
+●   Case-study views
+●   Searches
+Leads
+●   CTA clicks
+●   Form starts
+●   Form completions
+●   Lead source
+AI●   AI sessions
+●   Queries
+●   Recommendations
+●   Brief generations
+●   AI-generated leads
+●   Feedback
+Advertising
+●   Impressions
+●   Clicks
+●   CTR
+●   Campaign performance
+60. SECURITY
+Implement:
+●   HTTPS
+●   Secure authentication
+●   Role-based access
+●   API protection
+●   Input validation
+●   Rate limiting
+●   Spam protection
+●   Secure file uploads
+●   Secret management
+●   Database security
+●   Audit logs
+Never expose secrets or API keys in frontend code.
+61. PERFORMANCE
+Optimize:
+●   Images
+●   Videos
+●   JavaScript
+●   CSS
+●   Fonts●   Database queries
+●   API calls
+●   AI requests
+Use:
+●   CDN
+●   Caching
+●   Lazy loading
+●   Code splitting
+AI must not unnecessarily slow ordinary website pages.
+62. ACCESSIBILITY
+Implement:
+●   Semantic HTML
+●   Keyboard navigation
+●   Accessible forms
+●   Correct labels
+●   Contrast
+●   Alt text
+●   Accessible navigation
+●   Reduced-motion support
+63. RESPONSIVE DESIGN
+Fully test:
+Desktop
+Laptop
+Tablet
+Mobile
+Especially:
+●   AI
+●   Forms
+●   Filters●   Project galleries
+●   Testimonials
+●   Articles
+●   Advertising
+● Admin dashboard
+64. ZERO PLACEHOLDER POLICY
+Production must contain no:
+●   Lorem ipsum
+●   Fake testimonials
+●   Fake statistics
+●   Fake clients
+●   Fake advertisements
+●   Fake AI responses
+●   Broken buttons
+●   Dead navigation
+●   Unfinished public pages
+If real content isn't available, use a clean CMS empty state.
+65. END-TO-END ACCEPTANCE TESTS
+TEST A — TESTIMONIAL
+Client
+↓
+Submission Form ↓
+Database
+↓
+Pending
+↓
+Admin Review ↓
+Approve
+↓
+Published
+↓
+Testimonial Card↓
+Testimonials Page ↓
+Homepage ↓
+Project ↓ Service
+TEST B — PROJECT
+Admin
+↓
+Create Project
+↓
+Publish
+↓
+Projects
+↓
+Project Detail
+↓
+Service Relationship ↓
+Case Study ↓ Testimonial ↓
+Insights
+TEST C — AI
+Visitor
+↓
+AI
+↓
+Requirement Understanding ↓
+Follow-up Questions
+↓
+Knowledge Retrieval
+↓
+Service Recommendation ↓
+Project Recommendation ↓Case Study Recommendation ↓
+Insight Recommendation ↓
+Brief Generation ↓
+Submission ↓
+CRM
+TEST D — MONETIZATION
+Advertiser ↓ Advertise ↓
+Enquiry
+↓
+Admin
+↓ Campaign ↓ Placement ↓
+Publish
+↓ Impression ↓
+Click
+↓ Analytics
+TEST E — CONTENT
+Admin
+↓
+Create Article ↓
+Metadata ↓ Publish ↓ Insights ↓
+SEO↓
+Search
+↓
+AI Knowledge
+↓
+Related Content
+66. DEVELOPMENT PHASES
+The actual engineering work should follow:
+PHASE 1
+Foundation
+Design system → Navigation → Homepage → Services → Projects → Project pages → Case Studies
+PHASE 2
+Content Platform
+CMS → Testimonials → Approval system → Insights → Reports → Resources → Newsletter
+PHASE 3
+Commercial Platform
+CRM → Project leads → Advertiser leads → Sponsors → Advertising → Media Kit → Analytics
+PHASE 4
+AI Platform
+AI infrastructure → Knowledge → Assistant → Project Advisor → Brief Generator → AI Search → Recommendations
+PHASE 5
+Advanced AI
+Personalization → AI Content Assistant → AI Lab → AI Analytics → Feedback
+PHASE 6Production
+Security → Performance → SEO → Accessibility → Mobile → End-to-end testing → Deployment
+This follows the phased architecture of the supplied master specification.
+67. DEVELOPER WORKFLOW
+Before coding:
+STEP 1
+Audit current website.
+STEP 2
+Audit repository.
+STEP 3
+Audit frontend.
+STEP 4
+Audit backend.
+STEP 5
+Audit database.
+STEP 6
+Audit APIs.
+STEP 7
+Audit deployment.
+STEP 8
+Audit current content.
+STEP 9Map reusable components.
+STEP 10
+Create final technical architecture.
+STEP 11
+Implement Phase 1.
+STEP 12
+Test.
+STEP 13
+Implement Phase 2.
+STEP 14
+Test.
+STEP 15
+Implement Phase 3.
+STEP 16
+Test.
+STEP 17
+Implement Phase 4.
+STEP 18
+Test.
+STEP 19
+Implement Phase 5.
+STEP 20
+Run complete production QA.
+STEP 21Deploy.
+The source specification explicitly requires auditing the existing implementation before rebuilding.
+68. FINAL DEFINITION OF DONE
+The project is NOT complete merely because the pages visually exist. It is complete only when:
+FRONTEND
+●   All pages work.
+●   Navigation works.
+●   Responsive layouts work.
+●   Forms work.
+●   Search works.
+●   Filters work.
+CMS
+●   Content can be created.
+●   Content can be edited.
+●   Content can be published.
+●   Content can be archived.
+TESTIMONIALS
+●   Submission works.
+●   Approval works.
+●   Cards are generated.
+●   Cards are reusable.
+PROJECTS
+●   Projects are CMS-driven.
+●   Detail pages work.
+●   Relationships work.
+CONTENT
+●   Articles work.
+●   Reports work.
+●   Resources work.●   Related content works.
+MONETIZATION
+●   Advertiser enquiry works.
+●   Campaigns work.
+●   Placements work.
+●   Sponsorship works.
+●   Tracking works.
+CRM
+●   Leads are captured.
+●   Lead types are separated.
+●   AI briefs are attached.
+●   Sources are tracked.
+AI
+●   AI assistant works.
+●   Knowledge retrieval works.
+●   AI search works.
+●   Recommendations work.
+●   Project Advisor works.
+●   Brief Generator works.
+●   AI does not fabricate Ryze information.
+ADMIN
+●   Content management works.
+●   Commercial management works.
+●   AI management works.
+●   Analytics works.
+TECHNICAL
+●   SEO works.
+●   Security is tested.
+●   Performance is tested.
+●   Accessibility is tested.
+●   Mobile is tested.
+●   Production deployment is stable.
+69. FINAL PRODUCT ARCHITECTUREThe completed Ryze Works platform should operate as:
+RYZE WORKS
+│
+┌───────────────────┼───────────────────┐
+│
+│
+│
+AGENCY             KNOWLEDGE             AI
+│
+│
+│
+Services            Insights          AI Assistant Projects             Reports           AI Search
+Case Studies          Resources         AI Advisor Testimonials             Blog            AI Briefs
+│
+│             Recommendations
+└───────────────────┼───────────────────┘ │
+COMMERCIAL
+│
+┌───────────┼───────────┐ │││
+Leads      Sponsors      Ads
+│││
+└───────────┼───────────┘ │
+COMMAND CENTER │
+CMS + CRM + Analytics
+70. FINAL DEVELOPER DIRECTIVE
+Do not build a normal agency website.
+Transform Ryze Works into a single integrated AI-native platform.
+Preserve strong existing work where appropriate, but redesign the information architecture and product experience around the new vision.
+AI must be deeply integrated into discovery, search, recommendations, project briefing and lead generation.
+Content must be CMS-driven and relational.
+Testimonials must have a real submission and approval workflow.
+Projects and case studies must have dedicated pages.
+Insights, reports and resources must become a genuine knowledge platform.The content platform must support sponsorship and premium advertising without compromising the Ryze brand.
+CRM, analytics and advertising must be connected to the backend.
+The admin must be able to operate the platform without developer intervention
+for normal content and commercial operations.
+Do not use fake data to simulate completion.
+Do not leave unfinished features.
+Do not treat AI as a cosmetic chatbot.
+Build → Integrate → Test → Optimize → Deploy.
+The final website must itself be a demonstration of Ryze Works' capabilities in strategy, design, technology, content, growth, automation and AI.
+FINAL GOAL
+RYZE WORKS SHOULD NOT LOOK LIKE A COMPANY THAT HAS ADDED AI TO ITS WEBSITE.

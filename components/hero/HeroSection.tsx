@@ -57,23 +57,29 @@ export const HeroSection: React.FC = () => {
             <div className="w-full max-w-lg mb-8">
               <form
                 onSubmit={handleHeroPromptSubmit}
-                className="relative rounded-2xl bg-white/[0.04] border border-white/20 focus-within:border-[#B896FF] focus-within:ring-1 focus-within:ring-[#B896FF] p-4 shadow-2xl backdrop-blur-md transition-all duration-300 group"
+                className="relative rounded-2xl bg-white/[0.04] border border-white/15 focus-within:border-violet-500/70 focus-within:ring-1 focus-within:ring-violet-500/30 focus-within:shadow-[0_0_25px_rgba(139,92,246,0.18)] p-3.5 px-4 shadow-2xl backdrop-blur-md transition-all duration-200 group"
               >
-                <div className="font-mono text-[10px] font-semibold text-zinc-400 uppercase tracking-wider mb-2">
-                  What are you trying to build?
-                </div>
-                <div className="flex items-center gap-3">
-                  <input
-                    type="text"
-                    value={heroPrompt}
-                    onChange={(e) => setHeroPrompt(e.target.value)}
-                    placeholder="Tell Ryze what you're working on..."
-                    className="w-full bg-transparent text-sm text-white placeholder:text-zinc-500 focus:outline-none"
-                  />
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex-1 min-w-0">
+                    <label
+                      htmlFor="hero-prompt-input"
+                      className="text-[10px] tracking-wider uppercase font-medium text-zinc-400 mb-1 block select-none"
+                    >
+                      What are you trying to build?
+                    </label>
+                    <input
+                      id="hero-prompt-input"
+                      type="text"
+                      value={heroPrompt}
+                      onChange={(e) => setHeroPrompt(e.target.value)}
+                      placeholder="Tell Ryze what you're working on..."
+                      className="w-full bg-transparent border-0 outline-none ring-0 focus:ring-0 focus:outline-none focus:border-0 shadow-none text-sm text-zinc-100 placeholder:text-zinc-500 font-sans caret-violet-400 p-0"
+                    />
+                  </div>
                   <button
                     type="submit"
                     aria-label="Send to Ryze AI"
-                    className="w-9 h-9 rounded-full bg-gradient-to-r from-[#7042FF] to-[#4318D1] hover:from-[#8257ff] hover:to-[#5022e0] flex items-center justify-center text-white shrink-0 shadow-[0_0_20px_rgba(112,66,255,0.4)] transition-all transform hover:scale-105 active:scale-95"
+                    className="w-8 h-8 rounded-full bg-violet-600 hover:bg-violet-500 text-white flex items-center justify-center shrink-0 transition-transform active:scale-95 cursor-pointer shadow-[0_0_15px_rgba(139,92,246,0.35)]"
                   >
                     <ArrowRight className="w-4 h-4" />
                   </button>

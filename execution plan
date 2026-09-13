@@ -1,0 +1,123 @@
+Based on a comprehensive, deep audit of the entire 70-section **[ryze works](file:///d:/RYZE%20WEBSITE/ryze%20works)** Master Specification and the 30-day **[workflow](file:///d:/RYZE%20WEBSITE/workflow)** build document, here is the complete phased execution plan to complete **all remaining tasks** and achieve the 100% end-state platform.
+
+---
+
+```
+                                  REMAINING EXECUTION ROADMAP
+  ┌────────────────────────────────────────────────────────────────────────────────────────┐
+  │ PHASE 1: Core Database Wiring & Knowledge Engine Expansion                             │
+  ├────────────────────────────────────────────────────────────────────────────────────────┤
+  │ PHASE 2: Ryze Command Center — Admin Auth, Content CMS & Testimonial Moderation        │
+  ├────────────────────────────────────────────────────────────────────────────────────────┤
+  │ PHASE 3: Commercial Platform, Monetization Engine & Staff CRM                          │
+  ├────────────────────────────────────────────────────────────────────────────────────────┤
+  │ PHASE 4: Advanced AI Platform, pgvector RAG & AI Lab                                   │
+  ├────────────────────────────────────────────────────────────────────────────────────────┤
+  │ PHASE 5: Production Hardening, SEO, Automated Testing (Tests A–E) & Deployment         │
+  └────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### PHASE 1: Core Database Wiring & Knowledge Engine Expansion
+*Primary Objective: Eliminate hardcoded data dependencies and bring the public Knowledge Platform to full parity (§10–§15, §20–§23, Days 9, 11, 14, 18, 19).*
+
+1. **Live Supabase Data Ingestion**:
+   - Seed existing verified data (`siteData.ts`) into Postgres tables (`services`, `projects`, `case_studies`, `articles`).
+   - Switch `/services`, `/services/[slug]`, `/projects`, `/projects/[slug]`, `/case-studies`, `/case-studies/[slug]`, and `/insights` from local objects to direct Supabase queries with Next.js ISR/caching and graceful fallbacks.
+2. **Content Relationship Graph (§15)**:
+   - Wire dynamic M2M relationships: Services ↔ Projects ↔ Case Studies ↔ Insights via `project_services` and foreign keys.
+   - Render contextual "Related Case Studies" and "Related Insights" dynamically on every detail page.
+3. **Reports Platform (§22)**:
+   - Build `/reports` (listing of market benchmarks, industry whitepapers, research).
+   - Build `/reports/[slug]` (report landing page with executive summary, author/sponsor metadata, and gated download form).
+4. **Resources Platform (§23)**:
+   - Build `/resources` (guides, design framework templates, startup launch checklists).
+   - Build `/resources/[slug]` (resource detail with direct/gated file download capture).
+
+---
+
+### PHASE 2: Ryze Command Center — Admin Auth, Content CMS & Moderation
+*Primary Objective: Build the internal management platform so staff can manage content without code deployments (§18, §21, §51, §52, Days 8, 10, 13, 16, 17, 22).*
+
+1. **Admin Authentication & RBAC (§51)**:
+   - Implement `/admin/login` using Supabase Auth.
+   - Protect all `/admin/*` routes with server-side session checks and role verification (`profiles.role IN ('editor', 'admin')`).
+2. **Command Center Overview Dashboard (§51, Day 22)**:
+   - Live KPI cards displaying real DB counts: Total Leads, Pending Testimonials, Published Projects, Insights Views, and AI Queries (zero fake analytics).
+3. **Agency Content CMS (§52, Days 8, 10, 13)**:
+   - **Services Manager**: Create, edit, reorder, and archive services.
+   - **Projects Manager**: Manage project details, gallery uploads, tech tags, and service joins.
+   - **Case Studies Manager**: Structured challenge/strategy/execution/results editor with mandatory **Client Verification Gate** (§13) enforcement.
+4. **Testimonial Moderation Desk (§18, Day 16 — Acceptance Test A)**:
+   - Dedicated moderation queue to inspect incoming client submissions.
+   - One-click workflow: **Approve**, **Reject**, **Feature**, or **Archive**.
+   - Approved testimonials immediately reflect on the homepage, `/testimonials`, and linked project pages.
+5. **Knowledge CMS (§21, §52, Day 17 — Acceptance Test E)**:
+   - Article editor with Markdown/rich-text, category selector, author assignment, reading-time calculator, and pre-publish SEO validation.
+   - Reports & Resources asset uploader.
+
+---
+
+### PHASE 3: Commercial Platform, Monetization Engine & Staff CRM
+*Primary Objective: Transform the site into a commercial media vehicle with advertising ops and CRM lead management (§25–§33, §53, Day 21).*
+
+1. **Commercial Frontends (§26, §31, §32)**:
+   - **`/advertise`**: Dedicated advertiser inquiry portal with budget range, campaign objectives, placement selection, and separate advertiser lead routing.
+   - **`/media-kit`**: Interactive media kit presenting Ryze positioning, audience demographics, editorial categories, and sponsorship tiers with contact CTA.
+2. **8 Monetization Placement Products (§27, §28)**:
+   - Build reusable sponsor UI components:
+     * `SponsoredArticleBadge` & `InArticleSponsorCard` (with strict "Sponsored" / "Partner Content" labeling).
+     * `EndOfArticleSponsor` card.
+     * `ReportSponsorBanner` and `CategorySponsor` header.
+3. **Advertising CMS & Tracker (§29, §30, §53 — Acceptance Test D)**:
+   - DB tables: `sponsors`, `campaigns`, `ad_placements`, `ad_impressions`, `ad_clicks`.
+   - Admin campaign management: create campaigns, assign creative assets, set date ranges, and bind to target content categories.
+   - Server-side tracking endpoints to log impressions and outbound clicks with CTR calculation.
+4. **Staff CRM & Pipeline Manager (§33, Day 21)**:
+   - Lead inbox categorized by type: `Project`, `Advertiser`, `General`, and `Newsletter`.
+   - Visual inspection of attached AI project briefs with UTM and referral page tracking.
+   - Lead status controls (`new` → `reviewing` → `contacted` → `qualified` → `closed`).
+   - Job Applications review desk with signed, time-limited resume download links from Supabase private storage.
+
+---
+
+### PHASE 4: Advanced AI Platform, pgvector RAG & AI Lab
+*Primary Objective: Elevate Ryze AI from prompt grounding into a true retrieval-augmented system with public showcases (§34–§50, Days 23, 25, 26).*
+
+1. **pgvector Embeddings & Semantic Search Engine (§48, §49)**:
+   - Auto-embedding pipeline: vectorize approved services, projects, case studies, and articles into the `knowledge_documents` table using Gemini embeddings.
+   - Update `app/api/ai/chat/route.ts` to query `match_knowledge()` via cosine similarity before prompting Gemini.
+2. **Universal AI Natural-Language Search (§23, §38, §39)**:
+   - Global Command-K search modal across all content (e.g., *"Show me fintech case studies with high conversion"*).
+   - Natural language queries return real, verified matching cards with deep links.
+3. **Public AI Lab (`/ai/lab`) (§47)**:
+   - Build `/ai/lab` showcasing Ryze’s AI prototypes, creative workflow automations, RAG blueprints, and experiments.
+4. **AI Lead Intent Classifier (§42)**:
+   - Background classification hook scoring inbound briefs as `HIGH`, `MEDIUM`, or `LOW` intent to assist sales prioritization in the CRM.
+5. **Admin AI Content Assistant (§46)**:
+   - One-click admin tools inside the CMS to generate draft summaries, suggested SEO meta descriptions, and semantic tags (human approval required).
+
+---
+
+### PHASE 5: Production Hardening, SEO, Automated Testing & Deployment
+*Primary Objective: Satisfy the Release Gate Checklist, verify zero regressions, and ship to production (§58–§65, Days 27–30).*
+
+1. **SEO & Discoverability (§58, Day 27)**:
+   - Implement `app/sitemap.ts` (dynamically querying all published slugs from DB).
+   - Implement `app/robots.ts`.
+   - Embed Schema.org JSON-LD structured data (`Organization`, `Service`, `Article`, `CaseStudy`) on all routes.
+2. **Telemetry & Monitoring (§59, Day 30)**:
+   - Integrate **PostHog**: track page views, CTA interactions, brief submissions, search queries, and download events.
+   - Integrate **Sentry**: error boundary reporting for client components and API routes.
+3. **Automated Testing Suite (§65, Day 29 — Tests A through E)**:
+   - Install and configure **Vitest** and **Playwright**.
+   - **Test A**: Testimonial submit → DB pending → Admin approval → Public render.
+   - **Test B**: Project creation → Slug generation → Related service linking.
+   - **Test C**: AI Brief guided Q&A → Structured brief output → CRM lead ingestion.
+   - **Test D**: Advertiser inquiry → Campaign assignment → Impression logging.
+   - **Test E**: Article draft → Pre-publish validation → Public indexation.
+4. **Final Release & Deployment Gate (§64, §68, Day 30)**:
+   - Zero-placeholder check (ensure no unfinished states or broken routes).
+   - Responsive & accessibility audit (375px / 768px / 1440px + keyboard navigation).
+   - Production build verification on Vercel with environment variable parity and rollback plan.
