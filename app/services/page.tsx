@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
+import { IconShield3D } from "@/components/ui/IconShield3D";
 import { SERVICES_DATA } from "@/data/siteData";
 import { createClient } from "@/lib/supabase/server";
 import { Brain, PenTool, Code2, TrendingUp, Zap, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
@@ -86,9 +87,7 @@ export default async function ServicesPage() {
               <div className="lg:col-span-5 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-2xl bg-[#1E085A]/60 border border-[#7042FF]/30 flex items-center justify-center shadow-lg shadow-[#1E085A]/50">
-                      {getIcon(service.icon)}
-                    </div>
+                    <IconShield3D icon={getIcon(service.icon)} className="mb-0 shrink-0" />
                     <span className="font-mono text-[11px] sm:text-[12px] font-medium tracking-wider uppercase text-[#B896FF]">
                       0{idx + 1} // {service.tagline}
                     </span>

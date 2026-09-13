@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Brain, PenTool, Code2, TrendingUp, Zap, ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { IconShield3D } from "@/components/ui/IconShield3D";
 import { SERVICES_DATA } from "@/data/siteData";
 
 export const WhatWeDo: React.FC = () => {
@@ -43,10 +44,8 @@ export const WhatWeDo: React.FC = () => {
             className="group p-6 rounded-2xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/35 shadow-2xl shadow-black/50 hover:shadow-[#1E085A]/40 transition-all duration-300 flex flex-col justify-between hover:bg-[#131422] hover:-translate-y-1 select-none"
           >
             <div>
-              {/* Icon box */}
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center border border-white/10 bg-[#1E085A]/40 mb-6 transition-all duration-300 group-hover:scale-110 group-hover:border-[#7042FF]/50 shadow-[0_0_20px_rgba(112,66,255,0.15)]">
-                {getIcon(service.icon)}
-              </div>
+              {/* 3D Micro-Interaction Shield Token */}
+              <IconShield3D icon={getIcon(service.icon)} />
 
               {/* Tagline */}
               <span className="font-mono text-[10px] sm:text-[11px] font-bold tracking-[0.22em] uppercase mb-1.5 block text-[#B896FF]">
