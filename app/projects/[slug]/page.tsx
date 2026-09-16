@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
-import { ProjectMockup } from "@/components/ui/ProjectMockup";
+import { ProjectDetailHero } from "@/components/projects/ProjectDetailHero";
 import { FEATURED_PROJECTS, TESTIMONIALS_DATA } from "@/data/siteData";
 import { createClient, createAdminClient } from "@/lib/supabase/server";
 import { ArrowLeft, ArrowRight, CheckCircle2, ShieldCheck, Star } from "lucide-react";
@@ -133,7 +133,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   );
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#080417] text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
+    <main className="min-h-[calc(100vh-80px)] bg-[#030014]/40 text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
       <Navbar />
 
       {/* Hero Ambient Backlight */}
@@ -180,26 +180,30 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </div>
         </div>
 
-        {/* Media Hero Showcase Container */}
-        <div className="relative rounded-3xl overflow-hidden aspect-[16/10] sm:aspect-[21/9] border border-white/[0.1] shadow-2xl shadow-black/80 mb-14 bg-[#0d0e17]">
-          <ProjectMockup slug={project.slug} className="w-full h-full" />
-        </div>
+        {/* Media Hero Showcase Theater */}
+        <ProjectDetailHero
+          slug={project.slug}
+          client={project.client}
+          title={project.title}
+          category={project.category}
+          industry={project.industry}
+        />
 
         {/* Project Scope Matrix */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="p-6 rounded-2xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] shadow-xl">
+          <div className="p-5 rounded-2xl bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 transition-all shadow-xl">
             <span className="font-mono text-[10px] uppercase tracking-wider text-[#B896FF] block mb-1">
               Client Partner
             </span>
             <span className="text-base font-semibold text-white">{project.client}</span>
           </div>
-          <div className="p-6 rounded-2xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] shadow-xl">
+          <div className="p-5 rounded-2xl bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 transition-all shadow-xl">
             <span className="font-mono text-[10px] uppercase tracking-wider text-[#B896FF] block mb-1">
               Primary Discipline
             </span>
             <span className="text-base font-semibold text-white">{project.category}</span>
           </div>
-          <div className="p-6 rounded-2xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] shadow-xl">
+          <div className="p-5 rounded-2xl bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 transition-all shadow-xl">
             <span className="font-mono text-[10px] uppercase tracking-wider text-[#B896FF] block mb-1">
               Status &amp; Verification
             </span>
@@ -221,7 +225,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 <Link
                   key={srv.slug}
                   href={`/services/${srv.slug}`}
-                  className="p-5 rounded-2xl bg-[#0d0e17]/85 border border-white/[0.08] hover:border-[#B896FF]/40 transition-all duration-300 group shadow-lg"
+                  className="p-5 rounded-2xl bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 transition-all duration-300 group shadow-lg"
                 >
                   <div className="text-[10px] font-mono text-[#B896FF] uppercase mb-1">
                     {srv.tagline || srv.group}
@@ -237,25 +241,25 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         )}
 
         {/* Narrative: Challenge & Approach */}
-        <div className="space-y-8 rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] p-8 sm:p-12 mb-14 shadow-2xl shadow-black/50">
+        <div className="space-y-8 rounded-3xl bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 p-8 sm:p-12 mb-14 shadow-2xl shadow-black/50">
           <div>
             <h2 className="text-2xl sm:text-3xl font-semibold tracking-[-0.01em] [word-spacing:0.1em] text-white mb-3 leading-snug">The Challenge</h2>
-            <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed">
+            <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed">
               Scaling a category-defining experience in {project.industry} required a brand architecture and digital product stack that balances radical visual distinctiveness with ultra-low latency and intuitive clarity.
             </p>
           </div>
 
-          <div className="pt-6 border-t border-white/[0.08]">
+          <div className="pt-6 border-t border-white/10">
             <h2 className="text-2xl sm:text-3xl font-semibold tracking-[-0.01em] [word-spacing:0.1em] text-white mb-3 leading-snug">The Ryze Works Approach</h2>
-            <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed mb-6">
+            <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed mb-6">
               We mobilized a dedicated cross-functional pod across strategy, procedural design, and modern fullstack engineering (Next.js, Supabase, and real-time systems) to execute sprint-by-sprint deliverables.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] text-xs text-zinc-200">
+              <div className="flex items-center gap-2.5 p-3.5 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/10 text-xs text-zinc-300 hover:border-violet-500/30 transition-all">
                 <CheckCircle2 className="w-4 h-4 text-[#B896FF] shrink-0" />
                 <span>Zero-placeholder verified architecture</span>
               </div>
-              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] text-xs text-zinc-200">
+              <div className="flex items-center gap-2.5 p-3.5 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/10 text-xs text-zinc-300 hover:border-violet-500/30 transition-all">
                 <CheckCircle2 className="w-4 h-4 text-[#B896FF] shrink-0" />
                 <span>High-performance responsive design system</span>
               </div>
@@ -265,7 +269,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
         {/* Client Testimonial if available */}
         {testimonial && (
-          <div className="rounded-3xl bg-gradient-to-r from-[#1E085A]/50 via-[#0d0e17]/90 to-[#1E085A]/50 border border-[#7042FF]/30 p-8 sm:p-10 mb-14 shadow-2xl shadow-black/50">
+          <div className="rounded-3xl bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 p-8 sm:p-10 mb-14 shadow-2xl shadow-black/50 transition-all">
             <div className="flex items-center gap-1.5 mb-4">
               {[...Array(testimonial.rating)].map((_, i) => (
                 <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
@@ -281,7 +285,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         )}
 
         {/* Project CTA */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-[#1E085A]/40 via-[#0d0e17]/80 to-[#1E085A]/40 border border-[#7042FF]/30 backdrop-blur-md shadow-2xl shadow-black/50">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-8 sm:p-10 rounded-3xl bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 shadow-2xl shadow-black/50 transition-all">
           <div>
             <h3 className="text-xl sm:text-2xl font-semibold tracking-[-0.01em] [word-spacing:0.1em] text-white mb-2 leading-snug">
               Have a similar challenge in mind?
