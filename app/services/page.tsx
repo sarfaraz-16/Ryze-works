@@ -3,10 +3,10 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
-import { IconShield3D } from "@/components/ui/IconShield3D";
+import { ServiceCapabilityCard } from "@/components/services/ServiceCapabilityCard";
 import { SERVICES_DATA } from "@/data/siteData";
 import { createClient } from "@/lib/supabase/server";
-import { Brain, PenTool, Code2, TrendingUp, Zap, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 export const revalidate = 3600;
 
@@ -43,23 +43,13 @@ export default async function ServicesPage() {
   } catch (err) {
     console.warn("Supabase services fetch fallback:", err);
   }
-  const getIcon = (iconName: string) => {
-    switch (iconName) {
-      case "Brain": return <Brain className="w-6 h-6 text-[#B896FF]" />;
-      case "PenTool": return <PenTool className="w-6 h-6 text-[#B896FF]" />;
-      case "Code2": return <Code2 className="w-6 h-6 text-[#B896FF]" />;
-      case "TrendingUp": return <TrendingUp className="w-6 h-6 text-[#B896FF]" />;
-      case "Zap": return <Zap className="w-6 h-6 text-[#B896FF]" />;
-      default: return <Brain className="w-6 h-6 text-[#B896FF]" />;
-    }
-  };
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#080417] text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
+    <main className="min-h-[calc(100vh-80px)] bg-[#030014]/40 text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
       <Navbar />
 
       {/* Hero Ambient Backlight */}
-      <div className="absolute top-0 right-0 left-0 h-[600px] bg-[radial-gradient(ellipse_80%_60%_at_70%_-10%,rgba(112,66,255,0.28),rgba(8,4,23,0))] pointer-events-none" />
+      <div className="absolute top-0 right-0 left-0 h-[600px] bg-[radial-gradient(ellipse_80%_60%_at_70%_-10%,rgba(112,66,255,0.22),transparent)] pointer-events-none" />
 
       <section className="pt-36 pb-24 max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
@@ -76,80 +66,44 @@ export default async function ServicesPage() {
           </p>
         </div>
 
-        {/* Services Asymmetrical 12-Column List */}
+        {/* Services Asymmetrical 12-Column List with 3D Tilt & Obsidian Glass */}
         <div className="space-y-8 mb-20">
           {services.map((service, idx) => (
-            <div
+            <ServiceCapabilityCard
               key={service.id}
-              className="rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/30 shadow-2xl shadow-black/50 p-8 sm:p-10 transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
-            >
-              {/* Left Column (cols 1-5): Numerical indicator, title, scope summary, #7042FF pill button */}
-              <div className="lg:col-span-5 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <IconShield3D icon={getIcon(service.icon)} className="mb-0 shrink-0" />
-                    <span className="font-mono text-[11px] sm:text-[12px] font-medium tracking-wider uppercase text-[#B896FF]">
-                      0{idx + 1} // {service.tagline}
-                    </span>
-                  </div>
-                  <h2 className="text-2xl sm:text-3xl font-semibold tracking-[-0.01em] [word-spacing:0.1em] text-white mb-3 leading-snug">
-                    {service.name}
-                  </h2>
-                  <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed mb-6">
-                    {service.description}
-                  </p>
-                </div>
-                <Link
-                  href={`/services/${service.slug}`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-[#7042FF] to-[#4318D1] hover:brightness-110 shadow-lg shadow-[#7042FF]/30 border border-[#B896FF]/30 transition-all w-fit"
-                >
-                  <span>View {service.name} Framework</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-
-              {/* Right Column (cols 7-12): 2x2 grid of capability tiles with checkmark badges */}
-              <div className="lg:col-span-7 bg-[#080417]/80 rounded-2xl p-6 sm:p-8 border border-white/[0.06]">
-                <div className="text-[10px] font-mono font-medium uppercase tracking-wider text-zinc-400 mb-4">
-                  CORE DELIVERABLES & CAPABILITIES
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {service.deliverables.map((item) => (
-                    <div
-                      key={item}
-                      className="bg-white/[0.03] border border-white/[0.08] rounded-lg p-3 text-xs text-zinc-200 flex items-start gap-2.5 hover:border-[#B896FF]/30 hover:bg-white/[0.05] transition-all"
-                    >
-                      <CheckCircle2 className="w-4 h-4 text-[#B896FF] shrink-0 mt-0.5" />
-                      <span className="font-medium leading-snug">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+              service={service}
+              index={idx}
+            />
           ))}
         </div>
 
-        {/* Consulting Card */}
-        <div className="rounded-3xl bg-gradient-to-r from-[#1E085A]/50 via-[#0d0e17]/90 to-[#1E085A]/50 border border-[#7042FF]/30 p-8 sm:p-12 text-center flex flex-col items-center backdrop-blur-md shadow-2xl shadow-black/50">
-          <h2 className="text-2xl sm:text-3xl font-semibold tracking-[-0.01em] [word-spacing:0.1em] text-white mb-3 leading-snug">
-            Unsure which service model fits your roadmap?
-          </h2>
-          <p className="text-sm sm:text-base text-zinc-300 font-normal max-w-xl mb-8 leading-relaxed">
-            Consult Ryze AI for an instant scope advisory, or schedule a strategic briefing with our engineering and design partners.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="/ai"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-[#7042FF] to-[#4318D1] hover:brightness-110 shadow-lg shadow-[#7042FF]/30 border border-[#B896FF]/30 transition-all"
-            >
-              Consult Ryze AI Advisor
-            </Link>
-            <Link
-              href="/start-a-project"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold text-zinc-200 bg-white/[0.05] border border-white/15 hover:border-white/30 hover:bg-white/[0.08] transition-all"
-            >
-              Start a Project Brief →
-            </Link>
+        {/* Consulting Advisory Card */}
+        <div className="relative rounded-3xl bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 p-8 sm:p-12 text-center flex flex-col items-center shadow-2xl shadow-black/60 overflow-hidden transition-all">
+          <div className="absolute inset-0 pointer-events-none rounded-3xl bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(139,92,246,0.15),transparent)] z-0" />
+
+          <div className="relative z-10 max-w-2xl flex flex-col items-center">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-3 leading-snug">
+              Unsure which service model fits your roadmap?
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-300 font-normal mb-8 leading-relaxed">
+              Consult Ryze AI for an instant scope advisory, or schedule a strategic briefing with our engineering and design partners.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                href="/ai"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-semibold tracking-wider text-white bg-violet-600 hover:bg-violet-500 shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all"
+              >
+                <span>Consult Ryze AI Advisor</span>
+                <Sparkles className="w-3.5 h-3.5" />
+              </Link>
+              <Link
+                href="/start-a-project"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-semibold tracking-wider text-zinc-200 bg-white/[0.05] border border-white/10 hover:border-white/20 hover:bg-white/[0.08] transition-all"
+              >
+                <span>Start a Project Brief</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -161,3 +115,4 @@ export default async function ServicesPage() {
     </main>
   );
 }
+
