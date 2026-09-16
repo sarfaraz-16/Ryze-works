@@ -10,28 +10,29 @@ export const ProjectMockup: React.FC<ProjectMockupProps> = ({ slug, className = 
   switch (slug) {
     case "nostic":
       return (
-        <div className={`w-full h-full bg-gradient-to-br from-slate-200 via-slate-300 to-blue-200 rounded-2xl overflow-hidden relative flex items-center justify-center p-6 border border-white/20 shadow-inner ${className}`}>
+        <div className={`w-full h-full bg-gradient-to-br from-[#161224] via-[#0f0b1a] to-[#07050e] rounded-2xl overflow-hidden relative flex items-center justify-center p-6 border border-white/10 shadow-inner ${className}`}>
           {/* Ambient subtle backlight */}
-          <div className="absolute -top-10 -right-10 w-36 h-36 bg-blue-500/30 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -top-10 -right-10 w-36 h-36 bg-violet-500/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-slate-400/10 rounded-full blur-3xl pointer-events-none" />
 
           {/* Hardware Diagnostic Device Mockup */}
-          <div className="w-36 h-36 sm:w-44 sm:h-44 bg-white rounded-3xl shadow-2xl border border-slate-300 flex flex-col items-center justify-between p-4 transform -rotate-3 group-hover:rotate-0 transition-transform duration-500">
+          <div className="w-36 h-36 sm:w-44 sm:h-44 bg-[#141021] rounded-3xl shadow-2xl border border-white/15 flex flex-col items-center justify-between p-4 transform -rotate-3 group-hover:rotate-0 transition-transform duration-500">
             <div className="w-full flex items-center justify-between">
-              <span className="font-mono text-[9px] font-extrabold tracking-wider text-slate-800 uppercase">NOSTIC PRO</span>
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]" />
+              <span className="font-mono text-[9px] font-extrabold tracking-wider text-zinc-200 uppercase">NOSTIC PRO</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10b981]" />
             </div>
-            <div className="w-full h-14 bg-slate-950 rounded-xl flex flex-col items-center justify-center border border-slate-800 shadow-inner p-1">
-              <span className="text-[12px] font-mono font-bold text-sky-400">98.6°F • 99% SpO2</span>
+            <div className="w-full h-14 bg-[#090612] rounded-xl flex flex-col items-center justify-center border border-violet-500/30 shadow-inner p-1">
+              <span className="text-[12px] font-mono font-bold text-violet-300">98.6°F • 99% SpO2</span>
               <span className="text-[9px] font-mono text-emerald-400 flex items-center gap-1">
                 <Activity className="w-3 h-3 inline" /> OPTIMAL VITALS
               </span>
             </div>
-            <div className="w-full flex items-center justify-between pt-1 border-t border-slate-100">
-              <span className="w-6 h-1.5 bg-slate-200 rounded-full" />
-              <span className="text-[8px] font-mono text-slate-500">BLE 5.3 MESH</span>
+            <div className="w-full flex items-center justify-between pt-1 border-t border-white/10">
+              <span className="w-6 h-1.5 bg-white/20 rounded-full" />
+              <span className="text-[8px] font-mono text-zinc-400">BLE 5.3 MESH</span>
             </div>
           </div>
-          <div className="absolute top-4 left-4 text-[11px] font-black tracking-wider text-slate-800/80 uppercase">
+          <div className="absolute top-4 left-4 text-[11px] font-black tracking-wider text-white/80 uppercase">
             nostic
           </div>
         </div>
@@ -150,6 +151,35 @@ export const ProjectMockup: React.FC<ProjectMockupProps> = ({ slug, className = 
           </div>
           <div className="absolute top-4 left-4 text-[11px] font-bold tracking-wider text-emerald-300">
             simpl
+          </div>
+        </div>
+      );
+
+    case "razorpay":
+      return (
+        <div className={`w-full h-full bg-gradient-to-br from-[#0c1e3d] via-[#08152e] to-[#040a17] rounded-2xl overflow-hidden relative flex items-center justify-center p-6 border border-blue-500/30 shadow-inner ${className}`}>
+          <div className="absolute -top-8 -right-8 w-40 h-40 bg-blue-500/25 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none" />
+
+          {/* Payment Interface Mockup */}
+          <div className="w-32 h-44 sm:w-36 sm:h-52 bg-[#050e24] rounded-3xl border-2 border-blue-400/30 shadow-2xl p-3 flex flex-col justify-between transform rotate-2 group-hover:rotate-0 transition-transform duration-500">
+            <div className="flex items-center justify-between border-b border-blue-800/40 pb-1.5">
+              <span className="text-[10px] font-black italic tracking-wide text-blue-300">Razorpay</span>
+              <span className="text-[8px] font-mono px-2 py-0.5 rounded-full bg-blue-950 border border-blue-500/40 text-blue-400">INSTANT</span>
+            </div>
+            <div className="my-auto text-center py-1">
+              <div className="w-10 h-10 rounded-full bg-blue-500/20 border border-blue-400/40 flex items-center justify-center mx-auto mb-2 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                <ShieldCheck className="w-5 h-5 text-blue-400 stroke-[2.5]" />
+              </div>
+              <div className="text-[9px] font-bold text-white">₹45,000.00 Settled</div>
+              <div className="text-[7px] text-blue-300/80 mt-0.5">Enterprise Payout API</div>
+            </div>
+            <div className="w-full py-1.5 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg text-[9px] font-bold text-white flex items-center justify-center shadow-md">
+              SUCCESSFUL
+            </div>
+          </div>
+          <div className="absolute top-4 left-4 text-[11px] font-bold italic tracking-wider text-blue-300">
+            Razorpay
           </div>
         </div>
       );

@@ -9,28 +9,28 @@ export const FeaturedWork: React.FC = () => {
     switch (slug) {
       case "nostic":
         return (
-          <div className="w-full h-48 bg-gradient-to-br from-slate-100 via-slate-200 to-blue-200 rounded-xl overflow-hidden relative flex items-center justify-center p-4 border border-white/20 shadow-inner">
+          <div className="w-full h-48 bg-gradient-to-br from-[#161224] via-[#0f0b1a] to-[#07050e] rounded-xl overflow-hidden relative flex items-center justify-center p-4 border border-white/10 shadow-inner">
             {/* Ambient subtle backlight */}
-            <div className="absolute -top-10 -right-10 w-28 h-28 bg-blue-400/30 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -top-10 -right-10 w-28 h-28 bg-violet-500/20 rounded-full blur-2xl pointer-events-none" />
 
             {/* Hardware Diagnostic Device Mockup */}
-            <div className="w-32 h-32 bg-white rounded-3xl shadow-2xl border border-slate-300 flex flex-col items-center justify-between p-3.5 transform -rotate-3 hover:rotate-0 transition-transform duration-300">
+            <div className="w-32 h-32 bg-[#141021] rounded-3xl shadow-2xl border border-white/15 flex flex-col items-center justify-between p-3.5 transform -rotate-3 hover:rotate-0 transition-transform duration-300">
               <div className="w-full flex items-center justify-between">
-                <span className="font-mono text-[8px] font-extrabold tracking-wider text-slate-800 uppercase">NOSTIC PRO</span>
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_6px_#10b981]" />
+                <span className="font-mono text-[8px] font-extrabold tracking-wider text-zinc-200 uppercase">NOSTIC PRO</span>
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_#10b981]" />
               </div>
-              <div className="w-full h-11 bg-slate-950 rounded-xl flex flex-col items-center justify-center border border-slate-800 shadow-inner">
-                <span className="text-[11px] font-mono font-bold text-sky-400">98.6°F • 99% SpO2</span>
+              <div className="w-full h-11 bg-[#090612] rounded-xl flex flex-col items-center justify-center border border-violet-500/30 shadow-inner">
+                <span className="text-[11px] font-mono font-bold text-violet-300">98.6°F • 99% SpO2</span>
                 <span className="text-[8px] font-mono text-emerald-400 flex items-center gap-1">
                   <Activity className="w-2.5 h-2.5 inline" /> OPTIMAL VITALS
                 </span>
               </div>
-              <div className="w-full flex items-center justify-between pt-1 border-t border-slate-100">
-                <span className="w-5 h-1.5 bg-slate-200 rounded-full" />
-                <span className="text-[7px] font-mono text-slate-500">BLE 5.3</span>
+              <div className="w-full flex items-center justify-between pt-1 border-t border-white/10">
+                <span className="w-5 h-1.5 bg-white/20 rounded-full" />
+                <span className="text-[7px] font-mono text-zinc-400">BLE 5.3</span>
               </div>
             </div>
-            <div className="absolute top-3 left-3 text-[10px] font-black tracking-wider text-slate-800/80 uppercase">
+            <div className="absolute top-3 left-3 text-[10px] font-black tracking-wider text-white/80 uppercase">
               nostic
             </div>
           </div>
@@ -153,6 +153,31 @@ export const FeaturedWork: React.FC = () => {
           </div>
         );
 
+      case "razorpay":
+        return (
+          <div className="w-full h-48 bg-gradient-to-br from-[#0c1e3d] via-[#08152e] to-[#040a17] rounded-xl overflow-hidden relative flex items-center justify-center p-4 border border-blue-500/30 shadow-inner">
+            <div className="absolute -top-6 -right-6 w-28 h-28 bg-blue-500/25 rounded-full blur-2xl pointer-events-none" />
+
+            {/* Payment Interface Mockup */}
+            <div className="w-28 h-38 bg-[#050e24] rounded-2xl border-2 border-blue-400/30 shadow-2xl p-2.5 flex flex-col justify-between transform rotate-2 hover:rotate-0 transition-transform duration-300">
+              <div className="flex items-center justify-between border-b border-blue-800/40 pb-1">
+                <span className="text-[9px] font-black italic tracking-wide text-blue-300">Razorpay</span>
+                <span className="text-[7px] font-mono px-1.5 py-0.5 rounded bg-blue-950 border border-blue-500/40 text-blue-400">INSTANT</span>
+              </div>
+              <div className="my-auto text-center py-1">
+                <div className="text-[8px] font-bold text-white">₹45,000.00 Settled</div>
+                <div className="text-[6px] text-blue-300/80">Enterprise Payout</div>
+              </div>
+              <div className="w-full py-1 bg-gradient-to-r from-blue-500 to-indigo-600 rounded text-[7px] font-bold text-white flex items-center justify-center shadow-md">
+                SUCCESSFUL
+              </div>
+            </div>
+            <div className="absolute top-3 left-3 text-[10px] font-bold italic tracking-wider text-blue-300">
+              Razorpay
+            </div>
+          </div>
+        );
+
       default:
         return null;
     }
@@ -170,8 +195,8 @@ export const FeaturedWork: React.FC = () => {
         linkHref="/projects"
       />
 
-      {/* 5-Card Project Bento Grid with 3D Perspective Tilt & Parallax */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+      {/* 6-Card Project Bento Grid with 3D Perspective Tilt & Parallax */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {FEATURED_PROJECTS.map((project) => (
           <TiltCard3D
             key={project.id}

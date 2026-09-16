@@ -152,6 +152,19 @@ export const FEATURED_PROJECTS: Project[] = [
     tags: ["Checkout UX", "Conversion Funnel", "Fintech"],
     isFeatured: true,
     linkText: "Fintech →"
+  },
+  {
+    id: "project-razorpay",
+    slug: "razorpay",
+    title: "RAZORPAY",
+    client: "Razorpay",
+    category: "Payments, Brand, Enterprise Platform",
+    industry: "Fintech",
+    description: "Scaling enterprise trust, digital payment experiences, and next-generation financial infrastructure across India.",
+    heroImage: "/images/projects/razorpay.jpg",
+    tags: ["Payments", "Design System", "Fintech Platform"],
+    isFeatured: true,
+    linkText: "Fintech →"
   }
 ];
 
