@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -8,12 +8,41 @@ import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { Sparkles, ArrowRight, Loader2, Bot, FileText, Cpu, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 
+const parseMarkdown = (text: string) => {
+  const blocks = text.split('\n');
+  return blocks.map((block, bIdx) => {
+    const parts = block.split(/(\[.*?\]\(.*?\)|\*\*.*?\*\*)/g);
+    return (
+      <React.Fragment key={bIdx}>
+        {parts.map((part, idx) => {
+          const linkMatch = part.match(/\[(.*?)\]\((.*?)\)/);
+          if (linkMatch) {
+            return (
+              <a key={idx} href={linkMatch[2]} target="_blank" rel="noopener noreferrer" className="text-[#B896FF] hover:text-violet-200 underline underline-offset-4 decoration-violet-500/50 transition-colors">
+                {linkMatch[1]}
+              </a>
+            );
+          }
+          const boldMatch = part.match(/\*\*(.*?)\*\*/);
+          if (boldMatch) {
+            return <strong key={idx} className="font-semibold text-white">{boldMatch[1]}</strong>;
+          }
+          return <span key={idx}>{part}</span>;
+        })}
+        {bIdx < blocks.length - 1 && <br />}
+      </React.Fragment>
+    );
+  });
+};
+
 export default function AIPage() {
   const [activeTab, setActiveTab] = useState<"chat" | "brief">("chat");
 
   // Chat State
   const [chatInput, setChatInput] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
   const [messages, setMessages] = useState<
     Array<{ role: "user" | "assistant"; text: string; sources?: string[] }>
   >([
@@ -23,6 +52,10 @@ export default function AIPage() {
       sources: ["/services", "/case-studies"]
     }
   ]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, chatLoading]);
 
   // Brief Generator State
   const [briefForm, setBriefForm] = useState({
@@ -274,23 +307,23 @@ export default function AIPage() {
                       <Sparkles className="w-5 h-5 text-[#B896FF]" />
                     </div>
                   )}
-                  <div className="max-w-2xl">
+                  <div className={`max-w-[90%] ${m.role === "user" ? "ml-auto" : ""}`}>
                     <div
-                      className={`rounded-2xl p-5 text-sm leading-relaxed ${
+                      className={`${
                         m.role === "user"
-                          ? "bg-gradient-to-r from-[#7042FF] to-[#4318D1] text-white font-medium shadow-lg shadow-[#7042FF]/20"
-                          : "bg-white/[0.03] border border-white/10 text-zinc-200 backdrop-blur-md"
+                          ? "bg-gradient-to-r from-violet-600/25 to-purple-600/25 border border-violet-500/30 text-white rounded-2xl rounded-tr-none px-4 py-2.5 text-xs sm:text-sm font-medium shadow-lg inline-block"
+                          : "bg-white/[0.03] border border-white/10 rounded-2xl rounded-tl-none p-5 text-zinc-200 text-sm leading-relaxed"
                       }`}
                     >
-                      <p className="whitespace-pre-line">{m.text}</p>
+                      <div className="whitespace-pre-line leading-relaxed">{parseMarkdown(m.text)}</div>
                       
                       {m.sources && m.sources.length > 0 && (
-                        <div className="mt-4 pt-3 border-t border-white/[0.08] flex flex-wrap items-center gap-2 text-[10px] text-zinc-400 font-mono">
+                        <div className="mt-4 pt-3 border-t border-white/5 flex flex-wrap items-center gap-2 text-xs text-zinc-400">
                           <span>Verified Citations:</span>
                           {m.sources.map((src) => (
                             <span
                               key={src}
-                              className="px-2 py-0.5 rounded-full bg-[#1E085A]/60 border border-[#7042FF]/30 text-[#B896FF]"
+                              className="bg-white/[0.04] border border-white/10 hover:border-violet-500/40 text-violet-300 px-2.5 py-1 rounded-md text-[11px] font-mono transition-colors"
                             >
                               {src}
                             </span>
@@ -307,6 +340,7 @@ export default function AIPage() {
                   <span>Synthesizing grounded answer via Gemini 3.6 Flash...</span>
                 </div>
               )}
+              <div ref={messagesEndRef} />
             </div>
 
             {/* Chat Input Dock */}
