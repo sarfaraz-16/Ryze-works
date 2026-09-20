@@ -5,7 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { RESOURCES_DATA } from "@/data/resourcesData";
-import { ReportDownloadForm } from "@/components/reports/ReportDownloadForm";
+import { ResourceDownloadForm } from "@/components/resources/ResourceDownloadForm";
 import {
   ArrowLeft,
   CheckCircle2,
@@ -34,7 +34,7 @@ export default async function ResourceDetailPage({ params }: ResourcePageProps) 
   }
 
   return (
-    <main className="min-h-screen bg-[#080417] text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
+    <main className="min-h-screen bg-transparent text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
       <Navbar />
 
       {/* Hero Ambient Backlight */}
@@ -44,9 +44,9 @@ export default async function ResourceDetailPage({ params }: ResourcePageProps) 
         {/* Back Link */}
         <Link
           href="/resources"
-          className="inline-flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-white transition-colors mb-8"
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono text-zinc-400 hover:text-white bg-white/[0.04] border border-white/10 hover:border-violet-500/40 transition-all mb-6 group"
         >
-          <ArrowLeft className="w-3.5 h-3.5" />
+          <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
           <span>ALL FRAMEWORKS &amp; TOOLKITS</span>
         </Link>
 
@@ -71,40 +71,41 @@ export default async function ResourceDetailPage({ params }: ResourcePageProps) 
             </p>
 
             {/* Core Implementation Objectives */}
-            <div className="rounded-3xl bg-[#0d0e17]/85 border border-white/[0.08] p-8 space-y-5">
-              <h2 className="text-sm font-mono uppercase tracking-wider text-white font-bold flex items-center gap-2">
-                <Zap className="w-4 h-4 text-[#B896FF]" />
+            <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 rounded-3xl p-7 sm:p-8 mb-6 transition-all duration-300 relative group shadow-xl">
+              <h2 className="text-xs font-mono uppercase tracking-widest text-violet-400 font-semibold mb-4 flex items-center gap-2">
+                <Zap className="w-4 h-4" />
                 What You Get With This Toolkit
               </h2>
               <div className="space-y-4">
                 {resource.takeaways.map((point, idx) => (
-                  <div key={idx} className="flex items-start gap-3.5">
-                    <div className="w-6 h-6 rounded-full bg-[#7042FF]/20 border border-[#7042FF]/40 flex items-center justify-center text-[#B896FF] shrink-0 mt-0.5">
-                      <CheckCircle2 className="w-3.5 h-3.5" />
+                  <div key={idx} className="flex items-start gap-3 text-sm text-zinc-200 leading-relaxed">
+                    <div className="w-5 h-5 rounded-full bg-violet-500/20 border border-violet-500/40 flex items-center justify-center text-violet-300 shrink-0 mt-0.5 shadow-[0_0_10px_rgba(139,92,246,0.3)]">
+                      <CheckCircle2 className="w-3 h-3" />
                     </div>
-                    <p className="text-sm text-zinc-200 leading-relaxed">{point}</p>
+                    <p>{point}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Technical Specifications */}
-            <div className="rounded-3xl bg-[#0d0e17]/85 border border-white/[0.08] p-8 space-y-4">
-              <h2 className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold">
+            <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 rounded-3xl p-7 sm:p-8 mb-6 transition-all duration-300 relative group shadow-xl">
+              <h2 className="text-xs font-mono uppercase tracking-widest text-violet-400 font-semibold mb-4 flex items-center gap-2">
+                <Layers className="w-4 h-4" />
                 Asset Specifications &amp; Compatibility
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs font-mono text-zinc-300">
-                <div className="p-3 rounded-xl bg-[#080417] border border-white/[0.06]">
-                  <span className="text-zinc-500 block mb-1">FORMAT</span>
-                  <span>{resource.format}</span>
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/10">
+                  <span className="text-[11px] font-mono uppercase text-zinc-400 block mb-1">FORMAT</span>
+                  <span className="text-sm font-semibold text-white tracking-wide">{resource.format}</span>
                 </div>
-                <div className="p-3 rounded-xl bg-[#080417] border border-white/[0.06]">
-                  <span className="text-zinc-500 block mb-1">FILE SIZE</span>
-                  <span>{resource.fileSize}</span>
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/10">
+                  <span className="text-[11px] font-mono uppercase text-zinc-400 block mb-1">FILE SIZE</span>
+                  <span className="text-sm font-semibold text-white tracking-wide">{resource.fileSize}</span>
                 </div>
-                <div className="p-3 rounded-xl bg-[#080417] border border-white/[0.06]">
-                  <span className="text-zinc-500 block mb-1">TIER</span>
-                  <span>{resource.difficulty}</span>
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/10">
+                  <span className="text-[11px] font-mono uppercase text-zinc-400 block mb-1">TIER</span>
+                  <span className="text-sm font-semibold text-white tracking-wide">{resource.difficulty}</span>
                 </div>
               </div>
             </div>
@@ -112,9 +113,9 @@ export default async function ResourceDetailPage({ params }: ResourcePageProps) 
 
           {/* Right Column: Download Lead Gate */}
           <div className="lg:sticky lg:top-28">
-            <ReportDownloadForm
-              reportTitle={resource.title}
-              reportSlug={resource.slug}
+            <ResourceDownloadForm
+              resourceTitle={resource.title}
+              resourceSlug={resource.slug}
               fileSize={resource.fileSize}
             />
           </div>
