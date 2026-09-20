@@ -24,11 +24,11 @@ export default function ResourcesPage() {
       <section className="pt-36 pb-24 max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="max-w-3xl mb-16">
-          <div className="text-[11px] font-mono text-[#B896FF] uppercase tracking-widest mb-3 font-medium flex items-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#B896FF]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono text-violet-400 bg-violet-500/10 border border-violet-500/20 mb-6">
+            <Sparkles className="w-3.5 h-3.5" />
             AGENCY FRAMEWORKS // PRODUCTION PLAYBOOKS
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.08] tracking-[-0.01em] text-white mb-6">
+          <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-6">
             Frameworks, Toolkits &amp; Checklists
           </h1>
           <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed max-w-2xl">

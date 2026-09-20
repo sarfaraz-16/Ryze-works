@@ -30,8 +30,8 @@ export function ResourcesClient({ resources }: Props) {
             onClick={() => setSelectedCategory(cat)}
             className={
               selectedCategory === cat
-                ? "px-4 py-1.5 rounded-xl text-xs font-mono text-white bg-violet-600/30 border border-violet-500 shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-all"
-                : "px-4 py-1.5 rounded-xl text-xs font-mono text-zinc-400 bg-white/[0.03] border border-white/10 hover:border-white/20 hover:text-zinc-200 transition-all cursor-pointer"
+                ? "px-4 py-2 rounded-xl text-xs font-mono text-white bg-violet-600/25 border border-violet-500 shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-all"
+                : "px-4 py-2 rounded-xl text-xs font-mono text-zinc-400 bg-white/[0.03] border border-white/10 hover:border-white/20 hover:text-zinc-200 transition-all cursor-pointer"
             }
           >
             {cat}
@@ -68,9 +68,9 @@ export function ResourcesClient({ resources }: Props) {
               </p>
 
               {/* Key Highlights */}
-              <ul className="space-y-3 mb-6">
+              <ul className="mb-6">
                 {item.takeaways.map((point, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm font-mono text-zinc-200">
+                  <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm font-mono text-zinc-200 mb-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-1.5 shadow-[0_0_8px_rgba(34,211,238,0.6)] shrink-0" />
                     <span>{point}</span>
                   </li>
