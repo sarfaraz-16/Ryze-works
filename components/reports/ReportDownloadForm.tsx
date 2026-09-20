@@ -77,14 +77,15 @@ export function ReportDownloadForm({ reportTitle, reportSlug, fileSize }: Props)
   }
 
   return (
-    <div className="rounded-3xl bg-[#0d0e17]/90 border border-white/[0.08] p-8 shadow-2xl shadow-black/80 backdrop-blur-xl space-y-6">
-      <div className="flex items-center gap-3 pb-4 border-b border-white/[0.06]">
-        <div className="w-9 h-9 rounded-xl bg-[#7042FF]/20 border border-[#7042FF]/30 flex items-center justify-center text-[#B896FF]">
-          <FileText className="w-4 h-4" />
+    <div className="sticky top-28 bg-[#0B0813]/80 backdrop-blur-2xl border border-white/10 hover:border-violet-500/30 rounded-3xl p-6 sm:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.7)] relative overflow-hidden space-y-6">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-violet-600/15 blur-[90px] rounded-full -z-10 pointer-events-none" />
+      <div className="flex items-center gap-3 pb-4 border-b border-white/10 relative z-10">
+        <div className="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-300 shadow-[0_0_15px_rgba(139,92,246,0.15)]">
+          <FileText className="w-5 h-5" />
         </div>
         <div>
           <h3 className="text-sm font-bold text-white">Instant Whitepaper Download</h3>
-          <p className="text-[11px] text-zinc-400">Complete verification to unlock full 48+ page findings.</p>
+          <p className="text-[11px] text-zinc-400">Complete verification to unlock full findings.</p>
         </div>
       </div>
 
@@ -105,7 +106,7 @@ export function ReportDownloadForm({ reportTitle, reportSlug, fileSize }: Props)
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="e.g. Sarah Chen"
-            className="w-full px-3.5 py-2.5 bg-[#080417] border border-white/[0.1] rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#7042FF] transition-colors"
+            className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none relative z-10"
           />
         </div>
 
@@ -119,7 +120,7 @@ export function ReportDownloadForm({ reportTitle, reportSlug, fileSize }: Props)
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="sarah@organization.com"
-            className="w-full px-3.5 py-2.5 bg-[#080417] border border-white/[0.1] rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#7042FF] transition-colors"
+            className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none relative z-10"
           />
         </div>
 
@@ -133,14 +134,14 @@ export function ReportDownloadForm({ reportTitle, reportSlug, fileSize }: Props)
             value={company}
             onChange={(e) => setCompany(e.target.value)}
             placeholder="e.g. Acme Scaleup"
-            className="w-full px-3.5 py-2.5 bg-[#080417] border border-white/[0.1] rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#7042FF] transition-colors"
+            className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none relative z-10"
           />
         </div>
 
         <button
           type="submit"
           disabled={submitting}
-          className="w-full mt-2 py-3 px-6 rounded-full bg-gradient-to-r from-[#7042FF] to-[#7C3AED] hover:brightness-110 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-[#7042FF]/30 transition-all cursor-pointer disabled:opacity-50"
+          className="w-full mt-4 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold rounded-xl py-3.5 shadow-[0_0_25px_rgba(139,92,246,0.35)] transition-all flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-50 relative z-10"
         >
           {submitting ? (
             <>
