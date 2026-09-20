@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
+import { TiltCard3D } from "@/components/ui/TiltCard3D";
 import { REPORTS_DATA } from "@/data/reportsData";
 import { FileText, ArrowRight, Download, Sparkles, BookOpen, Layers } from "lucide-react";
 
@@ -15,7 +16,7 @@ export const metadata = {
 
 export default function ReportsPage() {
   return (
-    <main className="min-h-screen bg-[#080417] text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
+    <main className="min-h-screen bg-transparent text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
       <Navbar />
 
       {/* Hero Ambient Backlight */}
@@ -39,46 +40,47 @@ export default function ReportsPage() {
         {/* Reports Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
           {REPORTS_DATA.map((report) => (
-            <div
+            <TiltCard3D
               key={report.id}
-              className="rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/35 p-8 flex flex-col justify-between shadow-2xl shadow-black/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-[#7042FF]/10 group"
+              className="bg-[#0B0813]/75 backdrop-blur-2xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-7 sm:p-8 transition-all duration-300 relative group overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col justify-between"
             >
-              <div>
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-500/[0.07] via-transparent to-cyan-500/[0.04] opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300" />
+              <div className="relative z-10">
                 {/* Meta Top Header */}
                 <div className="flex items-center justify-between gap-3 mb-6">
-                  <span className="px-2.5 py-1 rounded-md bg-[#7042FF]/15 border border-[#7042FF]/30 text-[#B896FF] text-[10px] font-mono uppercase font-bold">
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-violet-300 bg-violet-500/10 border border-violet-500/20 px-2.5 py-1 rounded-md">
                     {report.category}
                   </span>
-                  <span className="text-[11px] font-mono text-zinc-500">
+                  <span className="font-mono text-[11px] text-zinc-400 bg-white/[0.04] border border-white/10 px-2.5 py-1 rounded-md">
                     {report.pages} PAGES
                   </span>
                 </div>
 
                 {/* Title & Subtitle */}
-                <h2 className="text-xl font-bold text-white mb-3 tracking-tight group-hover:text-[#B896FF] transition-colors leading-snug">
+                <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-violet-200 transition-colors tracking-tight mt-4 mb-3">
                   <Link href={`/reports/${report.slug}`}>{report.title}</Link>
                 </h2>
 
-                <p className="text-xs text-zinc-400 leading-relaxed mb-6">
+                <p className="text-sm text-zinc-300 leading-relaxed font-sans mb-6">
                   {report.summary}
                 </p>
               </div>
 
               {/* Card Footer */}
-              <div className="pt-6 border-t border-white/[0.06] flex items-center justify-between">
-                <div className="text-[11px] font-mono text-zinc-500">
+              <div className="pt-6 border-t border-white/10 flex items-center justify-between mt-auto relative z-10">
+                <div className="font-mono text-xs text-zinc-400 flex items-center gap-2">
+                  <FileText className="w-3.5 h-3.5 text-zinc-500" />
                   {report.format} • {report.fileSize}
                 </div>
 
                 <Link
                   href={`/reports/${report.slug}`}
-                  className="text-xs font-semibold text-white group-hover:text-[#B896FF] flex items-center gap-1.5 transition-colors"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-white bg-violet-600/20 hover:bg-violet-600 border border-violet-500/30 hover:border-violet-400 shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all"
                 >
-                  <span>View Findings</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  <span>View Findings →</span>
                 </Link>
               </div>
-            </div>
+            </TiltCard3D>
           ))}
         </div>
       </section>
