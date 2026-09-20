@@ -14,6 +14,7 @@ export default function ContactPage() {
     serviceInterest: "Technology",
     message: ""
   });
+  const [budget, setBudget] = useState("");
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -48,7 +49,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#080417] text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
+    <main className="min-h-[calc(100vh-80px)] bg-transparent text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
       <Navbar />
 
       {/* Hero Ambient Backlight */}
@@ -59,47 +60,55 @@ export default function ContactPage() {
           {/* Left Column */}
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
-              <div className="text-[11px] font-mono text-[#B896FF] uppercase tracking-widest mb-3 font-medium flex items-center gap-2">
-                <Sparkles className="w-3.5 h-3.5 text-[#B896FF]" />
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono text-violet-400 bg-violet-500/10 border border-violet-500/20 mb-6">
+                <Sparkles className="w-3.5 h-3.5" />
                 GET IN TOUCH
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.08] tracking-[-0.01em] [word-spacing:0.1em] text-white mb-6">
+              <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
                 Let&apos;s create impact together.
               </h1>
-              <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed mb-8">
+              <p className="text-base sm:text-lg text-zinc-300 max-w-md leading-relaxed mb-8">
                 Whether you have an early-stage brief, need technical architecture guidance, or want to scale an existing brand, our partners are ready to collaborate.
               </p>
             </div>
 
-            <div className="space-y-6 pt-8 border-t border-white/[0.08]">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#1E085A]/60 border border-[#7042FF]/30 flex items-center justify-center text-[#B896FF] shadow-lg shadow-[#1E085A]/50">
+            <div className="space-y-4 pt-8 border-t border-white/10">
+              <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 rounded-2xl p-4 flex items-center gap-4 group">
+                <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="font-mono text-[10px] uppercase font-medium text-zinc-400 block">Email Us Directly</span>
-                  <a href="mailto:teamryzeworks@gmail.com" className="text-sm font-semibold text-white hover:text-[#B896FF] transition-colors">
+                  <a href="mailto:teamryzeworks@gmail.com" className="text-sm font-semibold text-white hover:text-violet-300 transition-colors block">
                     teamryzeworks@gmail.com
                   </a>
+                  <span className="font-mono text-[10px] uppercase text-zinc-400">Direct Practice Inquiries</span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#1E085A]/60 border border-[#7042FF]/30 flex items-center justify-center text-[#B896FF] shadow-lg shadow-[#1E085A]/50">
+              <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 rounded-2xl p-4 flex items-center gap-4 group">
+                <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="font-mono text-[10px] uppercase font-medium text-zinc-400 block">Studio Headquarters</span>
-                  <span className="text-sm font-semibold text-white">Chennai, India</span>
+                  <span className="text-sm font-semibold text-white block">Chennai, India</span>
+                  <span className="font-mono text-[10px] uppercase text-zinc-400">13.0827° N, 80.2707° E // Global Operations</span>
+                </div>
+              </div>
+
+              <div className="mt-8 pt-4">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs font-mono text-emerald-400">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Response SLA: Sub-4 hour turnaround
                 </div>
               </div>
             </div>
           </div>
 
           {/* Right Column: Lead Form */}
-          <div className="lg:col-span-7 rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] p-8 sm:p-12 shadow-2xl shadow-black/50">
-            <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-2 tracking-[-0.01em] [word-spacing:0.08em]">Send a Message</h2>
-            <p className="text-xs sm:text-sm text-zinc-400 font-normal mb-8">
+          <div className="lg:col-span-7 bg-[#0B0813]/75 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 sm:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.6)] relative overflow-hidden">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-600/15 blur-[100px] rounded-full -z-10 pointer-events-none" />
+            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-1">Send a Message</h2>
+            <p className="font-mono text-xs text-zinc-400 mb-8">
               Inbound inquiries are encrypted and routed directly to our practice leadership.
             </p>
 
@@ -128,7 +137,7 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Maya Lin"
-                    className="w-full bg-white/[0.04] border border-white/15 focus:border-[#B896FF] focus:ring-1 focus:ring-[#B896FF] rounded-xl px-4 py-3 text-xs text-white placeholder:text-zinc-500 focus:outline-none transition-all"
+                    className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none"
                   />
                 </div>
 
@@ -142,7 +151,7 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="e.g. maya@company.com"
-                    className="w-full bg-white/[0.04] border border-white/15 focus:border-[#B896FF] focus:ring-1 focus:ring-[#B896FF] rounded-xl px-4 py-3 text-xs text-white placeholder:text-zinc-500 focus:outline-none transition-all"
+                    className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none"
                   />
                 </div>
               </div>
@@ -157,7 +166,7 @@ export default function ContactPage() {
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                     placeholder="e.g. HyperScale Inc"
-                    className="w-full bg-white/[0.04] border border-white/15 focus:border-[#B896FF] focus:ring-1 focus:ring-[#B896FF] rounded-xl px-4 py-3 text-xs text-white placeholder:text-zinc-500 focus:outline-none transition-all"
+                    className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none"
                   />
                 </div>
 
@@ -168,7 +177,7 @@ export default function ContactPage() {
                   <select
                     value={formData.serviceInterest}
                     onChange={(e) => setFormData({ ...formData, serviceInterest: e.target.value })}
-                    className="w-full bg-[#0d0e17] border border-white/15 focus:border-[#B896FF] focus:ring-1 focus:ring-[#B896FF] rounded-xl px-4 py-3 text-xs text-white focus:outline-none transition-all"
+                    className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 transition-all outline-none"
                   >
                     <option value="Technology">Technology &amp; Web Apps</option>
                     <option value="Strategy">Brand &amp; GTM Strategy</option>
@@ -176,6 +185,24 @@ export default function ContactPage() {
                     <option value="Marketing">Growth &amp; Performance</option>
                     <option value="Experiences">Immersive Experiences</option>
                   </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="font-mono text-[11px] font-medium text-zinc-300 uppercase block mb-2">
+                  Project Budget
+                </label>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {["<$15k", "$15k–$35k", "$35k–$75k", "$75k+"].map((b) => (
+                    <button
+                      key={b}
+                      type="button"
+                      onClick={() => setBudget(b)}
+                      className={`px-3.5 py-2 rounded-xl text-xs font-mono border transition-all cursor-pointer ${budget === b ? "bg-violet-600/20 border-violet-500 text-white shadow-[0_0_12px_rgba(139,92,246,0.3)]" : "bg-white/[0.03] border-white/10 text-zinc-400 hover:border-white/20"}`}
+                    >
+                      {b}
+                    </button>
+                  ))}
                 </div>
               </div>
 
@@ -189,7 +216,7 @@ export default function ContactPage() {
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Tell us about your timeline, scope, and objectives..."
-                  className="w-full bg-white/[0.04] border border-white/15 focus:border-[#B896FF] focus:ring-1 focus:ring-[#B896FF] rounded-xl px-4 py-3 text-xs text-white placeholder:text-zinc-500 focus:outline-none transition-all"
+                  className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none"
                 />
               </div>
 
@@ -197,7 +224,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full justify-center px-6 py-3.5 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-[#7042FF] to-[#4318D1] hover:brightness-110 shadow-lg shadow-[#7042FF]/30 border border-[#B896FF]/30 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                  className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold rounded-xl py-3.5 shadow-[0_0_25px_rgba(139,92,246,0.35)] transition-all flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-50"
                 >
                   {loading ? (
                     <span className="flex items-center gap-2">
