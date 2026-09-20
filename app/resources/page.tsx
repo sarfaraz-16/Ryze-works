@@ -15,7 +15,7 @@ export const metadata = {
 
 export default function ResourcesPage() {
   return (
-    <main className="min-h-screen bg-[#080417] text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
+    <main className="min-h-screen bg-transparent text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
       <Navbar />
 
       {/* Hero Ambient Backlight */}
