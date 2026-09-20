@@ -140,7 +140,7 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15] mt-4 mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15] mb-6 mt-4">
             {article.title}
           </h1>
           <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed mb-6">
@@ -160,11 +160,29 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
         </div>
 
         {/* Feature Graphic / Cover Art */}
-        <div className="w-full max-w-4xl mx-auto rounded-3xl overflow-hidden bg-black/40 border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] mb-12 p-8 sm:p-12 relative flex items-center justify-center min-h-[300px]">
-          <div className={`absolute inset-0 bg-gradient-to-br ${bgGlow} opacity-50 mix-blend-screen`} />
-          <div className="absolute inset-0 opacity-10 mix-blend-overlay" style={{ backgroundImage: "url('/noise.png')", backgroundSize: "100px" }} />
-          <div className="relative z-10 text-center">
-            <Sparkles className="w-16 h-16 text-white/30 mx-auto" />
+        <div className="w-full max-w-4xl mx-auto rounded-3xl overflow-hidden bg-gradient-to-b from-[#130E24]/80 to-[#0B0813]/90 border border-white/10 p-6 sm:p-8 mb-12 shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 relative z-10">
+            <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-5 flex flex-col gap-3 relative overflow-hidden group hover:border-violet-500/40 transition-all">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-[10px] font-mono text-cyan-400 w-fit">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                PHASE 01 (DAYS 1-7)
+              </div>
+              <h4 className="text-white font-bold text-sm">Core Metric Isolation</h4>
+            </div>
+            <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-5 flex flex-col gap-3 relative overflow-hidden group hover:border-violet-500/40 transition-all">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-lg bg-violet-500/10 border border-violet-500/20 text-[10px] font-mono text-violet-400 w-fit">
+                <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
+                PHASE 02 (DAYS 8-21)
+              </div>
+              <h4 className="text-white font-bold text-sm">Full-Stack Scaffolding & Edge Auth</h4>
+            </div>
+            <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-5 flex flex-col gap-3 relative overflow-hidden group hover:border-violet-500/40 transition-all">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-mono text-emerald-400 w-fit">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                PHASE 03 (DAYS 22-30)
+              </div>
+              <h4 className="text-white font-bold text-sm">Telemetry, Proof & Hardened Launch</h4>
+            </div>
           </div>
         </div>
 
@@ -175,62 +193,50 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
           </div>
         ) : (
           <div className="max-w-3xl mx-auto text-zinc-200 font-sans leading-relaxed text-base sm:text-lg">
-            <p className="mb-6 text-zinc-300 font-normal leading-[1.8]">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-12 mb-4 flex items-center gap-2.5">
+              The Core Trap: Premature Over-Engineering
+            </h2>
+            <p className="text-base sm:text-lg text-zinc-300 leading-[1.8] mb-6 font-sans">
               In the current landscape of AI acceleration, traditional agency frameworks that rely on multi-month discovery phases and siloed design documentation are rapidly becoming obsolete. Today’s market demands continuous integration between creative direction and computational execution.
             </p>
 
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-12 mb-4 flex items-center gap-2">
-              The Shift from Static Assets to Generative Systems
-            </h2>
-            <p className="mb-6 text-zinc-300 font-normal leading-[1.8]">
-              Brands are no longer static collections of logos, fonts, and fixed color swatches. Instead, an AI-native brand is a living system — capable of adapting across personal interfaces, contextual notifications, and real-time interaction flows while maintaining strict identity coherence.
-            </p>
-
-            <div className="my-8 border-l-2 border-violet-500 bg-gradient-to-r from-violet-950/20 to-transparent p-6 rounded-r-2xl text-lg sm:text-xl font-medium text-violet-200 italic">
+            <div className="my-8 border-l-2 border-violet-500 bg-violet-950/20 p-6 rounded-r-2xl text-lg text-violet-200 italic">
               "Design for the API layer first. When your brand system is encoded into design tokens and component libraries, deploying AI agents and personalized user journeys becomes seamless rather than an architectural redesign."
             </div>
 
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-12 mb-4 flex items-center gap-2">
-              Measuring What Actually Converts
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-12 mb-4 flex items-center gap-2.5">
+              The 30-Day Execution Matrix
             </h2>
-            <p className="mb-6 text-zinc-300 font-normal leading-[1.8]">
-              Performance is no longer just about top-of-funnel click-through rates. With intelligent systems, we can instrument granular micro-interactions, predict user drop-offs, and dynamically adjust product flows to optimize for lifetime retention and enterprise trust.
+            <p className="text-base sm:text-lg text-zinc-300 leading-[1.8] mb-6 font-sans">
+              Brands are no longer static collections of logos, fonts, and fixed color swatches. Instead, an AI-native brand is a living system — capable of adapting across personal interfaces, contextual notifications, and real-time interaction flows while maintaining strict identity coherence.
             </p>
 
-            <ul className="my-6 space-y-2.5 pl-2">
-              <li className="flex items-start gap-3 text-zinc-300">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0 mt-2.5 shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
-                <span>Define interaction metrics that signal high intent early in the session.</span>
-              </li>
-              <li className="flex items-start gap-3 text-zinc-300">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0 mt-2.5 shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
-                <span>Implement component-level tracing to find UX bottlenecks.</span>
-              </li>
-              <li className="flex items-start gap-3 text-zinc-300">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0 mt-2.5 shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
-                <span>Connect quantitative drop-offs to qualitative heatmaps.</span>
-              </li>
-            </ul>
+            <ol className="my-6 space-y-4 pl-6 list-decimal text-zinc-300 text-base sm:text-lg leading-[1.8] font-sans">
+              <li><strong className="text-white">Core Metric Isolation:</strong> Establish the singular metric that matters for validation.</li>
+              <li><strong className="text-white">Full-Stack Scaffolding:</strong> Build the end-to-end user journey using robust architecture.</li>
+              <li><strong className="text-white">Hardened Launch:</strong> Implement telemetry and lock down security for scaled traffic.</li>
+            </ol>
 
-            <div className="my-6 rounded-2xl bg-[#0B0813]/90 border border-white/10 p-5 font-mono text-xs sm:text-sm text-cyan-300 overflow-x-auto shadow-inner">
-              <pre>{`// Example: Tracking micro-interactions in a Next.js component
-export function TrackedButton({ children, actionId }) {
-  const handleClick = async () => {
-    await telemetry.track('button_click', { action: actionId });
-  };
-  return <button onClick={handleClick}>{children}</button>;
-}`}</pre>
+            <div className="my-8 p-6 rounded-2xl bg-[#0B0813]/80 backdrop-blur-xl border border-violet-500/30 shadow-[0_0_20px_rgba(139,92,246,0.15)] font-mono text-sm sm:text-base text-violet-200">
+              <strong className="text-violet-400">Key Principle:</strong> If your day-one launch requires complex microservices, you haven't identified your single value transaction.
             </div>
+
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-12 mb-4 flex items-center gap-2.5">
+              Technical Foundation: Next.js + Edge Layer
+            </h2>
+            <p className="text-base sm:text-lg text-zinc-300 leading-[1.8] mb-6 font-sans">
+              Performance is no longer just about top-of-funnel click-through rates. With intelligent systems, we can instrument granular micro-interactions, predict user drop-offs, and dynamically adjust product flows to optimize for lifetime retention and enterprise trust.
+            </p>
           </div>
         )}
 
         {/* Footer info & Share block */}
-        <div className="max-w-3xl mx-auto mt-16 pt-10 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="max-w-3xl mx-auto mt-16 p-4 rounded-2xl bg-white/[0.02] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
             <span className="text-sm font-semibold text-white">Share this insight:</span>
             <div className="flex gap-2">
               <button className="px-3 py-1.5 rounded-md text-xs font-mono text-zinc-400 bg-white/[0.04] border border-white/10 hover:border-violet-500/40 hover:text-white transition-all cursor-pointer">Copy Link</button>
-              <button className="px-3 py-1.5 rounded-md text-xs font-mono text-zinc-400 bg-white/[0.04] border border-white/10 hover:border-violet-500/40 hover:text-white transition-all cursor-pointer">Twitter</button>
+              <button className="px-3 py-1.5 rounded-md text-xs font-mono text-zinc-400 bg-white/[0.04] border border-white/10 hover:border-violet-500/40 hover:text-white transition-all cursor-pointer">Share on X</button>
             </div>
           </div>
           <div className="text-sm text-zinc-500">

@@ -283,7 +283,7 @@ export const ARTICLES_DATA: Article[] = [
   {
     id: "art-idea-to-execution",
     slug: "from-idea-to-execution-for-startup-founders",
-    title: "From Idea To Execution for Startups Founders",
+    title: "From Idea To Execution for Startup Founders",
     category: "BUSINESS",
     readTime: "6 min read",
     summary: "The practical 30-day playbook for early-stage founders navigating product definition, tech stack, and launch.",
