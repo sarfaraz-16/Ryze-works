@@ -73,8 +73,8 @@ export default function ContactPage() {
             </div>
 
             <div className="space-y-4 pt-8 border-t border-white/10">
-              <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 rounded-2xl p-4 flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all">
+              <div className="bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 rounded-2xl p-4 transition-all flex items-center gap-4 group">
+                <div className="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-300 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
@@ -85,8 +85,8 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 rounded-2xl p-4 flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all">
+              <div className="bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 rounded-2xl p-4 transition-all flex items-center gap-4 group">
+                <div className="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-300 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
@@ -105,8 +105,8 @@ export default function ContactPage() {
           </div>
 
           {/* Right Column: Lead Form */}
-          <div className="lg:col-span-7 bg-[#0B0813]/75 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 sm:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.6)] relative overflow-hidden">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-600/15 blur-[100px] rounded-full -z-10 pointer-events-none" />
+          <div className="lg:col-span-7 bg-[#0B0813]/80 backdrop-blur-2xl border border-white/10 hover:border-white/15 rounded-3xl p-6 sm:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.7)] relative overflow-hidden">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-violet-600/15 blur-[100px] rounded-full -z-10 pointer-events-none" />
             <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-1">Send a Message</h2>
             <p className="font-mono text-xs text-zinc-400 mb-8">
               Inbound inquiries are encrypted and routed directly to our practice leadership.
@@ -128,7 +128,7 @@ export default function ContactPage() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="font-mono text-[11px] font-medium text-zinc-300 uppercase block mb-1.5">
+                  <label className="block text-xs font-mono font-medium text-zinc-400 uppercase tracking-wider mb-2">
                     Your Name *
                   </label>
                   <input
@@ -142,7 +142,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="font-mono text-[11px] font-medium text-zinc-300 uppercase block mb-1.5">
+                  <label className="block text-xs font-mono font-medium text-zinc-400 uppercase tracking-wider mb-2">
                     Email Address *
                   </label>
                   <input
@@ -158,7 +158,7 @@ export default function ContactPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="font-mono text-[11px] font-medium text-zinc-300 uppercase block mb-1.5">
+                  <label className="block text-xs font-mono font-medium text-zinc-400 uppercase tracking-wider mb-2">
                     Company Name
                   </label>
                   <input
@@ -171,7 +171,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="font-mono text-[11px] font-medium text-zinc-300 uppercase block mb-1.5">
+                  <label className="block text-xs font-mono font-medium text-zinc-400 uppercase tracking-wider mb-2">
                     Primary Service
                   </label>
                   <select
@@ -189,7 +189,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label className="font-mono text-[11px] font-medium text-zinc-300 uppercase block mb-2">
+                <label className="block text-xs font-mono font-medium text-zinc-400 uppercase tracking-wider mb-2">
                   Project Budget
                 </label>
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -198,7 +198,7 @@ export default function ContactPage() {
                       key={b}
                       type="button"
                       onClick={() => setBudget(b)}
-                      className={`px-3.5 py-2 rounded-xl text-xs font-mono border transition-all cursor-pointer ${budget === b ? "bg-violet-600/20 border-violet-500 text-white shadow-[0_0_12px_rgba(139,92,246,0.3)]" : "bg-white/[0.03] border-white/10 text-zinc-400 hover:border-white/20"}`}
+                      className={`px-3.5 py-2 rounded-xl text-xs font-mono border transition-all cursor-pointer ${budget === b ? "bg-violet-600/25 border-violet-500 text-violet-200 shadow-[0_0_12px_rgba(139,92,246,0.3)]" : "bg-white/[0.03] border-white/10 text-zinc-400 hover:border-white/20 hover:text-zinc-200"}`}
                     >
                       {b}
                     </button>
@@ -207,7 +207,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <label className="font-mono text-[11px] font-medium text-zinc-300 uppercase block mb-1.5">
+                <label className="block text-xs font-mono font-medium text-zinc-400 uppercase tracking-wider mb-2">
                   How can we help you? *
                 </label>
                 <textarea
@@ -216,7 +216,7 @@ export default function ContactPage() {
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Tell us about your timeline, scope, and objectives..."
-                  className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none"
+                  className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl p-4 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none resize-none"
                 />
               </div>
 
