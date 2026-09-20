@@ -371,18 +371,26 @@ export default function AIPage() {
 
         {/* Tab 2: Project Brief Generator */}
         {activeTab === "brief" && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <div className="lg:col-span-6 rounded-3xl bg-[#0B0813]/80 backdrop-blur-2xl border border-white/10 p-8 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(139,92,246,0.1),transparent_60%)] pointer-events-none" />
+          <div className="relative">
+            {/* Ambient Radial Glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[550px] bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.15),transparent_70%)] blur-[90px] -z-10 pointer-events-none" />
+            
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              <div className="lg:col-span-6 bg-[#0B0813]/70 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(139,92,246,0.1),transparent_60%)] pointer-events-none" />
               <div className="relative z-10">
-                <h2 className="text-xl sm:text-2xl font-semibold text-white mb-2 tracking-[-0.01em] [word-spacing:0.08em]">Project Parameters</h2>
+                <div className="font-mono text-[11px] text-violet-400 uppercase tracking-widest flex items-center gap-2 mb-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
+                  SYSTEM INITIALIZED
+                </div>
+                <h2 className="text-xl sm:text-2xl font-bold text-white mb-2 tracking-[-0.01em] [word-spacing:0.08em]">Project Parameters</h2>
                 <p className="text-xs sm:text-sm text-zinc-400 font-normal mb-8">
                   Fill in your project vision. Our AI architect will structure an actionable scope and tech stack proposal.
                 </p>
 
                 <form onSubmit={handleGenerateBrief} className="space-y-5">
                   <div>
-                    <label className="font-mono text-[11px] font-medium text-zinc-300 uppercase block mb-1.5">
+                    <label className="text-xs font-mono font-medium text-zinc-400 tracking-wide uppercase block mb-1.5">
                       Your Name *
                     </label>
                     <input
@@ -391,12 +399,12 @@ export default function AIPage() {
                       value={briefForm.name}
                       onChange={(e) => setBriefForm({ ...briefForm, name: e.target.value })}
                       placeholder="e.g. Alex Morgan"
-                      className="w-full bg-white/[0.03] border border-white/10 hover:border-white/20 focus:border-violet-500/60 focus:ring-1 focus:ring-violet-500/60 rounded-xl px-4 py-3 text-sm text-zinc-200 transition-all outline-none"
+                      className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="font-mono text-[11px] font-medium text-zinc-300 uppercase block mb-1.5">
+                    <label className="text-xs font-mono font-medium text-zinc-400 tracking-wide uppercase block mb-1.5">
                       Work Email *
                     </label>
                     <input
@@ -405,12 +413,12 @@ export default function AIPage() {
                       value={briefForm.email}
                       onChange={(e) => setBriefForm({ ...briefForm, email: e.target.value })}
                       placeholder="e.g. alex@company.com"
-                      className="w-full bg-white/[0.03] border border-white/10 hover:border-white/20 focus:border-violet-500/60 focus:ring-1 focus:ring-violet-500/60 rounded-xl px-4 py-3 text-sm text-zinc-200 transition-all outline-none"
+                      className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="font-mono text-[11px] font-medium text-zinc-300 uppercase block mb-1.5">
+                    <label className="text-xs font-mono font-medium text-zinc-400 tracking-wide uppercase block mb-1.5">
                       Company / Startup Name
                     </label>
                     <input
@@ -418,12 +426,12 @@ export default function AIPage() {
                       value={briefForm.company}
                       onChange={(e) => setBriefForm({ ...briefForm, company: e.target.value })}
                       placeholder="e.g. Nova Robotics"
-                      className="w-full bg-white/[0.03] border border-white/10 hover:border-white/20 focus:border-violet-500/60 focus:ring-1 focus:ring-violet-500/60 rounded-xl px-4 py-3 text-sm text-zinc-200 transition-all outline-none"
+                      className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="font-mono text-[11px] font-medium text-zinc-300 uppercase block mb-1.5">
+                    <label className="text-xs font-mono font-medium text-zinc-400 tracking-wide uppercase block mb-1.5">
                       Project Concept &amp; Vision *
                     </label>
                     <textarea
@@ -432,7 +440,7 @@ export default function AIPage() {
                       value={briefForm.projectIdea}
                       onChange={(e) => setBriefForm({ ...briefForm, projectIdea: e.target.value })}
                       placeholder="What are you building? Target features, user flows, and business goals..."
-                      className="w-full bg-white/[0.03] border border-white/10 hover:border-white/20 focus:border-violet-500/60 focus:ring-1 focus:ring-violet-500/60 rounded-xl px-4 py-3 text-sm text-zinc-200 transition-all outline-none"
+                      className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none"
                     />
                   </div>
 
@@ -440,13 +448,13 @@ export default function AIPage() {
                     <button
                       type="submit"
                       disabled={briefLoading}
-                      className="w-full justify-center px-6 py-3.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 shadow-[0_0_25px_rgba(139,92,246,0.3)] transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                      className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold rounded-xl py-3.5 shadow-[0_0_25px_rgba(139,92,246,0.35)] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                     >
                       {briefLoading ? (
-                        <span className="flex items-center gap-2">
+                        <>
                           <Loader2 className="w-4 h-4 animate-spin" />
                           Generating Structured Brief...
-                        </span>
+                        </>
                       ) : (
                         "Generate Executive Brief →"
                       )}
@@ -457,30 +465,32 @@ export default function AIPage() {
             </div>
 
             {/* Output Panel */}
-            <div className="lg:col-span-6 rounded-3xl bg-[#0B0813]/80 backdrop-blur-2xl border border-white/10 p-8 sm:p-10 flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative overflow-hidden">
+            <div className="lg:col-span-6 bg-[#0B0813]/70 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative overflow-hidden">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(139,92,246,0.05),transparent_60%)] pointer-events-none" />
-              <div className="relative z-10 h-full">
+              <div className="relative z-10 h-full flex flex-col">
                 {generatedBrief ? (
                   <div className="space-y-6">
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-xs font-medium tracking-wider text-[#B896FF] uppercase">
+                    <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+                      <span className="font-mono text-[11px] text-violet-400 tracking-wider uppercase">
                         Executive Summary
                       </span>
-                      <span className="px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/40 text-[10px] text-emerald-300 font-mono">
-                        Confidence: {generatedBrief.confidenceScore}
-                      </span>
+                      <div className="flex gap-2">
+                        <button className="px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/10 hover:border-violet-500/40 text-xs text-zinc-300 font-mono transition-colors cursor-pointer">Copy Markdown</button>
+                        <button className="px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/10 hover:border-violet-500/40 text-xs text-zinc-300 font-mono transition-colors cursor-pointer">Export PDF</button>
+                      </div>
                     </div>
-                    <h3 className="text-lg sm:text-xl font-semibold text-white tracking-[-0.015em]">
+                    <h3 className="text-lg sm:text-xl font-semibold text-white tracking-[-0.015em] leading-relaxed">
                       {generatedBrief.executiveSummary}
                     </h3>
 
-                    <div>
-                      <h4 className="font-mono text-[10px] font-medium tracking-wider text-zinc-400 uppercase mb-3">
+                    <div className="mt-8">
+                      <h4 className="flex items-center gap-2 font-mono text-[11px] font-medium tracking-wider text-zinc-300 uppercase mb-4">
+                        <div className="w-1 h-3 bg-violet-500 rounded-full" />
                         Recommended Scope &amp; Deliverables
                       </h4>
                       <div className="space-y-2">
                         {generatedBrief.scopeDeliverables?.map((item: string, i: number) => (
-                          <div key={i} className="flex items-start gap-2.5 text-xs text-zinc-200">
+                          <div key={i} className="flex items-start gap-2.5 text-sm text-zinc-200 bg-white/[0.02] p-3 rounded-xl border border-white/5">
                             <CheckCircle2 className="w-4 h-4 text-[#B896FF] shrink-0 mt-0.5" />
                             <span>{item}</span>
                           </div>
@@ -488,15 +498,16 @@ export default function AIPage() {
                       </div>
                     </div>
 
-                    <div>
-                      <h4 className="font-mono text-[10px] font-medium tracking-wider text-zinc-400 uppercase mb-2">
+                    <div className="mt-8">
+                      <h4 className="flex items-center gap-2 font-mono text-[11px] font-medium tracking-wider text-zinc-300 uppercase mb-4">
+                        <div className="w-1 h-3 bg-violet-500 rounded-full" />
                         Architectural Stack
                       </h4>
-                      <div className="flex flex-wrap gap-1.5">
+                      <div className="flex flex-wrap gap-2">
                         {generatedBrief.recommendedStack?.map((tech: string) => (
                           <span
                             key={tech}
-                            className="px-2.5 py-1 rounded-full bg-white/[0.05] border border-white/10 text-[11px] text-[#B896FF] font-mono"
+                            className="px-3 py-1.5 rounded-md bg-white/[0.04] border border-white/10 text-[11px] text-violet-300 font-mono"
                           >
                             {tech}
                           </span>
@@ -504,26 +515,49 @@ export default function AIPage() {
                       </div>
                     </div>
 
-                    <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs text-zinc-300 font-mono">
+                    <div className="pt-6 mt-8 border-t border-white/[0.08] flex items-center justify-between text-xs text-zinc-400 font-mono">
                       <span>Estimated Sprint Duration:</span>
-                      <span className="text-white font-bold">{generatedBrief.estimatedSprint}</span>
+                      <span className="text-white font-bold bg-white/[0.05] px-3 py-1 rounded-md">{generatedBrief.estimatedSprint}</span>
                     </div>
                   </div>
                 ) : (
-                  <div className="h-full flex flex-col items-center justify-center text-center p-8">
-                    <div className="w-16 h-16 rounded-3xl bg-[#1E085A]/60 border border-[#7042FF]/30 flex items-center justify-center mb-4 shadow-lg shadow-[#1E085A]/50">
-                      <Cpu className="w-8 h-8 text-[#B896FF]" />
+                  <div className="h-full flex flex-col">
+                    <div className="font-mono text-[11px] text-zinc-400 uppercase tracking-wider flex justify-between items-center pb-4 border-b border-white/10">
+                      <span>TELEMETRY STANDBY</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                        <span className="text-amber-400/80">SYNTHESIS IDLE</span>
+                      </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-white mb-2 tracking-[-0.015em]">
-                      Awaiting Project Parameters
-                    </h3>
-                    <p className="text-xs sm:text-sm text-zinc-400 font-normal max-w-sm">
-                      Submit the form to the left to have Gemini synthesize your project specifications into a structured proposal.
-                    </p>
+                    
+                    <div className="flex-1 flex flex-col items-center justify-center text-center p-4 sm:p-8 mt-4">
+                      <div className="w-14 h-14 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 mb-6 shadow-[0_0_20px_rgba(139,92,246,0.2)]">
+                        <Cpu className="w-7 h-7" />
+                      </div>
+                      <h3 className="text-lg font-semibold text-white mb-3 tracking-[-0.015em]">
+                        Awaiting Project Parameters
+                      </h3>
+                      <p className="text-sm text-zinc-400 font-normal max-w-sm mb-10 leading-relaxed">
+                        Submit the form to the left to have Gemini synthesize your project specifications into a structured proposal.
+                      </p>
+                      
+                      <div className="grid grid-cols-1 gap-3 w-full max-w-sm">
+                        <div className="bg-white/[0.02] border border-dashed border-white/10 rounded-xl p-3 text-xs font-mono text-zinc-500 flex items-center justify-center gap-2">
+                          <span>⚡ Tech Stack Architecture</span>
+                        </div>
+                        <div className="bg-white/[0.02] border border-dashed border-white/10 rounded-xl p-3 text-xs font-mono text-zinc-500 flex items-center justify-center gap-2">
+                          <span>⏱️ Phase-by-Phase Timeline</span>
+                        </div>
+                        <div className="bg-white/[0.02] border border-dashed border-white/10 rounded-xl p-3 text-xs font-mono text-zinc-500 flex items-center justify-center gap-2">
+                          <span>📊 Resource &amp; Scope Matrix</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
             </div>
+          </div>
           </div>
         )}
       </section>
