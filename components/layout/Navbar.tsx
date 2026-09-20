@@ -42,7 +42,7 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center group select-none">
-          <span className="font-display font-extrabold text-white text-base sm:text-lg tracking-[0.14em] uppercase whitespace-nowrap group-hover:text-[#B896FF] transition-colors">
+          <span className="font-display font-extrabold text-white text-base sm:text-lg tracking-[0.14em] uppercase whitespace-nowrap group-hover:text-violet-300 transition-colors">
             RYZE WORKS
           </span>
         </Link>
@@ -55,13 +55,16 @@ export const Navbar: React.FC = () => {
               <Link
                 key={link.label}
                 href={link.href}
-                className={`text-[11px] lg:text-xs font-mono tracking-wider transition-colors duration-150 py-1.5 px-3 rounded-lg flex items-center ${
+                className={`text-[11px] lg:text-xs font-mono tracking-wider px-2 py-1 relative transition-colors duration-200 ${
                   isActive
-                    ? "bg-violet-500/20 text-white border border-violet-500/30"
-                    : "text-zinc-300 hover:text-white"
+                    ? "text-white font-semibold"
+                    : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
                 {link.label}
+                {isActive && (
+                  <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-violet-400 shadow-[0_0_8px_rgba(167,139,250,0.9)]" />
+                )}
               </Link>
             );
           })}
@@ -69,14 +72,11 @@ export const Navbar: React.FC = () => {
 
         {/* Right CTA */}
         <div className="hidden sm:flex items-center">
-          <Link href="/start-a-project">
-            <Button
-              variant="primary"
-              size="md"
-              className="text-[11px] font-bold tracking-[0.14em] px-6 py-2.5 rounded-full shadow-[0_0_20px_rgba(112,66,255,0.4)]"
-            >
-              START A PROJECT
-            </Button>
+          <Link
+            href="/start-a-project"
+            className="bg-gradient-to-r from-violet-600 to-indigo-600 rounded-full px-5 py-2 text-xs font-semibold text-white shadow-[0_0_20px_rgba(139,92,246,0.35)] hover:brightness-110 transition-all"
+          >
+            START A PROJECT
           </Link>
         </div>
 
@@ -101,12 +101,17 @@ export const Navbar: React.FC = () => {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`text-xs font-mono tracking-widest py-2 px-4 rounded-lg transition-colors ${
+                  className={`text-xs font-mono tracking-widest py-2 transition-colors flex items-center gap-3 relative ${
                     isActive
-                      ? "bg-violet-500/20 text-white border border-violet-500/30"
-                      : "text-zinc-200 hover:text-white"
+                      ? "text-white font-semibold"
+                      : "text-zinc-400 hover:text-zinc-200"
                   }`}
                 >
+                  {isActive ? (
+                    <span className="w-1.5 h-1.5 rounded-full bg-violet-400 shadow-[0_0_8px_rgba(167,139,250,0.9)]" />
+                  ) : (
+                    <span className="w-1.5 h-1.5" />
+                  )}
                   {link.label}
                 </Link>
               );
