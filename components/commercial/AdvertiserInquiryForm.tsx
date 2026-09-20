@@ -131,8 +131,10 @@ export function AdvertiserInquiryForm() {
   }
 
   return (
-    <div className="rounded-3xl bg-[#0d0e17]/90 border border-white/[0.08] p-8 sm:p-12 shadow-2xl shadow-black/80 backdrop-blur-xl">
-      <div className="mb-8 pb-6 border-b border-white/[0.08]">
+    <div className="max-w-3xl mx-auto bg-[#0B0813]/80 backdrop-blur-2xl border border-white/10 hover:border-white/15 rounded-3xl p-7 sm:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.7)] relative overflow-hidden text-left mt-10">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-violet-600/15 blur-[110px] rounded-full -z-10 pointer-events-none" />
+      
+      <div className="mb-8 pb-6 border-b border-white/[0.08] relative z-10">
         <div className="text-[11px] font-mono text-[#B896FF] uppercase tracking-widest mb-2 font-medium flex items-center gap-2">
           <Sparkles className="w-3.5 h-3.5 text-[#B896FF]" />
           COMMERCIAL PLACEMENT INTAKE
@@ -146,16 +148,16 @@ export function AdvertiserInquiryForm() {
       </div>
 
       {errorMsg && (
-        <div className="mb-6 p-4 rounded-xl bg-rose-950/40 border border-rose-500/40 text-xs text-rose-300">
+        <div className="mb-6 p-4 rounded-xl bg-rose-950/40 border border-rose-500/40 text-xs text-rose-300 relative z-10">
           {errorMsg}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
         {/* Contact Coordinates */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-[11px] font-mono uppercase tracking-wider text-zinc-300 mb-1.5">
+            <label className="block text-xs font-mono font-medium text-zinc-400 uppercase tracking-wider mb-2">
               Brand / Company Name *
             </label>
             <input
@@ -164,12 +166,12 @@ export function AdvertiserInquiryForm() {
               value={formData.companyName}
               onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
               placeholder="e.g. Stripe, Linear, Vercel"
-              className="w-full px-4 py-3 bg-[#080417] border border-white/[0.1] rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#7042FF] transition-colors"
+              className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none appearance-none"
             />
           </div>
 
           <div>
-            <label className="block text-[11px] font-mono uppercase tracking-wider text-zinc-300 mb-1.5">
+            <label className="block text-xs font-mono font-medium text-zinc-400 uppercase tracking-wider mb-2">
               Contact Name &amp; Title *
             </label>
             <input
@@ -178,14 +180,14 @@ export function AdvertiserInquiryForm() {
               value={formData.contactName}
               onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
               placeholder="e.g. Maya Lin, VP Marketing"
-              className="w-full px-4 py-3 bg-[#080417] border border-white/[0.1] rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#7042FF] transition-colors"
+              className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none appearance-none"
             />
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-[11px] font-mono uppercase tracking-wider text-zinc-300 mb-1.5">
+            <label className="block text-xs font-mono font-medium text-zinc-400 uppercase tracking-wider mb-2">
               Corporate Email *
             </label>
             <input
@@ -194,12 +196,12 @@ export function AdvertiserInquiryForm() {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="maya@company.com"
-              className="w-full px-4 py-3 bg-[#080417] border border-white/[0.1] rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#7042FF] transition-colors"
+              className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none appearance-none"
             />
           </div>
 
           <div>
-            <label className="block text-[11px] font-mono uppercase tracking-wider text-zinc-300 mb-1.5">
+            <label className="block text-xs font-mono font-medium text-zinc-400 uppercase tracking-wider mb-2">
               Website / Product URL *
             </label>
             <input
@@ -208,14 +210,14 @@ export function AdvertiserInquiryForm() {
               value={formData.website}
               onChange={(e) => setFormData({ ...formData, website: e.target.value })}
               placeholder="https://company.com"
-              className="w-full px-4 py-3 bg-[#080417] border border-white/[0.1] rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#7042FF] transition-colors"
+              className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none appearance-none"
             />
           </div>
         </div>
 
         {/* Placement Formats */}
         <div>
-          <label className="block text-[11px] font-mono uppercase tracking-wider text-zinc-300 mb-2">
+          <label className="block text-xs font-mono font-medium text-zinc-400 uppercase tracking-wider mb-2">
             Placement Formats of Interest (Select all that apply)
           </label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -226,14 +228,14 @@ export function AdvertiserInquiryForm() {
                   type="button"
                   key={plc}
                   onClick={() => togglePlacement(plc)}
-                  className={`p-3 rounded-xl border text-left text-xs transition-all cursor-pointer flex items-center justify-between ${
+                  className={`p-3 rounded-xl border text-xs font-mono transition-all text-left flex items-center justify-between cursor-pointer ${
                     selected
-                      ? "bg-[#7042FF]/15 border-[#7042FF] text-white font-medium"
-                      : "bg-[#080417] border-white/[0.08] text-zinc-400 hover:border-white/20"
+                      ? "bg-violet-600/20 border-violet-500 text-white shadow-[0_0_12px_rgba(139,92,246,0.25)]"
+                      : "bg-white/[0.03] border-white/10 text-zinc-300 hover:border-white/20 hover:text-white"
                   }`}
                 >
                   <span>{plc}</span>
-                  {selected && <CheckCircle2 className="w-3.5 h-3.5 text-[#B896FF] shrink-0" />}
+                  {selected && <CheckCircle2 className="w-4 h-4 text-[#B896FF] shrink-0" />}
                 </button>
               );
             })}
@@ -242,7 +244,7 @@ export function AdvertiserInquiryForm() {
 
         {/* Campaign Objectives */}
         <div>
-          <label className="block text-[11px] font-mono uppercase tracking-wider text-zinc-300 mb-2">
+          <label className="block text-xs font-mono font-medium text-zinc-400 uppercase tracking-wider mb-2">
             Primary Campaign Objectives
           </label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -253,14 +255,14 @@ export function AdvertiserInquiryForm() {
                   type="button"
                   key={obj}
                   onClick={() => toggleObjective(obj)}
-                  className={`p-3 rounded-xl border text-left text-xs transition-all cursor-pointer flex items-center justify-between ${
+                  className={`p-3 rounded-xl border text-xs font-mono transition-all text-left flex items-center justify-between cursor-pointer ${
                     selected
-                      ? "bg-[#7042FF]/15 border-[#7042FF] text-white font-medium"
-                      : "bg-[#080417] border-white/[0.08] text-zinc-400 hover:border-white/20"
+                      ? "bg-violet-600/20 border-violet-500 text-white shadow-[0_0_12px_rgba(139,92,246,0.25)]"
+                      : "bg-white/[0.03] border-white/10 text-zinc-300 hover:border-white/20 hover:text-white"
                   }`}
                 >
                   <span>{obj}</span>
-                  {selected && <CheckCircle2 className="w-3.5 h-3.5 text-[#B896FF] shrink-0" />}
+                  {selected && <CheckCircle2 className="w-4 h-4 text-[#B896FF] shrink-0" />}
                 </button>
               );
             })}
@@ -270,16 +272,16 @@ export function AdvertiserInquiryForm() {
         {/* Budget & Timeline */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-[11px] font-mono uppercase tracking-wider text-zinc-300 mb-1.5">
+            <label className="block text-xs font-mono font-medium text-zinc-400 uppercase tracking-wider mb-2">
               Anticipated Campaign Budget
             </label>
             <select
               value={formData.budget}
               onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-              className="w-full px-4 py-3 bg-[#080417] border border-white/[0.1] rounded-xl text-xs text-white focus:outline-none focus:border-[#7042FF] transition-colors"
+              className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none appearance-none"
             >
               {BUDGET_RANGES.map((b) => (
-                <option key={b} value={b} className="bg-[#080417]">
+                <option key={b} value={b} className="bg-[#0B0813]">
                   {b}
                 </option>
               ))}
@@ -287,16 +289,16 @@ export function AdvertiserInquiryForm() {
           </div>
 
           <div>
-            <label className="block text-[11px] font-mono uppercase tracking-wider text-zinc-300 mb-1.5">
+            <label className="block text-xs font-mono font-medium text-zinc-400 uppercase tracking-wider mb-2">
               Target Launch Timeline
             </label>
             <select
               value={formData.timeline}
               onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
-              className="w-full px-4 py-3 bg-[#080417] border border-white/[0.1] rounded-xl text-xs text-white focus:outline-none focus:border-[#7042FF] transition-colors"
+              className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none appearance-none"
             >
               {TIMELINES.map((t) => (
-                <option key={t} value={t} className="bg-[#080417]">
+                <option key={t} value={t} className="bg-[#0B0813]">
                   {t}
                 </option>
               ))}
@@ -306,7 +308,7 @@ export function AdvertiserInquiryForm() {
 
         {/* Detailed Brief Message */}
         <div>
-          <label className="block text-[11px] font-mono uppercase tracking-wider text-zinc-300 mb-1.5">
+          <label className="block text-xs font-mono font-medium text-zinc-400 uppercase tracking-wider mb-2">
             Brief Overview / Audience Alignment Notes
           </label>
           <textarea
@@ -314,14 +316,14 @@ export function AdvertiserInquiryForm() {
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
             placeholder="Share context on your product, target buyer persona, or specific topics you would like to align with..."
-            className="w-full px-4 py-3 bg-[#080417] border border-white/[0.1] rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#7042FF] leading-relaxed transition-colors"
+            className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none resize-none"
           />
         </div>
 
         <button
           type="submit"
           disabled={submitting}
-          className="w-full py-4 px-8 rounded-full bg-gradient-to-r from-[#7042FF] to-[#7C3AED] hover:brightness-110 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-[#7042FF]/30 transition-all cursor-pointer disabled:opacity-50"
+          className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold rounded-xl py-4 shadow-[0_0_25px_rgba(139,92,246,0.35)] transition-all flex items-center justify-center gap-2 group cursor-pointer text-sm sm:text-base disabled:opacity-50"
         >
           {submitting ? (
             <>

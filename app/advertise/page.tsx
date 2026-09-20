@@ -13,6 +13,7 @@ import {
   Layers,
   ArrowRight,
 } from "lucide-react";
+import { TiltCard3D } from "@/components/ui/TiltCard3D";
 
 export const metadata = {
   title: "Advertise & Partner | RYZE WORKS",
@@ -39,7 +40,7 @@ export default function AdvertisePage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#080417] text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
+    <main className="min-h-screen bg-transparent text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
       <Navbar />
 
       {/* Hero Ambient Backlight */}
@@ -48,14 +49,14 @@ export default function AdvertisePage() {
       <section className="pt-36 pb-24 max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="max-w-3xl mb-16">
-          <div className="text-[11px] font-mono text-[#B896FF] uppercase tracking-widest mb-3 font-medium flex items-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#B896FF]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono text-violet-400 bg-violet-500/10 border border-violet-500/20 mb-6">
+            <Sparkles className="w-3.5 h-3.5" />
             COMMERCIAL PARTNERSHIPS // AUDIENCE NETWORK
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.08] tracking-[-0.01em] text-white mb-6">
+          <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-4">
             Reach decision-makers building the future of tech.
           </h1>
-          <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed max-w-2xl">
+          <p className="text-base sm:text-lg text-zinc-300 max-w-2xl leading-relaxed mb-10">
             Align your enterprise platform with high-conviction founders, engineering leaders, and product innovators via verified research benchmarks and native thought leadership.
           </p>
 
@@ -75,18 +76,19 @@ export default function AdvertisePage() {
           {highlights.map((h, i) => {
             const Icon = h.icon;
             return (
-              <div
+              <TiltCard3D
                 key={i}
-                className="p-7 rounded-3xl bg-[#0d0e17]/80 border border-white/[0.08] flex flex-col justify-between"
+                className="bg-[#0B0813]/75 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-6 sm:p-7 transition-all duration-300 relative group overflow-hidden shadow-xl flex flex-col justify-between"
               >
-                <div>
-                  <div className="w-10 h-10 rounded-xl bg-[#7042FF]/15 border border-[#7042FF]/30 flex items-center justify-center text-[#B896FF] mb-5">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-500/[0.07] via-transparent to-cyan-500/[0.04] opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300" />
+                <div className="relative z-10">
+                  <div className="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-300 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <h3 className="text-base font-bold text-white mb-2">{h.title}</h3>
-                  <p className="text-xs text-zinc-400 leading-relaxed">{h.description}</p>
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2">{h.title}</h3>
+                  <p className="text-xs text-zinc-300 leading-relaxed">{h.description}</p>
                 </div>
-              </div>
+              </TiltCard3D>
             );
           })}
         </div>
