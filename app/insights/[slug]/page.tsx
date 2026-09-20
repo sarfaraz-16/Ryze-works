@@ -103,7 +103,7 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
   const bgGlow = glowMap[article.category] || "from-white/10 to-transparent";
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#030014]/40 text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
+    <main className="min-h-[calc(100vh-80px)] bg-transparent text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
@@ -113,87 +113,129 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
       {/* Hero Ambient Backlight */}
       <div className="absolute top-0 right-0 left-0 h-[600px] bg-[radial-gradient(ellipse_80%_60%_at_70%_-10%,rgba(112,66,255,0.28),rgba(8,4,23,0))] pointer-events-none" />
 
-      <article className="pt-36 pb-24 max-w-3xl mx-auto px-6 relative z-10">
-        <Link
-          href="/insights"
-          className="inline-flex items-center gap-2 text-xs font-mono font-medium text-zinc-400 hover:text-white transition-colors mb-8 group"
-        >
-          <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
-          <span>BACK TO INSIGHTS ARCHIVE</span>
-        </Link>
+      <article className="pt-36 pb-24 max-w-4xl mx-auto px-6 relative z-10">
+        <div className="max-w-3xl mx-auto">
+          <Link
+            href="/insights"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono text-zinc-400 hover:text-white bg-white/[0.04] border border-white/10 hover:border-violet-500/40 transition-all mb-8 group"
+          >
+            <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
+            <span>BACK TO ARTICLES</span>
+          </Link>
+        </div>
 
-        {/* Cinematic Hero Header */}
-        <div className="bg-[#0B0813]/70 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 sm:p-12 mb-12 relative overflow-hidden shadow-2xl">
-          <div className={`absolute inset-0 bg-gradient-to-br ${bgGlow} opacity-50 mix-blend-screen`} />
-          <div className="absolute inset-0 opacity-10 mix-blend-overlay" style={{ backgroundImage: "url('/noise.png')", backgroundSize: "100px" }} />
-          
-          <div className="relative z-10">
-            {/* Metadata */}
-            <div className="flex flex-wrap items-center gap-3 mb-8">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono tracking-wide bg-white/[0.05] border border-white/10 text-zinc-300">
-                {article.category}
-              </span>
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono tracking-wide bg-white/[0.05] border border-white/10 text-zinc-300">
-                <Clock className="w-3.5 h-3.5" />
-                {article.readTime}
-              </span>
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono tracking-wide bg-white/[0.05] border border-white/10 text-zinc-300">
-                <Calendar className="w-3.5 h-3.5" />
-                {article.publishedAt}
-              </span>
+        {/* Article Header & Metadata Bar */}
+        <div className="max-w-3xl mx-auto mb-10">
+          <div className="flex flex-wrap items-center gap-3 mb-4">
+            <span className="font-mono text-xs uppercase tracking-wider text-violet-300 bg-violet-500/10 border border-violet-500/20 px-3 py-1 rounded-md">
+              {article.category}
+            </span>
+            <span className="font-mono text-xs text-zinc-400 bg-white/[0.04] border border-white/10 px-3 py-1 rounded-md flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5" />
+              {article.readTime}
+            </span>
+            <span className="font-mono text-xs text-zinc-400 bg-white/[0.04] border border-white/10 px-3 py-1 rounded-md flex items-center gap-1.5">
+              <Calendar className="w-3.5 h-3.5" />
+              {article.publishedAt}
+            </span>
+          </div>
+
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15] mt-4 mb-6">
+            {article.title}
+          </h1>
+          <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed mb-6">
+            {article.summary}
+          </p>
+
+          {/* Author Telemetry Card */}
+          <div className="inline-flex items-center gap-3 p-2 pr-4 rounded-full bg-white/[0.03] border border-white/10 mb-10">
+            <div className="w-10 h-10 rounded-full bg-violet-500/20 border border-violet-500/30 flex items-center justify-center text-violet-300 font-bold text-sm shadow-[0_0_10px_rgba(139,92,246,0.2)]">
+              RW
             </div>
-
-            {/* Title & Summary */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-6">
-              {article.title}
-            </h1>
-            <p className="text-lg text-zinc-300 leading-relaxed m-0">
-              {article.summary}
-            </p>
+            <div className="text-left flex flex-col">
+              <span className="text-sm font-semibold text-zinc-200 leading-none mb-1.5 mt-1">Ryze Works Editorial</span>
+              <span className="text-xs font-mono text-zinc-500 leading-none">Research &amp; Strategy</span>
+            </div>
           </div>
         </div>
 
-        {/* Article Body Content */}
+        {/* Feature Graphic / Cover Art */}
+        <div className="w-full max-w-4xl mx-auto rounded-3xl overflow-hidden bg-black/40 border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] mb-12 p-8 sm:p-12 relative flex items-center justify-center min-h-[300px]">
+          <div className={`absolute inset-0 bg-gradient-to-br ${bgGlow} opacity-50 mix-blend-screen`} />
+          <div className="absolute inset-0 opacity-10 mix-blend-overlay" style={{ backgroundImage: "url('/noise.png')", backgroundSize: "100px" }} />
+          <div className="relative z-10 text-center">
+            <Sparkles className="w-16 h-16 text-white/30 mx-auto" />
+          </div>
+        </div>
+
+        {/* Prose Reading Container */}
         {articleContent ? (
-          <div className="space-y-6 text-lg text-zinc-300 leading-loose font-sans whitespace-pre-line">
+          <div className="max-w-3xl mx-auto text-zinc-200 font-sans leading-relaxed text-base sm:text-lg whitespace-pre-line">
             {articleContent}
           </div>
         ) : (
-          <div className="text-lg text-zinc-300 leading-loose font-sans">
-            <p className="mb-6">
+          <div className="max-w-3xl mx-auto text-zinc-200 font-sans leading-relaxed text-base sm:text-lg">
+            <p className="mb-6 text-zinc-300 font-normal leading-[1.8]">
               In the current landscape of AI acceleration, traditional agency frameworks that rely on multi-month discovery phases and siloed design documentation are rapidly becoming obsolete. Today’s market demands continuous integration between creative direction and computational execution.
             </p>
 
-            <h2 className="text-2xl sm:text-3xl text-white font-bold tracking-tight mt-12 mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-12 mb-4 flex items-center gap-2">
               The Shift from Static Assets to Generative Systems
             </h2>
-            <p className="mb-6">
+            <p className="mb-6 text-zinc-300 font-normal leading-[1.8]">
               Brands are no longer static collections of logos, fonts, and fixed color swatches. Instead, an AI-native brand is a living system — capable of adapting across personal interfaces, contextual notifications, and real-time interaction flows while maintaining strict identity coherence.
             </p>
 
-            <div className="border-l-4 border-violet-500 bg-white/[0.02] p-6 rounded-r-2xl my-8 italic text-zinc-200">
-              <h3 className="font-mono text-xs sm:text-sm font-semibold text-[#B896FF] uppercase tracking-wider mb-2 flex items-center gap-2 not-italic">
-                <Sparkles className="w-4 h-4 text-[#B896FF]" />
-                Core Takeaway for Founders
-              </h3>
-              <p className="text-base sm:text-lg text-zinc-300 font-normal leading-relaxed m-0">
-                Design for the API layer first. When your brand system is encoded into design tokens and component libraries, deploying AI agents and personalized user journeys becomes seamless rather than an architectural redesign.
-              </p>
+            <div className="my-8 border-l-2 border-violet-500 bg-gradient-to-r from-violet-950/20 to-transparent p-6 rounded-r-2xl text-lg sm:text-xl font-medium text-violet-200 italic">
+              "Design for the API layer first. When your brand system is encoded into design tokens and component libraries, deploying AI agents and personalized user journeys becomes seamless rather than an architectural redesign."
             </div>
 
-            <h2 className="text-2xl sm:text-3xl text-white font-bold tracking-tight mt-12 mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-12 mb-4 flex items-center gap-2">
               Measuring What Actually Converts
             </h2>
-            <p className="mb-6">
+            <p className="mb-6 text-zinc-300 font-normal leading-[1.8]">
               Performance is no longer just about top-of-funnel click-through rates. With intelligent systems, we can instrument granular micro-interactions, predict user drop-offs, and dynamically adjust product flows to optimize for lifetime retention and enterprise trust.
             </p>
+
+            <ul className="my-6 space-y-2.5 pl-2">
+              <li className="flex items-start gap-3 text-zinc-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0 mt-2.5 shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
+                <span>Define interaction metrics that signal high intent early in the session.</span>
+              </li>
+              <li className="flex items-start gap-3 text-zinc-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0 mt-2.5 shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
+                <span>Implement component-level tracing to find UX bottlenecks.</span>
+              </li>
+              <li className="flex items-start gap-3 text-zinc-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0 mt-2.5 shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
+                <span>Connect quantitative drop-offs to qualitative heatmaps.</span>
+              </li>
+            </ul>
+
+            <div className="my-6 rounded-2xl bg-[#0B0813]/90 border border-white/10 p-5 font-mono text-xs sm:text-sm text-cyan-300 overflow-x-auto shadow-inner">
+              <pre>{`// Example: Tracking micro-interactions in a Next.js component
+export function TrackedButton({ children, actionId }) {
+  const handleClick = async () => {
+    await telemetry.track('button_click', { action: actionId });
+  };
+  return <button onClick={handleClick}>{children}</button>;
+}`}</pre>
+            </div>
           </div>
         )}
 
-        {/* Footer info */}
-        <div className="border-t border-white/10 pt-8 mt-16 flex justify-between text-sm text-zinc-500">
-          <div>Published by Ryze Works Editorial Practice</div>
-          <div>Chennai, India</div>
+        {/* Footer info & Share block */}
+        <div className="max-w-3xl mx-auto mt-16 pt-10 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            <span className="text-sm font-semibold text-white">Share this insight:</span>
+            <div className="flex gap-2">
+              <button className="px-3 py-1.5 rounded-md text-xs font-mono text-zinc-400 bg-white/[0.04] border border-white/10 hover:border-violet-500/40 hover:text-white transition-all cursor-pointer">Copy Link</button>
+              <button className="px-3 py-1.5 rounded-md text-xs font-mono text-zinc-400 bg-white/[0.04] border border-white/10 hover:border-violet-500/40 hover:text-white transition-all cursor-pointer">Twitter</button>
+            </div>
+          </div>
+          <div className="text-sm text-zinc-500">
+            Published in Chennai, India
+          </div>
         </div>
       </article>
 
