@@ -95,7 +95,7 @@ export default async function CaseStudiesPage() {
               key={cs.id}
               className="bg-[#0B0813]/75 backdrop-blur-2xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-8 sm:p-10 transition-all duration-300 relative group overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] mb-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
             >
-              <div className="absolute -inset-px rounded-3xl bg-gradient-to-r from-violet-500/10 via-transparent to-cyan-500/10 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300" />
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-violet-500/[0.06] via-transparent to-cyan-500/[0.06] opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300 -z-0" />
               <div className="lg:col-span-7 relative z-10">
                 <div className="font-mono text-xs uppercase tracking-widest text-violet-400 bg-violet-500/10 border border-violet-500/20 px-3 py-1 rounded-md inline-flex items-center gap-2 mb-3">
                   <span>{cs.client}</span>
@@ -127,18 +127,18 @@ export default async function CaseStudiesPage() {
 
               <div className="lg:col-span-5 space-y-4 relative z-10">
                 <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-5 hover:border-white/20 transition-all">
-                  <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 font-semibold mb-2 flex items-center gap-2">
+                  <span className="text-[11px] font-mono uppercase tracking-widest text-violet-300 font-semibold mb-2 flex items-center gap-2">
                     The Challenge
                   </span>
-                  <p className="text-sm text-zinc-300 leading-relaxed">
+                  <p className="text-sm text-zinc-200 leading-relaxed font-sans">
                     {cs.challenge}
                   </p>
                 </div>
                 <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-5 hover:border-white/20 transition-all">
-                  <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 font-semibold mb-2 flex items-center gap-2">
+                  <span className="text-[11px] font-mono uppercase tracking-widest text-violet-300 font-semibold mb-2 flex items-center gap-2">
                     The Technical Execution
                   </span>
-                  <p className="text-sm text-zinc-300 leading-relaxed">
+                  <p className="text-sm text-zinc-200 leading-relaxed font-sans">
                     {cs.execution}
                   </p>
                 </div>
