@@ -78,13 +78,14 @@ function ArticleCard({ article }: { article: Article }) {
       onPointerMove={tilt.onPointerMove}
       onPointerLeave={tilt.onPointerLeave}
       style={tilt.cardStyle}
-      className="relative group rounded-3xl bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 overflow-hidden transition-all duration-300 flex flex-col shadow-2xl shadow-black/50 select-none h-full"
+      className="bg-[#0B0813]/75 backdrop-blur-2xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-6 sm:p-7 transition-all duration-300 relative group overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col justify-between h-full select-none"
     >
-      <div className="absolute inset-0 z-0 rounded-3xl" style={tilt.glareStyle} />
+      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-500/[0.07] via-transparent to-cyan-500/[0.04] opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300" />
+      <div className="absolute inset-0 z-0 rounded-3xl pointer-events-none" style={tilt.glareStyle} />
       
       <Link href={`/insights/${article.slug}`} className="flex flex-col h-full relative z-10 outline-none">
         {/* Upper Media Theater */}
-        <div className="h-[180px] sm:h-[200px] w-full relative overflow-hidden border-b border-white/10 bg-[#080417]">
+        <div className="w-full h-44 rounded-2xl overflow-hidden bg-black/40 border border-white/10 mb-6 relative flex items-center justify-center group-hover:border-violet-500/30 transition-all">
           {/* Base glow */}
           <div className={`absolute inset-0 bg-gradient-to-b ${bgGradient} opacity-50 mix-blend-screen group-hover:opacity-100 transition-opacity duration-500`} />
           
@@ -104,10 +105,10 @@ function ArticleCard({ article }: { article: Article }) {
           
           {/* Category chip and Read-Time badge pinned neatly to top corners over frosted glass */}
           <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
-            <span className="px-3 py-1 rounded-lg text-[10px] font-mono tracking-wider font-semibold uppercase bg-black/60 backdrop-blur-md border border-white/20 text-zinc-100 shadow-md">
+            <span className="font-mono text-[11px] uppercase tracking-wider text-violet-300 bg-violet-500/10 border border-violet-500/20 px-2.5 py-1 rounded-md">
               {article.category}
             </span>
-            <span className="px-2.5 py-1 rounded-lg text-[10px] font-mono text-zinc-300 bg-black/50 backdrop-blur-md border border-white/10 flex items-center gap-1.5">
+            <span className="font-mono text-[11px] text-zinc-400 bg-white/[0.04] border border-white/10 px-2.5 py-1 rounded-md flex items-center gap-1.5">
               <Clock className="w-3 h-3" />
               {article.readTime}
             </span>
@@ -115,23 +116,20 @@ function ArticleCard({ article }: { article: Article }) {
         </div>
 
         {/* Content Area */}
-        <div className="p-8 sm:p-10 flex flex-col flex-grow justify-between">
+        <div className="flex flex-col flex-grow justify-between">
           <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-violet-200 transition-colors mb-3 leading-snug">
+            <h2 className="text-xl sm:text-2xl font-bold text-white group-hover:text-violet-200 transition-colors tracking-tight mb-3">
               {article.title}
             </h2>
-            <p className="text-sm text-zinc-300 line-clamp-2 leading-relaxed mb-6">
+            <p className="text-sm text-zinc-300 leading-relaxed font-sans mb-6 line-clamp-3">
               {article.summary}
             </p>
           </div>
 
-          <div className="mt-auto pt-6 border-t border-white/[0.06] relative">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold text-white group-hover:text-violet-200 transition-colors">
-              <span>Read Full Article</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+          <div className="mt-auto">
+            <div className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-white bg-violet-600/20 hover:bg-violet-600 border border-violet-500/30 hover:border-violet-400 shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all group-hover:shadow-[0_0_20px_rgba(139,92,246,0.4)]">
+              <span>Read Full Article →</span>
             </div>
-            {/* Expanding violet glow underline on hover */}
-            <div className="absolute bottom-0 left-0 h-[2px] bg-violet-500/50 w-0 group-hover:w-full transition-all duration-500 ease-out shadow-[0_0_8px_rgba(139,92,246,0.5)]" />
           </div>
         </div>
       </Link>
@@ -150,26 +148,21 @@ export function InsightsClient({ initialArticles }: InsightsClientProps) {
 
   return (
     <>
-      {/* Unified Frosted Obsidian Dock */}
-      <div className="bg-[#0B0813]/80 backdrop-blur-2xl border border-white/10 rounded-2xl p-2 shadow-[0_10px_30px_rgba(0,0,0,0.5)] inline-flex flex-wrap items-center gap-1.5 sticky top-24 z-30 mb-12">
+      {/* Interactive Filter Dock */}
+      <div className="flex flex-wrap items-center gap-2 mb-10 sticky top-24 z-30">
         {categories.map((cat) => {
           const isActive = selectedCategory === cat;
           return (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`relative px-4 py-2 text-xs uppercase tracking-wider rounded-xl transition-colors cursor-pointer select-none font-medium ${
-                isActive ? "text-white font-semibold" : "text-zinc-400 hover:text-zinc-200"
-              }`}
+              className={
+                isActive
+                  ? "px-4 py-2 rounded-xl text-xs font-mono text-white bg-violet-600/25 border border-violet-500 shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-all"
+                  : "px-4 py-2 rounded-xl text-xs font-mono text-zinc-400 bg-white/[0.03] border border-white/10 hover:border-white/20 hover:text-zinc-200 transition-all cursor-pointer"
+              }
             >
-              {isActive && (
-                <motion.div
-                  layoutId="activeInsightPill"
-                  className="absolute inset-0 bg-violet-600/30 border border-violet-500/50 rounded-xl shadow-[0_0_15px_rgba(139,92,246,0.3)] -z-0"
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                />
-              )}
-              <span className="relative z-10">{cat}</span>
+              {cat}
             </button>
           );
         })}

@@ -54,7 +54,7 @@ export default async function InsightsPage() {
   }
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#030014]/40 text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
+    <main className="min-h-[calc(100vh-80px)] bg-transparent text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
       <Navbar />
 
       {/* Hero Ambient Backlight */}
@@ -63,8 +63,8 @@ export default async function InsightsPage() {
       <section className="pt-36 pb-24 max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="text-[11px] font-mono text-[#B896FF] uppercase tracking-widest mb-3 font-medium flex items-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#B896FF]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono text-violet-400 bg-violet-500/10 border border-violet-500/20 mb-6">
+            <Sparkles className="w-3.5 h-3.5" />
             EDITORIAL &amp; PERSPECTIVES
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.08] tracking-[-0.01em] [word-spacing:0.1em] text-white mb-6">
