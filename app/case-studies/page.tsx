@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
+import { TiltCard3D } from "@/components/ui/TiltCard3D";
 import { CASE_STUDIES } from "@/data/siteData";
 import { createClient } from "@/lib/supabase/server";
 import { ArrowRight, ShieldCheck, Sparkles, Award } from "lucide-react";
@@ -66,7 +67,7 @@ export default async function CaseStudiesPage() {
     console.warn("Supabase case studies fallback:", err);
   }
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#080417] text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
+    <main className="min-h-[calc(100vh-80px)] bg-transparent text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
       <Navbar />
 
       {/* Hero Ambient Backlight */}
@@ -90,63 +91,59 @@ export default async function CaseStudiesPage() {
         {/* Case Studies Grid */}
         <div className="space-y-10 mb-20">
           {caseStudies.map((cs) => (
-            <div
+            <TiltCard3D
               key={cs.id}
-              className="rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/30 shadow-2xl shadow-black/50 p-8 sm:p-12 transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+              className="bg-[#0B0813]/75 backdrop-blur-2xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-8 sm:p-10 transition-all duration-300 relative group overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] mb-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
             >
-              <div className="lg:col-span-7">
-                <div className="flex items-center gap-3 font-mono text-[11px] font-medium tracking-wider text-[#B896FF] uppercase mb-4">
-                  <span className="bg-[#1E085A]/60 border border-[#7042FF]/30 px-3 py-1 rounded-full">{cs.client}</span>
-                  <span>•</span>
+              <div className="absolute -inset-px rounded-3xl bg-gradient-to-r from-violet-500/10 via-transparent to-cyan-500/10 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300" />
+              <div className="lg:col-span-7 relative z-10">
+                <div className="font-mono text-xs uppercase tracking-widest text-violet-400 bg-violet-500/10 border border-violet-500/20 px-3 py-1 rounded-md inline-flex items-center gap-2 mb-3">
+                  <span>{cs.client}</span>
+                  <span className="text-violet-500/50">•</span>
                   <span>{cs.tag}</span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-4 leading-snug tracking-[-0.01em] [word-spacing:0.1em]">
+                <h2 className="text-2xl sm:text-3xl font-bold text-white group-hover:text-violet-200 transition-colors tracking-tight mb-4">
                   {cs.title}
                 </h2>
                 <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed mb-6">
                   {cs.strategy}
                 </p>
 
-                <div className="p-4 rounded-2xl bg-gradient-to-r from-[#1E085A]/60 to-[#0d0e17] border border-[#7042FF]/40 mb-6 flex items-start gap-3.5">
-                  <Award className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                <div className="bg-violet-600/10 border border-violet-500/30 rounded-xl p-4 my-4 flex items-center gap-3 text-xs sm:text-sm font-mono text-violet-200 shadow-[0_0_15px_rgba(139,92,246,0.15)] mb-6">
+                  <Award className="w-5 h-5 text-amber-400 shrink-0" />
                   <div>
-                    <span className="font-mono text-[10px] font-medium tracking-wider uppercase text-[#B896FF] block mb-0.5">
-                      Key Verified Impact
-                    </span>
-                    <span className="text-sm font-semibold text-white">
-                      {cs.results}
-                    </span>
+                    <span className="block text-[10px] text-violet-400 mb-0.5 tracking-widest uppercase font-semibold">Key Verified Impact</span>
+                    <span>{cs.results}</span>
                   </div>
                 </div>
 
                 <Link
                   href={`/case-studies/${cs.slug}`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-[#7042FF] to-[#4318D1] hover:brightness-110 shadow-lg shadow-[#7042FF]/30 border border-[#B896FF]/30 transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 shadow-[0_0_20px_rgba(139,92,246,0.35)] transition-all relative z-10"
                 >
-                  <span>Read Full Deep Dive</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span>Read Full Deep Dive →</span>
                 </Link>
               </div>
 
-              <div className="lg:col-span-5 bg-[#080417]/80 rounded-2xl p-6 sm:p-8 border border-white/[0.06] space-y-5">
-                <div>
-                  <span className="font-mono text-[10px] font-medium tracking-wider uppercase text-zinc-400 block mb-1.5">
+              <div className="lg:col-span-5 space-y-4 relative z-10">
+                <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-5 hover:border-white/20 transition-all">
+                  <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 font-semibold mb-2 flex items-center gap-2">
                     The Challenge
                   </span>
-                  <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
+                  <p className="text-sm text-zinc-300 leading-relaxed">
                     {cs.challenge}
                   </p>
                 </div>
-                <div className="pt-4 border-t border-white/[0.08]">
-                  <span className="font-mono text-[10px] font-medium tracking-wider uppercase text-zinc-400 block mb-1.5">
+                <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-5 hover:border-white/20 transition-all">
+                  <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 font-semibold mb-2 flex items-center gap-2">
                     The Technical Execution
                   </span>
-                  <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
+                  <p className="text-sm text-zinc-300 leading-relaxed">
                     {cs.execution}
                   </p>
                 </div>
               </div>
-            </div>
+            </TiltCard3D>
           ))}
         </div>
       </section>
