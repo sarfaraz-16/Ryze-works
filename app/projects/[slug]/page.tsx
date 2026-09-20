@@ -133,7 +133,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   );
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#030014]/40 text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
+    <main className="min-h-[calc(100vh-80px)] bg-transparent text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
       <Navbar />
 
       {/* Hero Ambient Backlight */}
@@ -143,74 +143,80 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         {/* Back Link */}
         <Link
           href="/projects"
-          className="inline-flex items-center gap-2 text-xs font-mono font-medium text-zinc-400 hover:text-white transition-colors mb-8 group"
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono text-zinc-400 hover:text-white bg-white/[0.04] border border-white/10 hover:border-violet-500/40 transition-all mb-8 group"
         >
           <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
-          <span>BACK TO WORK ARCHIVE</span>
+          <span>BACK TO ALL WORK</span>
         </Link>
 
         {/* Header */}
         <div className="mb-12">
-          <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-[#B896FF] mb-4">
-            <span className="bg-[#1E085A]/50 border border-[#7042FF]/30 px-3 py-1 rounded-full">{project.industry}</span>
-            <span>•</span>
-            <span className="flex items-center gap-1.5 text-emerald-400 bg-emerald-950/40 border border-emerald-500/30 px-3 py-1 rounded-full">
+          <div className="font-mono text-xs uppercase tracking-wider text-violet-300 bg-violet-500/10 border border-violet-500/20 px-3 py-1 rounded-md inline-flex items-center gap-2 mb-4">
+            <span>{project.industry}</span>
+            <span className="opacity-50">•</span>
+            <span className="flex items-center gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5" />
-              Verified Consent Record
+              Verified Consent
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.08] tracking-[-0.01em] [word-spacing:0.1em] text-white mb-6">
+          <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
             {project.title}
           </h1>
 
-          <p className="text-sm sm:text-base text-zinc-300 font-normal max-w-3xl leading-relaxed mb-6">
+          <p className="text-base sm:text-xl text-zinc-300 max-w-3xl leading-relaxed font-sans mb-10">
             {project.description}
           </p>
 
-          <div className="flex flex-wrap gap-2">
-            {project.tags.map((tag: string) => (
-              <span
-                key={tag}
-                className="font-mono text-[10px] text-zinc-300 bg-white/[0.05] border border-white/10 px-3 py-1 rounded-full"
-              >
-                {tag}
-              </span>
-            ))}
+          <div className="bg-[#0B0813]/60 backdrop-blur-md border border-white/10 rounded-2xl p-6 mb-12 flex flex-wrap items-center gap-6 text-left">
+            <div>
+              <div className="text-[11px] font-mono uppercase text-zinc-500 mb-1.5">Core Stack</div>
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag: string) => (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-mono bg-white/[0.05] border border-white/10 text-cyan-300"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Media Hero Showcase Theater */}
-        <ProjectDetailHero
-          slug={project.slug}
-          client={project.client}
-          title={project.title}
-          category={project.category}
-          industry={project.industry}
-        />
+        <div className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.7)] bg-[#0B0813]/80 mb-16 relative group">
+          <div className="absolute inset-0 bg-gradient-to-tr from-violet-500/[0.05] via-transparent to-cyan-500/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+          <ProjectDetailHero
+            slug={project.slug}
+            client={project.client}
+            title={project.title}
+            category={project.category}
+            industry={project.industry}
+          />
+        </div>
 
         {/* Project Scope Matrix */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="p-5 rounded-2xl bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 transition-all shadow-xl">
-            <span className="font-mono text-[10px] uppercase tracking-wider text-[#B896FF] block mb-1">
-              Client Partner
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+          <div className="bg-[#0B0813]/75 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 rounded-2xl p-5 transition-all shadow-xl">
+            <span className="text-3xl font-extrabold text-white tracking-tight block mb-1">
+              {project.client}
             </span>
-            <span className="text-base font-semibold text-white">{project.client}</span>
+            <span className="text-[11px] font-mono uppercase text-zinc-400 mt-1 block">Client Partner</span>
           </div>
-          <div className="p-5 rounded-2xl bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 transition-all shadow-xl">
-            <span className="font-mono text-[10px] uppercase tracking-wider text-[#B896FF] block mb-1">
-              Primary Discipline
+          <div className="bg-[#0B0813]/75 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 rounded-2xl p-5 transition-all shadow-xl">
+            <span className="text-3xl font-extrabold text-white tracking-tight block mb-1">
+              {project.category}
             </span>
-            <span className="text-base font-semibold text-white">{project.category}</span>
+            <span className="text-[11px] font-mono uppercase text-zinc-400 mt-1 block">Primary Discipline</span>
           </div>
-          <div className="p-5 rounded-2xl bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 transition-all shadow-xl">
-            <span className="font-mono text-[10px] uppercase tracking-wider text-[#B896FF] block mb-1">
-              Status &amp; Verification
+          <div className="bg-[#0B0813]/75 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 rounded-2xl p-5 transition-all shadow-xl">
+            <span className="text-3xl font-extrabold text-emerald-400 tracking-tight flex items-center gap-2 mb-1">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]" />
+              Live
             </span>
-            <span className="text-base font-semibold text-emerald-400 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]" />
-              Production Live
-            </span>
+            <span className="text-[11px] font-mono uppercase text-zinc-400 mt-1 block">Status &amp; Verification</span>
           </div>
         </div>
 
@@ -241,27 +247,27 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         )}
 
         {/* Narrative: Challenge & Approach */}
-        <div className="space-y-8 rounded-3xl bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 p-8 sm:p-12 mb-14 shadow-2xl shadow-black/50">
+        <div className="max-w-4xl mx-auto space-y-12 my-12">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-semibold tracking-[-0.01em] [word-spacing:0.1em] text-white mb-3 leading-snug">The Challenge</h2>
-            <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-4 flex items-center gap-3">The Problem</h2>
+            <p className="text-base sm:text-lg text-zinc-300 leading-relaxed font-sans">
               Scaling a category-defining experience in {project.industry} required a brand architecture and digital product stack that balances radical visual distinctiveness with ultra-low latency and intuitive clarity.
             </p>
           </div>
 
-          <div className="pt-6 border-t border-white/10">
-            <h2 className="text-2xl sm:text-3xl font-semibold tracking-[-0.01em] [word-spacing:0.1em] text-white mb-3 leading-snug">The Ryze Works Approach</h2>
-            <p className="text-sm sm:text-base text-zinc-400 font-normal leading-relaxed mb-6">
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-4 flex items-center gap-3">The Architectural Solution</h2>
+            <p className="text-base sm:text-lg text-zinc-300 leading-relaxed font-sans mb-6">
               We mobilized a dedicated cross-functional pod across strategy, procedural design, and modern fullstack engineering (Next.js, Supabase, and real-time systems) to execute sprint-by-sprint deliverables.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              <div className="flex items-center gap-2.5 p-3.5 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/10 text-xs text-zinc-300 hover:border-violet-500/30 transition-all">
-                <CheckCircle2 className="w-4 h-4 text-[#B896FF] shrink-0" />
-                <span>Zero-placeholder verified architecture</span>
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <span className="w-1.5 h-1.5 shrink-0 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
+                <span className="text-zinc-200">Zero-placeholder verified architecture</span>
               </div>
-              <div className="flex items-center gap-2.5 p-3.5 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/10 text-xs text-zinc-300 hover:border-violet-500/30 transition-all">
-                <CheckCircle2 className="w-4 h-4 text-[#B896FF] shrink-0" />
-                <span>High-performance responsive design system</span>
+              <div className="flex items-center gap-3">
+                <span className="w-1.5 h-1.5 shrink-0 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
+                <span className="text-zinc-200">High-performance responsive design system</span>
               </div>
             </div>
           </div>
@@ -284,22 +290,47 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </div>
         )}
 
+        {/* Next Project Navigator */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-12 border-t border-white/10 my-16">
+          <Link
+            href="/projects"
+            className="w-full sm:w-1/2 p-6 rounded-2xl bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 transition-all flex flex-col text-left group"
+          >
+            <span className="text-[10px] font-mono uppercase text-zinc-500 mb-2">Previous Work</span>
+            <span className="text-sm font-semibold text-white group-hover:text-violet-200 transition-colors flex items-center gap-2">
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+              Return to Archive
+            </span>
+          </Link>
+          <Link
+            href="/projects"
+            className="w-full sm:w-1/2 p-6 rounded-2xl bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 transition-all flex flex-col text-right group"
+          >
+            <span className="text-[10px] font-mono uppercase text-zinc-500 mb-2">Explore More</span>
+            <span className="text-sm font-semibold text-white group-hover:text-violet-200 transition-colors flex items-center justify-end gap-2">
+              View All Projects
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </span>
+          </Link>
+        </div>
+
         {/* Project CTA */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-8 sm:p-10 rounded-3xl bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 shadow-2xl shadow-black/50 transition-all">
-          <div>
-            <h3 className="text-xl sm:text-2xl font-semibold tracking-[-0.01em] [word-spacing:0.1em] text-white mb-2 leading-snug">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-8 sm:p-10 rounded-3xl bg-[#0B0813]/80 backdrop-blur-2xl border border-white/10 hover:border-violet-500/30 shadow-[0_25px_60px_rgba(0,0,0,0.7)] transition-all relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-violet-600/15 blur-[100px] rounded-full -z-10 pointer-events-none" />
+          <div className="relative z-10">
+            <h3 className="text-2xl font-bold text-white mb-2">
               Have a similar challenge in mind?
             </h3>
-            <p className="text-xs sm:text-sm text-zinc-300 font-normal">
+            <p className="text-sm text-zinc-300">
               Let&apos;s evaluate your goals and map an AI-accelerated delivery plan.
             </p>
           </div>
           <Link
             href="/start-a-project"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-[#7042FF] to-[#4318D1] hover:brightness-110 shadow-lg shadow-[#7042FF]/30 border border-[#B896FF]/30 transition-all shrink-0"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 shadow-[0_0_25px_rgba(139,92,246,0.35)] transition-all group cursor-pointer relative z-10 shrink-0"
           >
             <span>Start a Project Brief</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>
       </section>
