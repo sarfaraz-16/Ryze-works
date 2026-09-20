@@ -166,7 +166,7 @@ export default function AiNeuralCore3D({
       transparent: true,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
-      opacity: 0.75,
+      opacity: 1.0,
     });
     const linesMesh = new THREE.LineSegments(linesGeometry, linesMaterial);
     clusterGroup.add(linesMesh);
@@ -306,7 +306,7 @@ export default function AiNeuralCore3D({
 
             // Boost line brightness on focused & shockwave
             const lineBright =
-              proximityAlpha * (focused ? 1.3 : 0.85) + shockwaveMultiplier * 0.5;
+              proximityAlpha * (focused ? 2.5 : 1.8) + shockwaveMultiplier * 1.0;
 
             // Vertex 1 (from node i)
             const v1 = lineVertexIndex * 3;
