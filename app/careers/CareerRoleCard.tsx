@@ -97,22 +97,40 @@ export function CareerRoleCard({ role }: { role: CareerRole }) {
   };
 
   return (
-    <div className="rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/30 shadow-2xl shadow-black/50 transition-all duration-300 overflow-hidden">
+    <div className="bg-[#0B0813]/75 backdrop-blur-2xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-7 sm:p-9 transition-all duration-300 relative group overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] mb-6">
       {/* Main Row */}
       <div
         onClick={() => setIsExpanded(!isExpanded)}
-        className="p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 cursor-pointer select-none"
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 cursor-pointer select-none"
       >
-        <div className="space-y-2 flex-1">
+        <div className="space-y-3 flex-1">
           <div className="flex items-center gap-3 flex-wrap">
-            <h3 className="text-xl sm:text-2xl font-semibold text-white tracking-[-0.01em] [word-spacing:0.08em] hover:text-[#B896FF] transition-colors">
+            <h3 className="text-2xl font-bold text-white group-hover:text-violet-200 transition-colors tracking-tight">
               {role.title}
             </h3>
             {renderBadge(role.badge)}
+            <div className="flex items-center gap-1.5 ml-2">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider">Hiring Now</span>
+            </div>
           </div>
-          <p className="font-mono text-xs sm:text-sm text-zinc-400 font-normal">
-            {role.department || "General"} · {role.employment_type || "Full-time"} · {role.location || "Remote"}
-          </p>
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="px-3 py-1 rounded-lg text-xs font-mono bg-white/[0.04] border border-white/10 text-cyan-300 flex items-center gap-1.5">
+              <Briefcase className="w-3.5 h-3.5" />
+              {role.department || "General"}
+            </span>
+            <span className="px-3 py-1 rounded-lg text-xs font-mono bg-white/[0.04] border border-white/10 text-cyan-300 flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5" />
+              {role.employment_type || "Full-time"}
+            </span>
+            <span className="px-3 py-1 rounded-lg text-xs font-mono bg-white/[0.04] border border-white/10 text-cyan-300 flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5" />
+              {role.location || "Remote"}
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
@@ -127,26 +145,11 @@ export function CareerRoleCard({ role }: { role: CareerRole }) {
 
       {/* Expand Affordance Details */}
       {isExpanded && (
-        <div className="px-6 pb-8 sm:px-8 pt-2 border-t border-white/[0.06] bg-[#080417]/50 animate-in fade-in duration-200">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4">
+        <div className="pt-6 mt-6 border-t border-white/10 animate-in fade-in duration-200">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Role Metadata & Description */}
             <div className="lg:col-span-6 space-y-6">
-              <div className="flex flex-wrap gap-3 font-mono text-xs text-zinc-300">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.03] border border-white/10">
-                  <Briefcase className="w-3.5 h-3.5 text-[#B896FF]" />
-                  {role.department || "General"}
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.03] border border-white/10">
-                  <Clock className="w-3.5 h-3.5 text-[#B896FF]" />
-                  {role.employment_type || "Full-time"}
-                </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.03] border border-white/10">
-                  <MapPin className="w-3.5 h-3.5 text-cyan-400" />
-                  {role.location || "Remote"}
-                </span>
-              </div>
-
-              <div className="space-y-3 text-sm text-zinc-300 font-normal leading-relaxed">
+              <div className="text-sm text-zinc-300 leading-relaxed font-sans mt-3 mb-6 space-y-4">
                 <p>
                   Join our cross-functional studio partnering with category-defining brands to shape AI-native digital systems, brand identities, and high-velocity engineering solutions.
                 </p>
@@ -163,7 +166,7 @@ export function CareerRoleCard({ role }: { role: CareerRole }) {
             </div>
 
             {/* Application Form */}
-            <div className="lg:col-span-6 rounded-2xl bg-[#0d0e17] border border-white/10 p-6">
+            <div className="lg:col-span-6 bg-white/[0.02] border border-white/10 rounded-2xl p-5">
               <h4 className="text-base font-semibold text-white mb-4">
                 Apply for {role.title}
               </h4>
@@ -195,7 +198,7 @@ export function CareerRoleCard({ role }: { role: CareerRole }) {
                       placeholder="Jane Doe"
                       value={formData.applicant_name}
                       onChange={(e) => setFormData({ ...formData, applicant_name: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/15 text-white text-xs focus:border-[#B896FF] focus:outline-none transition-colors"
+                      className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none mb-3"
                     />
                   </div>
 
@@ -209,7 +212,7 @@ export function CareerRoleCard({ role }: { role: CareerRole }) {
                       placeholder="jane@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white/[0.04] border border-white/15 text-white text-xs focus:border-[#B896FF] focus:outline-none transition-colors"
+                      className="w-full bg-white/[0.04] border border-white/10 hover:border-white/20 focus:border-violet-500/70 focus:bg-white/[0.06] focus:ring-1 focus:ring-violet-500/70 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-zinc-100 placeholder:text-zinc-600 transition-all outline-none mb-3"
                     />
                   </div>
 
@@ -235,7 +238,7 @@ export function CareerRoleCard({ role }: { role: CareerRole }) {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full justify-center px-5 py-3 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-[#7042FF] to-[#4318D1] hover:brightness-110 shadow-lg shadow-[#7042FF]/30 border border-[#B896FF]/30 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50 mt-2"
+                    className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold rounded-xl py-3 shadow-[0_0_20px_rgba(139,92,246,0.35)] transition-all flex items-center justify-center gap-2 group text-xs sm:text-sm disabled:opacity-50 mt-2 cursor-pointer"
                   >
                     {isSubmitting ? (
                       "Submitting Application..."

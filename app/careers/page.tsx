@@ -5,6 +5,7 @@ import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { supabaseAdmin, isSupabaseConfigured } from "@/lib/supabase";
 import { CareerRoleCard, CareerRole } from "./CareerRoleCard";
 import { Sparkles, Users, Zap, Shield } from "lucide-react";
+import { TiltCard3D } from "@/components/ui/TiltCard3D";
 
 export const metadata = {
   title: "Careers & Open Positions | RYZE WORKS",
@@ -94,7 +95,7 @@ export default async function CareersPage() {
   }
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#080417] text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
+    <main className="min-h-[calc(100vh-80px)] bg-transparent text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
       <Navbar />
 
       {/* Hero Ambient Backlight */}
@@ -103,14 +104,14 @@ export default async function CareersPage() {
       <section className="pt-36 pb-20 max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="text-[11px] font-mono text-[#B896FF] uppercase tracking-widest mb-3 font-medium flex items-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#B896FF]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono text-violet-400 bg-violet-500/10 border border-violet-500/20 mb-6">
+            <Sparkles className="w-3.5 h-3.5" />
             CAREERS &amp; OPEN OPPORTUNITIES
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.08] tracking-[-0.01em] [word-spacing:0.1em] text-white mb-6">
+          <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-6">
             Build the future of AI-driven creative engineering.
           </h1>
-          <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed max-w-2xl">
+          <p className="text-base sm:text-lg text-zinc-300 max-w-2xl leading-relaxed">
             We are looking for exceptional thinkers, builders, and designers to help shape category-defining brands and intelligence systems.
           </p>
         </div>
@@ -130,45 +131,45 @@ export default async function CareersPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="p-6 sm:p-8 rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/30 shadow-2xl shadow-black/50 space-y-3 transition-all duration-300">
-              <div className="w-12 h-12 rounded-2xl bg-[#1E085A]/60 border border-[#7042FF]/30 flex items-center justify-center text-[#B896FF] shadow-lg shadow-[#1E085A]/50">
+            <TiltCard3D className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-7 transition-all duration-300 relative group overflow-hidden shadow-xl">
+              <div className="w-12 h-12 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-violet-300 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:border-violet-500/40 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all">
                 <Sparkles className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-semibold text-white tracking-[-0.01em] [word-spacing:0.08em]">AI-Native Workflow</h3>
-              <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
+              <h3 className="text-lg font-bold text-white mb-2">AI-Native Workflow</h3>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
                 Work with bleeding-edge AI models, vector reasoning, and accelerated generative pipelines.
               </p>
-            </div>
+            </TiltCard3D>
 
-            <div className="p-6 sm:p-8 rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/30 shadow-2xl shadow-black/50 space-y-3 transition-all duration-300">
-              <div className="w-12 h-12 rounded-2xl bg-[#1E085A]/60 border border-[#7042FF]/30 flex items-center justify-center text-[#B896FF] shadow-lg shadow-[#1E085A]/50">
+            <TiltCard3D className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-7 transition-all duration-300 relative group overflow-hidden shadow-xl">
+              <div className="w-12 h-12 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-violet-300 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:border-violet-500/40 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all">
                 <Users className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-semibold text-white tracking-[-0.01em] [word-spacing:0.08em]">High Autonomy</h3>
-              <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
+              <h3 className="text-lg font-bold text-white mb-2">High Autonomy</h3>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
                 Flat hierarchy with direct ownership from inception to release with senior leadership.
               </p>
-            </div>
+            </TiltCard3D>
 
-            <div className="p-6 sm:p-8 rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/30 shadow-2xl shadow-black/50 space-y-3 transition-all duration-300">
-              <div className="w-12 h-12 rounded-2xl bg-[#1E085A]/60 border border-[#7042FF]/30 flex items-center justify-center text-cyan-400 shadow-lg shadow-[#1E085A]/50">
+            <TiltCard3D className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-7 transition-all duration-300 relative group overflow-hidden shadow-xl">
+              <div className="w-12 h-12 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-violet-300 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:border-violet-500/40 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all">
                 <Zap className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-semibold text-white tracking-[-0.01em] [word-spacing:0.08em]">Competitive Equity</h3>
-              <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
+              <h3 className="text-lg font-bold text-white mb-2">Competitive Equity</h3>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
                 Comprehensive health insurance, flexible remote/hybrid setups, and performance bonuses.
               </p>
-            </div>
+            </TiltCard3D>
 
-            <div className="p-6 sm:p-8 rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/30 shadow-2xl shadow-black/50 space-y-3 transition-all duration-300">
-              <div className="w-12 h-12 rounded-2xl bg-[#1E085A]/60 border border-[#7042FF]/30 flex items-center justify-center text-emerald-400 shadow-lg shadow-[#1E085A]/50">
+            <TiltCard3D className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-7 transition-all duration-300 relative group overflow-hidden shadow-xl">
+              <div className="w-12 h-12 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-violet-300 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:border-violet-500/40 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all">
                 <Shield className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-semibold text-white tracking-[-0.01em] [word-spacing:0.08em]">Craft Over Compromise</h3>
-              <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
+              <h3 className="text-lg font-bold text-white mb-2">Craft Over Compromise</h3>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
                 Obsessive attention to craft, typography, performance budgets, and pixel precision.
               </p>
-            </div>
+            </TiltCard3D>
           </div>
         </div>
       </section>
