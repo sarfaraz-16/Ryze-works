@@ -22,6 +22,7 @@ import {
   Layers,
   FileText,
 } from "lucide-react";
+import { TiltCard3D } from "@/components/ui/TiltCard3D";
 
 interface SearchMatch {
   id: string;
@@ -84,7 +85,7 @@ export default function AILabPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#080417] text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
+    <main className="min-h-screen bg-transparent text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
       <Navbar />
 
       {/* Hero Ambient Backlight */}
@@ -126,7 +127,8 @@ export default function AILabPage() {
 
       {/* LIVE SEMANTIC CONTENT EXPLORER */}
       <section className="pb-24 max-w-5xl mx-auto px-6 relative z-10">
-        <div className="p-8 sm:p-10 rounded-3xl bg-[#0d0e17]/90 border border-white/[0.1] shadow-2xl shadow-black/60 backdrop-blur-xl">
+        <div className="bg-[#0B0813]/75 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 sm:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.6)] relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(112,66,255,0.15),rgba(6,182,212,0.1),transparent_70%)] blur-[90px] -z-10 pointer-events-none" />
           <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/[0.06]">
             <div className="flex items-center gap-2 text-xs font-mono uppercase text-zinc-400">
               <Terminal className="w-4 h-4 text-[#B896FF]" />
@@ -151,7 +153,7 @@ export default function AILabPage() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search via natural language (e.g. 'How did Nostic transform diagnostics?')..."
-              className="w-full bg-[#080417] border border-white/15 focus:border-[#B896FF]/60 rounded-2xl py-4 pl-12 pr-32 text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-[#7042FF]/30 transition-all shadow-inner"
+              className="w-full bg-white/[0.04] border border-white/10 focus-within:border-cyan-500/60 focus-within:ring-1 focus-within:ring-cyan-500/60 rounded-xl px-4 py-3.5 pl-12 pr-32 text-sm text-zinc-100 placeholder:text-zinc-500 transition-all outline-none"
             />
             <Search className="w-5 h-5 text-zinc-400 absolute left-4 top-1/2 -translate-y-1/2" />
             <button
@@ -184,7 +186,7 @@ export default function AILabPage() {
                   key={sample}
                   type="button"
                   onClick={() => handleSearch(sample)}
-                  className="px-3 py-1.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.06] text-xs text-zinc-300 hover:text-white transition-all cursor-pointer text-left"
+                  className="px-3 py-1.5 rounded-lg text-xs font-mono text-zinc-300 bg-white/[0.04] border border-white/10 hover:border-cyan-500/40 hover:text-white transition-all cursor-pointer text-left"
                 >
                   &ldquo;{sample}&rdquo;
                 </button>
@@ -303,59 +305,61 @@ export default function AILabPage() {
         </div>
 
         {/* Architecture Flowchart Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+          <div className="hidden md:block absolute top-[34px] left-[12%] right-[12%] border-t border-dashed border-violet-500/30 -z-10" />
+          
           {/* Step 1 */}
-          <div className="p-6 rounded-3xl bg-[#0d0e17]/80 border border-white/[0.08] relative">
-            <div className="w-10 h-10 rounded-xl bg-[#1E085A]/60 border border-[#7042FF]/40 flex items-center justify-center text-[#B896FF] font-bold font-mono text-sm mb-4">
+          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-5 transition-all duration-300 relative group">
+            <div className="w-7 h-7 rounded-lg bg-violet-500/10 border border-violet-500/30 text-violet-300 font-mono text-xs flex items-center justify-center font-bold mb-4">
               01
             </div>
             <h3 className="text-sm font-semibold text-white mb-2">Natural Query Ingestion</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
               Visitor inputs natural questions via the chat gateway or search console.
             </p>
-            <div className="mt-4 text-[10px] font-mono text-[#B896FF] bg-[#7042FF]/10 px-2 py-1 rounded border border-[#7042FF]/20">
+            <div className="mt-4 text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.05] border border-white/10 text-cyan-300 w-fit">
               POST /api/ai/chat
             </div>
           </div>
 
           {/* Step 2 */}
-          <div className="p-6 rounded-3xl bg-[#0d0e17]/80 border border-white/[0.08] relative">
-            <div className="w-10 h-10 rounded-xl bg-[#1E085A]/60 border border-cyan-500/40 flex items-center justify-center text-cyan-400 font-bold font-mono text-sm mb-4">
+          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-5 transition-all duration-300 relative group">
+            <div className="w-7 h-7 rounded-lg bg-violet-500/10 border border-violet-500/30 text-violet-300 font-mono text-xs flex items-center justify-center font-bold mb-4">
               02
             </div>
             <h3 className="text-sm font-semibold text-white mb-2">Gemini Embeddings</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
               Text converted into a 1536-dimensional normalized floating point semantic vector.
             </p>
-            <div className="mt-4 text-[10px] font-mono text-cyan-300 bg-cyan-500/10 px-2 py-1 rounded border border-cyan-500/20">
+            <div className="mt-4 text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.05] border border-white/10 text-cyan-300 w-fit">
               gemini-embedding-001 (1536d)
             </div>
           </div>
 
           {/* Step 3 */}
-          <div className="p-6 rounded-3xl bg-[#0d0e17]/80 border border-white/[0.08] relative">
-            <div className="w-10 h-10 rounded-xl bg-[#1E085A]/60 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold font-mono text-sm mb-4">
+          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-5 transition-all duration-300 relative group">
+            <div className="w-7 h-7 rounded-lg bg-violet-500/10 border border-violet-500/30 text-violet-300 font-mono text-xs flex items-center justify-center font-bold mb-4">
               03
             </div>
             <h3 className="text-sm font-semibold text-white mb-2">pgvector Cosine Search</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
-              PostgreSQL executes cosine distance calculation (<code className="text-emerald-300">&lt;=&gt;</code>) with 0.58 confidence threshold.
+              PostgreSQL executes cosine distance calculation (<code className="text-cyan-300">&lt;=&gt;</code>) with 0.58 confidence threshold.
             </p>
-            <div className="mt-4 text-[10px] font-mono text-emerald-300 bg-emerald-500/10 px-2 py-1 rounded border border-emerald-500/20">
+            <div className="mt-4 text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.05] border border-white/10 text-cyan-300 w-fit">
               RPC match_knowledge()
             </div>
           </div>
 
           {/* Step 4 */}
-          <div className="p-6 rounded-3xl bg-[#0d0e17]/80 border border-white/[0.08] relative">
-            <div className="w-10 h-10 rounded-xl bg-[#1E085A]/60 border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold font-mono text-sm mb-4">
+          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-5 transition-all duration-300 relative group">
+            <div className="w-7 h-7 rounded-lg bg-violet-500/10 border border-violet-500/30 text-violet-300 font-mono text-xs flex items-center justify-center font-bold mb-4">
               04
             </div>
             <h3 className="text-sm font-semibold text-white mb-2">Grounded Flash Synthesis</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
               Gemini Flash generates answers grounded strictly in retrieved documents with active route links.
             </p>
-            <div className="mt-4 text-[10px] font-mono text-amber-300 bg-amber-500/10 px-2 py-1 rounded border border-amber-500/20">
+            <div className="mt-4 text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.05] border border-white/10 text-cyan-300 w-fit">
               Gemini 3.6 Flash + Citations
             </div>
           </div>
@@ -365,35 +369,35 @@ export default function AILabPage() {
       {/* BENCHMARKS & CASE STUDIES */}
       <section className="py-20 border-t border-white/[0.08] max-w-6xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="p-8 rounded-3xl bg-[#0d0e17]/80 border border-white/[0.08] space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-[#1E085A]/60 border border-[#7042FF]/30 flex items-center justify-center text-[#B896FF]">
+          <TiltCard3D className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-7 transition-all group flex flex-col items-start h-full">
+            <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-400 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:border-violet-500/40 transition-all">
               <Zap className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold text-white">Sub-180ms Vector Query Latency</h3>
+            <h3 className="text-lg font-bold text-white mb-4">Sub-180ms Vector Query Latency</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
               Native PostgreSQL pgvector cosine indexing combined with edge API handlers yields near-instantaneous semantic hops across enterprise corpora.
             </p>
-          </div>
+          </TiltCard3D>
 
-          <div className="p-8 rounded-3xl bg-[#0d0e17]/80 border border-white/[0.08] space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-[#1E085A]/60 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+          <TiltCard3D className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-7 transition-all group flex flex-col items-start h-full">
+            <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-400 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:border-violet-500/40 transition-all">
               <ShieldCheck className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold text-white">Zero-Hallucination Refusal Gate</h3>
+            <h3 className="text-lg font-bold text-white mb-4">Zero-Hallucination Refusal Gate</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
               Dual-layer defense: Queries scoring below 0.58 cosine relevance trigger an immediate deterministic refusal, preventing AI hallucinations.
             </p>
-          </div>
+          </TiltCard3D>
 
-          <div className="p-8 rounded-3xl bg-[#0d0e17]/80 border border-white/[0.08] space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-[#1E085A]/60 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+          <TiltCard3D className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-7 transition-all group flex flex-col items-start h-full">
+            <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-400 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:border-violet-500/40 transition-all">
               <Activity className="w-6 h-6" />
             </div>
-            <h3 className="text-lg font-bold text-white">Automated Brief Synthesis</h3>
+            <h3 className="text-lg font-bold text-white mb-4">Automated Brief Synthesis</h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
               Client briefs are autonomously mapped to deliverable scopes, tech stacks, and timeline milestones before syncing directly into our staff CRM.
             </p>
-          </div>
+          </TiltCard3D>
         </div>
       </section>
 
