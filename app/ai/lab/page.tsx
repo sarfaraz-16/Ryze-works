@@ -306,11 +306,11 @@ export default function AILabPage() {
 
         {/* Architecture Flowchart Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
-          <div className="hidden md:block absolute top-[34px] left-[12%] right-[12%] border-t border-dashed border-violet-500/30 -z-10" />
+          <div className="hidden md:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-violet-500/0 via-violet-500/30 to-cyan-500/0 -z-10" />
           
           {/* Step 1 */}
-          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-5 transition-all duration-300 relative group">
-            <div className="w-7 h-7 rounded-lg bg-violet-500/10 border border-violet-500/30 text-violet-300 font-mono text-xs flex items-center justify-center font-bold mb-4">
+          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-6 transition-all duration-300 relative group">
+            <div className="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/30 text-violet-300 font-mono text-xs font-bold flex items-center justify-center shadow-[0_0_12px_rgba(139,92,246,0.2)] mb-4">
               01
             </div>
             <h3 className="text-sm font-semibold text-white mb-2">Natural Query Ingestion</h3>
@@ -323,8 +323,8 @@ export default function AILabPage() {
           </div>
 
           {/* Step 2 */}
-          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-5 transition-all duration-300 relative group">
-            <div className="w-7 h-7 rounded-lg bg-violet-500/10 border border-violet-500/30 text-violet-300 font-mono text-xs flex items-center justify-center font-bold mb-4">
+          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-6 transition-all duration-300 relative group">
+            <div className="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/30 text-cyan-300 font-mono text-xs font-bold flex items-center justify-center shadow-[0_0_12px_rgba(6,182,212,0.2)] mb-4">
               02
             </div>
             <h3 className="text-sm font-semibold text-white mb-2">Gemini Embeddings</h3>
@@ -337,8 +337,8 @@ export default function AILabPage() {
           </div>
 
           {/* Step 3 */}
-          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-5 transition-all duration-300 relative group">
-            <div className="w-7 h-7 rounded-lg bg-violet-500/10 border border-violet-500/30 text-violet-300 font-mono text-xs flex items-center justify-center font-bold mb-4">
+          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-6 transition-all duration-300 relative group">
+            <div className="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/30 text-emerald-300 font-mono text-xs font-bold flex items-center justify-center shadow-[0_0_12px_rgba(16,185,129,0.2)] mb-4">
               03
             </div>
             <h3 className="text-sm font-semibold text-white mb-2">pgvector Cosine Search</h3>
@@ -351,8 +351,8 @@ export default function AILabPage() {
           </div>
 
           {/* Step 4 */}
-          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-5 transition-all duration-300 relative group">
-            <div className="w-7 h-7 rounded-lg bg-violet-500/10 border border-violet-500/30 text-violet-300 font-mono text-xs flex items-center justify-center font-bold mb-4">
+          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-6 transition-all duration-300 relative group">
+            <div className="w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/30 text-amber-300 font-mono text-xs font-bold flex items-center justify-center shadow-[0_0_12px_rgba(245,158,11,0.2)] mb-4">
               04
             </div>
             <h3 className="text-sm font-semibold text-white mb-2">Grounded Flash Synthesis</h3>
@@ -368,9 +368,11 @@ export default function AILabPage() {
 
       {/* BENCHMARKS & CASE STUDIES */}
       <section className="py-20 border-t border-white/[0.08] max-w-6xl mx-auto px-6 relative z-10">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(112,66,255,0.1),transparent_70%)] blur-[90px] -z-20 pointer-events-none" />
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <TiltCard3D className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-7 transition-all group flex flex-col items-start h-full">
-            <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-400 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:border-violet-500/40 transition-all">
+          <TiltCard3D className="bg-[#0B0813]/75 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-7 transition-all group flex flex-col items-start h-full shadow-xl">
+            <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/25 text-violet-300 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:border-violet-500/50 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all">
               <Zap className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-bold text-white mb-4">Sub-180ms Vector Query Latency</h3>
@@ -379,8 +381,8 @@ export default function AILabPage() {
             </p>
           </TiltCard3D>
 
-          <TiltCard3D className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-7 transition-all group flex flex-col items-start h-full">
-            <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-400 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:border-violet-500/40 transition-all">
+          <TiltCard3D className="bg-[#0B0813]/75 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-7 transition-all group flex flex-col items-start h-full shadow-xl">
+            <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/25 text-violet-300 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:border-violet-500/50 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-bold text-white mb-4">Zero-Hallucination Refusal Gate</h3>
@@ -389,8 +391,8 @@ export default function AILabPage() {
             </p>
           </TiltCard3D>
 
-          <TiltCard3D className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-2xl p-7 transition-all group flex flex-col items-start h-full">
-            <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-400 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:border-violet-500/40 transition-all">
+          <TiltCard3D className="bg-[#0B0813]/75 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-7 transition-all group flex flex-col items-start h-full shadow-xl">
+            <div className="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/25 text-violet-300 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:border-violet-500/50 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all">
               <Activity className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-bold text-white mb-4">Automated Brief Synthesis</h3>
