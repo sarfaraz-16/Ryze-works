@@ -37,7 +37,8 @@ export default function AboutPage() {
         {/* 3 Pillars */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           <TiltCard3D className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-8 transition-all duration-300 relative group overflow-hidden shadow-2xl h-full flex flex-col">
-            <div className="w-12 h-12 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-violet-300 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:border-violet-500/50 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all">
+            <div className="absolute -inset-px rounded-3xl bg-gradient-to-b from-violet-500/10 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300" />
+            <div className="w-12 h-12 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-violet-300 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:border-violet-500/40 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all relative z-10">
               <Zap className="w-6 h-6" />
             </div>
             <h2 className="text-xl font-bold text-white mb-3">10x Velocity</h2>
@@ -47,7 +48,8 @@ export default function AboutPage() {
           </TiltCard3D>
 
           <TiltCard3D className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-8 transition-all duration-300 relative group overflow-hidden shadow-2xl h-full flex flex-col">
-            <div className="w-12 h-12 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-violet-300 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:border-violet-500/50 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all">
+            <div className="absolute -inset-px rounded-3xl bg-gradient-to-b from-violet-500/10 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300" />
+            <div className="w-12 h-12 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-violet-300 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:border-violet-500/40 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all relative z-10">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <h2 className="text-xl font-bold text-white mb-3">Zero Placeholders</h2>
@@ -57,7 +59,8 @@ export default function AboutPage() {
           </TiltCard3D>
 
           <TiltCard3D className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-8 transition-all duration-300 relative group overflow-hidden shadow-2xl h-full flex flex-col">
-            <div className="w-12 h-12 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-violet-300 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:border-violet-500/50 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all">
+            <div className="absolute -inset-px rounded-3xl bg-gradient-to-b from-violet-500/10 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300" />
+            <div className="w-12 h-12 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-violet-300 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:border-violet-500/40 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all relative z-10">
               <Compass className="w-6 h-6" />
             </div>
             <h2 className="text-xl font-bold text-white mb-3">Fullstack Synergy</h2>
@@ -89,8 +92,8 @@ export default function AboutPage() {
 
         {/* Studio Info */}
         <div className="relative">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.2),transparent_70%)] blur-[90px] -z-10 pointer-events-none" />
-          <div className="bg-[#0B0813]/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 sm:p-12 relative overflow-hidden shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 mb-16">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[250px] bg-violet-600/15 blur-[100px] rounded-full -z-10 pointer-events-none" />
+          <div className="bg-[#0B0813]/80 backdrop-blur-2xl border border-white/10 hover:border-violet-500/30 rounded-3xl p-8 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 mb-16">
             <div className="relative z-10">
               <div className="flex items-center gap-2 font-mono text-xs font-medium text-violet-400 uppercase tracking-wider mb-3">
                 <Globe2 className="w-4 h-4" />
@@ -106,7 +109,7 @@ export default function AboutPage() {
 
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 shadow-[0_0_25px_rgba(139,92,246,0.35)] border border-white/10 transition-all shrink-0 relative z-10"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 shadow-[0_0_20px_rgba(139,92,246,0.35)] transition-all shrink-0 relative z-10"
             >
               <span>Connect With Us</span>
               <ArrowRight className="w-4 h-4" />
