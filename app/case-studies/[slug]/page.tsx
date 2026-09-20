@@ -90,7 +90,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
   }
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#080417] text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
+    <main className="min-h-[calc(100vh-80px)] bg-transparent text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
       <Navbar />
 
       {/* Hero Ambient Backlight */}
@@ -99,7 +99,7 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
       <section className="pt-36 pb-24 max-w-5xl mx-auto px-6 relative z-10">
         <Link
           href="/case-studies"
-          className="inline-flex items-center gap-2 text-xs font-mono font-medium text-zinc-400 hover:text-white transition-colors mb-8 group"
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono text-zinc-400 hover:text-white bg-white/[0.04] border border-white/10 hover:border-violet-500/40 transition-all mb-6 group"
         >
           <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
           <span>BACK TO CASE STUDIES</span>
@@ -126,67 +126,73 @@ export default async function CaseStudyDetailPage({ params }: CaseStudyPageProps
         </div>
 
         {/* Key Result Banner */}
-        <div className="rounded-3xl bg-gradient-to-r from-[#1E085A]/60 via-[#0d0e17] to-[#1E085A]/60 border border-[#7042FF]/40 p-8 sm:p-10 mb-14 flex items-start gap-5 shadow-2xl shadow-black/50">
-          <Award className="w-10 h-10 text-amber-400 shrink-0 mt-1" />
+        <div className="bg-gradient-to-r from-violet-950/40 via-[#0B0813]/80 to-purple-950/30 backdrop-blur-2xl border border-violet-500/30 rounded-3xl p-6 sm:p-8 shadow-[0_15px_40px_rgba(139,92,246,0.15)] mb-10 flex items-center gap-5">
+          <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+            <Award className="w-6 h-6 text-amber-400" />
+          </div>
           <div>
             <div className="font-mono text-[11px] font-medium tracking-wider uppercase text-[#B896FF] mb-1.5">
               Verified Production Impact &amp; Metric
             </div>
-            <div className="text-xl sm:text-2xl font-bold text-white tracking-[-0.015em]">
+            <div className="text-lg sm:text-xl font-bold text-white tracking-tight">
               {cs.results}
             </div>
           </div>
         </div>
 
         {/* Deep Dive Narrative */}
-        <div className="space-y-10 mb-14">
-          <div className="rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] p-8 sm:p-10 shadow-2xl shadow-black/50">
-            <h2 className="text-xl sm:text-2xl font-semibold text-white mb-4 tracking-[-0.01em] [word-spacing:0.08em]">
-              1. The Challenge
+        <div className="space-y-6 mb-14">
+          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 rounded-3xl p-7 sm:p-9 transition-all duration-300 relative group shadow-xl">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 flex items-center gap-3 tracking-tight">
+              <span className="text-violet-400/50">1.</span> The Challenge
             </h2>
-            <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed">
+            <p className="text-base text-zinc-300 leading-relaxed font-sans">
               {cs.challenge}
             </p>
           </div>
 
-          <div className="rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] p-8 sm:p-10 shadow-2xl shadow-black/50">
-            <h2 className="text-xl sm:text-2xl font-semibold text-white mb-4 tracking-[-0.01em] [word-spacing:0.08em]">
-              2. The Strategic Direction
+          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 rounded-3xl p-7 sm:p-9 transition-all duration-300 relative group shadow-xl">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 flex items-center gap-3 tracking-tight">
+              <span className="text-violet-400/50">2.</span> The Strategic Direction
             </h2>
-            <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed">
+            <p className="text-base text-zinc-300 leading-relaxed font-sans">
               {cs.strategy}
             </p>
           </div>
 
-          <div className="rounded-3xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] p-8 sm:p-10 shadow-2xl shadow-black/50">
-            <h2 className="text-xl sm:text-2xl font-semibold text-white mb-4 tracking-[-0.01em] [word-spacing:0.08em]">
-              3. Technical Execution
+          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 rounded-3xl p-7 sm:p-9 transition-all duration-300 relative group shadow-xl">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 flex items-center gap-3 tracking-tight">
+              <span className="text-violet-400/50">3.</span> Technical Execution
             </h2>
-            <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed mb-6">
+            <p className="text-base text-zinc-300 leading-relaxed font-sans mb-6">
               {cs.execution}
             </p>
-            <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.06] font-mono text-xs text-zinc-400">
-              Technology Stack: Next.js (App Router), TypeScript, Tailwind CSS, Supabase PostgreSQL, Edge AI Gateway.
+            <div className="flex flex-wrap gap-2 pt-6 mt-6 border-t border-white/10">
+              {["Next.js", "TypeScript", "Tailwind CSS", "Supabase PostgreSQL", "Edge AI Gateway"].map(tech => (
+                <span key={tech} className="px-3 py-1.5 rounded-lg text-xs font-mono text-cyan-300 bg-white/[0.04] border border-white/10 flex items-center gap-1.5">
+                  {tech}
+                </span>
+              ))}
             </div>
           </div>
         </div>
 
         {/* Closing Action */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-[#1E085A]/50 via-[#0d0e17]/90 to-[#1E085A]/50 border border-[#7042FF]/30 backdrop-blur-md shadow-2xl shadow-black/50">
+        <div className="bg-[#0B0813]/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
           <div>
-            <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2 tracking-[-0.01em] [word-spacing:0.08em] leading-snug">
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 tracking-tight">
               Want similar results for your product?
             </h3>
-            <p className="text-xs sm:text-sm text-zinc-300 font-normal">
+            <p className="text-sm text-zinc-300 font-sans">
               Schedule an executive discovery call or generate a structured brief.
             </p>
           </div>
           <Link
             href="/start-a-project"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-[#7042FF] to-[#4318D1] hover:brightness-110 shadow-lg shadow-[#7042FF]/30 border border-[#B896FF]/30 transition-all shrink-0"
+            className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold rounded-xl px-6 py-3.5 shadow-[0_0_25px_rgba(139,92,246,0.35)] transition-all shrink-0 flex items-center gap-2"
           >
             <span>Start a Project Brief</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </section>
