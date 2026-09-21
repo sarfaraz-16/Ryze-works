@@ -55,7 +55,7 @@ export const Preloader: React.FC = () => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-          className="fixed inset-0 z-[100] bg-[#05030A] flex items-center justify-center overflow-hidden pointer-events-auto select-none"
+          className="fixed inset-0 w-screen h-[100dvh] z-[100] bg-[#05030A] flex items-center justify-center overflow-hidden select-none pointer-events-auto"
         >
           <video
             ref={videoRef}
@@ -64,6 +64,8 @@ export const Preloader: React.FC = () => {
             muted
             playsInline
             preload="auto"
+            webkit-playsinline="true"
+            x5-playsinline="true"
             onError={() => setIsComplete(true)}
             onCanPlay={(e) => {
               e.currentTarget.playbackRate = 1.6;
@@ -74,7 +76,7 @@ export const Preloader: React.FC = () => {
                 handleComplete();
               }
             }}
-            className="w-full h-full object-cover scale-105"
+            className="w-full h-full object-cover object-center scale-102 sm:scale-105 pointer-events-none"
           />
 
           <button
@@ -82,7 +84,7 @@ export const Preloader: React.FC = () => {
               e.stopPropagation();
               if (canInteract) handleComplete();
             }}
-            className="absolute bottom-6 right-6 z-20 px-3.5 py-1.5 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-md border border-white/10 text-[10px] font-mono tracking-widest text-zinc-400 hover:text-white transition-all cursor-pointer"
+            className="absolute bottom-[calc(1rem+env(safe-area-inset-bottom))] sm:bottom-6 right-5 sm:right-6 z-20 px-3.5 py-1.5 rounded-full bg-black/50 hover:bg-black/80 backdrop-blur-md border border-white/10 text-[10px] font-mono tracking-widest text-zinc-400 hover:text-white transition-all cursor-pointer active:scale-95"
           >
             ESC TO SKIP →
           </button>
