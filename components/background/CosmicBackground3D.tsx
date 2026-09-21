@@ -174,7 +174,7 @@ export default function CosmicBackground3D({
 
       animationFrameId = requestAnimationFrame(animate);
 
-      const delta = Math.min(clock.getDelta(), 0.1);
+      const _delta = Math.min(clock.getDelta(), 0.1);
       const t = clock.getElapsedTime();
 
       // Smooth scroll parallax lerp

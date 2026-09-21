@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Clock } from "lucide-react";
-import { motion } from "framer-motion";
+import { Clock } from "lucide-react";
+// import {} from "framer-motion";
 import { Article } from "@/types";
 import { useTilt3D } from "@/hooks/useTilt3D";
 
@@ -59,7 +59,7 @@ function CategoryVisual({ category }: { category: string }) {
 }
 
 function ArticleCard({ article }: { article: Article }) {
-  const tilt = useTilt3D();
+  const { cardRef, onPointerEnter, onPointerMove, onPointerLeave, cardStyle, glareStyle } = useTilt3D();
 
   const gradientMap: Record<string, string> = {
     TECHNOLOGY: "from-cyan-500/20 to-transparent",
@@ -73,15 +73,15 @@ function ArticleCard({ article }: { article: Article }) {
 
   return (
     <div
-      ref={tilt.cardRef}
-      onPointerEnter={tilt.onPointerEnter}
-      onPointerMove={tilt.onPointerMove}
-      onPointerLeave={tilt.onPointerLeave}
-      style={tilt.cardStyle}
+      ref={cardRef}
+      onPointerEnter={onPointerEnter}
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
+      style={cardStyle}
       className="bg-[#0B0813]/75 backdrop-blur-2xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-6 sm:p-7 transition-all duration-300 relative group overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] flex flex-col justify-between h-full select-none"
     >
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-500/[0.07] via-transparent to-cyan-500/[0.04] opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300" />
-      <div className="absolute inset-0 z-0 rounded-3xl pointer-events-none" style={tilt.glareStyle} />
+      <div className="absolute inset-0 z-0 rounded-3xl pointer-events-none" style={glareStyle} />
       
       <Link href={`/insights/${article.slug}`} className="flex flex-col h-full relative z-10 outline-none">
         {/* Upper Media Theater */}

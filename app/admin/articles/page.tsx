@@ -1,17 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/server";
-import {
-  FileText,
-  PlusCircle,
-  ExternalLink,
-  Edit,
-  Clock,
-  Search,
-  Sparkles,
-  CheckCircle2,
-  AlertTriangle,
-} from "lucide-react";
+import { FileText, PlusCircle, ExternalLink, Edit, Sparkles, CheckCircle2, AlertTriangle } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { ResourceItem } from "@/data/resourcesData";
-import { ArrowRight, Download, Layers, Sparkles, Filter, FileCode2 } from "lucide-react";
+// import {} from "lucide-react";
 import { TiltCard3D } from "@/components/ui/TiltCard3D";
 
 interface Props {

@@ -6,16 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { REPORTS_DATA } from "@/data/reportsData";
 import { ReportDownloadForm } from "@/components/reports/ReportDownloadForm";
-import {
-  ArrowLeft,
-  BookOpen,
-  Calendar,
-  CheckCircle2,
-  FileText,
-  ShieldCheck,
-  Sparkles,
-  Layers,
-} from "lucide-react";
+import { ArrowLeft, BookOpen, CheckCircle2, ShieldCheck, Sparkles, Layers } from "lucide-react";
 
 export const revalidate = 3600;
 

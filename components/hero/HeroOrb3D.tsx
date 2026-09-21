@@ -317,7 +317,7 @@ export default function HeroOrb3D({ className = "" }: HeroOrb3DProps) {
 
     // 5. Motion & Physics (Directional Momentum & Perpetual Ambient Drift)
     const BASE_SPEED = 0.003;
-    let velocity = { x: 0, y: BASE_SPEED };
+    const velocity = { x: 0, y: BASE_SPEED };
     let isDragging = false;
     let lastPointerPosition = { x: 0, y: 0 };
 

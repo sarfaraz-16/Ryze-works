@@ -9,22 +9,7 @@ import {
   ArticleInput,
 } from "./actions";
 import { calculateReadingTime, slugify } from "@/lib/utils/readingTime";
-import {
-  ArrowLeft,
-  Save,
-  Send,
-  AlertCircle,
-  CheckCircle2,
-  Loader2,
-  Sparkles,
-  Lock,
-  Unlock,
-  Tag,
-  Clock,
-  FileText,
-  Search,
-  ExternalLink,
-} from "lucide-react";
+import { ArrowLeft, Save, Send, AlertCircle, CheckCircle2, Loader2, Lock, Unlock, Clock, FileText, Search, ExternalLink } from "lucide-react";
 
 interface Props {
   initialArticle?: ArticleInput & { id?: string; status?: string };
@@ -73,7 +58,7 @@ export function ArticleEditorForm({ initialArticle }: Props) {
 
   // Dynamic calculations
   const readingTime = calculateReadingTime(content || summary);
-  const wordCount = content ? content.trim().split(/\s+/).filter(Boolean).length : 0;
+  const wordCount = content ? content.trim().split(/\s+/).filter(Boolean as any).length : 0;
   const seoDescLength = seoDescription.trim().length;
   const isSeoDescValid = seoDescLength >= 50;
 

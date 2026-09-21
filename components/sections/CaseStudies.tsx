@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowRight, Activity, CreditCard, Sparkles, TrendingUp } from "lucide-react";
+import { ArrowRight, Activity, CreditCard } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { TiltCard3D } from "@/components/ui/TiltCard3D";
 

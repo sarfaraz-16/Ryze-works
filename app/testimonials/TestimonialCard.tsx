@@ -4,8 +4,8 @@ import React from "react";
 import { Star, CheckCircle2 } from "lucide-react";
 import { useTilt3D } from "@/hooks/useTilt3D";
 
-export function TestimonialCard({ item }: { item: any }) {
-  const tilt = useTilt3D();
+export function TestimonialCard({ item }: { item: { company?: string; rating: number; quote: string; avatar?: string; authorName: string; role: string } }) {
+  const { cardRef, onPointerEnter, onPointerMove, onPointerLeave, cardStyle, glareStyle } = useTilt3D();
 
   const metricMap: Record<string, string> = {
     CRED: "+310% App DAU",
@@ -13,18 +13,18 @@ export function TestimonialCard({ item }: { item: any }) {
     Yulu: "Zero Downtime Cutover"
   };
 
-  const metric = metricMap[item.company] || "Verified Client";
+  const metric = metricMap[item.company || ""] || "Verified Client";
 
   return (
     <div
-      ref={tilt.cardRef}
-      onPointerEnter={tilt.onPointerEnter}
-      onPointerMove={tilt.onPointerMove}
-      onPointerLeave={tilt.onPointerLeave}
-      style={tilt.cardStyle}
+      ref={cardRef}
+      onPointerEnter={onPointerEnter}
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
+      style={cardStyle}
       className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/40 rounded-3xl p-8 sm:p-9 min-h-[260px] transition-all duration-300 relative group overflow-hidden shadow-2xl flex flex-col justify-between select-none"
     >
-      <div className="absolute inset-0 z-0 rounded-3xl" style={tilt.glareStyle} />
+      <div className="absolute inset-0 z-0 rounded-3xl" style={glareStyle} />
       
       {/* Ambient violet/indigo radial glow in the corner */}
       <div className="absolute -top-24 -right-24 w-48 h-48 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.25)_0%,transparent_70%)] pointer-events-none" />
@@ -49,6 +49,7 @@ export function TestimonialCard({ item }: { item: any }) {
         {/* Avatar with glowing border */}
         <div className="w-11 h-11 rounded-2xl bg-[#0d0e17] border border-violet-500/40 flex items-center justify-center font-mono text-xs font-bold text-white shrink-0 shadow-[0_0_15px_rgba(139,92,246,0.3)] overflow-hidden">
           {item.avatar ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
             <img src={item.avatar} alt={item.authorName} className="w-full h-full object-cover" />
           ) : (
             item.authorName.split(" ").map((n: string) => n[0]).join("")

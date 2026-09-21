@@ -3,18 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
-import {
-  Sparkles,
-  Users,
-  Target,
-  BarChart2,
-  ShieldCheck,
-  Download,
-  ArrowRight,
-  Globe,
-  Award,
-  Layers,
-} from "lucide-react";
+import { Sparkles, Users, ShieldCheck, ArrowRight, Globe } from "lucide-react";
 import { TiltCard3D } from "@/components/ui/TiltCard3D";
 
 export const metadata = {

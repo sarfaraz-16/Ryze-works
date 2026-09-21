@@ -69,7 +69,7 @@ export async function saveArticleDraft(
     const slug = input.slug?.trim() || slugify(input.title);
     const readTime = input.read_time || calculateReadingTime(input.content || input.summary || "");
 
-    const payload: Record<string, any> = {
+    const payload: Record<string, unknown> = {
       title: input.title.trim(),
       slug,
       category: input.category || "TECHNOLOGY",
@@ -182,7 +182,7 @@ export async function publishArticle(
     const slug = input.slug?.trim() || slugify(input.title);
     const readTime = input.read_time || calculateReadingTime(input.content || input.summary || "");
 
-    const payload: Record<string, any> = {
+    const payload: Record<string, unknown> = {
       title: input.title.trim(),
       slug,
       category: input.category || "TECHNOLOGY",

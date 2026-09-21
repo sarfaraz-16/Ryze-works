@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { usePreloaderReveal } from "@/hooks/usePreloaderReveal";
 
 const CosmicBackground3D = dynamic(
   () => import("./CosmicBackground3D"),
@@ -11,7 +12,8 @@ const CosmicBackground3D = dynamic(
 );
 
 export function CosmicBackground() {
-  return <CosmicBackground3D />;
+  const revealed = usePreloaderReveal();
+  return revealed ? <CosmicBackground3D /> : null;
 }
 
 export default CosmicBackground;

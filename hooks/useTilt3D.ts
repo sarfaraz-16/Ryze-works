@@ -43,7 +43,7 @@ export function useTilt3D(options: UseTilt3DOptions = {}) {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (isTouch || prefersReducedMotion) {
-      setIsEnabled(false);
+      queueMicrotask(() => setIsEnabled(false));
     }
   }, []);
 

@@ -1,19 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/server";
-import {
-  Inbox,
-  MessageSquareQuote,
-  Briefcase,
-  BookOpen,
-  ArrowRight,
-  AlertTriangle,
-  CheckCircle2,
-  Sparkles,
-  PlusCircle,
-  Clock,
-  ShieldCheck,
-} from "lucide-react";
+import { Inbox, MessageSquareQuote, Briefcase, BookOpen, ArrowRight, AlertTriangle, CheckCircle2, Sparkles, PlusCircle, Clock } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 

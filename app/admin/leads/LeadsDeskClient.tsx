@@ -1,27 +1,8 @@
 "use client";
 
 import React, { useState, useTransition } from "react";
-import { updateLeadStatus, deleteLead, LeadLifecycleStatus } from "./actions";
-import {
-  Inbox,
-  Search,
-  Filter,
-  Eye,
-  Trash2,
-  CheckCircle2,
-  Clock,
-  Briefcase,
-  Megaphone,
-  FileText,
-  Mail,
-  Building,
-  Globe,
-  Sparkles,
-  Loader2,
-  X,
-  ExternalLink,
-  ChevronRight,
-} from "lucide-react";
+import { updateLeadStatus, LeadLifecycleStatus } from "./actions";
+import { Search, Eye, CheckCircle2, Briefcase, Megaphone, FileText, Mail, Sparkles, X } from "lucide-react";
 
 export interface LeadRecord {
   id: string;
@@ -56,7 +37,7 @@ export function LeadsDeskClient({ initialLeads }: Props) {
   const [activeTab, setActiveTab] = useState<string>("ALL");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [inspectingLead, setInspectingLead] = useState<LeadRecord | null>(null);
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const [updatingId, setUpdatingId] = useState<string | null>(null);
   const [notification, setNotification] = useState<string | null>(null);
 

@@ -268,3 +268,6 @@
   }
 }
 
+html[data-preloader="skip"] #ryze-preloader { display: none; }
+html[data-preloader="intro"] { overflow: hidden; }
+

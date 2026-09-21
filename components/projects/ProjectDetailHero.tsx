@@ -24,8 +24,8 @@ const BRAND_GLOWS: Record<string, string> = {
 export const ProjectDetailHero: React.FC<ProjectDetailHeroProps> = ({
   slug,
   client,
-  title,
-  category,
+  
+  
   industry,
 }) => {
   const brandGlow = BRAND_GLOWS[slug.toLowerCase()] || "rgba(168, 85, 247, 0.25)";
@@ -216,12 +216,12 @@ export const ProjectDetailHero: React.FC<ProjectDetailHeroProps> = ({
 
       {/* Top Left Watermark Tag */}
       <div className="absolute top-6 left-6 font-mono text-[10px] uppercase tracking-widest text-zinc-400/80 bg-white/[0.04] backdrop-blur-md px-3 py-1 rounded-full border border-white/10 pointer-events-none">
-        {client} // {industry}
+        {client} {"//"} {industry}
       </div>
 
       {/* Bottom Right Verified Badge */}
       <div className="absolute bottom-6 right-6 font-mono text-[9px] uppercase tracking-widest text-emerald-400 bg-emerald-950/70 backdrop-blur-md px-3 py-1 rounded-full border border-emerald-500/30 pointer-events-none">
-        CASE ARTIFACT // VERIFIED
+        CASE ARTIFACT {"//"} VERIFIED
       </div>
     </div>
   );

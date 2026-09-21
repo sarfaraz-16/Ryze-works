@@ -7,7 +7,7 @@ import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { ProjectDetailHero } from "@/components/projects/ProjectDetailHero";
 import { FEATURED_PROJECTS, TESTIMONIALS_DATA } from "@/data/siteData";
 import { createClient, createAdminClient } from "@/lib/supabase/server";
-import { ArrowLeft, ArrowRight, CheckCircle2, ShieldCheck, Star } from "lucide-react";
+import { ArrowLeft, ArrowRight, ShieldCheck, Star } from "lucide-react";
 
 export const revalidate = 3600;
 
@@ -87,7 +87,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         if (data.project_services && Array.isArray(data.project_services) && data.project_services.length > 0) {
           relatedServices = data.project_services
             .map((ps: any) => ps.services)
-            .filter(Boolean)
+            .filter(Boolean as any)
             .map((s: any) => ({
               slug: s.slug,
               name: s.name,
@@ -106,7 +106,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             if (psData && Array.isArray(psData)) {
               relatedServices = psData
                 .map((ps: any) => ps.services)
-                .filter(Boolean)
+                .filter(Boolean as any)
                 .map((s: any) => ({
                   slug: s.slug,
                   name: s.name,

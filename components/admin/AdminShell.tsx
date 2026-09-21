@@ -4,20 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import {
-  LayoutDashboard,
-  MessageSquareQuote,
-  Inbox,
-  FileText,
-  Briefcase,
-  ExternalLink,
-  LogOut,
-  Shield,
-  Menu,
-  X,
-  Sparkles,
-  Layers,
-} from "lucide-react";
+import { LayoutDashboard, MessageSquareQuote, Inbox, FileText, Briefcase, ExternalLink, LogOut, Shield, Menu, X } from "lucide-react";
 
 interface AdminShellProps {
   children: React.ReactNode;

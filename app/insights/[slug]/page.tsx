@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { ARTICLES_DATA } from "@/data/siteData";
 import { createClient } from "@/lib/supabase/server";
-import { ArrowLeft, Clock, Calendar, Sparkles } from "lucide-react";
+import { ArrowLeft, Clock, Calendar } from "lucide-react";
 
 export const revalidate = 3600;
 
@@ -100,7 +100,7 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
     ALL: "from-white/10 to-transparent",
   };
   
-  const bgGlow = glowMap[article.category] || "from-white/10 to-transparent";
+  const _bgGlow = glowMap[article.category] || "from-white/10 to-transparent";
 
   return (
     <main className="min-h-[calc(100vh-80px)] bg-transparent text-zinc-100 overflow-x-hidden relative selection:bg-[#7042FF]/30 selection:text-[#B896FF]">
@@ -197,11 +197,11 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
               The Core Trap: Premature Over-Engineering
             </h2>
             <p className="text-base sm:text-lg text-zinc-300 leading-[1.8] mb-6 font-sans">
-              In the current landscape of AI acceleration, traditional agency frameworks that rely on multi-month discovery phases and siloed design documentation are rapidly becoming obsolete. Today’s market demands continuous integration between creative direction and computational execution.
+              In the current landscape of AI acceleration, traditional agency frameworks that rely on multi-month discovery phases and siloed design documentation are rapidly becoming obsolete. Today&apos;s market demands continuous integration between creative direction and computational execution.
             </p>
 
             <div className="my-8 border-l-2 border-violet-500 bg-violet-950/20 p-6 rounded-r-2xl text-lg text-violet-200 italic">
-              "Design for the API layer first. When your brand system is encoded into design tokens and component libraries, deploying AI agents and personalized user journeys becomes seamless rather than an architectural redesign."
+              &quot;Design for the API layer first. When your brand system is encoded into design tokens and component libraries, deploying AI agents and personalized user journeys becomes seamless rather than an architectural redesign.&quot;
             </div>
 
             <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-12 mb-4 flex items-center gap-2.5">
@@ -218,7 +218,7 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
             </ol>
 
             <div className="my-8 p-6 rounded-2xl bg-[#0B0813]/80 backdrop-blur-xl border border-violet-500/30 shadow-[0_0_20px_rgba(139,92,246,0.15)] font-mono text-sm sm:text-base text-violet-200">
-              <strong className="text-violet-400">Key Principle:</strong> If your day-one launch requires complex microservices, you haven't identified your single value transaction.
+              <strong className="text-violet-400">Key Principle:</strong> If your day-one launch requires complex microservices, you haven&apos;t identified your single value transaction.
             </div>
 
             <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-12 mb-4 flex items-center gap-2.5">

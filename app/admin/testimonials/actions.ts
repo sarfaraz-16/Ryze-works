@@ -47,7 +47,7 @@ export async function updateTestimonialStatus(
     }
 
     // 3. Perform mutation
-    const updatePayload: Record<string, any> = {
+    const updatePayload: Record<string, unknown> = {
       status,
       reviewed_at: new Date().toISOString(),
     };

@@ -23,7 +23,7 @@ export async function generateEmbedding(text: string): Promise<number[]> {
     "gemini-embedding-2-preview"
   ];
 
-  let lastError: any = null;
+  let lastError: unknown = null;
 
   for (const model of modelsToTry) {
     try {

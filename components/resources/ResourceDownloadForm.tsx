@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { CheckCircle2, Download, Loader2, Sparkles, FileText, Lock } from "lucide-react";
+import { CheckCircle2, Download, Loader2, FileText, Lock } from "lucide-react";
 
 interface Props {
   resourceTitle: string;

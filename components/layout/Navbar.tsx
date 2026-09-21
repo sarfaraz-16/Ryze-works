@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Menu, X } from "lucide-react";
 
 export const Navbar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [_isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {

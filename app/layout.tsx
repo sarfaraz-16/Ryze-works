@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CosmicBackground } from "@/components/background/CosmicBackground";
-import { Preloader } from "@/components/layout/Preloader";
+import Preloader from "@/components/layout/Preloader";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans",
@@ -34,6 +34,10 @@ export const metadata: Metadata = {
     type: "website"
   }
 };
+
+const isProd = process.env.NODE_ENV === "production";
+
+const preloaderGate = `(function(){try{var d=document.documentElement;var seen=sessionStorage.getItem("ryze_preloader_seen")==="true";d.dataset.preloader=(${isProd}&&seen)?"skip":"intro"}catch(e){d.dataset.preloader="skip"}})();`;
 
 export default function RootLayout({
   children,
@@ -79,6 +83,10 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        <script dangerouslySetInnerHTML={{ __html: preloaderGate }} />
+        <noscript>
+          <style>{`#ryze-preloader{display:none!important}`}</style>
+        </noscript>
       </head>
       <body className="min-h-full flex flex-col font-sans antialiased bg-[#080417] text-zinc-100 selection:bg-[#7042FF] selection:text-white relative" suppressHydrationWarning>
         <CosmicBackground />

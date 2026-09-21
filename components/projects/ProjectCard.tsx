@@ -70,7 +70,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, className = "
         <div>
           <div className="font-mono text-[11px] font-medium tracking-wider uppercase text-[#B896FF] mb-1.5 flex items-center gap-2">
             <span>{project.client}</span>
-            <span className="text-zinc-600">//</span>
+            <span className="text-zinc-600">{"//"}</span>
             <span className="text-zinc-400">{project.category}</span>
           </div>
           <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-violet-200 transition-colors mb-2 leading-snug">

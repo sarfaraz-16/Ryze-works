@@ -5,23 +5,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
-import {
-  Sparkles,
-  Search,
-  Database,
-  Cpu,
-  ShieldCheck,
-  Zap,
-  ArrowRight,
-  ExternalLink,
-  Code2,
-  CheckCircle2,
-  Loader2,
-  Terminal,
-  Activity,
-  Layers,
-  FileText,
-} from "lucide-react";
+import { Sparkles, Search, Database, Cpu, ShieldCheck, Zap, ArrowRight, ExternalLink, Loader2, Terminal, Activity, Layers } from "lucide-react";
 import { TiltCard3D } from "@/components/ui/TiltCard3D";
 
 interface SearchMatch {

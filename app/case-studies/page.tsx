@@ -6,7 +6,7 @@ import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { TiltCard3D } from "@/components/ui/TiltCard3D";
 import { CASE_STUDIES } from "@/data/siteData";
 import { createClient } from "@/lib/supabase/server";
-import { ArrowRight, ShieldCheck, Sparkles, Award } from "lucide-react";
+import { Sparkles, Award } from "lucide-react";
 
 export const revalidate = 3600;
 

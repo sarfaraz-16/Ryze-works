@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { CheckCircle2, Send, Loader2, Sparkles, DollarSign, Calendar, Target } from "lucide-react";
+import { CheckCircle2, Send, Loader2, Sparkles } from "lucide-react";
 
 const PLACEMENT_OPTIONS = [
   "Sponsored Insights Article",

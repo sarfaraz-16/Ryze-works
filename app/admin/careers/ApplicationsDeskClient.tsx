@@ -6,20 +6,7 @@ import {
   updateApplicationStatus,
   ApplicationLifecycleStatus,
 } from "./actions";
-import {
-  Briefcase,
-  Download,
-  CheckCircle2,
-  AlertCircle,
-  Loader2,
-  Mail,
-  Calendar,
-  ExternalLink,
-  Shield,
-  FileText,
-  Clock,
-  Search,
-} from "lucide-react";
+import { Download, CheckCircle2, AlertCircle, Loader2, Mail, Search } from "lucide-react";
 
 export interface JobApplicationRecord {
   id: string;
@@ -64,7 +51,7 @@ export function ApplicationsDeskClient({ initialApplications }: Props) {
     useState<JobApplicationRecord[]>(initialApplications);
   const [filterStatus, setFilterStatus] = useState<string>("ALL");
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const [downloadingPath, setDownloadingPath] = useState<string | null>(null);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
   const [notification, setNotification] = useState<{

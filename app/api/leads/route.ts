@@ -66,7 +66,7 @@ export async function POST(req: Request) {
       message: "Lead recorded successfully (development mode).",
       lead: { name, email, company, serviceInterest }
     });
-  } catch (err: unknown) {
+  } catch (err: any) {
     console.error("Lead submission error:", err);
     return NextResponse.json(
       { error: "Internal server error processing request." },

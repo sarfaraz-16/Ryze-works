@@ -2,20 +2,7 @@
 
 import React, { useState, useTransition } from "react";
 import { updateTestimonialStatus, toggleFeaturedTestimonial } from "./actions";
-import {
-  Star,
-  CheckCircle2,
-  XCircle,
-  Clock,
-  ShieldCheck,
-  Sparkles,
-  AlertCircle,
-  Loader2,
-  Filter,
-  Check,
-  RotateCcw,
-  StarOff,
-} from "lucide-react";
+import { Star, CheckCircle2, XCircle, Clock, ShieldCheck, AlertCircle, Loader2, Check } from "lucide-react";
 
 export interface TestimonialRecord {
   id: string;
@@ -45,7 +32,7 @@ export function TestimonialModerationClient({
   const [pendingList, setPendingList] = useState<TestimonialRecord[]>(initialPending);
   const [processedList, setProcessedList] = useState<TestimonialRecord[]>(initialProcessed);
   const [activeTab, setActiveTab] = useState<"pending" | "processed">("pending");
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const [processingId, setProcessingId] = useState<string | null>(null);
   const [notification, setNotification] = useState<{
     type: "success" | "error";

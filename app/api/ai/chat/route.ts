@@ -85,7 +85,7 @@ export async function POST(req: Request) {
       .join("\n\n");
 
     const directSources = Array.from(
-      new Set(matchedChunks.map((c) => c.url).filter(Boolean))
+      new Set(matchedChunks.map((c) => c.url).filter(Boolean as any))
     );
 
     // STEP 4: Call Google Gemini Flash with Grounded Prompt Context

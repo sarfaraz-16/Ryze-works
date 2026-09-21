@@ -70,7 +70,7 @@ export default function AIPage() {
   const [briefLoading, setBriefLoading] = useState(false);
   const [generatedBrief, setGeneratedBrief] = useState<any | null>(null);
   
-  const [isTyping, setIsTyping] = useState(false);
+  const [/* isTyping */, setIsTyping] = useState(false);
   const typingTimerRef = React.useRef<NodeJS.Timeout | null>(null);
 
   React.useEffect(() => {
@@ -112,7 +112,7 @@ export default function AIPage() {
           sources: data.sources || []
         }
       ]);
-    } catch (err) {
+    } catch {
       setMessages((prev) => [
         ...prev,
         {

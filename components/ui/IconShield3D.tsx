@@ -22,13 +22,17 @@ export const IconShield3D: React.FC<IconShield3DProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [transformStyle, setTransformStyle] = useState<React.CSSProperties>({});
   const [isHovered, setIsHovered] = useState(false);
-  const [canHover, setCanHover] = useState(true);
+  const [canHover, setCanHover] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    }
+    return true;
+  });
   const rafId = useRef<number | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
-    setCanHover(mq.matches);
     const handler = (e: MediaQueryListEvent) => setCanHover(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);

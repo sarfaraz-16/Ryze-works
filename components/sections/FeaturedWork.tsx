@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowRight, Activity, ShoppingBag, Bike, ShieldCheck, CreditCard, Sparkles, Check } from "lucide-react";
+import { ArrowRight, Activity, ShoppingBag, Bike, Check } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { TiltCard3D } from "@/components/ui/TiltCard3D";
 import { FEATURED_PROJECTS } from "@/data/siteData";

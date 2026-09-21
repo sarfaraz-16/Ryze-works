@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import dynamic from "next/dynamic";
 import { Sparkles, ArrowRight, Loader2, Bot } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -38,17 +38,7 @@ export const RyzeAIPanel: React.FC = () => {
     }, 400);
   };
 
-  useEffect(() => {
-    const handleCustomPrompt = (e: CustomEvent<string>) => {
-      if (e.detail) {
-        submitQuery(e.detail);
-      }
-    };
-    window.addEventListener("ryze-ai-prompt" as any, handleCustomPrompt);
-    return () => window.removeEventListener("ryze-ai-prompt" as any, handleCustomPrompt);
-  }, []);
-
-  const submitQuery = async (userQuery: string) => {
+  const submitQuery = useCallback(async (userQuery: string) => {
     const trimmed = userQuery.trim();
     if (!trimmed || loading) return;
 
@@ -73,7 +63,18 @@ export const RyzeAIPanel: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [loading]);
+
+  useEffect(() => {
+    const handleCustomPrompt = (e: Event) => {
+      const customEvent = e as CustomEvent<string>;
+      if (customEvent.detail) {
+        submitQuery(customEvent.detail);
+      }
+    };
+    window.addEventListener("ryze-ai-prompt", handleCustomPrompt as EventListener);
+    return () => window.removeEventListener("ryze-ai-prompt", handleCustomPrompt as EventListener);
+  }, [submitQuery]);
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -4,15 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { AdvertiserInquiryForm } from "@/components/commercial/AdvertiserInquiryForm";
-import {
-  Sparkles,
-  BarChart3,
-  Users,
-  ShieldCheck,
-  FileText,
-  Layers,
-  ArrowRight,
-} from "lucide-react";
+import { Sparkles, BarChart3, Users, ShieldCheck, ArrowRight } from "lucide-react";
 import { TiltCard3D } from "@/components/ui/TiltCard3D";
 
 export const metadata = {

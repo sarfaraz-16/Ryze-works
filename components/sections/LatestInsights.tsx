@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Sparkles, Rocket, Cpu, Mountain, ArrowRight } from "lucide-react";
+import { Rocket, Mountain } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ARTICLES_DATA } from "@/data/siteData";
 

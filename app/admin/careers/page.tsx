@@ -1,7 +1,7 @@
 import React from "react";
 import { createAdminClient } from "@/lib/supabase/server";
 import { ApplicationsDeskClient, JobApplicationRecord } from "./ApplicationsDeskClient";
-import { Briefcase, Sparkles, UserCheck } from "lucide-react";
+import { Briefcase, Sparkles } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 

@@ -3,7 +3,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+// import {} from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 const CosmicHorizon3D = dynamic(() => import("@/components/ui/CosmicHorizon3D"), {

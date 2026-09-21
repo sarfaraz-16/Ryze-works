@@ -37,7 +37,7 @@ export const WhatWeDo: React.FC = () => {
 
       {/* 5-Column Bento Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-        {SERVICES_DATA.map((service, index) => (
+        {SERVICES_DATA.map((service, /* index */) => (
           <Link
             key={service.id}
             href={`/services/${service.slug}`}

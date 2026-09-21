@@ -4,16 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { IconShield3D } from "@/components/ui/IconShield3D";
 import { useTilt3D } from "@/hooks/useTilt3D";
-import {
-  Brain,
-  PenTool,
-  Code2,
-  TrendingUp,
-  Zap,
-  ArrowRight,
-  Layers,
-  LucideIcon,
-} from "lucide-react";
+import { Brain, PenTool, Code2, TrendingUp, Zap, ArrowRight, Layers, LucideIcon } from "lucide-react";
 
 export interface ServiceCapabilityItem {
   id: string;
@@ -133,7 +124,7 @@ export function ServiceCapabilityCard({ service, index }: ServiceCapabilityCardP
               className="mb-0 shrink-0"
             />
             <span className="font-mono text-[11px] sm:text-[12px] font-medium tracking-wider uppercase text-[#B896FF]">
-              0{index + 1} // {service.tagline}
+              0{index + 1} {"//"} {service.tagline}
             </span>
           </div>
 

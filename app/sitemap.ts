@@ -154,7 +154,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Dynamic Database Routes
-  let dynamicDbRoutes: MetadataRoute.Sitemap = [];
+  const dynamicDbRoutes: MetadataRoute.Sitemap = [];
   try {
     const supabase = createAdminClient();
     if (supabase) {

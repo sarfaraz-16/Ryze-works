@@ -4,6 +4,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Sparkles, Code2, TrendingUp, Layers, Zap } from "lucide-react";
+import { usePreloaderReveal } from "@/hooks/usePreloaderReveal";
 
 const HeroOrb3D = dynamic(() => import("@/components/hero/HeroOrb3D"), {
   ssr: false,
@@ -15,6 +16,8 @@ const HeroOrb3D = dynamic(() => import("@/components/hero/HeroOrb3D"), {
 });
 
 export const HeroOrb: React.FC = () => {
+  const revealed = usePreloaderReveal();
+
   return (
     <div className="relative w-full max-w-[620px] aspect-square flex items-center justify-center select-none">
       {/* Outer ambient glow using brand spectrum */}
@@ -31,7 +34,7 @@ export const HeroOrb: React.FC = () => {
 
       {/* 3D WebGL Hero Orb Canvas */}
       <div className="relative w-full h-full flex items-center justify-center">
-        <HeroOrb3D />
+        {revealed && <HeroOrb3D />}
       </div>
 
       {/* Floating Badges Container: z-30, pointer-events-none so mouse drag passes through to 3D canvas */}

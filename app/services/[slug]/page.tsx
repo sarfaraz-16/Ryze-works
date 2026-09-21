@@ -8,18 +8,7 @@ import { ProjectCard } from "@/components/projects/ProjectCard";
 import { SERVICES_DATA, FEATURED_PROJECTS } from "@/data/siteData";
 import { createClient, createAdminClient } from "@/lib/supabase/server";
 import { Project } from "@/types";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Sparkles,
-  Layers,
-  Brain,
-  PenTool,
-  Code2,
-  TrendingUp,
-  Zap,
-  LucideIcon,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, Sparkles, Layers, Brain, PenTool, Code2, TrendingUp, Zap, LucideIcon } from "lucide-react";
 
 export const revalidate = 3600;
 
@@ -114,7 +103,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         if (psData && Array.isArray(psData)) {
           linkedProjects = psData
             .map((item: any) => item.projects)
-            .filter(Boolean);
+            .filter(Boolean as any);
         }
       }
     }
@@ -135,7 +124,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     FALLBACK_SERVICE_PROJECTS[slug.toLowerCase()] || ["project-nostic", "project-zepto", "project-cred"];
   const fallbackProjects = fallbackIds
     .map((id) => FEATURED_PROJECTS.find((p) => p.id === id))
-    .filter(Boolean) as Project[];
+    .filter(Boolean as any) as Project[];
 
   const finalProjects: Project[] =
     linkedProjects.length > 0
@@ -176,7 +165,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           <div className="max-w-2xl">
             <div className="text-[11px] font-mono text-[#B896FF] uppercase tracking-widest mb-3 font-medium flex items-center gap-2">
               <Sparkles className="w-3.5 h-3.5 text-[#B896FF]" />
-              {service.tagline} // {service.group}
+              {service.tagline} {"//"} {service.group}
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.08] tracking-[-0.01em] [word-spacing:0.1em] text-white mb-6">
               {service.name}
@@ -203,7 +192,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             </div>
 
             <div className="font-mono text-[10px] tracking-widest uppercase text-[#B896FF] font-semibold mb-1">
-              {service.tagline} // DISCIPLINE
+              {service.tagline} {"//"} DISCIPLINE
             </div>
             <div className="text-xs text-zinc-300 font-medium mb-3">
               AI-Accelerated Studio Runtime
@@ -229,7 +218,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           <div className="lg:col-span-5 flex flex-col justify-between relative z-10">
             <div>
               <div className="font-mono text-[11px] sm:text-[12px] font-medium tracking-wider uppercase text-[#B896FF] mb-2">
-                01 // {service.tagline} METHODOLOGY
+                01 {"//"} {service.tagline} METHODOLOGY
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-3 leading-snug group-hover:text-violet-200 transition-colors">
                 AI-Native Methodology

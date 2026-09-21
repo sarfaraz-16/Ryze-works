@@ -1,0 +1,701 @@
+{
+  "D:\\RYZE WEBSITE\\app\\admin\\articles\\ArticleEditorForm.tsx": [
+    {
+      "line": 19,
+      "rule": "unused",
+      "name": "Sparkles"
+    },
+    {
+      "line": 22,
+      "rule": "unused",
+      "name": "Tag"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\admin\\articles\\[id]\\page.tsx": [
+    {
+      "line": 14,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\admin\\articles\\actions.ts": [
+    {
+      "line": 25,
+      "rule": "any"
+    },
+    {
+      "line": 72,
+      "rule": "any"
+    },
+    {
+      "line": 111,
+      "rule": "any"
+    },
+    {
+      "line": 185,
+      "rule": "any"
+    },
+    {
+      "line": 229,
+      "rule": "any"
+    },
+    {
+      "line": 255,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\admin\\articles\\page.tsx": [
+    {
+      "line": 9,
+      "rule": "unused",
+      "name": "Clock"
+    },
+    {
+      "line": 10,
+      "rule": "unused",
+      "name": "Search"
+    },
+    {
+      "line": 21,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\admin\\careers\\ApplicationsDeskClient.tsx": [
+    {
+      "line": 10,
+      "rule": "unused",
+      "name": "Briefcase"
+    },
+    {
+      "line": 16,
+      "rule": "unused",
+      "name": "Calendar"
+    },
+    {
+      "line": 17,
+      "rule": "unused",
+      "name": "ExternalLink"
+    },
+    {
+      "line": 18,
+      "rule": "unused",
+      "name": "Shield"
+    },
+    {
+      "line": 19,
+      "rule": "unused",
+      "name": "FileText"
+    },
+    {
+      "line": 20,
+      "rule": "unused",
+      "name": "Clock"
+    },
+    {
+      "line": 67,
+      "rule": "unused",
+      "name": "isPending"
+    },
+    {
+      "line": 101,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\admin\\careers\\actions.ts": [
+    {
+      "line": 15,
+      "rule": "any"
+    },
+    {
+      "line": 77,
+      "rule": "any"
+    },
+    {
+      "line": 135,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\admin\\careers\\page.tsx": [
+    {
+      "line": 4,
+      "rule": "unused",
+      "name": "UserCheck"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\admin\\leads\\LeadsDeskClient.tsx": [
+    {
+      "line": 4,
+      "rule": "unused",
+      "name": "deleteLead"
+    },
+    {
+      "line": 6,
+      "rule": "unused",
+      "name": "Inbox"
+    },
+    {
+      "line": 8,
+      "rule": "unused",
+      "name": "Filter"
+    },
+    {
+      "line": 10,
+      "rule": "unused",
+      "name": "Trash2"
+    },
+    {
+      "line": 12,
+      "rule": "unused",
+      "name": "Clock"
+    },
+    {
+      "line": 17,
+      "rule": "unused",
+      "name": "Building"
+    },
+    {
+      "line": 18,
+      "rule": "unused",
+      "name": "Globe"
+    },
+    {
+      "line": 20,
+      "rule": "unused",
+      "name": "Loader2"
+    },
+    {
+      "line": 22,
+      "rule": "unused",
+      "name": "ExternalLink"
+    },
+    {
+      "line": 23,
+      "rule": "unused",
+      "name": "ChevronRight"
+    },
+    {
+      "line": 34,
+      "rule": "any"
+    },
+    {
+      "line": 36,
+      "rule": "any"
+    },
+    {
+      "line": 59,
+      "rule": "unused",
+      "name": "isPending"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\admin\\leads\\actions.ts": [
+    {
+      "line": 16,
+      "rule": "any"
+    },
+    {
+      "line": 69,
+      "rule": "any"
+    },
+    {
+      "line": 91,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\admin\\login\\page.tsx": [
+    {
+      "line": 54,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\admin\\page.tsx": [
+    {
+      "line": 15,
+      "rule": "unused",
+      "name": "ShieldCheck"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\admin\\testimonials\\TestimonialModerationClient.tsx": [
+    {
+      "line": 11,
+      "rule": "unused",
+      "name": "Sparkles"
+    },
+    {
+      "line": 14,
+      "rule": "unused",
+      "name": "Filter"
+    },
+    {
+      "line": 16,
+      "rule": "unused",
+      "name": "RotateCcw"
+    },
+    {
+      "line": 17,
+      "rule": "unused",
+      "name": "StarOff"
+    },
+    {
+      "line": 48,
+      "rule": "unused",
+      "name": "isPending"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\admin\\testimonials\\actions.ts": [
+    {
+      "line": 9,
+      "rule": "any"
+    },
+    {
+      "line": 50,
+      "rule": "any"
+    },
+    {
+      "line": 82,
+      "rule": "any"
+    },
+    {
+      "line": 117,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\advertise\\page.tsx": [
+    {
+      "line": 12,
+      "rule": "unused",
+      "name": "FileText"
+    },
+    {
+      "line": 13,
+      "rule": "unused",
+      "name": "Layers"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\ai-disclosure\\page.tsx": [
+    {
+      "line": 5,
+      "rule": "unused",
+      "name": "ShieldCheck"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\ai\\lab\\page.tsx": [
+    {
+      "line": 17,
+      "rule": "unused",
+      "name": "Code2"
+    },
+    {
+      "line": 18,
+      "rule": "unused",
+      "name": "CheckCircle2"
+    },
+    {
+      "line": 23,
+      "rule": "unused",
+      "name": "FileText"
+    },
+    {
+      "line": 79,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\ai\\page.tsx": [
+    {
+      "line": 71,
+      "rule": "any"
+    },
+    {
+      "line": 73,
+      "rule": "unused",
+      "name": "isTyping"
+    },
+    {
+      "line": 115,
+      "rule": "unused",
+      "name": "err"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\api\\ai\\brief\\route.ts": [
+    {
+      "line": 178,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\api\\ai\\chat\\route.ts": [
+    {
+      "line": 189,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\api\\ai\\search\\route.ts": [
+    {
+      "line": 58,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\api\\careers\\apply\\route.ts": [
+    {
+      "line": 133,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\api\\testimonials\\route.ts": [
+    {
+      "line": 63,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\careers\\CareerRoleCard.tsx": [
+    {
+      "line": 91,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\case-studies\\page.tsx": [
+    {
+      "line": 9,
+      "rule": "unused",
+      "name": "ArrowRight"
+    },
+    {
+      "line": 9,
+      "rule": "unused",
+      "name": "ShieldCheck"
+    },
+    {
+      "line": 50,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\contact\\page.tsx": [
+    {
+      "line": 44,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\insights\\InsightsClient.tsx": [
+    {
+      "line": 5,
+      "rule": "unused",
+      "name": "ArrowRight"
+    },
+    {
+      "line": 6,
+      "rule": "unused",
+      "name": "motion"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\insights\\[slug]\\page.tsx": [
+    {
+      "line": 103,
+      "rule": "unused",
+      "name": "bgGlow"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\insights\\page.tsx": [
+    {
+      "line": 40,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\media-kit\\page.tsx": [
+    {
+      "line": 9,
+      "rule": "unused",
+      "name": "Target"
+    },
+    {
+      "line": 10,
+      "rule": "unused",
+      "name": "BarChart2"
+    },
+    {
+      "line": 12,
+      "rule": "unused",
+      "name": "Download"
+    },
+    {
+      "line": 15,
+      "rule": "unused",
+      "name": "Award"
+    },
+    {
+      "line": 16,
+      "rule": "unused",
+      "name": "Layers"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\projects\\[slug]\\page.tsx": [
+    {
+      "line": 10,
+      "rule": "unused",
+      "name": "CheckCircle2"
+    },
+    {
+      "line": 38,
+      "rule": "any"
+    },
+    {
+      "line": 89,
+      "rule": "any"
+    },
+    {
+      "line": 91,
+      "rule": "any"
+    },
+    {
+      "line": 108,
+      "rule": "any"
+    },
+    {
+      "line": 110,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\reports\\[slug]\\page.tsx": [
+    {
+      "line": 12,
+      "rule": "unused",
+      "name": "Calendar"
+    },
+    {
+      "line": 14,
+      "rule": "unused",
+      "name": "FileText"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\reports\\page.tsx": [
+    {
+      "line": 8,
+      "rule": "unused",
+      "name": "ArrowRight"
+    },
+    {
+      "line": 8,
+      "rule": "unused",
+      "name": "Download"
+    },
+    {
+      "line": 8,
+      "rule": "unused",
+      "name": "BookOpen"
+    },
+    {
+      "line": 8,
+      "rule": "unused",
+      "name": "Layers"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\resources\\[slug]\\page.tsx": [
+    {
+      "line": 12,
+      "rule": "unused",
+      "name": "FileCode2"
+    },
+    {
+      "line": 14,
+      "rule": "unused",
+      "name": "Sparkles"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\services\\[slug]\\page.tsx": [
+    {
+      "line": 116,
+      "rule": "any"
+    },
+    {
+      "line": 142,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\testimonials\\TestimonialCard.tsx": [
+    {
+      "line": 7,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\app\\testimonials\\TestimonialsSubmissionForm.tsx": [
+    {
+      "line": 49,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\components\\admin\\AdminShell.tsx": [
+    {
+      "line": 18,
+      "rule": "unused",
+      "name": "Sparkles"
+    },
+    {
+      "line": 19,
+      "rule": "unused",
+      "name": "Layers"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\components\\background\\CosmicBackground3D.tsx": [
+    {
+      "line": 177,
+      "rule": "unused",
+      "name": "delta"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\components\\commercial\\AdvertiserInquiryForm.tsx": [
+    {
+      "line": 4,
+      "rule": "unused",
+      "name": "DollarSign"
+    },
+    {
+      "line": 4,
+      "rule": "unused",
+      "name": "Calendar"
+    },
+    {
+      "line": 4,
+      "rule": "unused",
+      "name": "Target"
+    },
+    {
+      "line": 102,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\components\\layout\\Navbar.tsx": [
+    {
+      "line": 10,
+      "rule": "unused",
+      "name": "isScrolled"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\components\\projects\\ProjectDetailHero.tsx": [
+    {
+      "line": 27,
+      "rule": "unused",
+      "name": "title"
+    },
+    {
+      "line": 28,
+      "rule": "unused",
+      "name": "category"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\components\\reports\\ReportDownloadForm.tsx": [
+    {
+      "line": 4,
+      "rule": "unused",
+      "name": "Sparkles"
+    },
+    {
+      "line": 45,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\components\\resources\\ResourceDownloadForm.tsx": [
+    {
+      "line": 4,
+      "rule": "unused",
+      "name": "Sparkles"
+    },
+    {
+      "line": 45,
+      "rule": "any"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\components\\resources\\ResourcesClient.tsx": [
+    {
+      "line": 6,
+      "rule": "unused",
+      "name": "ArrowRight"
+    },
+    {
+      "line": 6,
+      "rule": "unused",
+      "name": "Download"
+    },
+    {
+      "line": 6,
+      "rule": "unused",
+      "name": "Layers"
+    },
+    {
+      "line": 6,
+      "rule": "unused",
+      "name": "Sparkles"
+    },
+    {
+      "line": 6,
+      "rule": "unused",
+      "name": "Filter"
+    },
+    {
+      "line": 6,
+      "rule": "unused",
+      "name": "FileCode2"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\components\\sections\\CaseStudies.tsx": [
+    {
+      "line": 2,
+      "rule": "unused",
+      "name": "Sparkles"
+    },
+    {
+      "line": 2,
+      "rule": "unused",
+      "name": "TrendingUp"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\components\\sections\\ClosingCTA.tsx": [
+    {
+      "line": 6,
+      "rule": "unused",
+      "name": "ArrowRight"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\components\\sections\\FeaturedWork.tsx": [
+    {
+      "line": 2,
+      "rule": "unused",
+      "name": "ShieldCheck"
+    },
+    {
+      "line": 2,
+      "rule": "unused",
+      "name": "CreditCard"
+    },
+    {
+      "line": 2,
+      "rule": "unused",
+      "name": "Sparkles"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\components\\sections\\LatestInsights.tsx": [
+    {
+      "line": 3,
+      "rule": "unused",
+      "name": "Sparkles"
+    },
+    {
+      "line": 3,
+      "rule": "unused",
+      "name": "Cpu"
+    },
+    {
+      "line": 3,
+      "rule": "unused",
+      "name": "ArrowRight"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\components\\sections\\WhatWeDo.tsx": [
+    {
+      "line": 40,
+      "rule": "unused",
+      "name": "index"
+    }
+  ],
+  "D:\\RYZE WEBSITE\\lib\\ai\\embeddings.ts": [
+    {
+      "line": 26,
+      "rule": "any"
+    }
+  ]
+}

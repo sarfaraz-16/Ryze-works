@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { TiltCard3D } from "@/components/ui/TiltCard3D";
 import { REPORTS_DATA } from "@/data/reportsData";
-import { FileText, ArrowRight, Download, Sparkles, BookOpen, Layers } from "lucide-react";
+import { FileText, Sparkles } from "lucide-react";
 
 export const revalidate = 3600;
 
