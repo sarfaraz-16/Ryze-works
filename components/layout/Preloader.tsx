@@ -24,7 +24,7 @@ export const Preloader: React.FC = () => {
     // Set fallback timeout in case autoplay is blocked
     const fallbackTimer = setTimeout(() => {
       handleComplete();
-    }, 7000);
+    }, 4500);
 
     // Setup skip listener
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -64,9 +64,10 @@ export const Preloader: React.FC = () => {
             muted
             playsInline
             preload="auto"
-            onLoadedData={(e) => {
+            onError={() => setIsComplete(true)}
+            onCanPlay={(e) => {
               e.currentTarget.playbackRate = 1.6;
-              e.currentTarget.play().catch(() => {});
+              e.currentTarget.play().catch(() => setIsComplete(true));
             }}
             onEnded={(e) => {
               if (e.currentTarget.currentTime > 1) {
