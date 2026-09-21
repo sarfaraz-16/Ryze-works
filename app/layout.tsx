@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CosmicBackground } from "@/components/background/CosmicBackground";
-import { Preloader } from "@/components/layout/Preloader";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans",
@@ -86,7 +85,6 @@ export default function RootLayout({
           Skip to main content
         </a>
         <div id="main-content" className="contents">
-          <Preloader />
           {children}
         </div>
       </body>
