@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-// import {} from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { ArrowRight } from "lucide-react";
+import { useReducedMotion } from "framer-motion";
 
 const CosmicHorizon3D = dynamic(() => import("@/components/ui/CosmicHorizon3D"), {
   ssr: false,
@@ -12,6 +12,9 @@ const CosmicHorizon3D = dynamic(() => import("@/components/ui/CosmicHorizon3D"),
 });
 
 export const ClosingCTA: React.FC = () => {
+  const shouldReduceMotion = useReducedMotion();
+  const arrowRef = useRef<HTMLDivElement>(null);
+  
   const marqueeItems = [
     "AI-NATIVE ARCHITECTURE",
     "10X VELOCITY",
@@ -21,10 +24,27 @@ export const ClosingCTA: React.FC = () => {
     "CATEGORY LEADERSHIP"
   ];
 
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!arrowRef.current) return;
+      const rect = arrowRef.current.getBoundingClientRect();
+      const diskCenterX = rect.left + rect.width / 2;
+      const diskCenterY = rect.top + rect.height / 2;
+      const angle = Math.atan2(e.clientY - diskCenterY, e.clientX - diskCenterX) * (180 / Math.PI);
+      
+      arrowRef.current.style.transform = `rotate(${angle}deg)`;
+    };
+    
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [shouldReduceMotion]);
+
   return (
     <section className="relative overflow-hidden border-t border-white/[0.08] bg-[#080417]">
       {/* Full-bleed Pre-footer Anchor Marquee */}
-      <div className="py-3.5 border-b border-white/[0.06] bg-[#080417]/80 overflow-hidden relative select-none">
+      <div className="py-3.5 border-b border-white/[0.06] bg-[#080417]/80 overflow-hidden relative select-none z-20">
         <div className="animate-marquee flex items-center gap-12 font-mono text-[11px] font-bold tracking-[0.25em] text-[#B896FF]/70 uppercase">
           {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, idx) => (
             <div key={idx} className="flex items-center gap-12 shrink-0">
@@ -36,19 +56,22 @@ export const ClosingCTA: React.FC = () => {
       </div>
 
       {/* Main Closing CTA Container */}
-      <div className="relative py-20 sm:py-28">
+      <div className="relative py-24 md:py-32 flex flex-col items-center justify-center min-h-[70vh]">
+        
+        {/* Curved Cosmic Horizon Backdrop */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-[350px] rounded-[100%] bg-gradient-to-t from-[#7042FF]/15 via-transparent to-transparent pointer-events-none blur-2xl z-0" />
+
         {/* 3D Cosmic Event Horizon Warp Grid */}
         <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
           <CosmicHorizon3D />
-          {/* Soft dark gradient mask so wireframe emerges organically out of the dark void */}
           <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#030014]/40 to-[#030014] pointer-events-none" />
         </div>
 
         {/* Background ambient gradient glow with brand spectrum */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(112,66,255,0.25),rgba(8,4,23,0)_70%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(112,66,255,0.25),rgba(8,4,23,0)_70%)] pointer-events-none z-0" />
 
         {/* Background neon undulating light wave ribbons matching WEBSITE UI.jpeg */}
-        <div className="absolute inset-0 pointer-events-none opacity-50">
+        <div className="absolute inset-0 pointer-events-none opacity-50 z-0">
           <svg
             viewBox="0 0 1440 280"
             fill="none"
@@ -100,25 +123,51 @@ export const ClosingCTA: React.FC = () => {
           </svg>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
-          <div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-[-0.01em] [word-spacing:0.1em] text-white leading-snug">
-              Ready to build what&apos;s next?<br />
-              <span className="text-zinc-200">Let&apos;s create impact together.</span>
+        {/* Main Content Overlay */}
+        <div className="max-w-7xl mx-auto px-6 relative z-10 w-full flex flex-col items-center text-center">
+          
+          {/* Agency Metadata & Availability */}
+          <div className="text-xs font-mono tracking-widest uppercase text-emerald-400 flex items-center justify-center gap-2 mb-8">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10b981]" />
+            ACCEPTING SELECT Q4 2026 PROJECTS
+          </div>
+
+          {/* Giant Display Typography */}
+          <div className="flex flex-col items-center justify-center gap-2 md:gap-4 mb-16 relative pointer-events-none">
+            <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.95] text-white uppercase text-center">
+              HAVE A VISION?
+            </h2>
+            <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.95] uppercase text-center bg-gradient-to-r from-white via-[#c7d2fe] to-[#7042FF] bg-clip-text text-transparent">
+              LET&apos;S BUILD IT.
             </h2>
           </div>
 
-          <div className="shrink-0">
-            <Link href="/start-a-project">
-              <Button
-                variant="primary"
-                size="lg"
-                className="text-xs font-bold tracking-[0.15em] px-8 py-4 rounded-xl"
-              >
-                START A PROJECT →
-              </Button>
+          {/* Interactive Compass Action Disk */}
+          <div className="relative mt-10 mb-12 cursor-pointer z-20">
+            <Link href="/contact" className="block relative group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7042FF] rounded-full" aria-label="Start a project">
+              <div className="w-36 h-36 md:w-44 md:h-44 rounded-full bg-[#120a2e]/90 border-2 border-[#7042FF]/40 shadow-[0_0_40px_rgba(112,66,255,0.25)] hover:border-[#38bdf8] hover:shadow-[0_0_60px_rgba(56,189,248,0.35)] transition-all duration-300 flex flex-col items-center justify-center">
+                <span className="text-[12px] font-mono tracking-widest text-slate-200 font-semibold group-hover:text-white uppercase mb-2">
+                  START
+                </span>
+                {/* Center dot/pivot */}
+                <div className="relative flex items-center justify-center w-8 h-8 rounded-full bg-white/10 group-hover:bg-[#38bdf8]/30 transition-colors">
+                  <div 
+                    ref={arrowRef} 
+                    className="absolute w-full h-full flex items-center justify-center transition-transform duration-75 ease-out origin-center"
+                    style={shouldReduceMotion ? {} : { transform: 'rotate(0deg)' }}
+                  >
+                    <ArrowRight className="w-6 h-6 text-white group-hover:text-white transition-colors" />
+                  </div>
+                </div>
+              </div>
             </Link>
           </div>
+
+          {/* Quick-access email */}
+          <a href="mailto:hello@ryzeworks.com" className="text-slate-400 hover:text-white hover:underline underline-offset-4 transition-colors font-mono text-sm tracking-wide z-20 relative">
+            HELLO@RYZEWORKS.COM
+          </a>
+          
         </div>
       </div>
     </section>

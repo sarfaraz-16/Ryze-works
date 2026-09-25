@@ -2,6 +2,7 @@ import React from "react";
 import { ArrowRight, Activity, CreditCard } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { TiltCard3D } from "@/components/ui/TiltCard3D";
+import { CounterNumber } from "@/components/ui/CounterNumber";
 
 export const CaseStudies: React.FC = () => {
   return (
@@ -43,7 +44,9 @@ export const CaseStudies: React.FC = () => {
                 <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981]" />
               </div>
               <div className="w-full h-12 bg-slate-950 rounded-xl flex flex-col items-center justify-center shadow-inner">
-                <span className="text-[11px] font-mono font-bold text-sky-400">98.6°F</span>
+                <span className="text-[11px] font-mono font-bold text-sky-400">
+                  <CounterNumber value={98.6} decimals={1} suffix="°F" />
+                </span>
                 <span className="text-[7px] font-mono text-emerald-400">STATUS: CALIBRATED</span>
               </div>
               <div className="w-full flex items-center justify-between text-[8px] font-bold text-slate-600 border-t border-slate-200 pt-1">
@@ -98,8 +101,10 @@ export const CaseStudies: React.FC = () => {
                 <div className="h-8 w-1.5 bg-sky-300 rounded-full" />
               </div>
               <div className="text-[9px] font-bold text-sky-200 flex justify-between items-center border-t border-white/10 pt-1">
-                <span>40M+ DAILY TXN</span>
-                <span className="font-mono text-emerald-300">99.99% UP</span>
+                <span><CounterNumber value={40} suffix="M+ DAILY TXN" /></span>
+                <span className="font-mono text-emerald-300">
+                  <CounterNumber value={99.99} decimals={2} suffix="% UP" />
+                </span>
               </div>
             </div>
           </div>
@@ -147,7 +152,9 @@ export const CaseStudies: React.FC = () => {
                 <div className="w-9 h-9 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center mx-auto mb-1">
                   <CreditCard className="w-4 h-4 text-emerald-300" />
                 </div>
-                <div className="text-[8px] font-mono text-emerald-300 font-bold">₹1,850 APPROVED</div>
+                <div className="text-[8px] font-mono text-emerald-300 font-bold">
+                  <CounterNumber value={1850} prefix="₹" suffix=" APPROVED" />
+                </div>
               </div>
               <div className="w-full py-1 bg-emerald-400 rounded-md text-[7px] font-black text-slate-950 text-center shadow-md">
                 COMPLETE ORDER
