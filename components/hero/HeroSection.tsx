@@ -25,7 +25,8 @@ export function HeroSection() {
     const img = imagesRef.current[frameIndex - 1];
     if (!img || !img.complete) return;
 
-    const dpr = window.devicePixelRatio || 1;
+    // Cap devicePixelRatio to 2 for mobile performance
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
 
@@ -38,7 +39,7 @@ export function HeroSection() {
     ctx.scale(dpr, dpr);
     ctx.clearRect(0, 0, width, height);
 
-    // object-cover math
+    // Dynamic math for mobile vs desktop
     const imgRatio = img.naturalWidth / img.naturalHeight;
     const canvasRatio = width / height;
     let renderW = width;
@@ -46,16 +47,38 @@ export function HeroSection() {
     let offsetX = 0;
     let offsetY = 0;
 
-    if (canvasRatio > imgRatio) {
-      renderH = width / imgRatio;
-      offsetY = (height - renderH) / 2;
+    const isMobile = width < 768;
+
+    if (isMobile) {
+      // Hybrid contain/cover logic to prevent helmet cut-off
+      if (canvasRatio > imgRatio) {
+        renderH = height;
+        renderW = height * imgRatio;
+        offsetX = (width - renderW) / 2;
+        offsetY = 0;
+      } else {
+        renderW = width;
+        renderH = width / imgRatio;
+        offsetX = 0;
+        offsetY = (height - renderH) / 2;
+      }
     } else {
-      renderW = height * imgRatio;
-      offsetX = (width - renderW) / 2;
+      // Original cover math
+      if (canvasRatio > imgRatio) {
+        renderW = width;
+        renderH = width / imgRatio;
+        offsetX = 0;
+        offsetY = (height - renderH) / 2;
+      } else {
+        renderH = height;
+        renderW = height * imgRatio;
+        offsetX = (width - renderW) / 2;
+        offsetY = 0;
+      }
     }
 
-    // Offset downwards by navbar clearance so the helmet is never cut off
-    const navClearance = 40;
+    // Safe area top padding so mobile headers never overlap suit helmet
+    const navClearance = isMobile ? 80 : 40;
     offsetY = Math.max(navClearance, offsetY + navClearance);
 
     ctx.drawImage(img, offsetX, offsetY, renderW, renderH);
@@ -150,8 +173,8 @@ export function HeroSection() {
 
   return (
     <section ref={containerRef} className="relative w-full h-[450vh] bg-[#080417]">
-      {/* Sticky viewport pinned to the top for the entire 450vh duration */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+      {/* Sticky viewport uses 100dvh for mobile dynamic address bars */}
+      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden flex items-center justify-center">
         {/* Canvas Layer */}
         <canvas
           ref={canvasRef}
@@ -161,21 +184,21 @@ export function HeroSection() {
         {/* PHASE 1: Initial Text Overlay */}
         <motion.div 
           style={{ opacity: introOpacity, y: introY, pointerEvents: introPointerEvents as any }}
-          className="absolute inset-0 w-full max-w-7xl mx-auto px-6 flex flex-col justify-center z-10"
+          className="absolute inset-0 w-full max-w-7xl mx-auto px-4 sm:px-6 flex flex-col justify-center z-10 pt-20 sm:pt-16"
         >
           <div className="max-w-2xl pointer-events-auto">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono tracking-wider uppercase bg-violet-950/60 border border-violet-500/30 text-violet-300 mb-6 backdrop-blur-md">
               <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
               AI-NATIVE CREATIVE & TECHNOLOGY PARTNER
             </span>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.08] mb-6">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-tight sm:leading-[1.08] mb-6">
               Strategy. Design.<br />
               Technology. Content.<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-300 to-cyan-400">
                 Powered by AI.
               </span>
             </h1>
-            <p className="text-lg text-slate-300 max-w-xl leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-300 max-w-xl leading-relaxed">
               We help ambitious brands build, grow and scale with clarity, creativity and intelligent systems.
             </p>
           </div>
@@ -184,26 +207,19 @@ export function HeroSection() {
         {/* PHASE 2: End-State Reveal & Persistent Docked CTAs */}
         <motion.div
           style={{ opacity: endOpacity, y: endY, pointerEvents: endPointerEvents as any }}
-          className="absolute bottom-12 inset-x-0 mx-auto z-20 flex flex-col items-center justify-center text-center px-6"
+          className="absolute bottom-8 sm:bottom-12 inset-x-0 mx-auto z-20 flex flex-col items-center justify-center text-center px-4 sm:px-6 w-full"
         >
-          {/* Eyebrow badge with AI Studio direct link */}
-          <Link className="group inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-[0.25em] bg-violet-950/70 border border-violet-500/40 text-violet-300 backdrop-blur-md hover:bg-violet-900/80 hover:border-violet-400 transition-all duration-300 mb-3 pointer-events-auto shadow-lg shadow-violet-950/40" href="/ai">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-            <span>EXPLORE AI LAB & STUDIO</span>
-            <span className="text-violet-400 group-hover:translate-x-0.5 transition-transform duration-200">&rarr;</span>
-          </Link>
-
           {/* Main Punchline */}
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white mb-6">
             Have a vision? Let&apos;s build it.
           </h2>
 
-          {/* Action Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-4 pointer-events-auto">
-            <Link className="px-6 py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wider uppercase bg-white/10 hover:bg-white/20 border border-white/20 text-white backdrop-blur-md transition-all duration-300 flex items-center gap-2" href="#work">
+          {/* Action Buttons (Stacked on mobile, row on tablet+) */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-xs sm:max-w-none mx-auto pointer-events-auto">
+            <Link className="flex items-center justify-center w-full sm:w-auto px-6 py-3 min-h-[44px] rounded-full text-xs sm:text-sm font-semibold tracking-wider uppercase bg-white/10 hover:bg-white/20 border border-white/20 text-white backdrop-blur-md transition-all duration-300 gap-2" href="#work">
               EXPLORE OUR WORK <span>&rarr;</span>
             </Link>
-            <Link className="px-6 py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wider uppercase bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white transition-all duration-300 shadow-lg shadow-violet-900/50" href="#contact">
+            <Link className="flex items-center justify-center w-full sm:w-auto px-6 py-3 min-h-[44px] rounded-full text-xs sm:text-sm font-semibold tracking-wider uppercase bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white transition-all duration-300 shadow-lg shadow-violet-900/50" href="#contact">
               START A PROJECT
             </Link>
           </div>
