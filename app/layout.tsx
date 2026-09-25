@@ -5,6 +5,7 @@ import { CosmicBackground } from "@/components/background/CosmicBackground";
 import Preloader from "@/components/layout/Preloader";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { CompanionAstronaut } from "@/components/spatial/CompanionAstronaut";
+import Script from "next/script";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans",
@@ -81,11 +82,17 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <script
+        <Script
+          id="ryze-json-ld"
           type="application/ld+json"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        <script dangerouslySetInnerHTML={{ __html: preloaderGate }} />
+        <Script 
+          id="ryze-preloader-gate" 
+          strategy="beforeInteractive" 
+          dangerouslySetInnerHTML={{ __html: preloaderGate }} 
+        />
         <noscript>
           <style>{`#ryze-preloader{display:none!important}`}</style>
         </noscript>

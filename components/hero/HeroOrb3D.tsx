@@ -407,17 +407,20 @@ export default function HeroOrb3D({ className = "" }: HeroOrb3DProps) {
     });
     resizeObserver.observe(container);
 
-    // Animation loop setup with Three.js Clock for frame-rate independence
+    // Animation loop setup with performance.now() for frame-rate independence
     let animationFrameId: number;
-    const clock = new THREE.Clock();
+    let lastTime = performance.now();
+    const startTime = performance.now();
     let ringSpinZ = 0;
     const BASE_SCALE = 0.85;
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
 
-      const delta = Math.min(clock.getDelta(), 0.1);
-      const t = clock.getElapsedTime();
+      const now = performance.now();
+      const delta = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
+      const t = (now - startTime) / 1000;
       const deltaScale = delta * 60; // normalized to 60fps
 
       // 3. Coasting & Perpetual Directional Drift:

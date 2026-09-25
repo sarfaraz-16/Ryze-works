@@ -1,224 +1,216 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { HeroOrb } from "./HeroOrb";
-import { usePreloaderReveal } from "@/hooks/usePreloaderReveal";
+import React, { useEffect, useRef, useState } from 'react';
+import { useScroll, useTransform, motion, useReducedMotion } from 'framer-motion';
+import Link from 'next/link';
 
-const PROMPTS = [
-  "Scale our brand with custom AI models...",
-  "Redesign mobile UX for 10M+ users...",
-  "Automate enterprise creative workflows...",
-  "Architect full-stack Next.js platforms...",
-];
+const TOTAL_FRAMES = 99;
 
-const QUICK_CHIPS = [
-  {
-    label: "AI Strategy",
-    prompt: "AI Strategy: What are the best opportunities to embed AI in our enterprise stack?",
-  },
-  {
-    label: "Product Design",
-    prompt: "Product Design: How would Ryze approach a complete UX/UI overhaul for scale?",
-  },
-  {
-    label: "Full-Stack Build",
-    prompt: "Full-Stack Build: What is the recommended Next.js and Supabase architecture?",
-  },
-  {
-    label: "Performance Growth",
-    prompt: "Performance Growth: How can we optimize our conversion funnels and speed?",
-  },
-];
+export function HeroSection() {
+  const shouldReduceMotion = useReducedMotion();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
+  const currentRenderFrameRef = useRef<number>(1);
+  const targetFrameRef = useRef<number>(1);
+  const [loaded, setLoaded] = useState(false);
 
-export const HeroSection: React.FC = () => {
-  const revealed = usePreloaderReveal();
-  const [heroPrompt, setHeroPrompt] = useState("");
-  const [placeholderText, setPlaceholderText] = useState(PROMPTS[0]);
-  const [isFocused, setIsFocused] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+  // 1. Pure Canvas Draw function
+  const renderFrame = (frameIndex: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-  // Animated Cycling Placeholder / Typewriter
-  useEffect(() => {
-    if (isFocused || heroPrompt) return;
+    const img = imagesRef.current[frameIndex - 1];
+    if (!img || !img.complete) return;
 
-    let currentPromptIdx = 0;
-    let charIdx = 0;
-    let isDeleting = false;
-    let timer: NodeJS.Timeout;
+    const dpr = window.devicePixelRatio || 1;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
 
-    const tick = () => {
-      const currentFullText = PROMPTS[currentPromptIdx];
-
-      if (isDeleting) {
-        charIdx--;
-        setPlaceholderText(currentFullText.substring(0, charIdx));
-        if (charIdx === 0) {
-          isDeleting = false;
-          currentPromptIdx = (currentPromptIdx + 1) % PROMPTS.length;
-          timer = setTimeout(tick, 350);
-          return;
-        }
-        timer = setTimeout(tick, 25);
-      } else {
-        charIdx++;
-        setPlaceholderText(currentFullText.substring(0, charIdx));
-        if (charIdx === currentFullText.length) {
-          isDeleting = true;
-          timer = setTimeout(tick, 2600);
-          return;
-        }
-        timer = setTimeout(tick, 45);
-      }
-    };
-
-    timer = setTimeout(tick, 1000);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [isFocused, heroPrompt]);
-
-  const handleHeroPromptSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const query = heroPrompt.trim() || placeholderText;
-    if (!query) return;
-
-    const aiSection = document.getElementById("ryze-ai");
-    if (aiSection) {
-      aiSection.scrollIntoView({ behavior: "smooth" });
-      window.dispatchEvent(
-        new CustomEvent("ryze-ai-prompt", { detail: query })
-      );
-      setHeroPrompt("");
+    if (canvas.width !== width * dpr || canvas.height !== height * dpr) {
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
     }
+
+    ctx.save();
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, width, height);
+
+    // object-cover math
+    const imgRatio = img.naturalWidth / img.naturalHeight;
+    const canvasRatio = width / height;
+    let renderW = width;
+    let renderH = height;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    if (canvasRatio > imgRatio) {
+      renderH = width / imgRatio;
+      offsetY = (height - renderH) / 2;
+    } else {
+      renderW = height * imgRatio;
+      offsetX = (width - renderW) / 2;
+    }
+
+    // Offset downwards by navbar clearance so the helmet is never cut off
+    const navClearance = 40;
+    offsetY = Math.max(navClearance, offsetY + navClearance);
+
+    ctx.drawImage(img, offsetX, offsetY, renderW, renderH);
+    ctx.restore();
   };
 
-  const handleChipClick = (promptText: string) => {
-    setHeroPrompt(promptText);
-    inputRef.current?.focus();
-  };
+  // 2. Preload all 99 frames
+  useEffect(() => {
+    let loadedCount = 0;
+    const images: HTMLImageElement[] = [];
+
+    for (let i = 1; i <= TOTAL_FRAMES; i++) {
+      const img = new Image();
+      const frameNum = String(i).padStart(3, '0');
+      img.src = `/hero-frames/ezgif-frame-${frameNum}.png`;
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount === 1) {
+          // Render initial frame immediately
+          renderFrame(1);
+        }
+        if (loadedCount === TOTAL_FRAMES) {
+          setLoaded(true);
+        }
+      };
+      images.push(img);
+    }
+    imagesRef.current = images;
+  }, []);
+
+  // 3. Bind scroll to frame rendering via Framer Motion useScroll
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  });
+
+  // PHASE 1: Initial Hero Intro Block (Visible at 0%, Gone by 18%)
+  const introOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const introY = useTransform(scrollYProgress, [0, 0.15], [0, -35]);
+  const introPointerEvents = useTransform(scrollYProgress, (v) => v > 0.12 ? 'none' : 'auto');
+
+  // PHASE 2: End-State Reveal & Persistent Docked CTAs (Appears 72% to 95%)
+  const endOpacity = useTransform(scrollYProgress, [0.72, 0.85, 0.95], [0, 1, 0.9]);
+  const endY = useTransform(scrollYProgress, [0.72, 0.85], [30, 0]);
+  const endPointerEvents = useTransform(scrollYProgress, (v) => v > 0.7 ? 'auto' : 'none');
+
+  // Map Scroll Progress to Target Frame (hold last frame from 88% to 100%)
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on('change', (progress) => {
+      const effectiveProgress = Math.min(1, progress / 0.88);
+      targetFrameRef.current = 1 + effectiveProgress * (TOTAL_FRAMES - 1);
+    });
+
+    return () => unsubscribe();
+  }, [scrollYProgress]);
+
+  // Smooth Lerping Render Loop
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      renderFrame(TOTAL_FRAMES);
+      return;
+    }
+
+    let animationFrameId: number;
+    let lastRenderedFrame = -1;
+
+    const renderLoop = () => {
+      // Smooth lerp towards target with clamped interpolation
+      const lerpFactor = 0.09;
+      currentRenderFrameRef.current += (targetFrameRef.current - currentRenderFrameRef.current) * lerpFactor;
+      
+      const frameToDraw = Math.min(TOTAL_FRAMES, Math.max(1, Math.round(currentRenderFrameRef.current)));
+      
+      if (frameToDraw !== lastRenderedFrame) {
+        renderFrame(frameToDraw);
+        lastRenderedFrame = frameToDraw;
+      }
+      
+      animationFrameId = requestAnimationFrame(renderLoop);
+    };
+
+    animationFrameId = requestAnimationFrame(renderLoop);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [shouldReduceMotion]);
+
+  // Handle window resize to re-render sharp canvas
+  useEffect(() => {
+    const handleResize = () => renderFrame(Math.round(currentRenderFrameRef.current));
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
-    <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
-      {/* Brand verified hero ambient backlight */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_70%_-10%,rgba(112,66,255,0.28),rgba(8,4,23,0))] pointer-events-none" />
+    <section ref={containerRef} className="relative w-full h-[450vh] bg-[#080417]">
+      {/* Sticky viewport pinned to the top for the entire 450vh duration */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+        {/* Canvas Layer */}
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 w-full h-full pointer-events-none z-0"
+        />
 
-      {/* Secondary atmospheric soft flare */}
-      <div className="absolute top-1/4 left-10 w-[450px] h-[450px] bg-[#4318D1]/15 rounded-full blur-[140px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Column: Hero Content */}
-          <div className="lg:col-span-7 flex flex-col items-start">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-              transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.15 }}
-              className="flex flex-col items-start"
-            >
-              {/* Eyebrow badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E085A]/60 border border-[#7042FF]/40 text-[#B896FF] font-mono text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase mb-6 shadow-[0_0_20px_rgba(112,66,255,0.25)] backdrop-blur-md">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#B896FF] animate-pulse" />
-                <span>AI-NATIVE CREATIVE &amp; TECHNOLOGY PARTNER</span>
-              </div>
-  
-              {/* Main Headline */}
-              <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.08] tracking-[-0.01em] [word-spacing:0.1em] text-white mb-6">
-                Strategy. Design.<br />
-                Technology. Content.<br />
-                <span className="gradient-text-purple">Powered by AI.</span>
-              </h1>
-  
-              {/* Subheading */}
-              <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed max-w-xl mb-8">
-                We help ambitious brands build, grow and scale with clarity, creativity and intelligent systems.
-              </p>
-            </motion.div>
-
-            {/* Interactive Prompt Search Box */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-              transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
-              className="w-full max-w-lg mb-8"
-            >
-              <form
-                onSubmit={handleHeroPromptSubmit}
-                className="relative rounded-2xl bg-white/[0.04] border border-white/15 focus-within:border-violet-500/70 focus-within:shadow-[0_0_25px_rgba(139,92,246,0.2)] p-3.5 px-4 shadow-2xl backdrop-blur-md transition-all duration-200 group"
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex-1 min-w-0">
-                    <label
-                      htmlFor="hero-prompt-input"
-                      className="text-[10px] tracking-wider uppercase font-medium text-zinc-400 mb-1 block select-none"
-                    >
-                      What are you trying to build?
-                    </label>
-                    <input
-                      ref={inputRef}
-                      id="hero-prompt-input"
-                      type="text"
-                      value={heroPrompt}
-                      onFocus={() => setIsFocused(true)}
-                      onBlur={() => setIsFocused(false)}
-                      onChange={(e) => setHeroPrompt(e.target.value)}
-                      placeholder={isFocused && !heroPrompt ? "Tell Ryze what you're working on..." : placeholderText}
-                      className="w-full bg-transparent border-none outline-none ring-0 shadow-none focus:outline-none focus:ring-0 focus:border-none focus:ring-offset-0 focus:ring-transparent [box-shadow:none] text-sm text-zinc-100 placeholder:text-zinc-500 caret-violet-400 p-0"
-                      style={{ border: 'none', outline: 'none', boxShadow: 'none' }}
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    aria-label="Send to Ryze AI"
-                    className="w-8 h-8 rounded-full bg-violet-600 hover:bg-violet-500 text-white flex items-center justify-center shrink-0 transition-transform active:scale-95 cursor-pointer shadow-[0_0_15px_rgba(139,92,246,0.35)]"
-                  >
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </form>
-
-              {/* Interactive Quick-Starter Chips */}
-              <div className="flex flex-wrap items-center gap-2 mt-3">
-                {QUICK_CHIPS.map((chip) => (
-                  <button
-                    key={chip.label}
-                    type="button"
-                    onClick={() => handleChipClick(chip.prompt)}
-                    className="text-[11px] text-zinc-400 bg-white/[0.03] border border-white/10 hover:border-violet-500/50 hover:text-white transition-all cursor-pointer rounded-full px-3 py-1 backdrop-blur-md active:scale-95 flex items-center gap-1.5 shadow-sm"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-violet-400/70" />
-                    <span>{chip.label}</span>
-                  </button>
-                ))}
-              </div>
-
-              {/* Secondary CTA Pairing */}
-              <div className="mt-6 flex items-center gap-2">
-                <Link
-                  href="/work"
-                  className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider text-zinc-300 hover:text-white transition-colors group"
-                >
-                  <span>EXPLORE OUR WORK</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#B896FF] group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </motion.div>
+        {/* PHASE 1: Initial Text Overlay */}
+        <motion.div 
+          style={{ opacity: introOpacity, y: introY, pointerEvents: introPointerEvents as any }}
+          className="absolute inset-0 w-full max-w-7xl mx-auto px-6 flex flex-col justify-center z-10"
+        >
+          <div className="max-w-2xl pointer-events-auto">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono tracking-wider uppercase bg-violet-950/60 border border-violet-500/30 text-violet-300 mb-6 backdrop-blur-md">
+              <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
+              AI-NATIVE CREATIVE & TECHNOLOGY PARTNER
+            </span>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.08] mb-6">
+              Strategy. Design.<br />
+              Technology. Content.<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-300 to-cyan-400">
+                Powered by AI.
+              </span>
+            </h1>
+            <p className="text-lg text-slate-300 max-w-xl leading-relaxed">
+              We help ambitious brands build, grow and scale with clarity, creativity and intelligent systems.
+            </p>
           </div>
+        </motion.div>
 
-          {/* Right Column: 3D Glowing Orb & Orbiting Badges */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-            transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.4 }}
-            className="lg:col-span-5 flex items-center justify-center relative mt-8 lg:mt-0"
-          >
-            <HeroOrb />
-          </motion.div>
-        </div>
+        {/* PHASE 2: End-State Reveal & Persistent Docked CTAs */}
+        <motion.div
+          style={{ opacity: endOpacity, y: endY, pointerEvents: endPointerEvents as any }}
+          className="absolute bottom-12 inset-x-0 mx-auto z-20 flex flex-col items-center justify-center text-center px-6"
+        >
+          {/* Eyebrow badge with AI Studio direct link */}
+          <Link className="group inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-[0.25em] bg-violet-950/70 border border-violet-500/40 text-violet-300 backdrop-blur-md hover:bg-violet-900/80 hover:border-violet-400 transition-all duration-300 mb-3 pointer-events-auto shadow-lg shadow-violet-950/40" href="/ai">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            <span>EXPLORE AI LAB & STUDIO</span>
+            <span className="text-violet-400 group-hover:translate-x-0.5 transition-transform duration-200">&rarr;</span>
+          </Link>
+
+          {/* Main Punchline */}
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white mb-6">
+            Have a vision? Let&apos;s build it.
+          </h2>
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-4 pointer-events-auto">
+            <Link className="px-6 py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wider uppercase bg-white/10 hover:bg-white/20 border border-white/20 text-white backdrop-blur-md transition-all duration-300 flex items-center gap-2" href="#work">
+              EXPLORE OUR WORK <span>&rarr;</span>
+            </Link>
+            <Link className="px-6 py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wider uppercase bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white transition-all duration-300 shadow-lg shadow-violet-900/50" href="#contact">
+              START A PROJECT
+            </Link>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
-};
+}
+
+export default HeroSection;

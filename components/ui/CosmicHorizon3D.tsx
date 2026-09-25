@@ -202,13 +202,16 @@ export default function CosmicHorizon3D({
     // 7. Animation Loop
     let animationFrameId: number;
     let offsetAcc = 0;
-    const clock = new THREE.Clock();
+    let lastTime = performance.now();
+    const startTime = performance.now();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
 
-      const delta = Math.min(clock.getDelta(), 0.1);
-      const elapsed = clock.getElapsedTime();
+      const now = performance.now();
+      const delta = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
+      const elapsed = (now - startTime) / 1000;
 
       // Endless forward flight offset increment
       offsetAcc += speedRef.current * (delta * 60);

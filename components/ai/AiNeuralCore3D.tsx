@@ -205,7 +205,8 @@ export default function AiNeuralCore3D({
 
     // 6. Animation Loop
     let animationFrameId: number;
-    const clock = new THREE.Clock();
+    let lastTime = performance.now();
+    const startTime = performance.now();
     let currentSpread = 1.0;
     let currentRotSpeed = 0.003;
     let currentPointSize = 0.32;
@@ -213,8 +214,10 @@ export default function AiNeuralCore3D({
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
 
-      const delta = Math.min(clock.getDelta(), 0.1);
-      const t = clock.getElapsedTime();
+      const now = performance.now();
+      const delta = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
+      const t = (now - startTime) / 1000;
       const deltaScale = delta * 60;
 
       const { isFocused: focused, isTyping: typing } = propsRef.current;

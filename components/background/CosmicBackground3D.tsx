@@ -153,18 +153,19 @@ export default function CosmicBackground3D({
     // 7. Tab Visibility Lifecycle: Auto-pause rendering when inactive
     let isTabVisible = !document.hidden;
     let animationFrameId: number | null = null;
+    let lastTime = performance.now();
+    const startTime = performance.now();
 
     const handleVisibilityChange = () => {
       isTabVisible = !document.hidden;
       if (isTabVisible && !animationFrameId) {
-        clock.getDelta(); // flush delta spike
+        lastTime = performance.now(); // flush delta spike
         animate();
       }
     };
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     // 8. High-Performance Render Loop
-    const clock = new THREE.Clock();
 
     const animate = () => {
       if (!isTabVisible) {
@@ -174,8 +175,10 @@ export default function CosmicBackground3D({
 
       animationFrameId = requestAnimationFrame(animate);
 
-      const _delta = Math.min(clock.getDelta(), 0.1);
-      const t = clock.getElapsedTime();
+      const now = performance.now();
+      const _delta = Math.min((now - lastTime) / 1000, 0.1);
+      lastTime = now;
+      const t = (now - startTime) / 1000;
 
       // Smooth scroll parallax lerp
       lerpedScrollY += (targetScrollY - lerpedScrollY) * 0.05;

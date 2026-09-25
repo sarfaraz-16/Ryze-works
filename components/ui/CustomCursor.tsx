@@ -80,7 +80,7 @@ export function CustomCursor() {
               ? 'rgba(255, 255, 255, 0.6)'
               : cursorVariant === 'hover'
               ? 'rgba(56, 189, 248, 0.6)'
-              : 'transparent',
+              : 'rgba(255, 255, 255, 0)',
         }}
         transition={{ type: 'spring', damping: 25, stiffness: 350 }}
         className="fixed top-0 left-0 border flex items-center justify-center backdrop-blur-[2px] shadow-[0_0_16px_rgba(112,66,255,0.4)]"
