@@ -258,17 +258,17 @@ export const ARTICLES_DATA: Article[] = [
     readTime: "5 min read",
     summary: "Why AI-native brands require dynamic generative visual systems rather than static corporate guidelines.",
     coverImage: "/images/insights/branding.jpg",
-    publishedAt: "2024-08-15"
+    publishedAt: "2026-08-15"
   },
   {
-    id: "art-growth-2024",
-    slug: "growth-strategies-that-actually-work-in-2024",
-    title: "Growth Strategies That Actually Work in 2024",
+    id: "art-growth-2026",
+    slug: "growth-strategies-that-actually-work-in-2026",
+    title: "Growth Strategies That Actually Work in 2026",
     category: "GROWTH",
     readTime: "6 min read",
     summary: "Breaking through advertising fatigue with algorithmic positioning, community flywheels, and zero-cac loops.",
     coverImage: "/images/insights/growth.jpg",
-    publishedAt: "2024-08-28"
+    publishedAt: "2026-08-28"
   },
   {
     id: "art-ai-products",
@@ -278,7 +278,7 @@ export const ARTICLES_DATA: Article[] = [
     readTime: "7 min read",
     summary: "Moving beyond chat wrappers to generative interfaces, agentic workflows, and latency-zero edge experiences.",
     coverImage: "/images/insights/technology.jpg",
-    publishedAt: "2024-09-01"
+    publishedAt: "2026-09-01"
   },
   {
     id: "art-idea-to-execution",
@@ -288,7 +288,7 @@ export const ARTICLES_DATA: Article[] = [
     readTime: "6 min read",
     summary: "The practical 30-day playbook for early-stage founders navigating product definition, tech stack, and launch.",
     coverImage: "/images/insights/business.jpg",
-    publishedAt: "2024-09-04"
+    publishedAt: "2026-09-04"
   }
 ];
 

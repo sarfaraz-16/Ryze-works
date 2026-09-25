@@ -15,7 +15,7 @@ export const LatestInsights: React.FC = () => {
             <div className="absolute w-36 h-20 bg-gradient-to-r from-[#7042FF]/50 to-[#B896FF]/40 rounded-full blur-md transform -rotate-12" />
           </div>
         );
-      case "growth-strategies-that-actually-work-in-2024":
+      case "growth-strategies-that-actually-work-in-2026":
         return (
           <div className="w-full h-44 bg-gradient-to-br from-[#2a1305] via-[#1a0c03] to-[#080417] rounded-xl overflow-hidden relative flex items-center justify-center p-4 border border-amber-500/30 shadow-inner">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.2),transparent_70%)]" />

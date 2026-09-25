@@ -55,7 +55,7 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
           readTime: data.read_time || "5 min read",
           summary: data.summary,
           coverImage: data.cover_image,
-          publishedAt: data.published_at ? data.published_at.split("T")[0] : "2024-09-01"
+          publishedAt: data.published_at ? data.published_at.split("T")[0] : "2026-09-01"
         };
         articleContent = data.content || null;
       }

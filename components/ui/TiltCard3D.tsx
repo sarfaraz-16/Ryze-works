@@ -11,6 +11,7 @@ export interface TiltCard3DProps extends UseTilt3DOptions {
   onClick?: () => void;
   style?: React.CSSProperties;
   ariaLabel?: string;
+  "data-cursor"?: string;
 }
 
 export const TiltCard3D: React.FC<TiltCard3DProps> = ({
@@ -25,6 +26,7 @@ export const TiltCard3D: React.FC<TiltCard3DProps> = ({
   perspective = 1000,
   easing = "cubic-bezier(0.16, 1, 0.3, 1)",
   speed = 400,
+  "data-cursor": dataCursor,
 }) => {
   const {
     cardRef,
@@ -66,12 +68,15 @@ export const TiltCard3D: React.FC<TiltCard3DProps> = ({
         <Link
           href={href}
           aria-label={ariaLabel}
+          data-cursor={dataCursor}
           className="block w-full h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B896FF] rounded-2xl"
         >
           {cardContent}
         </Link>
       ) : (
-        cardContent
+        <div data-cursor={dataCursor} className="w-full h-full">
+          {cardContent}
+        </div>
       )}
     </div>
   );

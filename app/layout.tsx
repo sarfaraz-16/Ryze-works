@@ -3,6 +3,8 @@ import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CosmicBackground } from "@/components/background/CosmicBackground";
 import Preloader from "@/components/layout/Preloader";
+import { CustomCursor } from "@/components/ui/CustomCursor";
+import { CompanionAstronaut } from "@/components/spatial/CompanionAstronaut";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans",
@@ -90,6 +92,9 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col font-sans antialiased bg-[#080417] text-zinc-100 selection:bg-[#7042FF] selection:text-white relative" suppressHydrationWarning>
         <CosmicBackground />
+        <CustomCursor />
+        <CompanionAstronaut />
+        <div className="grain-overlay" />
         <a href="#main-content" className="skip-to-content">
           Skip to main content
         </a>

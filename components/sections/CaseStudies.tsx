@@ -22,6 +22,7 @@ export const CaseStudies: React.FC = () => {
         <TiltCard3D
           href="/case-studies/nostic-transformation"
           ariaLabel="View case study: Nostic Transformation"
+          data-cursor="VIEW"
           className="group rounded-2xl bg-[#0d0e17]/90 border border-white/[0.08] hover:border-[#B896FF]/40 p-7 flex flex-col justify-between relative shadow-2xl shadow-black/50 hover:shadow-[#1E085A]/40 min-h-[380px] h-full"
         >
           {/* Top content - floating in 3D */}
@@ -68,6 +69,7 @@ export const CaseStudies: React.FC = () => {
         <TiltCard3D
           href="/case-studies/razorpay-scale"
           ariaLabel="View case study: Razorpay Scale"
+          data-cursor="VIEW"
           className="group rounded-2xl bg-[#0d0e17]/90 border border-white/[0.08] hover:border-[#B896FF]/40 p-7 flex flex-col justify-between relative shadow-2xl shadow-black/50 hover:shadow-[#1E085A]/40 min-h-[380px] h-full"
         >
           {/* Top content - floating in 3D */}
@@ -118,6 +120,7 @@ export const CaseStudies: React.FC = () => {
         <TiltCard3D
           href="/case-studies/simpl-engagement"
           ariaLabel="View case study: Simpl Engagement"
+          data-cursor="VIEW"
           className="group rounded-2xl bg-[#0d0e17]/90 border border-white/[0.08] hover:border-[#B896FF]/40 p-7 flex flex-col justify-between relative shadow-2xl shadow-black/50 hover:shadow-[#1E085A]/40 min-h-[380px] h-full"
         >
           {/* Top content - floating in 3D */}

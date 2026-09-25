@@ -202,6 +202,7 @@ export const FeaturedWork: React.FC = () => {
             key={project.id}
             href={`/projects/${project.slug}`}
             ariaLabel={`View project: ${project.title}`}
+            data-cursor="VIEW"
             className="group rounded-2xl bg-[#0d0e17]/85 backdrop-blur-md border border-white/[0.08] hover:border-[#B896FF]/35 p-4 shadow-2xl shadow-black/50 hover:shadow-[#1E085A]/40 flex flex-col justify-between hover:bg-[#131422] h-full"
           >
             {/* Visual Thumbnail: Layered Depth Hierarchy (floats above card frame in 3D space) */}

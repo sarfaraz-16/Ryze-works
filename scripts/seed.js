@@ -237,21 +237,21 @@ const ARTICLES = [
     seo_title: "The Future of Brand Building in an AI World | RYZE WORKS",
     seo_description: "Explore why modern AI-native brands require adaptive generative design systems.",
     status: "published",
-    published_at: "2024-08-15T00:00:00Z"
+    published_at: "2026-08-15T00:00:00Z"
   },
   {
-    slug: "growth-strategies-that-actually-work-in-2024",
-    title: "Growth Strategies That Actually Work in 2024",
+    slug: "growth-strategies-that-actually-work-in-2026",
+    title: "Growth Strategies That Actually Work in 2026",
     category: "GROWTH",
     read_time: "6 min read",
     summary: "A tactical breakdown of why programmatic distribution and AI-driven conversion loops outpace traditional paid acquisition.",
     cover_image: "/images/insights/growth.jpg",
     content: "Customer acquisition costs across Meta, Google, and traditional ad networks have surged significantly over the past 24 months. Brands relying purely on arbitrage and performance marketing without organic brand equity or automated retention funnels are seeing diminishing returns.\n\nModern growth engineering requires fusing product-led loops with high-velocity programmatic content distribution. In this deep dive, we outline our 4-stage growth framework that helped consumer brands achieve compounding retention with lower blended CAC.",
     tags: ["Growth", "Performance Marketing", "Funnel Optimization"],
-    seo_title: "Growth Strategies That Actually Work in 2024 | RYZE WORKS",
+    seo_title: "Growth Strategies That Actually Work in 2026 | RYZE WORKS",
     seo_description: "Proven tactical growth strategies combining programmatic distribution and product loops.",
     status: "published",
-    published_at: "2024-08-22T00:00:00Z"
+    published_at: "2026-08-22T00:00:00Z"
   },
   {
     slug: "how-ai-is-transforming-digital-products",
@@ -265,7 +265,7 @@ const ARTICLES = [
     seo_title: "How AI is Transforming Digital Products | RYZE WORKS",
     seo_description: "A deep architectural perspective on transitioning from CRUD dashboards to agentic software workflows.",
     status: "published",
-    published_at: "2024-08-29T00:00:00Z"
+    published_at: "2026-08-29T00:00:00Z"
   },
   {
     slug: "from-idea-to-execution-for-startup-founders",
@@ -279,7 +279,7 @@ const ARTICLES = [
     seo_title: "From Idea To Execution for Startups Founders | RYZE WORKS",
     seo_description: "The complete 30-day roadmap for early-stage startup founders from concept to verified launch.",
     status: "published",
-    published_at: "2024-09-04T00:00:00Z"
+    published_at: "2026-09-04T00:00:00Z"
   }
 ];
 
