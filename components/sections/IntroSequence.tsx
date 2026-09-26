@@ -85,12 +85,30 @@ export function IntroSequence() {
       img.src = `/intro-frames/ezgif-frame-${frameNum}.png`;
       img.onload = () => {
         loadedCount++;
+        window.dispatchEvent(
+          new CustomEvent('ryze:frame-progress', {
+            detail: { loaded: loadedCount, total: TOTAL_FRAMES }
+          })
+        );
         if (loadedCount === 1) {
           // Render initial frame immediately
           renderFrame(1);
         }
         if (loadedCount === TOTAL_FRAMES) {
           setLoaded(true);
+          window.dispatchEvent(new CustomEvent('ryze:frames-ready'));
+        }
+      };
+      img.onerror = () => {
+        loadedCount++;
+        window.dispatchEvent(
+          new CustomEvent('ryze:frame-progress', {
+            detail: { loaded: loadedCount, total: TOTAL_FRAMES }
+          })
+        );
+        if (loadedCount === TOTAL_FRAMES) {
+          setLoaded(true);
+          window.dispatchEvent(new CustomEvent('ryze:frames-ready'));
         }
       };
       images.push(img);

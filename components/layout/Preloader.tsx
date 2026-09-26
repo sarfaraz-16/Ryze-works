@@ -20,7 +20,7 @@ const STORAGE_KEY = "ryze_preloader_seen";
 const EASE: [number, number, number, number] = [0.76, 0, 0.24, 1]; // brand easing
 
 const MIN_MS = 1700; // fastest the counter may reach 100
-const MAX_WAIT_MS = 4000; // never hold a visitor longer than this waiting for load/fonts
+const MAX_WAIT_MS = 7000; // never hold a visitor longer than this waiting for load/fonts
 const HOLD_MS = 220; // beat of stillness at 100 before the horizon opens
 const EXIT_S = 0.95; // split duration
 
@@ -89,17 +89,42 @@ export default function Preloader() {
       };
     }
 
-    // The counter is honest: it stalls at 90 until the page + fonts are actually ready.
-    let ready = false;
-    const markReady = () => {
-      ready = true;
+    // The counter is honest: it tracks DOM/font readiness (20%) and frame loading (80%)
+    let domReady = false;
+    let framesReady = false;
+    let framesProgress = 0; // 0 to 1
+
+    const markDomReady = () => {
+      domReady = true;
     };
+
     const loaded =
       document.readyState === "complete"
         ? Promise.resolve()
         : new Promise<void>((res) => window.addEventListener("load", () => res(), { once: true }));
-    Promise.all([loaded, document.fonts?.ready ?? Promise.resolve()]).then(markReady, markReady);
-    const failsafe = window.setTimeout(markReady, MAX_WAIT_MS);
+    Promise.all([loaded, document.fonts?.ready ?? Promise.resolve()]).then(markDomReady, markDomReady);
+
+    const onFrameProgress = (e: Event) => {
+      const ce = e as CustomEvent<{loaded: number, total: number}>;
+      if (ce.detail) {
+        framesProgress = ce.detail.loaded / ce.detail.total;
+      }
+    };
+    
+    const onFramesReady = () => {
+      framesReady = true;
+      framesProgress = 1;
+    };
+
+    window.addEventListener("ryze:frame-progress", onFrameProgress);
+    window.addEventListener("ryze:frames-ready", onFramesReady);
+
+    // Safeguard: Force complete if it takes longer than MAX_WAIT_MS
+    const failsafe = window.setTimeout(() => {
+      domReady = true;
+      framesReady = true;
+      framesProgress = 1;
+    }, MAX_WAIT_MS);
 
     let raf = 0;
     let holdTimer = 0;
@@ -111,9 +136,21 @@ export default function Preloader() {
     const tick = (now: number) => {
       const dt = now - last;
       last = now;
-      const t = Math.min((now - t0) / MIN_MS, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
-      const target = ready ? eased : Math.min(eased, 0.9);
+      
+      const timeProgress = Math.min((now - t0) / MIN_MS, 1);
+      const timeEased = 1 - Math.pow(1 - timeProgress, 3);
+      
+      const bothReady = domReady && framesReady;
+      
+      // Base progress: 20% DOM/time + 80% frames
+      let target = (domReady ? 0.2 : Math.min(timeEased * 0.2, 0.18)) + (framesProgress * 0.8);
+      
+      if (bothReady) {
+        target = 1.0;
+      } else {
+        target = Math.min(target, 0.99);
+      }
+      
       shown += (target - shown) * (1 - Math.exp(-dt / 90));
 
       const pct = shown > 0.995 ? 100 : Math.floor(shown * 100);
@@ -132,6 +169,8 @@ export default function Preloader() {
       window.clearTimeout(holdTimer);
       window.clearTimeout(failsafe);
       window.removeEventListener("keydown", onKey);
+      window.removeEventListener("ryze:frame-progress", onFrameProgress);
+      window.removeEventListener("ryze:frames-ready", onFramesReady);
     };
   }, [skipped, reduced, startExit]);
 
