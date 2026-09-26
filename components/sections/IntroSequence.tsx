@@ -23,7 +23,15 @@ export function IntroSequence() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const img = imagesRef.current[frameIndex - 1];
+    let img = imagesRef.current[frameIndex - 1];
+    
+    // Fallback Frame Drawing: search backwards for nearest loaded frame
+    let searchIdx = frameIndex - 1;
+    while ((!img || !img.complete) && searchIdx > 0) {
+      searchIdx--;
+      img = imagesRef.current[searchIdx];
+    }
+    
     if (!img || !img.complete) return;
 
     // Cap devicePixelRatio to 2 for mobile performance
@@ -212,7 +220,7 @@ export function IntroSequence() {
 
   return (
     <section ref={containerRef} className="relative w-full h-[750vh] bg-[#080417]">
-      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden flex items-center justify-center bg-[#080417]">
+      <div className="sticky top-0 h-screen w-full z-10 overflow-hidden flex items-center justify-center bg-[#080417]">
         {/* Canvas Layer */}
         <canvas
           ref={canvasRef}

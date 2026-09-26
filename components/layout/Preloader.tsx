@@ -90,7 +90,7 @@ export default function Preloader() {
 
     // Tracking Variables
     let domReady = false;
-    let framesLoaded = 0;
+    let framesFinished = false;
     let framesProgress = 0; // 0 to 1
 
     const markDomReady = () => {
@@ -106,78 +106,78 @@ export default function Preloader() {
     const onFrameProgress = (e: Event) => {
       const ce = e as CustomEvent<{loaded: number, total: number}>;
       if (ce.detail) {
-        framesLoaded = ce.detail.loaded;
         framesProgress = ce.detail.loaded / ce.detail.total;
       }
     };
+    
+    const onFramesReady = () => {
+      framesFinished = true;
+      framesProgress = 1;
+    };
 
     window.addEventListener("ryze:frame-progress", onFrameProgress);
+    window.addEventListener("ryze:frames-ready", onFramesReady);
 
     let raf = 0;
-    let bootSequenceStarted = false;
-    let bootStartTime = 0;
-    let currentPhase = -1;
     let holding = false;
     let holdTimer = 0;
-    
-    const globalStartTime = performance.now();
+    let currentDisplay = 0;
+    let lastTickTime = performance.now();
 
     const tick = (now: number) => {
-      const globalElapsed = now - globalStartTime;
+      const dt = now - lastTickTime;
+      const realProgress = (domReady ? 10 : 0) + (framesProgress * 90);
+      
+      // Strict Gate: clamp to 98% until completely finished
+      const targetPercent = (framesFinished && domReady)
+        ? 100 
+        : Math.min(Math.floor(realProgress), 98);
 
-      // Fast-Boot Gating: >= 35 frames + DOM ready, OR 600ms absolute max wait
-      if (!bootSequenceStarted && ((domReady && framesLoaded >= 35) || globalElapsed > 600) && !holding) {
-        bootSequenceStarted = true;
-        bootStartTime = now;
+      if (currentDisplay < targetPercent) {
+        const diff = targetPercent - currentDisplay;
+        const step = diff > 20 ? 2 : 1;
+        const interval = diff > 10 ? 16 : 28;
+
+        if (dt >= interval) {
+          currentDisplay += step;
+          lastTickTime = now;
+        }
       }
 
-      if (bootSequenceStarted && !holding) {
-        const bootElapsed = now - bootStartTime;
-        
-        // Cycle every 500ms
-        const phase = Math.floor(bootElapsed / 500) % 4;
+      const phase = Math.floor(now / 300) % 4;
+      const phases = [
+        "// SYSTEM INITIALIZATION :: CALIBRATING OPTICAL SENSORS",
+        "// NEURAL TOPOLOGY :: CONNECTING AUTONOMOUS MESH",
+        "// VECTOR CAUSTICS :: HARMONIZING ENGINE FREQUENCIES",
+        "// RYZE OS ONLINE :: PREPARE FOR GENESIS"
+      ];
+      
+      if (telemetryRef.current) {
+         if (framesFinished && domReady && currentDisplay >= 100) {
+           telemetryRef.current.textContent = `// RYZE OS ONLINE :: READY [100%]`;
+         } else {
+           telemetryRef.current.textContent = `${phases[phase]} [${String(currentDisplay).padStart(2, '0')}%]`;
+         }
+      }
 
-        const phases = [
-          "// SYSTEM INITIALIZATION :: CALIBRATING OPTICAL SENSORS",
-          "// NEURAL TOPOLOGY :: CONNECTING AUTONOMOUS MESH",
-          "// VECTOR CAUSTICS :: HARMONIZING ENGINE FREQUENCIES",
-          "// RYZE OS ONLINE :: PREPARE FOR GENESIS"
-        ];
-        
-        if (telemetryRef.current && currentPhase !== phase) {
-          telemetryRef.current.textContent = phases[phase];
-          currentPhase = phase;
-        }
+      const visualProgress = currentDisplay / 100;
+      
+      if (horizonLineRef.current) {
+         horizonLineRef.current.style.transform = `scaleX(${visualProgress})`;
+         horizonLineRef.current.style.opacity = String(0.5 + visualProgress * 0.5);
+      }
+      if (quantumCoreRef.current) {
+         const coreScale = 0.5 + visualProgress * 0.5;
+         quantumCoreRef.current.style.transform = `scale(${coreScale})`;
+         quantumCoreRef.current.style.opacity = String(0.2 + visualProgress * 0.8);
+      }
 
-        // Rhythmic acceleration curve (0 -> 100% in 2.6s)
-        const rawProgress = Math.min(1, bootElapsed / 2600);
-        // cubic ease-in-out or similar, let's just use rawProgress for scaling
-        const visualProgress = rawProgress;
-        
-        if (horizonLineRef.current) {
-           horizonLineRef.current.style.transform = `scaleX(${visualProgress})`;
-           horizonLineRef.current.style.opacity = String(0.5 + visualProgress * 0.5);
-        }
+      if (currentDisplay >= 100 && framesFinished && domReady && !holding) {
+        holding = true;
         if (quantumCoreRef.current) {
-           const coreScale = 0.5 + visualProgress * 0.5;
-           quantumCoreRef.current.style.transform = `scale(${coreScale})`;
-           quantumCoreRef.current.style.opacity = String(0.2 + visualProgress * 0.8);
+           quantumCoreRef.current.classList.add("animate-pulse-exit-core");
         }
-
-        if (bootElapsed >= 2600) {
-          holding = true;
-          if (telemetryRef.current) telemetryRef.current.textContent = "// RYZE OS ONLINE :: READY";
-          // Flash center core into bright white/cyan light, hold for 200ms
-          if (quantumCoreRef.current) {
-             quantumCoreRef.current.classList.add("animate-pulse-exit-core");
-          }
-          holdTimer = window.setTimeout(startExit, 200);
-        }
-      } else if (!bootSequenceStarted && !holding) {
-        if (telemetryRef.current && currentPhase !== 0) {
-          telemetryRef.current.textContent = "// SYSTEM INITIALIZATION :: WAITING FOR RESOURCES";
-          currentPhase = 0;
-        }
+        holdTimer = window.setTimeout(startExit, 600); // 600ms hyper-drive detonation
       }
 
       if (phaseRef.current === "intro") raf = requestAnimationFrame(tick);
@@ -188,6 +188,7 @@ export default function Preloader() {
       cancelAnimationFrame(raf);
       window.clearTimeout(holdTimer);
       window.removeEventListener("keydown", onKey);
+      window.removeEventListener("ryze:frames-ready", onFramesReady);
       window.removeEventListener("ryze:frame-progress", onFrameProgress);
     };
   }, [skipped, reduced, startExit]);
@@ -348,14 +349,17 @@ export default function Preloader() {
         {/* The Quantum Singularity Core */}
         <div
           ref={quantumCoreRef}
-          className="absolute flex items-center justify-center w-24 h-24 rounded-full border border-violet-500/40"
+          className="absolute flex items-center justify-center w-32 h-32 rounded-full border border-violet-500/50"
           style={{
              transform: "scale(0)",
              opacity: 0,
              transition: exiting ? "opacity 0.4s ease-out" : "none"
           }}
         >
-          <div className="absolute inset-0 bg-violet-600/30 blur-2xl rounded-full pointer-events-none" />
+          {/* Counter-rotating cyan dashed ring */}
+          <div className="absolute inset-0 rounded-full border border-dashed border-cyan-400/60 animate-[spin_4s_linear_infinite_reverse]" />
+          {/* Intensely glowing neon core */}
+          <div className="absolute w-12 h-12 rounded-full bg-gradient-to-tr from-violet-600 to-cyan-400 blur-sm animate-pulse" />
         </div>
       </div>
     </div>

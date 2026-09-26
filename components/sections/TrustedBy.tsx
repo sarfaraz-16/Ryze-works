@@ -58,7 +58,7 @@ export const TrustedBy: React.FC = () => {
   };
 
   return (
-    <section className="border-y border-white/[0.08] py-5 my-10 bg-[#080417]/60 backdrop-blur-sm overflow-hidden relative select-none">
+    <section className="relative z-20 bg-[#080417] border-y border-white/[0.08] py-5 mb-10 overflow-hidden select-none">
       {/* Edge gradient masks for seamless marquee fade */}
       <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#080417] to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#080417] to-transparent z-10 pointer-events-none" />
