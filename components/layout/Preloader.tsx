@@ -52,7 +52,9 @@ export default function Preloader() {
   const skipped = useSkipped();
   const [phase, setPhase] = useState<Phase>("intro");
   const phaseRef = useRef<Phase>("intro");
-  const counterRef = useRef<HTMLSpanElement>(null);
+  const telemetryRef = useRef<HTMLSpanElement>(null);
+  const horizonLineRef = useRef<HTMLDivElement>(null);
+  const horizonCenterRef = useRef<HTMLDivElement>(null);
 
   /** Start the exit: unlock scroll, tell the hero to begin, open the horizon. */
   const startExit = useCallback(() => {
@@ -88,7 +90,7 @@ export default function Preloader() {
 
     // Tracking Variables
     let domReady = false;
-    let framesFinished = false;
+    let framesLoaded = 0;
     let framesProgress = 0; // 0 to 1
 
     const markDomReady = () => {
@@ -104,64 +106,85 @@ export default function Preloader() {
     const onFrameProgress = (e: Event) => {
       const ce = e as CustomEvent<{loaded: number, total: number}>;
       if (ce.detail) {
+        framesLoaded = ce.detail.loaded;
         framesProgress = ce.detail.loaded / ce.detail.total;
       }
     };
-    
-    const onFramesReady = () => {
-      framesFinished = true;
-      framesProgress = 1;
-    };
 
     window.addEventListener("ryze:frame-progress", onFrameProgress);
-    window.addEventListener("ryze:frames-ready", onFramesReady);
 
     let raf = 0;
-    let holdTimer = 0;
+    let bootSequenceStarted = false;
+    let bootStartTime = 0;
+    let currentPhase = -1;
     let holding = false;
-    
-    let currentDisplay = 0;
-    let lastTickTime = performance.now();
+    let holdTimer = 0;
 
     const tick = (now: number) => {
-      const dt = now - lastTickTime;
-      
-      const realProgress = (domReady ? 10 : 0) + (framesProgress * 90);
-      
-      // Calculate target:
-      // If frames are not finished, clamp max possible target to 98
-      const targetPercent = framesFinished && domReady 
-        ? 100 
-        : Math.min(Math.floor(realProgress), 98);
+      const realProgress = (domReady ? 0.2 : 0) + (framesProgress * 0.8);
 
-      // Smoothly advance currentDisplay toward targetPercent
-      // Ensure at least 15-25ms per percentage increment so every number renders cleanly
-      if (currentDisplay < targetPercent) {
-        // Dynamic step: catch up smoothly without sudden leaps
-        const diff = targetPercent - currentDisplay;
-        const step = diff > 20 ? 2 : 1;
-        const interval = diff > 10 ? 18 : 28; // ms per step
+      // Fast-Boot Gating: >= 60 frames (~20%) + DOM ready
+      if (!bootSequenceStarted && domReady && framesLoaded >= 60 && !holding) {
+        bootSequenceStarted = true;
+        bootStartTime = now;
+      }
 
-        if (dt >= interval) {
-          currentDisplay += step;
-          lastTickTime = now;
+      if (bootSequenceStarted && !holding) {
+        const bootElapsed = now - bootStartTime;
+        
+        let phase = 0;
+        if (bootElapsed < 300) phase = 0;
+        else if (bootElapsed < 600) phase = 1;
+        else if (bootElapsed < 900) phase = 2;
+        else phase = 3;
+
+        const phases = [
+          "// SYSTEM INITIALIZATION :: CALIBRATING OPTICAL SENSORS",
+          "// NEURAL TOPOLOGY :: CONNECTING AUTONOMOUS MESH",
+          "// VECTOR CAUSTICS :: HARMONIZING ENGINE FREQUENCIES",
+          "// RYZE OS ONLINE :: PREPARE FOR GENESIS"
+        ];
+        
+        if (telemetryRef.current && currentPhase !== phase) {
+          telemetryRef.current.textContent = phases[phase];
+          currentPhase = phase;
+        }
+
+        // Horizon stretching visually
+        const visualProgress = Math.max(realProgress, Math.min(1, bootElapsed / 1200));
+        
+        if (horizonLineRef.current) {
+           horizonLineRef.current.style.transform = `scaleX(${visualProgress})`;
+           horizonLineRef.current.style.opacity = String(0.5 + visualProgress * 0.5);
+        }
+        if (horizonCenterRef.current) {
+           horizonCenterRef.current.style.opacity = String(0.5 + visualProgress * 0.5);
+           horizonCenterRef.current.style.transform = `scale(${1 + visualProgress * 1.5})`;
+        }
+
+        if (bootElapsed >= 1200) {
+          holding = true;
+          holdTimer = window.setTimeout(startExit, 200);
+        }
+      } else if (!bootSequenceStarted && !holding) {
+        // Just show phase 0
+        if (telemetryRef.current && currentPhase !== 0) {
+          telemetryRef.current.textContent = "// SYSTEM INITIALIZATION :: CALIBRATING OPTICAL SENSORS";
+          currentPhase = 0;
+        }
+        if (horizonLineRef.current) {
+           const visualProgress = Math.min(realProgress, 0.3); 
+           horizonLineRef.current.style.transform = `scaleX(${visualProgress})`;
+           horizonLineRef.current.style.opacity = String(0.5 + visualProgress * 0.5);
+        }
+        if (horizonCenterRef.current) {
+           const visualProgress = Math.min(realProgress, 0.3);
+           horizonCenterRef.current.style.opacity = String(0.5 + visualProgress * 0.5);
+           horizonCenterRef.current.style.transform = `scale(${1 + visualProgress * 1.5})`;
         }
       }
 
-      if (counterRef.current) {
-        counterRef.current.textContent = String(Math.min(100, Math.floor(currentDisplay))).padStart(3, "0");
-      }
-
-      // Trigger exit ONLY when currentDisplay reaches 100 and assets are genuinely ready
-      if (currentDisplay >= 100 && framesFinished && domReady && !holding) {
-        holding = true;
-        holdTimer = window.setTimeout(() => {
-          startExit();
-        }, 200); // 200ms hold at 100%
-        return;
-      }
-
-      raf = requestAnimationFrame(tick);
+      if (phaseRef.current === "intro") raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
 
@@ -170,7 +193,6 @@ export default function Preloader() {
       window.clearTimeout(holdTimer);
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("ryze:frame-progress", onFrameProgress);
-      window.removeEventListener("ryze:frames-ready", onFramesReady);
     };
   }, [skipped, reduced, startExit]);
 
@@ -205,6 +227,27 @@ export default function Preloader() {
       className="fixed inset-0 z-[9999] overflow-hidden"
       style={{ pointerEvents: exiting ? "none" : "auto" }}
     >
+      <style>{`
+        @keyframes preloader-shimmer {
+          0% { background-position: 200% center; }
+          100% { background-position: -200% center; }
+        }
+        .animate-preloader-shimmer {
+          background: linear-gradient(90deg, var(--foreground, #f4f4f5) 0%, var(--foreground, #f4f4f5) 40%, #B896FF 50%, #38bdf8 60%, var(--foreground, #f4f4f5) 100%);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: preloader-shimmer 4s linear infinite;
+        }
+        @keyframes pulse-exit {
+          0% { transform: scale(1); opacity: 1; }
+          100% { transform: scale(2.5); opacity: 0; }
+        }
+        .animate-pulse-exit {
+          animation: pulse-exit 0.4s ease-out forwards;
+        }
+      `}</style>
+
       {/* ── TOP HALF: wordmark rises out of the horizon ── */}
       <motion.div
         className="absolute inset-x-0 top-0"
@@ -216,7 +259,7 @@ export default function Preloader() {
         <div className="absolute inset-x-0 bottom-0 flex justify-center px-6" style={{ paddingBottom: "0.5px" }}>
           <div
             aria-hidden="true"
-            className="overflow-hidden leading-none"
+            className="overflow-hidden leading-none animate-preloader-shimmer"
             style={{
               paddingTop: "0.12em",
               paddingBottom: "0.06em",
@@ -225,7 +268,6 @@ export default function Preloader() {
               fontSize: "clamp(1.75rem, 7.4vw, 6rem)",
               letterSpacing: "0.2em",
               marginRight: "-0.2em", // cancels trailing tracking so the word is optically centred
-              color: "var(--foreground, #f4f4f5)",
             }}
           >
             <div className="flex">
@@ -249,7 +291,7 @@ export default function Preloader() {
         </div>
       </motion.div>
 
-      {/* ── BOTTOM HALF: honest counter + skip ── */}
+      {/* ── BOTTOM HALF: Telemetry Ticker + skip ── */}
       <motion.div
         className="absolute inset-x-0 bottom-0"
         style={{ ...panelBg, height: "calc(50% + 0.5px)" }}
@@ -258,25 +300,26 @@ export default function Preloader() {
         transition={panelTransition}
       >
         <div
-          className="flex items-start justify-between px-6 pt-5 text-[11px] md:px-10"
+          className="flex flex-col items-center justify-start pt-6 text-[9px] sm:text-[11px] w-full px-6"
           style={{ fontFamily: "var(--font-geist-mono, ui-monospace, monospace)", letterSpacing: "0.22em" }}
         >
           {reduced ? (
             <span />
           ) : (
-            <span aria-hidden="true" className="tabular-nums" style={{ color: "var(--brand-light, #B896FF)" }}>
-              <span ref={counterRef}>000</span>
-              <span style={{ opacity: 0.45 }}>%</span>
+            <span aria-hidden="true" className="text-[#B896FF]/80 text-center uppercase" ref={telemetryRef}>
+              {"// SYSTEM INITIALIZATION :: CALIBRATING OPTICAL SENSORS"}
             </span>
           )}
-          <button
-            type="button"
-            onClick={startExit}
-            className="uppercase text-white/50 transition-colors hover:text-white focus-visible:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#B896FF]"
-          >
-            Skip
-          </button>
         </div>
+        
+        <button
+          type="button"
+          onClick={startExit}
+          className="absolute bottom-5 right-6 uppercase text-white/50 transition-colors hover:text-white text-[11px] focus-visible:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#B896FF]"
+          style={{ fontFamily: "var(--font-geist-mono, ui-monospace, monospace)", letterSpacing: "0.22em" }}
+        >
+          Skip
+        </button>
       </motion.div>
 
       {/* ── THE HORIZON ── */}
@@ -292,24 +335,30 @@ export default function Preloader() {
         animate={{ opacity: exiting ? 0 : 1 }}
         transition={{ duration: exiting ? 0.6 : 1.4, delay: exiting ? 0 : 0.2 }}
       />
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 z-20 h-px"
-        style={{
-          top: "calc(50% - 0.5px)",
-          transformOrigin: "50% 50%",
-          background:
-            "linear-gradient(90deg, transparent 0%, var(--brand-primary, #7042FF) 18%, var(--brand-light, #B896FF) 50%, #38bdf8 82%, transparent 100%)",
-          boxShadow: "0 0 18px 1px rgba(112,66,255,0.6)",
-        }}
-        initial={{ scaleX: 0, opacity: 1 }}
-        animate={exiting ? { scaleX: 1, opacity: 0 } : { scaleX: 1, opacity: 1 }}
-        transition={
-          exiting
-            ? { duration: reduced ? 0.3 : 0.5, delay: reduced ? 0 : 0.35 }
-            : { duration: reduced ? 0 : 1, ease: EASE }
-        }
-      />
+      <div className="absolute inset-x-0 z-20 flex justify-center items-center pointer-events-none" style={{ top: "calc(50% - 0.5px)" }}>
+        {/* The stretching line */}
+        <div
+          ref={horizonLineRef}
+          className={`absolute h-px w-full ${exiting ? "transition-opacity duration-400 ease-out opacity-0" : ""}`}
+          style={{
+            transformOrigin: "50% 50%",
+            background: "linear-gradient(90deg, transparent 0%, var(--brand-primary, #7042FF) 18%, var(--brand-light, #B896FF) 50%, #38bdf8 82%, transparent 100%)",
+            boxShadow: "0 0 18px 1px rgba(112,66,255,0.6)",
+            transform: "scaleX(0)",
+            opacity: 0,
+          }}
+        />
+        {/* The center node flare */}
+        <div
+          ref={horizonCenterRef}
+          className={`absolute h-[2px] w-[30px] rounded-full bg-cyan-300 blur-[0.5px] ${exiting ? "animate-pulse-exit" : ""}`}
+          style={{ 
+            boxShadow: "0 0 16px 3px rgba(56,189,248,0.9), 0 0 32px 6px rgba(112,66,255,0.8)",
+            transform: "scale(0)",
+            opacity: 0
+          }}
+        />
+      </div>
     </div>
   );
 }
