@@ -72,6 +72,11 @@ export function IntroSequence() {
 
     ctx.drawImage(img, offsetX, offsetY, renderW, renderH);
     ctx.restore();
+
+    if (frameIndex === 1) {
+      // Force canvas context flush to eliminate first-frame flash
+      ctx.getImageData(0, 0, 1, 1);
+    }
   };
 
   // 2. Preload all frames
@@ -83,7 +88,10 @@ export function IntroSequence() {
       const img = new Image();
       const frameNum = String(i).padStart(3, '0');
       img.src = `/intro-frames/ezgif-frame-${frameNum}.png`;
-      img.onload = () => {
+      images.push(img);
+      
+      // Hardware pre-decode to eliminate scrub stutter
+      img.decode().catch(() => {}).then(() => {
         loadedCount++;
         window.dispatchEvent(
           new CustomEvent('ryze:frame-progress', {
@@ -91,28 +99,15 @@ export function IntroSequence() {
           })
         );
         if (loadedCount === 1) {
-          // Render initial frame immediately
           renderFrame(1);
         }
         if (loadedCount === TOTAL_FRAMES) {
           setLoaded(true);
           window.dispatchEvent(new CustomEvent('ryze:frames-ready'));
         }
-      };
-      img.onerror = () => {
-        loadedCount++;
-        window.dispatchEvent(
-          new CustomEvent('ryze:frame-progress', {
-            detail: { loaded: loadedCount, total: TOTAL_FRAMES }
-          })
-        );
-        if (loadedCount === TOTAL_FRAMES) {
-          setLoaded(true);
-          window.dispatchEvent(new CustomEvent('ryze:frames-ready'));
-        }
-      };
-      images.push(img);
+      });
     }
+    
     imagesRef.current = images;
   }, []);
 
@@ -122,10 +117,10 @@ export function IntroSequence() {
     offset: ['start start', 'end end'],
   });
 
-  // Act 1: Intro Headline Fade - starts immediately at 0 and vanishes by 0.04
+  // Act 1: Intro Headline Fade - starts immediately at 0 and vanishes by 0.03
   const introTextOpacity = useTransform(
     scrollYProgress,
-    [0, 0.04],
+    [0, 0.03],
     [1, 0],
     { clamp: true }
   );
@@ -137,10 +132,10 @@ export function IntroSequence() {
     { clamp: true }
   );
 
-  // Hard display switch to completely remove from rendering after 0.04
-  const introDisplay = useTransform(
+  // Hard display switch to completely remove from rendering after 0.035
+  const introTextDisplay = useTransform(
     scrollYProgress,
-    (v) => (v >= 0.04 ? 'none' : 'flex')
+    (v) => (v > 0.035 ? 'none' : 'flex')
   );
 
   const introPointerEvents = useTransform(
@@ -159,6 +154,11 @@ export function IntroSequence() {
     scrollYProgress,
     [0.88, 0.94],
     [25, 0]
+  );
+
+  const ctaDisplay = useTransform(
+    scrollYProgress,
+    (v) => (v >= 0.85 ? 'flex' : 'none')
   );
 
   const ctaPointerEvents = useTransform(
@@ -224,7 +224,7 @@ export function IntroSequence() {
           style={{
             opacity: introTextOpacity,
             y: introTextY,
-            display: introDisplay,
+            display: introTextDisplay,
             pointerEvents: introPointerEvents as any,
           }}
           className="absolute z-10 w-full max-w-7xl mx-auto px-4 md:px-6 md:inset-0 md:flex md:flex-col md:justify-center max-md:top-20 max-md:inset-x-0 max-md:flex max-md:flex-col max-md:items-center max-md:text-center"
@@ -253,6 +253,7 @@ export function IntroSequence() {
           style={{
             opacity: ctaOpacity,
             y: ctaY,
+            display: ctaDisplay,
             pointerEvents: ctaPointerEvents as any,
           }}
           className="absolute bottom-6 md:bottom-12 inset-x-0 mx-auto z-20 flex flex-col items-center justify-center text-center px-4"

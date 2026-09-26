@@ -54,7 +54,7 @@ export default function Preloader() {
   const phaseRef = useRef<Phase>("intro");
   const telemetryRef = useRef<HTMLSpanElement>(null);
   const horizonLineRef = useRef<HTMLDivElement>(null);
-  const horizonCenterRef = useRef<HTMLDivElement>(null);
+  const quantumCoreRef = useRef<HTMLDivElement>(null);
 
   /** Start the exit: unlock scroll, tell the hero to begin, open the horizon. */
   const startExit = useCallback(() => {
@@ -119,12 +119,14 @@ export default function Preloader() {
     let currentPhase = -1;
     let holding = false;
     let holdTimer = 0;
+    
+    const globalStartTime = performance.now();
 
     const tick = (now: number) => {
-      const realProgress = (domReady ? 0.2 : 0) + (framesProgress * 0.8);
+      const globalElapsed = now - globalStartTime;
 
-      // Fast-Boot Gating: >= 60 frames (~20%) + DOM ready
-      if (!bootSequenceStarted && domReady && framesLoaded >= 60 && !holding) {
+      // Fast-Boot Gating: >= 35 frames + DOM ready, OR 600ms absolute max wait
+      if (!bootSequenceStarted && ((domReady && framesLoaded >= 35) || globalElapsed > 600) && !holding) {
         bootSequenceStarted = true;
         bootStartTime = now;
       }
@@ -132,11 +134,8 @@ export default function Preloader() {
       if (bootSequenceStarted && !holding) {
         const bootElapsed = now - bootStartTime;
         
-        let phase = 0;
-        if (bootElapsed < 300) phase = 0;
-        else if (bootElapsed < 600) phase = 1;
-        else if (bootElapsed < 900) phase = 2;
-        else phase = 3;
+        // Cycle every 500ms
+        const phase = Math.floor(bootElapsed / 500) % 4;
 
         const phases = [
           "// SYSTEM INITIALIZATION :: CALIBRATING OPTICAL SENSORS",
@@ -150,37 +149,34 @@ export default function Preloader() {
           currentPhase = phase;
         }
 
-        // Horizon stretching visually
-        const visualProgress = Math.max(realProgress, Math.min(1, bootElapsed / 1200));
+        // Rhythmic acceleration curve (0 -> 100% in 2.6s)
+        const rawProgress = Math.min(1, bootElapsed / 2600);
+        // cubic ease-in-out or similar, let's just use rawProgress for scaling
+        const visualProgress = rawProgress;
         
         if (horizonLineRef.current) {
            horizonLineRef.current.style.transform = `scaleX(${visualProgress})`;
            horizonLineRef.current.style.opacity = String(0.5 + visualProgress * 0.5);
         }
-        if (horizonCenterRef.current) {
-           horizonCenterRef.current.style.opacity = String(0.5 + visualProgress * 0.5);
-           horizonCenterRef.current.style.transform = `scale(${1 + visualProgress * 1.5})`;
+        if (quantumCoreRef.current) {
+           const coreScale = 0.5 + visualProgress * 0.5;
+           quantumCoreRef.current.style.transform = `scale(${coreScale})`;
+           quantumCoreRef.current.style.opacity = String(0.2 + visualProgress * 0.8);
         }
 
-        if (bootElapsed >= 1200) {
+        if (bootElapsed >= 2600) {
           holding = true;
+          if (telemetryRef.current) telemetryRef.current.textContent = "// RYZE OS ONLINE :: READY";
+          // Flash center core into bright white/cyan light, hold for 200ms
+          if (quantumCoreRef.current) {
+             quantumCoreRef.current.classList.add("animate-pulse-exit-core");
+          }
           holdTimer = window.setTimeout(startExit, 200);
         }
       } else if (!bootSequenceStarted && !holding) {
-        // Just show phase 0
         if (telemetryRef.current && currentPhase !== 0) {
-          telemetryRef.current.textContent = "// SYSTEM INITIALIZATION :: CALIBRATING OPTICAL SENSORS";
+          telemetryRef.current.textContent = "// SYSTEM INITIALIZATION :: WAITING FOR RESOURCES";
           currentPhase = 0;
-        }
-        if (horizonLineRef.current) {
-           const visualProgress = Math.min(realProgress, 0.3); 
-           horizonLineRef.current.style.transform = `scaleX(${visualProgress})`;
-           horizonLineRef.current.style.opacity = String(0.5 + visualProgress * 0.5);
-        }
-        if (horizonCenterRef.current) {
-           const visualProgress = Math.min(realProgress, 0.3);
-           horizonCenterRef.current.style.opacity = String(0.5 + visualProgress * 0.5);
-           horizonCenterRef.current.style.transform = `scale(${1 + visualProgress * 1.5})`;
         }
       }
 
@@ -239,12 +235,13 @@ export default function Preloader() {
           -webkit-text-fill-color: transparent;
           animation: preloader-shimmer 4s linear infinite;
         }
-        @keyframes pulse-exit {
-          0% { transform: scale(1); opacity: 1; }
-          100% { transform: scale(2.5); opacity: 0; }
+        @keyframes pulse-exit-core {
+          0% { transform: scale(1); opacity: 1; background-color: transparent; border-color: rgba(139,92,246,0.4); box-shadow: none; }
+          40% { transform: scale(1.5); opacity: 1; background-color: rgba(34,211,238,1); border-color: rgba(34,211,238,1); box-shadow: 0 0 40px 10px rgba(34,211,238,0.8); }
+          100% { transform: scale(4); opacity: 0; }
         }
-        .animate-pulse-exit {
-          animation: pulse-exit 0.4s ease-out forwards;
+        .animate-pulse-exit-core {
+          animation: pulse-exit-core 0.4s ease-out forwards;
         }
       `}</style>
 
@@ -256,7 +253,7 @@ export default function Preloader() {
         animate={panelExit(-1)}
         transition={panelTransition}
       >
-        <div className="absolute inset-x-0 bottom-0 flex justify-center px-6" style={{ paddingBottom: "0.5px" }}>
+        <div className="absolute inset-x-0 bottom-0 flex justify-center px-6 pb-[60px]" style={{ paddingBottom: "60px" }}>
           <div
             aria-hidden="true"
             className="overflow-hidden leading-none animate-preloader-shimmer"
@@ -300,7 +297,7 @@ export default function Preloader() {
         transition={panelTransition}
       >
         <div
-          className="flex flex-col items-center justify-start pt-6 text-[9px] sm:text-[11px] w-full px-6"
+          className="flex flex-col items-center justify-start pt-[60px] text-[9px] sm:text-[11px] w-full px-6"
           style={{ fontFamily: "var(--font-geist-mono, ui-monospace, monospace)", letterSpacing: "0.22em" }}
         >
           {reduced ? (
@@ -348,16 +345,18 @@ export default function Preloader() {
             opacity: 0,
           }}
         />
-        {/* The center node flare */}
+        {/* The Quantum Singularity Core */}
         <div
-          ref={horizonCenterRef}
-          className={`absolute h-[2px] w-[30px] rounded-full bg-cyan-300 blur-[0.5px] ${exiting ? "animate-pulse-exit" : ""}`}
-          style={{ 
-            boxShadow: "0 0 16px 3px rgba(56,189,248,0.9), 0 0 32px 6px rgba(112,66,255,0.8)",
-            transform: "scale(0)",
-            opacity: 0
+          ref={quantumCoreRef}
+          className="absolute flex items-center justify-center w-24 h-24 rounded-full border border-violet-500/40"
+          style={{
+             transform: "scale(0)",
+             opacity: 0,
+             transition: exiting ? "opacity 0.4s ease-out" : "none"
           }}
-        />
+        >
+          <div className="absolute inset-0 bg-violet-600/30 blur-2xl rounded-full pointer-events-none" />
+        </div>
       </div>
     </div>
   );
