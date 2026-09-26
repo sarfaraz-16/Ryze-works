@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar } from "@/components/layout/Navbar";
-import { HeroSection } from "@/components/hero/HeroSection";
+import IntroSequence from "@/components/sections/IntroSequence";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { WhatWeDo } from "@/components/sections/WhatWeDo";
 import { FeaturedWork } from "@/components/sections/FeaturedWork";
@@ -17,8 +17,8 @@ export default function Home() {
       {/* Fixed Sticky Header */}
       <Navbar />
 
-      {/* 1. Hero Section */}
-      <HeroSection />
+      {/* Intro Scroll Sequence */}
+      <IntroSequence />
 
       {/* 2. Client Trust Strip */}
       <TrustedBy />
