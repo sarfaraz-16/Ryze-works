@@ -16,7 +16,7 @@ import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "
 import { motion } from "framer-motion";
 
 const WORDMARK = "RYZE WORKS";
-const STORAGE_KEY = "ryze_preloader_seen";
+const STORAGE_KEY = "ryze:boot-completed";
 const EASE: [number, number, number, number] = [0.76, 0, 0.24, 1]; // brand easing
 
 const EXIT_S = 0.95; // split duration
@@ -42,7 +42,7 @@ function useReducedMotionPref(): boolean {
 function useSkipped(): boolean {
   return useSyncExternalStore(
     noopSubscribe,
-    () => document.documentElement.dataset.preloader === "skip",
+    () => document.documentElement.dataset.preloader === "skip" || (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('ryze:boot-completed') === 'true'),
     () => false
   );
 }
@@ -309,16 +309,15 @@ export default function Preloader() {
             </span>
           )}
         </div>
-        
-        <button
-          type="button"
-          onClick={startExit}
-          className="absolute bottom-5 right-6 uppercase text-white/50 transition-colors hover:text-white text-[11px] focus-visible:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#B896FF]"
-          style={{ fontFamily: "var(--font-geist-mono, ui-monospace, monospace)", letterSpacing: "0.22em" }}
-        >
-          Skip
-        </button>
       </motion.div>
+      
+      <button
+        type="button"
+        onClick={startExit}
+        className={`fixed bottom-6 right-8 z-[100] font-mono text-[10px] tracking-[0.25em] uppercase text-white/40 hover:text-white px-3 py-1.5 rounded-full border border-white/10 hover:border-violet-500/40 bg-white/[0.02] backdrop-blur-md transition-all duration-300 ${exiting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+      >
+        [ SKIP INTRO // ESC ]
+      </button>
 
       {/* ── THE HORIZON ── */}
       <motion.div

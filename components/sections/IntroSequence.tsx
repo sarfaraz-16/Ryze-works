@@ -192,6 +192,25 @@ export function IntroSequence() {
     (v) => (v >= 0.88 ? 'auto' : 'none')
   );
 
+  const skipBtnOpacity = useTransform(
+    scrollYProgress,
+    (v) => (v > 0.85 ? 0 : 1)
+  );
+
+  const skipBtnPointerEvents = useTransform(
+    scrollYProgress,
+    (v) => (v > 0.85 ? 'none' : 'auto')
+  );
+
+  const skipToContent = () => {
+    const section = document.getElementById('trusted-by') || document.querySelector('section:nth-of-type(2)');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: window.innerHeight * 7.5, behavior: 'smooth' });
+    }
+  };
+
   // Map Scroll Progress to Target Frame (hold last frame from 88% to 100%)
   useEffect(() => {
     const unsubscribe = scrollYProgress.on('change', (progress) => {
@@ -302,6 +321,15 @@ export function IntroSequence() {
             </Link>
           </div>
         </motion.div>
+
+        {/* Skip to Content Button */}
+        <motion.button
+          onClick={skipToContent}
+          style={{ opacity: skipBtnOpacity, pointerEvents: skipBtnPointerEvents as any }}
+          className="fixed bottom-6 right-8 z-[100] font-mono text-[10px] tracking-[0.25em] uppercase text-white/40 hover:text-white px-3 py-1.5 rounded-full border border-white/10 hover:border-violet-500/40 bg-white/[0.02] backdrop-blur-md transition-colors duration-300"
+        >
+          [ SKIP TO CONTENT ↓ ]
+        </motion.button>
       </div>
     </section>
   );
