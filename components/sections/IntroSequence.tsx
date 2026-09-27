@@ -89,29 +89,47 @@ export function IntroSequence() {
 
   // 2. Preload all frames
   useEffect(() => {
-    let loadedCount = 0;
-    const images: HTMLImageElement[] = [];
+    const TIER_1_COUNT = 70;
+    let tier1LoadedCount = 0;
+    const images: HTMLImageElement[] = new Array(TOTAL_FRAMES);
 
-    for (let i = 1; i <= TOTAL_FRAMES; i++) {
+    const loadTier2 = () => {
+      for (let i = TIER_1_COUNT + 1; i <= TOTAL_FRAMES; i++) {
+        const img = new Image();
+        const frameNum = String(i).padStart(3, '0');
+        img.src = `/intro-frames/ezgif-frame-${frameNum}.webp`;
+        images[i - 1] = img;
+        // Tier 2: Decode in background
+        img.decode().catch(() => {});
+      }
+    };
+
+    // Load Tier 1
+    for (let i = 1; i <= TIER_1_COUNT; i++) {
       const img = new Image();
       const frameNum = String(i).padStart(3, '0');
-      img.src = `/intro-frames/ezgif-frame-${frameNum}.png`;
-      images.push(img);
+      img.src = `/intro-frames/ezgif-frame-${frameNum}.webp`;
+      images[i - 1] = img;
       
       // Hardware pre-decode to eliminate scrub stutter
       img.decode().catch(() => {}).then(() => {
-        loadedCount++;
+        tier1LoadedCount++;
         window.dispatchEvent(
           new CustomEvent('ryze:frame-progress', {
-            detail: { loaded: loadedCount, total: TOTAL_FRAMES }
+            detail: { loaded: tier1LoadedCount, total: TIER_1_COUNT }
           })
         );
-        if (loadedCount === 1) {
+        
+        if (tier1LoadedCount === 1) {
           renderFrame(1);
         }
-        if (loadedCount === TOTAL_FRAMES) {
+        
+        if (tier1LoadedCount === TIER_1_COUNT) {
           setLoaded(true);
           window.dispatchEvent(new CustomEvent('ryze:frames-ready'));
+          
+          // Start streaming Tier 2 concurrently once Tier 1 is complete
+          loadTier2();
         }
       });
     }
