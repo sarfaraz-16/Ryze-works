@@ -5,7 +5,7 @@ import { useScroll, useTransform, motion, useReducedMotion } from 'framer-motion
 
 import Link from 'next/link';
 
-const TOTAL_FRAMES = 300;
+const TOTAL_FRAMES = 450;
 
 export function IntroSequence() {
   const shouldReduceMotion = useReducedMotion();
@@ -184,7 +184,7 @@ export function IntroSequence() {
 
   const ctaDisplay = useTransform(
     scrollYProgress,
-    (v) => (v >= 0.85 ? 'flex' : 'none')
+    (v) => (v >= 0.88 ? 'flex' : 'none')
   );
 
   const ctaPointerEvents = useTransform(
