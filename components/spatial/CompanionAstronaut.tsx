@@ -16,7 +16,7 @@ export function CompanionAstronaut() {
   const [mounted, setMounted] = useState(false);
   const [quoteIndex, setQuoteIndex] = useState(0);
   const [showBubble, setShowBubble] = useState(false);
-  const bubbleTimeout = useRef<NodeJS.Timeout | null>(null);
+  const [isSuppressed, setIsSuppressed] = useState(false);
 
   // Position physics
   const mouseX = useMotionValue(-100);
@@ -35,12 +35,22 @@ export function CompanionAstronaut() {
     setMounted(true);
   }, []);
 
+  // Ambient speech bubbles
   useEffect(() => {
+    const interval = setInterval(() => {
+      setQuoteIndex((prev) => (prev + 1) % ASTRONAUT_QUOTES.length);
+      setShowBubble(true);
+      setTimeout(() => setShowBubble(false), 2600);
+    }, 18000);
 
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      // Offset so the companion hovers slightly offset from the cursor
-      mouseX.set(e.clientX + 34);
-      mouseY.set(e.clientY + 24);
+      // Offset so the companion hovers gracefully beside the pointer
+      mouseX.set(e.clientX + 22);
+      mouseY.set(e.clientY + 18);
 
       const dx = e.clientX - prevPos.current.x;
       const dy = e.clientY - prevPos.current.y;
@@ -51,28 +61,23 @@ export function CompanionAstronaut() {
       }
 
       prevPos.current = { x: e.clientX, y: e.clientY };
+
+      const target = e.target as HTMLElement | null;
+      // Zero-occlusion zone: suppress completely in header (or top 80px) and footer
+      const inHeader = e.clientY <= 80 || !!target?.closest('header');
+      const inFooter = !!target?.closest('footer');
+      setIsSuppressed(inHeader || inFooter);
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
-  const handleInteract = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setQuoteIndex((prev) => (prev + 1) % ASTRONAUT_QUOTES.length);
-    setShowBubble(true);
-
-    if (bubbleTimeout.current) clearTimeout(bubbleTimeout.current);
-    bubbleTimeout.current = setTimeout(() => {
-      setShowBubble(false);
-    }, 2800);
-  };
-
   if (!mounted || shouldReduceMotion) return null;
 
   return (
     <div
-      className="hidden lg:block fixed inset-0 pointer-events-none z-[9998] overflow-hidden select-none"
+      className="hidden lg:block fixed inset-0 pointer-events-none z-[100] overflow-hidden select-none"
       aria-hidden="true"
     >
       <motion.div
@@ -83,7 +88,15 @@ export function CompanionAstronaut() {
           translateY: '-50%',
           rotate: rotation,
         }}
-        className="fixed top-0 left-0"
+        animate={{
+          opacity: isSuppressed ? 0 : 1,
+          scale: isSuppressed ? 0.6 : 1,
+        }}
+        transition={{
+          opacity: { duration: 0.2 },
+          scale: { duration: 0.2, ease: 'easeOut' },
+        }}
+        className="fixed top-0 left-0 pointer-events-none"
       >
         {/* Thought Bubble */}
         <AnimatePresence>
@@ -102,13 +115,11 @@ export function CompanionAstronaut() {
           )}
         </AnimatePresence>
 
-        {/* Clickable Floating Astronaut Body */}
+        {/* Floating Astronaut Body */}
         <motion.div
           animate={{ y: [0, -6, 0] }}
           transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-          onClick={handleInteract}
-          className="relative w-14 h-14 pointer-events-auto cursor-pointer group"
-          title="Click the astronaut"
+          className="relative w-14 h-14 pointer-events-none group"
         >
           {/* Subtle Thruster Glow */}
           <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-6 bg-[#38bdf8]/40 blur-md rounded-full group-hover:bg-[#7042FF]/60 transition-colors" />
