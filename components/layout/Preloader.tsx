@@ -70,6 +70,14 @@ export default function Preloader() {
     setPhase("exit");
   }, []);
 
+  /* Fast path: if skipped, ensure document attributes and reveal events are cleanly dispatched */
+  useEffect(() => {
+    if (skipped) {
+      document.documentElement.dataset.preloader = "done";
+      window.dispatchEvent(new Event("ryze:preloader-reveal"));
+    }
+  }, [skipped]);
+
   /* Intro: readiness gate + counter (or a short static hold for reduced motion) */
   useEffect(() => {
     if (skipped) return;
@@ -190,6 +198,9 @@ export default function Preloader() {
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("ryze:frames-ready", onFramesReady);
       window.removeEventListener("ryze:frame-progress", onFrameProgress);
+      if (document.documentElement.dataset.preloader === "intro") {
+        document.documentElement.dataset.preloader = "done";
+      }
     };
   }, [skipped, reduced, startExit]);
 

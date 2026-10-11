@@ -213,6 +213,10 @@ export function IntroSequence() {
 
   // Map Scroll Progress to Target Frame (hold last frame from 88% to 100%)
   useEffect(() => {
+    const initialProgress = scrollYProgress.get();
+    const initialEffective = Math.min(1, initialProgress / 0.88);
+    targetFrameRef.current = 1 + initialEffective * (TOTAL_FRAMES - 1);
+
     const unsubscribe = scrollYProgress.on('change', (progress) => {
       const effectiveProgress = Math.min(1, progress / 0.88);
       targetFrameRef.current = 1 + effectiveProgress * (TOTAL_FRAMES - 1);

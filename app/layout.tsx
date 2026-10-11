@@ -38,9 +38,7 @@ export const metadata: Metadata = {
   }
 };
 
-const isProd = process.env.NODE_ENV === "production";
-
-const preloaderGate = `(function(){try{var d=document.documentElement;var seen=sessionStorage.getItem("ryze_preloader_seen")==="true";d.dataset.preloader=(${isProd}&&seen)?"skip":"intro"}catch(e){d.dataset.preloader="skip"}})();`;
+const preloaderGate = `(function(){try{var d=document.documentElement;var seen=sessionStorage.getItem("ryze:boot-completed")==="true";d.dataset.preloader=seen?"skip":"intro"}catch(e){d.dataset.preloader="skip"}})();`;
 
 export default function RootLayout({
   children,
