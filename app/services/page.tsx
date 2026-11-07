@@ -4,15 +4,15 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { ServiceCapabilityCard } from "@/components/services/ServiceCapabilityCard";
-import { SERVICES_DATA } from "@/data/siteData";
+import { SERVICES_DATA, RYZE_CATALOGUE_10_SERVICES, TARGET_INDUSTRIES } from "@/data/siteData";
 import { createClient } from "@/lib/supabase/server";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
 
 export const revalidate = 3600;
 
 export const metadata = {
-  title: "Services & Capabilities | RYZE WORKS",
-  description: "End-to-end capabilities across Strategy, Brand + Creative, Technology, Marketing, and Experiences."
+  title: "Services & Capabilities | Ryzeworks",
+  description: "Explore Ryzeworks creative, branding, marketing, video production, and technology services."
 };
 
 export default async function ServicesPage() {
@@ -56,25 +56,91 @@ export default async function ServicesPage() {
         <div className="max-w-3xl mb-12 sm:mb-16">
           <div className="text-[11px] font-mono text-[#B896FF] uppercase tracking-widest mb-3 font-medium flex items-center gap-2">
             <Sparkles className="w-3.5 h-3.5 text-[#B896FF]" />
-            CAPABILITIES TAXONOMY
+            OUR SERVICES &amp; CAPABILITIES
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-bold leading-[1.08] tracking-[-0.01em] [word-spacing:0.1em] text-white mb-6">
-            End-to-end capabilities to build what&apos;s next.
+            Connecting creativity with commercial impact.
           </h1>
           <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed max-w-2xl">
-            We partner with ambitious founders and enterprise brands across 5 synchronized disciplines — fusing AI-native execution with craft and strategic rigor.
+            We combine strategy, creativity, content and execution to help brands build a stronger presence, connect with their audience and turn attention into opportunity.
           </p>
         </div>
 
-        {/* Services Asymmetrical 12-Column List with 3D Tilt & Obsidian Glass */}
-        <div className="space-y-8 mb-20">
-          {services.map((service, idx) => (
-            <ServiceCapabilityCard
-              key={service.id}
-              service={service}
-              index={idx}
-            />
-          ))}
+        {/* 10 Services Detailed Grid */}
+        <div className="mb-20">
+          <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
+            <div>
+              <span className="font-mono text-xs text-violet-400 uppercase tracking-widest block mb-1">
+                SERVICE DIRECTORY
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white">
+                10 Core Delivery Capabilities
+              </h2>
+            </div>
+            <span className="text-xs font-mono text-zinc-400">
+              {RYZE_CATALOGUE_10_SERVICES.length} Practices
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {RYZE_CATALOGUE_10_SERVICES.map((item) => (
+              <div
+                key={item.num}
+                className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-3 font-mono text-xs text-zinc-400">
+                    <span className="text-violet-400 font-bold">{item.num} // {item.category}</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">{item.name}</h3>
+                  <p className="text-xs text-violet-300 font-medium mb-3">{item.tagline}</p>
+                  <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6">
+                    {item.description}
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
+                  <span className="text-xs text-zinc-400">Inquire for project scope</span>
+                  <Link
+                    href="/start-a-project"
+                    className="text-xs font-semibold text-violet-400 hover:text-violet-300 flex items-center gap-1.5 transition-colors"
+                  >
+                    <span>Request Proposal</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Target Industries */}
+        <div className="rounded-3xl bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 p-8 sm:p-12 mb-20">
+          <div className="max-w-2xl mb-8">
+            <span className="text-xs font-mono text-violet-400 uppercase tracking-wider block mb-2">
+              SECTOR EXPERTISE
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+              Specialized Industry Knowledge
+            </h2>
+            <p className="text-sm text-zinc-300 leading-relaxed">
+              We are particularly suited to businesses that recognize the importance of strategic branding, quality creative communication, and consistent marketing.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {TARGET_INDUSTRIES.map((ind) => (
+              <div
+                key={ind.name}
+                className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-violet-500/30 transition-colors"
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <CheckCircle2 className="w-4 h-4 text-violet-400 shrink-0" />
+                  <h4 className="text-sm font-bold text-white">{ind.name}</h4>
+                </div>
+                <p className="text-xs text-zinc-400 leading-relaxed pl-6">{ind.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Consulting Advisory Card */}
@@ -83,25 +149,25 @@ export default async function ServicesPage() {
 
           <div className="relative z-10 max-w-2xl flex flex-col items-center">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-3 leading-snug">
-              Unsure which service model fits your roadmap?
+              Ready to turn your brand into your competitive edge?
             </h2>
             <p className="text-sm sm:text-base text-zinc-300 font-normal mb-8 leading-relaxed">
-              Consult Ryze AI for an instant scope advisory, or schedule a strategic briefing with our engineering and design partners.
+              Schedule a strategic discovery briefing with Ryzeworks to map your brand, content, and growth trajectory.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
-                href="/ai"
+                href="/start-a-project"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-semibold tracking-wider text-white bg-violet-600 hover:bg-violet-500 shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all"
               >
-                <span>Consult Ryze AI Advisor</span>
-                <Sparkles className="w-3.5 h-3.5" />
+                <span>Start a Project Enquiry</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
               <Link
-                href="/start-a-project"
+                href="/contact"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-semibold tracking-wider text-zinc-200 bg-white/[0.05] border border-white/10 hover:border-white/20 hover:bg-white/[0.08] transition-all"
               >
-                <span>Start a Project Brief</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <span>Contact Mandaveli Studio</span>
+                <Sparkles className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>

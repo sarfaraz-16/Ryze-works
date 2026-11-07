@@ -77,6 +77,66 @@ export default function AboutPage() {
           </TiltCard3D>
         </div>
 
+        {/* Mission & Vision Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 relative overflow-hidden">
+            <div className="inline-flex items-center gap-2 font-mono text-xs text-violet-400 uppercase tracking-wider mb-4">
+              <Sparkles className="w-4 h-4" />
+              <span>OUR MISSION</span>
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-4">
+              Redefining Creative Standards
+            </h3>
+            <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
+              To redefine creative standards, challenge conventions, build distinctive brands and drive meaningful business impact while empowering creative talent and creating opportunities for the next generation.
+            </p>
+          </div>
+
+          <div className="bg-[#0B0813]/70 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 relative overflow-hidden">
+            <div className="inline-flex items-center gap-2 font-mono text-xs text-violet-400 uppercase tracking-wider mb-4">
+              <Globe2 className="w-4 h-4" />
+              <span>OUR VISION</span>
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-4">
+              Building Creative Infrastructure
+            </h3>
+            <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
+              To reshape India&apos;s creative landscape by building a pioneering Creative Infrastructure that challenges conventions, sets new benchmarks in creative excellence, transforms brand experiences and unlocks limitless opportunities for emerging creative talent.
+            </p>
+          </div>
+        </div>
+
+        {/* Core Values */}
+        <div className="mb-20">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono text-violet-400 bg-violet-500/10 border border-violet-500/20 mb-3">
+              EXCELLENCE WITHOUT COMPROMISE
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Our 8 Guiding Values</h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { num: "01", title: "Think Beyond Convention", desc: "Challenging traditional approaches to introduce fresh, unexpected perspectives." },
+              { num: "02", title: "Ownership in Everything", desc: "Taking full accountability for creative quality, timeline discipline, and results." },
+              { num: "03", title: "Integrity Over Convenience", desc: "Honest strategy, truthful metrics, and principled partnerships over shortcuts." },
+              { num: "04", title: "People Before Hierarchy", desc: "Championing talent, open collaboration, and creative voices at every level." },
+              { num: "05", title: "Create With Purpose", desc: "Ensuring every asset, frame, and campaign serves an intentional brand outcome." },
+              { num: "06", title: "Courage to Create Differently", desc: "Daring to break visual clichés and stand out in crowded markets." },
+              { num: "07", title: "Grow Through Learning", desc: "Relentlessly mastering cutting-edge craft, modern tools, and strategic insight." },
+              { num: "08", title: "Collective Progress", desc: "Elevating clients, teams, and the larger creative ecosystem together." },
+            ].map((val) => (
+              <div key={val.num} className="p-6 rounded-2xl bg-[#0B0813]/60 border border-white/10 hover:border-violet-500/30 transition-all flex flex-col justify-between">
+                <div>
+                  <span className="font-mono text-xs text-violet-400 block mb-2">{val.num}</span>
+                  <h4 className="text-base font-bold text-white mb-2">{val.title}</h4>
+                  <p className="text-xs text-zinc-400 leading-relaxed">{val.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Corporate Governance & Leadership Card */}
         <div className="bg-[#0B0813]/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 sm:p-10 mb-16 shadow-2xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">

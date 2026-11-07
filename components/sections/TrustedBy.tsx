@@ -4,56 +4,66 @@ import { TRUSTED_CLIENTS } from "@/data/siteData";
 export const TrustedBy: React.FC = () => {
   const renderClientLogo = (client: typeof TRUSTED_CLIENTS[0]) => {
     switch (client.name) {
-      case "nostic":
+      case "Velve":
         return (
-          <span className="text-2xl font-bold tracking-tighter lowercase text-white">
-            nostic
-          </span>
-        );
-      case "zepto":
-        return (
-          <span className="text-2xl font-black tracking-normal lowercase text-white">
-            zepto
-          </span>
-        );
-      case "yulu":
-        return (
-          <div className="flex items-center gap-2 text-xl font-bold tracking-wider lowercase text-white">
-            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 inline-block shadow-[0_0_8px_#38bdf8]" />
-            <span>yulu</span>
-          </div>
-        );
-      case "CRED":
-        return (
-          <div className="flex items-center gap-2">
-            <div className="w-5 h-5 border border-white rounded-sm flex items-center justify-center text-[10px] font-mono font-bold">
-              C
-            </div>
-            <span className="text-xl font-black tracking-[0.2em] uppercase text-white font-serif">
-              CRED
+          <div className="flex items-center gap-1.5">
+            <span className="text-xl sm:text-2xl font-bold tracking-tight text-white uppercase font-sans">
+              VELVE
+            </span>
+            <span className="text-[10px] font-mono text-violet-400 border border-violet-500/30 px-1 py-0.5 rounded">
+              SALON
             </span>
           </div>
         );
-      case "Simpl":
+      case "Eththisai":
         return (
           <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded-full border border-white flex items-center justify-center">
-              <div className="w-1.5 h-1.5 rounded-full bg-white" />
-            </div>
-            <span className="text-xl font-bold tracking-tight text-white">
-              Simpl
+            <span className="w-2 h-2 rounded-full bg-violet-400 inline-block shadow-[0_0_8px_#a78bfa]" />
+            <span className="text-xl sm:text-2xl font-extrabold tracking-normal text-white">
+              Eththisai
             </span>
           </div>
         );
-      case "Razorpay":
+      case "Happy Break":
         return (
-          <div className="flex items-center gap-1.5 text-xl font-extrabold italic tracking-tight text-white">
-            <span className="text-sky-400 not-italic text-sm">▲</span>
-            <span>Razorpay</span>
+          <span className="text-xl sm:text-2xl font-black tracking-tight text-amber-200/90 lowercase font-sans">
+            happy break.
+          </span>
+        );
+      case "Hair Mechanix":
+        return (
+          <span className="text-lg sm:text-xl font-mono font-bold tracking-[0.18em] uppercase text-zinc-100">
+            HAIR MECHANIX
+          </span>
+        );
+      case "SAS Fitness":
+        return (
+          <div className="flex items-center gap-1.5">
+            <span className="text-xl sm:text-2xl font-black tracking-wider uppercase text-white">
+              SAS
+            </span>
+            <span className="text-xs font-mono font-semibold tracking-widest text-emerald-400 uppercase">
+              FITNESS
+            </span>
+          </div>
+        );
+      case "Reybha Couture":
+        return (
+          <span className="text-xl sm:text-2xl font-serif font-bold tracking-widest uppercase text-white/95">
+            REYBHA COUTURE
+          </span>
+        );
+      case "MRL solutions":
+        return (
+          <div className="flex items-center gap-1.5 font-mono">
+            <span className="text-lg sm:text-xl font-bold tracking-tight text-white">
+              MRL
+            </span>
+            <span className="text-xs text-zinc-400 font-light">solutions</span>
           </div>
         );
       default:
-        return <span className="text-xl font-bold text-white">{client.name}</span>;
+        return <span className="text-xl font-bold text-white">{client.label || client.name}</span>;
     }
   };
 

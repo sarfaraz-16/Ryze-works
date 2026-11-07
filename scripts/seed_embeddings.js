@@ -91,6 +91,38 @@ async function seedEmbeddings() {
     content: "Ryzeworks is a creative branding and marketing company and a unit of AINTRIX Global Pvt. Ltd., headquartered at 93/50, Ramakrishna Mutt Rd, Mandaveli, Chennai, Tamil Nadu - 600028. Established in 2025 and directed by Shanmuga Priya G. Official Tagline: Vision Into Influence. Creativity Into Distinction. Official Email: teamryzeworks@gmail.com. Official Phone: +91 88706 05033. Website: https://ryze-works.vercel.app. Ryzeworks is a creative and technology partner helping founders, SMEs, emerging brands, and growing businesses build stronger brands, create meaningful digital experiences, and grow through content, marketing, and digital solutions."
   });
 
+  // Approved 10 Core Services Catalogue (SRS Section 3.4 & 5)
+  documents.push({
+    title: "Ryzeworks 10 Core Delivery Services Catalogue",
+    url: "/services",
+    category: "services_catalogue",
+    content: "Ryzeworks delivers 10 specialized creative, marketing, and digital capabilities: 1. Video Production (high-quality short-form/long-form videos, Reels, Shorts, YouTube, planning, shooting, editing, final delivery). 2. Social Media Handling (scheduling, posting, captions, hashtags, content coordination across agreed platforms). 3. Branding (strategy, positioning, messaging, visual identity systems). 4. Creative & Design (social media creatives, posters, brochures, menus, standees, packaging). 5. Influencer Marketing (creator matching, collaboration negotiation, campaign execution). 6. Performance Marketing (paid Meta/Google campaigns focusing on leads, enquiries, sales, customer acquisition). 7. Website Building (responsive landing pages, company websites, e-commerce, custom web apps). 8. Ad Films & Commercial Production (commercial films combining visual direction and cinematic storytelling). 9. Creative Strategy & Campaign (concept development rooted in audience insights and end-to-end creative direction). 10. Social Media Content Creation (platform-ready Reels, posts, carousels, and stories)."
+  });
+
+  // Approved Target Industries & Sectors (SRS Section 3.2)
+  documents.push({
+    title: "Ryzeworks Target Industries & Client Sectors",
+    url: "/about",
+    category: "industries",
+    content: "Ryzeworks specializes in 6 core target industry sectors: 1. Food & Hospitality (restaurants, cafés, cloud kitchens, and food brands). 2. Beauty & Lifestyle (salons, beauty studios, wellness, and lifestyle brands). 3. Fashion & Retail (boutiques, couture labels, clothing, and jewellery brands). 4. Professional Services (consultants, educational institutions, service-based businesses). 5. Technology & SaaS (tech scaleups and emerging digital businesses). 6. Architecture & Interior Design (architects, interior studios, and design-led businesses)."
+  });
+
+  // Approved Clients (SRS Section 3.3)
+  documents.push({
+    title: "Ryzeworks Trusted Clients & Brand Collaborations",
+    url: "/#clients",
+    category: "clients",
+    content: "Ryzeworks has collaborated with brands across salon, food, fitness, fashion, and business services including: Velve unisex salon, Eththisai, Happy Break, Hair Mechanix, SAS Fitness, Reybha Couture, and MRL solutions."
+  });
+
+  // Mission, Vision & 8 Values (SRS Section 4)
+  documents.push({
+    title: "Ryzeworks Mission, Vision & 8 Core Values",
+    url: "/about",
+    category: "values",
+    content: "Mission: To redefine creative standards, challenge conventions, build distinctive brands and drive meaningful business impact while empowering creative talent. Vision: To reshape India's creative landscape by building a pioneering Creative Infrastructure. 8 Core Values: 1. Think Beyond Convention, 2. Ownership in Everything, 3. Integrity Over Convenience, 4. People Before Hierarchy, 5. Create With Purpose, 6. The Courage to Create Differently, 7. Grow Through Learning, 8. Collective Progress. Long-term positioning: Creative Infrastructure."
+  });
+
   // Services
   for (const s of services) {
     const deliverablesStr = Array.isArray(s.deliverables) ? s.deliverables.join(", ") : "";

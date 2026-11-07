@@ -78,13 +78,106 @@ export const SERVICES_DATA: Service[] = [
   }
 ];
 
+export const TARGET_INDUSTRIES = [
+  { name: "Food & Hospitality", desc: "Restaurants, cafés, cloud kitchens and food brands." },
+  { name: "Beauty & Lifestyle", desc: "Salons, beauty studios, wellness and lifestyle brands." },
+  { name: "Fashion & Retail", desc: "Boutiques, couture labels, clothing and jewellery brands." },
+  { name: "Professional Services", desc: "Consultants, educational institutions and service-based businesses." },
+  { name: "Technology & SaaS", desc: "Technology companies and emerging digital businesses." },
+  { name: "Architecture & Interior Design", desc: "Architects, interior studios and design-led businesses." }
+];
+
+export const RYZE_CATALOGUE_10_SERVICES = [
+  {
+    num: "01",
+    slug: "video-production",
+    name: "Video Production",
+    tagline: "Content that brings your brand to life.",
+    description: "We produce high-quality short-form and long-form videos—from Reels and Shorts to YouTube and business content—covering everything from planning and shooting to editing and final delivery.",
+    category: "Experiences"
+  },
+  {
+    num: "02",
+    slug: "social-media-handling",
+    name: "Social Media Handling",
+    tagline: "We keep your social presence active and consistent.",
+    description: "We manage the publishing side of your social media by scheduling and posting your content across the agreed platforms, while handling captions, hashtags and content coordination.",
+    category: "Marketing"
+  },
+  {
+    num: "03",
+    slug: "branding",
+    name: "Branding",
+    tagline: "Build a brand people remember.",
+    description: "We create meaningful brand identities that bring together strategy, positioning, messaging and visual identity—helping your brand establish a distinct and consistent presence.",
+    category: "Brand + Creative"
+  },
+  {
+    num: "04",
+    slug: "creative-design",
+    name: "Creative & Design",
+    tagline: "Ideas turned into compelling visuals.",
+    description: "From social media creatives and posters to brochures, menus, standees, packaging and other digital or print assets, we design visuals that communicate your brand effectively.",
+    category: "Brand + Creative"
+  },
+  {
+    num: "05",
+    slug: "influencer-marketing",
+    name: "Influencer Marketing",
+    tagline: "The right creators. The right audience. The right execution.",
+    description: "We connect brands with relevant influencers, negotiate collaborations, coordinate creators and manage the campaign from start to finish—so you don't have to chase or coordinate multiple people.",
+    category: "Marketing"
+  },
+  {
+    num: "06",
+    slug: "performance-marketing",
+    name: "Performance Marketing",
+    tagline: "Turn attention into measurable results.",
+    description: "We plan, launch and optimise paid campaigns across platforms such as Meta and Google, focusing on meaningful outcomes like leads, enquiries, sales and customer acquisition.",
+    category: "Marketing"
+  },
+  {
+    num: "07",
+    slug: "website-building",
+    name: "Website Building",
+    tagline: "Your digital home, built to work for your brand.",
+    description: "We design and build responsive, user-friendly websites for businesses—from landing pages and company websites to e-commerce and custom web experiences.",
+    category: "Technology"
+  },
+  {
+    num: "08",
+    slug: "ad-films-commercial-production",
+    name: "Ad Films & Commercial Cinematic Production",
+    tagline: "Big ideas deserve cinematic execution.",
+    description: "We conceptualise and produce commercial films that combine storytelling, visual direction and professional production to create memorable advertising content for brands.",
+    category: "Experiences"
+  },
+  {
+    num: "09",
+    slug: "creative-strategy-campaign",
+    name: "Creative Strategy & Campaign",
+    tagline: "One powerful idea. An entire campaign built around it.",
+    description: "We develop campaign concepts rooted in strategy and audience insight, then turn the core idea into a complete creative direction and, when required, take care of the execution from concept to completion.",
+    category: "Strategy"
+  },
+  {
+    num: "10",
+    slug: "social-media-content-creation",
+    name: "Social Media Content Creation",
+    tagline: "Consistent content with a clear creative direction.",
+    description: "We create platform-ready social content for brands, including Reels, posts, carousels, stories and other content formats—built around your brand, audience and communication goals.",
+    category: "Brand + Creative"
+  }
+];
+
 export const TRUSTED_CLIENTS = [
-  { name: "nostic", label: "nostic", industry: "Healthtech", logoStyle: "font-mono tracking-tighter lowercase font-bold" },
-  { name: "zepto", label: "zepto", industry: "Quick Commerce", logoStyle: "font-black tracking-normal lowercase" },
-  { name: "yulu", label: "yulu", industry: "Electric Mobility", logoStyle: "font-semibold tracking-wider lowercase" },
-  { name: "CRED", label: "CRED", industry: "Fintech Club", logoStyle: "font-serif tracking-widest uppercase font-black" },
-  { name: "Simpl", label: "Simpl", industry: "Pay Later Fintech", logoStyle: "font-medium tracking-tight" },
-  { name: "Razorpay", label: "Razorpay", industry: "Payments Infrastructure", logoStyle: "font-bold italic tracking-wide" }
+  { name: "Velve", label: "Velve unisex salon", industry: "Beauty & Salon", logoStyle: "font-semibold tracking-wide" },
+  { name: "Eththisai", label: "Eththisai", industry: "Media & Culture", logoStyle: "font-bold tracking-tight" },
+  { name: "Happy Break", label: "Happy Break", industry: "Food & Hospitality", logoStyle: "font-black tracking-normal" },
+  { name: "Hair Mechanix", label: "Hair Mechanix", industry: "Beauty & Grooming", logoStyle: "font-mono uppercase tracking-wider" },
+  { name: "SAS Fitness", label: "SAS Fitness", industry: "Fitness & Wellness", logoStyle: "font-black tracking-wider uppercase" },
+  { name: "Reybha Couture", label: "Reybha Couture", industry: "Fashion & Couture", logoStyle: "font-serif tracking-widest uppercase font-bold" },
+  { name: "MRL solutions", label: "MRL solutions", industry: "Professional Solutions", logoStyle: "font-mono tracking-tight" }
 ];
 
 export const FEATURED_PROJECTS: Project[] = [

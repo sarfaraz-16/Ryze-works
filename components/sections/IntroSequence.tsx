@@ -282,17 +282,20 @@ export function IntroSequence() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono uppercase tracking-widest bg-violet-950/60 border border-violet-500/30 text-violet-300 mb-6 backdrop-blur-md">
               <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
-              <span>{"// RYZE OS // GENESIS"}</span>
+              <span>{"// RYZEWORKS // CREATIVE & TECHNOLOGY PARTNER"}</span>
             </div>
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight sm:leading-[1.1] mb-6">
-              MAKING THE FUTURE OF TECHNOLOGY BEAUTIFUL.
+              FROM BRAND RECOGNITION<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-purple-300 to-indigo-300">
+                TO BUSINESS CONVERSION.
+              </span>
             </h1>
 
             {/* Subtitle */}
             <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-xl leading-relaxed mx-auto md:mx-0">
-              Where brand architecture meets autonomous intelligence. Scroll to initialize.
+              Strategic branding, purposeful content, cinematic creativity and performance-driven marketing — designed to make your brand stand out, attract the right audience and turn attention into opportunity.
             </p>
           </div>
         </motion.div>
@@ -308,17 +311,17 @@ export function IntroSequence() {
           className="absolute bottom-6 md:bottom-12 inset-x-0 mx-auto z-20 flex flex-col items-center justify-center text-center px-4"
         >
           <h2 className="text-xl sm:text-2xl md:text-4xl font-bold tracking-tight text-white mb-4">
-            Have a vision? Let&apos;s build it.
+            Let&apos;s Turn Your Brand Into Your Competitive Edge.
           </h2>
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-xs sm:max-w-none justify-center">
             <Link
-              href="#work"
+              href="/work"
               className="w-full sm:w-auto px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-white/10 hover:bg-white/20 border border-white/20 text-white backdrop-blur-md transition-all flex items-center justify-center gap-2"
             >
-              EXPLORE OUR WORK <span>&rarr;</span>
+              EXPLORE OUR CREATIVE WORK <span>&rarr;</span>
             </Link>
             <Link
-              href="#contact"
+              href="/start-a-project"
               className="w-full sm:w-auto px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white transition-all shadow-lg shadow-violet-900/40"
             >
               START A PROJECT

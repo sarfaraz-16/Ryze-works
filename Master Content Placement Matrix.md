@@ -42,39 +42,49 @@ flowchart TD
 
 ---
 
-### Section 3: Home Page Sections
-| SRS Subsection | Content Requested | Destination Codebase File(s) | Destination Database / Storage |
+### Section 3: Home Page Sections `[STATUS: 🟡 PARTIALLY INGESTED — PENDING ASSETS & PROJECTS]`
+
+> **Client Document Source:** `section 3,4,5.pdf`
+
+| SRS Subsection | Content Received / Status | Destination Codebase File(s) | Status |
 | :--- | :--- | :--- | :--- |
-| **3.1 Hero Section** | Main headline, subheadline, CTAs, Hero video/animation, numbers | `components/sections/IntroSequence.tsx`, `components/hero/HeroOrb.tsx`, `app/page.tsx` | N/A |
-| **3.2 Company Introduction** | Short description, what RYZE does, differentiators, positioning | `components/sections/WhatWeDo.tsx`, `app/about/page.tsx` | N/A |
-| **3.3 Trusted By / Clients** | Company names, verified logos, links, display approvals | `data/siteData.ts` (`TRUSTED_CLIENTS`), `components/sections/TrustedBy.tsx` | Supabase `projects` (if dynamic) |
-| **3.4 Homepage Services** | Service names, descriptions, icons, CTAs, destination links | `data/siteData.ts` (`SERVICES_DATA`), `components/sections/WhatWeDo.tsx` | Supabase table: `services` |
-| **3.5 Featured Projects** | Highlighted projects, thumbnails, tags, client names, links | `data/siteData.ts` (`FEATURED_PROJECTS`), `components/sections/FeaturedWork.tsx` | Supabase table: `projects` (`is_featured = true`) |
-| **3.6 Testimonials** | Quotes, author names, roles, company names, avatars | `data/siteData.ts` (`TESTIMONIALS_DATA`), `components/sections/Testimonials.tsx` | Supabase table: `testimonials` (`status = 'approved'`) |
-| **3.7 Latest Insights** | Featured articles, titles, categories, dates, authors, covers | `data/siteData.ts` (`ARTICLES_DATA`), `components/sections/LatestInsights.tsx` | Supabase table: `articles` (`status = 'published'`) |
+| **3.1 Hero Section** | **Headline:** "From Brand Recognition to Business Conversion."<br/>**Subtitle:** "Strategic branding, purposeful content, cinematic creativity and performance-driven marketing..."<br/>**CTAs:** "Let's Turn Your Brand Into Your Competitive Edge" & "Explore Our Creative Work" | [`components/sections/IntroSequence.tsx`](file:///d:/RYZE%20WEBSITE/components/sections/IntroSequence.tsx) | ✅ Ingested |
+| **3.2 Company Introduction** | What RYZE does, 6 Target Industries, 6 Differentiators, Positioning statement | [`components/sections/WhatWeDo.tsx`](file:///d:/RYZE%20WEBSITE/components/sections/WhatWeDo.tsx), [`app/about/page.tsx`](file:///d:/RYZE%20WEBSITE/app/about/page.tsx) | ✅ Ingested |
+| **3.3 Trusted By / Clients** | 7 Client Names: `Velve unisex salon`, `Eththisai`, `Happy Break`, `Hair Mechanix`, `SAS Fitness`, `Reybha Couture`, `MRL solutions` | [`data/siteData.ts`](file:///d:/RYZE%20WEBSITE/data/siteData.ts) (`TRUSTED_CLIENTS`), [`components/sections/TrustedBy.tsx`](file:///d:/RYZE%20WEBSITE/components/sections/TrustedBy.tsx) | 🟡 Names Ingested (Logos & permissions pending) |
+| **3.4 Homepage Services** | 10 Services (Video Production, Social Media Handling, Branding, Creative & Design, Influencer Mktg, Performance Mktg, Website Building, Ad Films, Creative Strategy, Content Creation) | [`data/siteData.ts`](file:///d:/RYZE%20WEBSITE/data/siteData.ts) (`SERVICES_DATA`), [`components/sections/WhatWeDo.tsx`](file:///d:/RYZE%20WEBSITE/components/sections/WhatWeDo.tsx) | 🟡 10 Services received |
+| **3.5 Featured Projects** | *Not provided yet in PDF* | [`data/siteData.ts`](file:///d:/RYZE%20WEBSITE/data/siteData.ts) (`FEATURED_PROJECTS`), [`components/sections/FeaturedWork.tsx`](file:///d:/RYZE%20WEBSITE/components/sections/FeaturedWork.tsx) | ❌ PENDING FROM CLIENT |
+| **3.6 Testimonials** | Explicitly marked `Testimonials: NA` | [`data/siteData.ts`](file:///d:/RYZE%20WEBSITE/data/siteData.ts) (`TESTIMONIALS_DATA`), [`components/sections/Testimonials.tsx`](file:///d:/RYZE%20WEBSITE/components/sections/Testimonials.tsx) | ⚠️ Marked NA (Needs confirmation if hidden) |
+| **3.7 Latest Insights** | 5 Categories (Branding, Business Growth, Creative & Design, Digital Marketing, Content Strategy) | [`data/siteData.ts`](file:///d:/RYZE%20WEBSITE/data/siteData.ts) (`ARTICLES_DATA`), [`components/sections/LatestInsights.tsx`](file:///d:/RYZE%20WEBSITE/components/sections/LatestInsights.tsx) | 🟡 Categories added (Articles pending) |
 
 ---
 
-### Section 4: About Page
-| SRS Field Requested | Destination Codebase File(s) | Component / Layout Location |
-| :--- | :--- | :--- |
-| **Company Story & History** | `app/about/page.tsx` | Main narrative section |
-| **Mission, Vision & Values** | `app/about/page.tsx` | Three-pillar philosophy cards |
-| **Current Positioning & Differentiators** | `app/about/page.tsx` | Value proposition grid (`TiltCard3D`) |
-| **Leadership / Team Profiles** (Name, Role, Bio, Photo, LinkedIn) | `app/about/page.tsx` | Team member cards, images in `public/images/team/` |
-| **Company Statistics** (Experience, clients, projects, markets) | `app/about/page.tsx`, `components/ui/CounterNumber.tsx` | Animated stats row |
+### Section 4: About Page `[STATUS: 🟡 PARTIALLY INGESTED — PENDING TEAM & STATS]`
+
+> **Client Document Source:** `section 3,4,5.pdf`
+
+| SRS Field | Content Received / Status | Destination Codebase File(s) | Status |
+| :--- | :--- | :--- | :--- |
+| **Company Narrative & Why Established** | Redefining creativity and marketing in the Indian market; challenging conventions | [`app/about/page.tsx`](file:///d:/RYZE%20WEBSITE/app/about/page.tsx) | ✅ Ingested |
+| **Mission & Vision** | Mission: Redefine standards & empower talent. Vision: Build pioneering Creative Infrastructure | [`app/about/page.tsx`](file:///d:/RYZE%20WEBSITE/app/about/page.tsx) | ✅ Ingested |
+| **8 Core Values** | 1. Think Beyond Convention, 2. Ownership in Everything, 3. Integrity Over Convenience, 4. People Before Hierarchy, 5. Create With Purpose, 6. Courage to Create Differently, 7. Grow Through Learning, 8. Collective Progress | [`app/about/page.tsx`](file:///d:/RYZE%20WEBSITE/app/about/page.tsx) | ✅ Ingested |
+| **Positioning** | Current: Creative & Marketing Agency. Long-term: Creative Infrastructure | [`app/about/page.tsx`](file:///d:/RYZE%20WEBSITE/app/about/page.tsx) | ✅ Ingested |
+| **7 Key Differentiators** | Strategy Before Aesthetics, Cinematic Excellence, Marketing with Business Intent, People-Centred Culture, etc. | [`app/about/page.tsx`](file:///d:/RYZE%20WEBSITE/app/about/page.tsx) | ✅ Ingested |
+| **Leadership / Team Profiles** | Director Shanmuga Priya G named; *other team members, photos, bios, LinkedIn links not sent* | [`app/about/page.tsx`](file:///d:/RYZE%20WEBSITE/app/about/page.tsx) | ❌ PENDING FROM CLIENT |
+| **Company Statistics** | *No verified metrics/numbers provided* | [`app/about/page.tsx`](file:///d:/RYZE%20WEBSITE/app/about/page.tsx) | ❌ PENDING FROM CLIENT |
 
 ---
 
-### Sections 5 & 6: Services & Individual Service Pages
-| SRS Field Requested | Destination Codebase File(s) | Destination Database / Storage |
-| :--- | :--- | :--- |
-| **Core Service Structure** | `data/siteData.ts` (`SERVICES_DATA`), `app/services/page.tsx` | Supabase table: `services` |
-| **Deliverables & Capabilities** | `components/services/ServiceCapabilityCard.tsx` | `services.deliverables` array |
-| **Individual Service Pages** (`/services/[slug]`) | `app/services/[slug]/page.tsx` | Dynamic route powered by Supabase |
-| **Process / Workflow Stages** | `app/services/[slug]/page.tsx` | Step-by-step roadmap UI |
-| **Technologies & Tools Used** | `app/services/[slug]/page.tsx` | Tech stack pill badges |
-| **Service-Specific Case Studies** | `app/services/[slug]/page.tsx` | Supabase table: `project_services` (M2M join) |
+### Sections 5 & 6: Services & Individual Service Pages `[STATUS: 🟡 SERVICE CATALOGUE OUTLINED]`
+
+> **Client Document Source:** `section 3,4,5.pdf`
+
+| SRS Field | Content Received / Status | Destination Codebase File(s) | Status |
+| :--- | :--- | :--- | :--- |
+| **10 Service Names & Short Descriptions** | Outlined: Video Production, Social Media Handling, Branding, Creative & Design, Influencer Mktg, Performance Mktg, Website Building, Ad Films, Creative Strategy, Content Creation | [`app/services/page.tsx`](file:///d:/RYZE%20WEBSITE/app/services/page.tsx), [`data/siteData.ts`](file:///d:/RYZE%20WEBSITE/data/siteData.ts) | 🟡 Outlined |
+| **Detailed Deliverables per Service** | *Not provided yet (needs bulleted deliverable list for each service)* | [`components/services/ServiceCapabilityCard.tsx`](file:///d:/RYZE%20WEBSITE/components/services/ServiceCapabilityCard.tsx) | ❌ PENDING FROM CLIENT |
+| **Process / Workflow Stages** | *Not provided yet (needs workflow step breakdown)* | [`app/services/[slug]/page.tsx`](file:///d:/RYZE%20WEBSITE/app/services/[slug]/page.tsx) | ❌ PENDING FROM CLIENT |
+| **Technologies & Tools Used** | *Not provided yet* | [`app/services/[slug]/page.tsx`](file:///d:/RYZE%20WEBSITE/app/services/[slug]/page.tsx) | ❌ PENDING FROM CLIENT |
+| **Related Projects per Service** | *Not provided yet* | Supabase table: `project_services` | ❌ PENDING FROM CLIENT |
 
 ---
 
@@ -115,7 +125,7 @@ flowchart TD
 | SRS Field Requested | Destination Codebase File(s) | Destination Database / Engine |
 | :--- | :--- | :--- |
 | **Product Overview & Capabilities** | `app/ai/page.tsx`, `components/sections/RyzeAIPanel.tsx` | Gemini 3.6 Flash |
-| **3D AI Neural Core Visualizer** | `components/ai/AiNeuralCore3D.tsx`, `components/spatial/CompanionAstronaut.tsx` | Three.js / WebGL |
+| **3D AI Neural Core Visualizer** | `components/ai/AiNeuralCore3D.tsx` | Three.js / WebGL |
 | **AI Project Advisor / Consultation Chat** | `app/api/ai/chat/route.ts` | Grounded RAG with Supabase `knowledge_documents` |
 | **AI Brief Generator** | `app/api/ai/brief/route.ts` | Generates AI scope & saves to `leads.ai_brief` |
 | **Semantic Knowledge Search** | `app/api/ai/search/route.ts` | Vector search via `match_knowledge()` RPC (`pgvector`) |
