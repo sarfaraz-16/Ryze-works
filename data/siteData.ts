@@ -338,6 +338,16 @@ export const FOOTER_COLUMNS = [
 ];
 
 export const SITE_CONTACT = {
+  name: "Ryzeworks",
+  parentCompany: "AINTRIX Global Pvt. Ltd.",
+  tagline: "Vision Into Influence. Creativity Into Distinction.",
+  yearEstablished: 2025,
+  director: "Shanmuga Priya G",
   email: "teamryzeworks@gmail.com",
-  location: "Chennai, India",
+  phone: "+91 88706 05033",
+  address: "93/50, Ramakrishna Mutt Rd, Mandaveli, Chennai, Tamil Nadu - 600028",
+  location: "Chennai, Tamil Nadu, India",
+  positioning: "A creative and technology partner that helps businesses build stronger brands, create meaningful digital experiences and grow through content, marketing and digital solutions.",
+  shortDescription: "Ryzeworks is a creative branding and marketing company that transforms business visions into distinctive, memorable brands. Through strategic branding, purposeful content, compelling visual storytelling and insight-driven marketing, we help businesses establish a powerful identity, stand apart in their markets and create lasting impressions.",
+  detailedDescription: "RYZE Works is a creative branding and marketing company built on the belief that every brand deserves to be distinctive, meaningful and impossible to overlook. We bring together strategic thinking, creative direction, brand development, content strategy, premium visual production and marketing expertise to transform business visions into compelling brand experiences. Our approach goes beyond conventional content creation. We understand a brand's vision, positioning, audience and market before developing the creative and marketing strategies that bring its identity to life. From building cohesive brand identities and developing purposeful content strategies to producing cinematic-quality visual content, executing marketing campaigns and strengthening digital presence, we ensure every creative output serves a larger brand objective. We believe exceptional branding is not simply about looking good. It is about creating recognition, establishing trust, shaping perception and building a connection that lasts. At RYZE Works, we bring together people, ideas and creativity to challenge conventions, raise creative standards and build brands that command attention and distinction."
 };

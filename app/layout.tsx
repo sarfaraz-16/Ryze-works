@@ -4,7 +4,6 @@ import "./globals.css";
 import { CosmicBackground } from "@/components/background/CosmicBackground";
 import Preloader from "@/components/layout/Preloader";
 import { CustomCursor } from "@/components/ui/CustomCursor";
-import { CompanionAstronaut } from "@/components/spatial/CompanionAstronaut";
 import Script from "next/script";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -19,21 +18,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RYZE WORKS — AI-Native Creative & Technology Partner",
+  title: "Ryzeworks — Vision Into Influence. Creativity Into Distinction.",
   description:
-    "Strategy. Design. Technology. Content. Powered by AI. We help ambitious brands build, grow and scale with clarity, creativity and intelligent systems.",
+    "A creative and technology partner that helps businesses build stronger brands, create meaningful digital experiences and grow through content, marketing and digital solutions. A unit of AINTRIX Global Pvt. Ltd.",
   keywords: [
-    "AI Agency",
-    "Digital Products",
+    "Ryzeworks",
+    "Ryze Works",
+    "AINTRIX Global",
+    "Brand Development",
+    "Visual Storytelling",
+    "Creative Direction",
     "Next.js Development",
     "Creative Technology",
-    "Brand Strategy",
-    "Ryze Works"
+    "Brand Strategy Chennai"
   ],
   openGraph: {
-    title: "RYZE WORKS — AI-Native Creative & Technology Partner",
+    title: "Ryzeworks — Vision Into Influence. Creativity Into Distinction.",
     description:
-      "Strategy. Design. Technology. Content. Powered by AI. We help ambitious brands build, grow and scale with clarity, creativity and intelligent systems.",
+      "A creative and technology partner that helps businesses build stronger brands, create meaningful digital experiences and grow through content, marketing and digital solutions.",
     type: "website"
   }
 };
@@ -48,11 +50,23 @@ export default function RootLayout({
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Ryze Works",
-    "url": "https://ryzeworks.tech",
-    "logo": "https://ryzeworks.tech/logo.png",
+    "name": "Ryzeworks",
+    "legalName": "AINTRIX Global Pvt. Ltd.",
+    "url": "https://ryze-works.vercel.app",
+    "logo": "https://ryze-works.vercel.app/logo.png",
+    "slogan": "Vision Into Influence. Creativity Into Distinction.",
     "description":
-      "Strategy. Design. Technology. Content. Powered by AI. We help ambitious brands build, grow and scale with clarity, creativity and intelligent systems.",
+      "A creative and technology partner that helps businesses build stronger brands, create meaningful digital experiences and grow through content, marketing and digital solutions.",
+    "foundingDate": "2025",
+    "founder": {
+      "@type": "Person",
+      "name": "Shanmuga Priya G",
+      "jobTitle": "Director"
+    },
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "AINTRIX Global Pvt. Ltd."
+    },
     "sameAs": [
       "https://linkedin.com",
       "https://instagram.com",
@@ -61,14 +75,18 @@ export default function RootLayout({
     ],
     "contactPoint": {
       "@type": "ContactPoint",
+      "telephone": "+91-8870605033",
       "email": "teamryzeworks@gmail.com",
-      "contactType": "customer support",
+      "contactType": "business enquiry",
       "areaServed": "Worldwide"
     },
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "93/50, Ramakrishna Mutt Rd, Mandaveli",
       "addressLocality": "Chennai",
-      "addressCountry": "India"
+      "postalCode": "600028",
+      "addressRegion": "Tamil Nadu",
+      "addressCountry": "IN"
     }
   };
 
@@ -98,7 +116,6 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans antialiased bg-[#080417] text-zinc-100 selection:bg-[#7042FF] selection:text-white relative" suppressHydrationWarning>
         <CosmicBackground />
         <CustomCursor />
-        <CompanionAstronaut />
         <div className="grain-overlay" />
         <a href="#main-content" className="skip-to-content">
           Skip to main content

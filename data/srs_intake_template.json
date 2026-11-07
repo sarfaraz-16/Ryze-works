@@ -1,0 +1,135 @@
+{
+  "company_info": {
+    "name": "Ryzeworks",
+    "parent_company": "AINTRIX Global Pvt. Ltd.",
+    "tagline": "Vision Into Influence. Creativity Into Distinction.",
+    "positioning": "A creative and technology partner that helps businesses build stronger brands, create meaningful digital experiences and grow through content, marketing and digital solutions",
+    "primary_audiences": [
+      "Founders",
+      "SMEs",
+      "Local and emerging brands",
+      "Growing businesses",
+      "Organisations seeking branding, content, marketing, or automation support"
+    ],
+    "primary_conversion": "Qualified business enquiry / discovery call",
+    "short_description": "Ryzeworks is a creative branding and marketing company that transforms business visions into distinctive, memorable brands. Through strategic branding, purposeful content, compelling visual storytelling and insight-driven marketing, we help businesses establish a powerful identity, stand apart in their markets and create lasting impressions.",
+    "detailed_description": "RYZE Works is a creative branding and marketing company built on the belief that every brand deserves to be distinctive, meaningful and impossible to overlook. We bring together strategic thinking, creative direction, brand development, content strategy, premium visual production and marketing expertise to transform business visions into compelling brand experiences. Our approach goes beyond conventional content creation. We understand a brand's vision, positioning, audience and market before developing the creative and marketing strategies that bring its identity to life. From building cohesive brand identities and developing purposeful content strategies to producing cinematic-quality visual content, executing marketing campaigns and strengthening digital presence, we ensure every creative output serves a larger brand objective. We believe exceptional branding is not simply about looking good. It is about creating recognition, establishing trust, shaping perception and building a connection that lasts. At RYZE Works, we bring together people, ideas and creativity to challenge conventions, raise creative standards and build brands that command attention and distinction.",
+    "year_established": 2025,
+    "director": "Shanmuga Priya G",
+    "locations": [
+      "93/50, Ramakrishna Mutt Rd, Mandaveli, Chennai, Chennai - 600028, Tamil Nadu"
+    ],
+    "email": "teamryzeworks@gmail.com",
+    "phone": "8870605033",
+    "website": "https://ryze-works.vercel.app",
+    "status": "APPROVED_BY_CLIENT"
+  },
+  "hero_section": {
+    "headline": "",
+    "subheadline": "",
+    "company_intro": "",
+    "primary_cta": { "text": "Start a Project", "destination": "/start-a-project" },
+    "secondary_cta": { "text": "Explore Work", "destination": "/work" },
+    "key_statistics": [
+      { "label": "Client Retention", "value": "98%" },
+      { "label": "Velocity Multiplier", "value": "10x" },
+      { "label": "Production Launches", "value": "24+" }
+    ]
+  },
+  "trusted_clients": [
+    {
+      "name": "Client Name",
+      "logo_filename": "client-logo.svg",
+      "website_url": "https://example.com",
+      "permission_approved": true
+    }
+  ],
+  "services": [
+    {
+      "slug": "strategy",
+      "name": "Strategy",
+      "tagline": "THINK",
+      "group": "Strategy",
+      "description": "",
+      "deliverables": [],
+      "workflow_steps": [],
+      "technologies": []
+    }
+  ],
+  "projects": [
+    {
+      "slug": "sample-project",
+      "title": "Project Title",
+      "client": "Client Name",
+      "industry": "Fintech / Healthtech",
+      "description": "",
+      "services_provided": [],
+      "hero_image": "/images/projects/sample.jpg",
+      "metrics": [],
+      "is_featured": true,
+      "publicly_publishable": true
+    }
+  ],
+  "case_studies": [
+    {
+      "slug": "sample-case-study",
+      "title": "",
+      "client": "",
+      "headline": "",
+      "challenge": "",
+      "strategy": "",
+      "execution": "",
+      "results": "",
+      "hero_image": "/images/case-studies/sample-wide.jpg"
+    }
+  ],
+  "testimonials": [
+    {
+      "author_name": "",
+      "role": "",
+      "company": "",
+      "quote": "",
+      "rating": 5,
+      "avatar": "/images/testimonials/avatar.jpg",
+      "is_approved": true
+    }
+  ],
+  "articles": [
+    {
+      "slug": "",
+      "title": "",
+      "category": "BRANDING",
+      "read_time": "5 min read",
+      "summary": "",
+      "content": "",
+      "cover_image": "/images/insights/sample.jpg",
+      "published_at": "2026-11-01"
+    }
+  ],
+  "team_members": [
+    {
+      "name": "",
+      "designation": "",
+      "bio": "",
+      "photo": "/images/team/member.jpg",
+      "linkedin": ""
+    }
+  ],
+  "careers": [
+    {
+      "slug": "",
+      "title": "",
+      "department": "",
+      "employment_type": "Full-time",
+      "location": "Remote / Chennai",
+      "badge": "hot",
+      "status": "published"
+    }
+  ],
+  "legal": {
+    "privacy_policy_html_or_md": "",
+    "terms_of_use_html_or_md": "",
+    "cookie_policy_html_or_md": "",
+    "ai_disclosure_statement": ""
+  }
+}

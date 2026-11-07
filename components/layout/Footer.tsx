@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
             </Link>
 
             <p className="text-xs text-zinc-300 leading-relaxed mb-6 max-w-xs">
-              An AI-native creative and technology partner helping brands build, grow and scale.
+              Vision Into Influence. Creativity Into Distinction. Transforming business visions into distinctive, memorable brands.
             </p>
 
             {/* Company Links */}
@@ -127,14 +127,24 @@ export const Footer: React.FC = () => {
               >
                 teamryzeworks@gmail.com
               </a>
-              <p className="text-zinc-500">Chennai, India</p>
+              <a
+                href="tel:8870605033"
+                className="block text-zinc-400 hover:text-[#B896FF] transition-colors"
+              >
+                +91 88706 05033
+              </a>
+              <p className="text-zinc-500 leading-snug">
+                93/50, Ramakrishna Mutt Rd, Mandaveli, Chennai - 600028, TN
+              </p>
             </div>
           </div>
         </div>
 
         {/* Bottom Legal Sub-bar */}
         <div className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-zinc-500">
-          <div>© 2024 Ryze Works. All rights reserved.</div>
+          <div>
+            © 2025–2026 Ryzeworks. A unit of <span className="text-zinc-400 font-medium">AINTRIX Global Pvt. Ltd.</span> All rights reserved.
+          </div>
 
           <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-6 gap-y-2">
             <Link href="/privacy" className="hover:text-zinc-200 transition-colors">

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
-import { Mail, MapPin, Loader2, CheckCircle2, Sparkles, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Loader2, CheckCircle2, Sparkles, Send } from "lucide-react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -81,7 +81,19 @@ export default function ContactPage() {
                   <a href="mailto:teamryzeworks@gmail.com" className="text-sm font-semibold text-white hover:text-violet-300 transition-colors block">
                     teamryzeworks@gmail.com
                   </a>
-                  <span className="font-mono text-[10px] uppercase text-zinc-400">Direct Practice Inquiries</span>
+                  <span className="font-mono text-[10px] uppercase text-zinc-400">Direct Inquiries &amp; Discovery Calls</span>
+                </div>
+              </div>
+
+              <div className="bg-[#0B0813]/60 backdrop-blur-xl border border-white/10 hover:border-violet-500/30 rounded-2xl p-4 transition-all flex items-center gap-4 group">
+                <div className="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-300 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(139,92,246,0.2)] transition-all">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <div>
+                  <a href="tel:8870605033" className="text-sm font-semibold text-white hover:text-violet-300 transition-colors block">
+                    +91 88706 05033
+                  </a>
+                  <span className="font-mono text-[10px] uppercase text-zinc-400">Direct Business Line</span>
                 </div>
               </div>
 
@@ -90,8 +102,9 @@ export default function ContactPage() {
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-sm font-semibold text-white block">Chennai, India</span>
-                  <span className="font-mono text-[10px] uppercase text-zinc-400">13.0827° N, 80.2707° E // Global Operations</span>
+                  <span className="text-sm font-semibold text-white block">Mandaveli, Chennai</span>
+                  <span className="text-xs text-zinc-400 leading-snug block">93/50, Ramakrishna Mutt Rd, Chennai - 600028, TN</span>
+                  <span className="font-mono text-[9px] uppercase text-violet-400 block mt-0.5">A unit of AINTRIX Global Pvt. Ltd.</span>
                 </div>
               </div>
 

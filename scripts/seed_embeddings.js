@@ -83,6 +83,14 @@ async function seedEmbeddings() {
   console.log("\n[STEP 2] Formulating structured semantic chunks...");
   const documents = [];
 
+  // Core Company Profile Chunk (Approved Client SRS Sections 1 & 2)
+  documents.push({
+    title: "About Ryzeworks — Company Overview, Positioning & Leadership",
+    url: "/about",
+    category: "company",
+    content: "Ryzeworks is a creative branding and marketing company and a unit of AINTRIX Global Pvt. Ltd., headquartered at 93/50, Ramakrishna Mutt Rd, Mandaveli, Chennai, Tamil Nadu - 600028. Established in 2025 and directed by Shanmuga Priya G. Official Tagline: Vision Into Influence. Creativity Into Distinction. Official Email: teamryzeworks@gmail.com. Official Phone: +91 88706 05033. Website: https://ryze-works.vercel.app. Ryzeworks is a creative and technology partner helping founders, SMEs, emerging brands, and growing businesses build stronger brands, create meaningful digital experiences, and grow through content, marketing, and digital solutions."
+  });
+
   // Services
   for (const s of services) {
     const deliverablesStr = Array.isArray(s.deliverables) ? s.deliverables.join(", ") : "";
