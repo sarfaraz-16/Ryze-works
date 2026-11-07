@@ -30,13 +30,41 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# Environment & Secrets
 .env
+.env*
 .env.local
 .env*.local
+.env.production
+.env.development
 api keys
 supabase/.temp/
+
+# Internal Documentation & Planning
+*.mdx?_spec*
+RYZE_MASTER_SPEC*
+*execution plan*
+workflow
+AGENTS.md
+CLAUDE.md
+docs/
+_private/
+*.pdf
+
+# Loose Media & 3D source files in root
+/*.png
+/*.jpg
+/*.jpeg
+/*.mp4
+/*.fbx
+/*.zip
+
+# Temporary build scripts & inspection logs
+fix_all_build.js
+lint_fix.json
+lint_fixes.json
+scripts/audit-*.mjs
+scripts/process-*.mjs
 
 # vercel
 .vercel
